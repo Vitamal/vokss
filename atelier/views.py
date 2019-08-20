@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from .models import MyOrder, Product
 
 def product_list(request):
-    products = Product.objects.filter('name')
+    products = Product.objects.all()
     return render(request, 'atelier/product_list.html', {'products': products})
 
 def product_detail(request, pk):
