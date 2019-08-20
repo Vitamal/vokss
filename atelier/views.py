@@ -1,5 +1,18 @@
 from django.shortcuts import get_object_or_404, render
-from .models import MyOrder, Product
+from .models import MyClient, Product
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from atelier.forms import ClientForm
+
+class ClientCreateView(CreateView):
+    model = MyClient
+    fields = ('first_name', 'last_name', 'tel_number', 'place')
+    template_name = 'atelier/client_form.html'
+
+class ClientUpdateView(UpdateView):
+    model = MyClient
+    form_class = ClientForm
+    template_name = 'atelier/client_update_form.html'
 
 def product_list(request):
     products = Product.objects.all()
@@ -8,6 +21,7 @@ def product_list(request):
 def product_detail(request, pk):
     details = get_object_or_404(Product, pk=pk)
     return render(request, 'atelier/product_detail.html', {'details': details})
+
 
 from django.http import  HttpResponseRedirect
 from django.urls import reverse

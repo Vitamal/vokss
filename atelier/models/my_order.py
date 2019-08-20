@@ -7,6 +7,7 @@ class MyOrder(models.Model):
     fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
     complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True)
     allowance_discount = models.ForeignKey('atelier.AllowanceDiscount', on_delete=models.CASCADE)
+    element_complexity_group = models.ManyToManyField('atelier.ElementComplexityGroup', blank=True)
     order_date = models.DateField(default=datetime.date.today)
 
     class Meta:
