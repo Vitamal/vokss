@@ -5,9 +5,9 @@ class MyOrder(models.Model):
     client = models.ForeignKey('atelier.MyClient', on_delete=models.CASCADE)
     product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE)
     fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
-    complication_elements = models.ManyToManyField('atelier.ComplicationElement', on_delete=models.SET_NULL, null=True, blank=True)
-    allowance_discount = models.ForeignKey('atelier.AllowanceDiscount', on_delete=models.SET_NULL, null=True, blank=True)
-    element_complexity_group = models.ManyToManyField('atelier.ElementComplexityGroup', on_delete=models.SET_NULL, null=True, blank=True)
+    complication_elements = models.ManyToManyField('atelier.ComplicationElement')
+    allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount')
+    element_complexity_group = models.ManyToManyField('atelier.ElementComplexityGroup')
     order_date = models.DateField(default=datetime.date.today)
 
     class Meta:
