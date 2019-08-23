@@ -3,6 +3,11 @@ from .models import MyClient, Product
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from atelier.forms import ClientForm
+from django.views.generic import ListView
+
+class ClientListView(ListView):
+    model = MyClient
+
 
 class ClientCreateView(CreateView):
     model = MyClient
