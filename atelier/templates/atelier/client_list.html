@@ -1,0 +1,18 @@
+{% extends 'atelier/generic.html' %}
+
+{% block content %}
+     <h1>Клієнти</h1>
+
+    {% if client_list %}
+    <ul>
+      {% for client in client_list %}
+          <li>
+              <strong>  <a href="{{ client.get_absolute_url }}">{{ client.first_name }} {{ client.last_name }}</a></strong>
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Немає жодного клієнта в Ательє.</p>
+    {% endif %}
+{% endblock %}
+

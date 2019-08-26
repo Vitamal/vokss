@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'atelier/style.css' %}">
+
+        <title>ATELIER</title>
+    </head>
+    <body>
+{#        <h1><a href="{% url 'index' %}">Home</a></h1>#}
+{#        <h1><a href="{% url 'product_list' %}">Products</a></h1>#}
+
+        {% block sidebar %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+
+    </body>
+
+</html>

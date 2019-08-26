@@ -1,6 +1,8 @@
 from django.db import models
+from django.urls import reverse
 
-class MyClient(models.Model):
+
+class Client(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     tel_number = models.IntegerField(blank=True)
@@ -11,6 +13,6 @@ class MyClient(models.Model):
 
     def get_absolute_url(self):
         """
-        Returns the url to access a particular author instance.
+        Returns the url to access a particular client instance.
         """
-        return reverse('client-detail', args=[str(self.id)])
+        return reverse('atelier:client_detail', args=[str(self.id)])

@@ -1,8 +1,10 @@
+{% extends 'atelier/generic.html' %}
+
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'atelier/style.css' %}">
-    {% for detail in details %}
-        {{ detail }}
-    {% endfor %}
+
+    <h1>Виріб: {{ product.name }}</h1>
+
+    <p><strong>Базова ціна:</strong> {{ product.base_price }} грн.</p>
+    <p><strong>Матеріал</strong> {{ product.allowed_materials }}</p>
 
 {% endblock %}

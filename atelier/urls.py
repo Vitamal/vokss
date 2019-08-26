@@ -3,12 +3,14 @@ from . import views
 
 app_name = 'atelier'
 urlpatterns = [
-    path('product/', views.product_list, name='product_list'),
-    path('product/<int:pk>/', views.product_detail, name='product_detail'),
+    path('', views.index, name='index'),
+    path('client/', views.ClientListView.as_view(), name='client_list'),
+    path('client/<int:pk>/', views.ClientDetailView.as_view(), name='client_detail'),
     path('client/add/', views.ClientCreateView.as_view(), name='client_form'),
     path('client/<int:pk>/edit/', views.ClientUpdateView.as_view(), name='client_update_form'),
     # path('', views.IndexView.as_view(), name='index'),
-    # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-    # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-    # path('<int:product_id>/vote/', views.vote, name='vote'),
+    path('product/', views.ProductListView.as_view(), name='product_list'),
+    path('product/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),
+    path('order/', views.OrderListView.as_view(), name='order_list'),
+
 ]

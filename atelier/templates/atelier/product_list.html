@@ -1,7 +1,18 @@
+{% extends 'atelier/generic.html' %}
+
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'atelier/style.css' %}">
-    {% for product in products %}
-        {{ product }}
-    {% endfor %}
+     <h1>Перелік виробів</h1>
+
+    {% if product_list %}
+    <ul>
+      {% for product in product_list %}
+          <li>
+              <strong>  <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></strong> (Базова ціна: {{product.base_price}})
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Немає жодного виробу в Ательє.</p>
+    {% endif %}
 {% endblock %}
+

@@ -1,9 +1,10 @@
 from django.db import models
 import datetime
+from django.urls import reverse
 
 
-class MyOrder(models.Model):
-    client = models.ForeignKey('atelier.MyClient', on_delete=models.CASCADE)
+class Order(models.Model):
+    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE)
     product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE)
     fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
     complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True)
@@ -25,4 +26,7 @@ class MyOrder(models.Model):
         return ', '.join([allowance_discount.name for allowance_discount in self.allowance_discount.all()[:3]])
 
     display_allowance_discount.short_description = 'allowance_discount'
+
+    def get_absolute_url(self):
+        return reverse('atelier:order_detail', args=[str(self.id)])
 

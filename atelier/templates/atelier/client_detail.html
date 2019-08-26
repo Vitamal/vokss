@@ -1,0 +1,12 @@
+{% extends 'atelier/generic.html' %}
+
+{% block content %}
+
+    <h1>Клієнт: {{ product.name }}</h1>
+
+    <p><strong>Імя: </strong> {{ client.first_name }} грн.</p>
+    <p><strong>Прізвище: </strong> {{ client.last_name }}</p>
+    <p><strong>Телефон: </strong> {{ client.tel_number }}</p>
+    <p><strong>Місто/село: </strong> {{ client.place }}</p>
+{#    <p><a href="{% url 'atelier:client_update_form' %}">Edit</a></p>#}
+{% endblock %}

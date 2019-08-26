@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class ComplicationElement(models.Model):
@@ -10,3 +11,9 @@ class ComplicationElement(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.label, self.name)
+
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('atelier:complication_element_detail', args=[str(self.id)])

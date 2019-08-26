@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, MyOrder, MyClient, AllowanceDiscount, ComplicationElement, ElementComplexityGroup, Fabric, FabricComplexityGroup
+from .models import Product, Order, Client, AllowanceDiscount, ComplicationElement, ElementComplexityGroup, Fabric, FabricComplexityGroup
 from . import models
 
 admin.site.register(Fabric)
@@ -12,26 +12,26 @@ admin.site.register(Product)
 # Define the admin class
 
 
-class MyOrderInline(admin.TabularInline):  # addition admin.class to show orders for select client
-    model = MyOrder
+class OrderInline(admin.TabularInline):  # addition admin.class to show orders for select client
+    model = Order
     extra = 0
     fields = ('product', 'order_date')
 
 
-class MyClientAdmin(admin.ModelAdmin):
+class ClientAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'tel_number', 'place')
-    inlines = [MyOrderInline]
+    inlines = [OrderInline]
 
 # Register the admin class with the associated model
 
 
-admin.site.register(MyClient, MyClientAdmin)
+admin.site.register(Client, ClientAdmin)
 
-# Register the Admin classes for MyOrder using the decorator
+# Register the Admin classes for Order using the decorator
 
 
-@admin.register(MyOrder)
-class MyOrderAdmin(admin.ModelAdmin):
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
 
     # to display all fields for orders
     list_display = ('client', 'product', 'fabric', 'display_allowance_discount', 'order_date')
@@ -48,25 +48,3 @@ class MyOrderAdmin(admin.ModelAdmin):
             'fields': ('complication_elements', 'allowance_discount', 'element_complexity_group')
         }),
     )
-
-
-'''
-class MyOrderInline(admin.TabularInline):
-    model = MyOrder
-    extra = 0
-
-
-class ProductAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {'fields': ['name']}),
-        ('Fabric information', {'fields': ['fabric'], 'classes': ['collapse']}),
-        ]
-    inlines = [MyOrderInline]
-
-
-class MyOrderAdmin(admin.ModelAdmin):
-    list_display = ('product', 'client', 'fabric', 'complication_elements', 'allowance_discount',
-                    'element_complexity_group','order_date')
-    list_filter = ['order_date']
-    search_fields = ['product']
-'''
