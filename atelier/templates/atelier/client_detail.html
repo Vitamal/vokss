@@ -8,5 +8,12 @@
     <p><strong>Прізвище: </strong> {{ client.last_name }}</p>
     <p><strong>Телефон: </strong> {{ client.tel_number }}</p>
     <p><strong>Місто/село: </strong> {{ client.place }}</p>
-{#    <p><a href="{% url 'atelier:client_update_form' %}">Edit</a></p>#}
+    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">Edit</a></p>
+    <br>
+    <p><strong>orders: </strong></p>
+    <ul>
+        {% for item in order_list %}
+            <li>{{ item.product }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
