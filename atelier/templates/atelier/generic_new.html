@@ -22,9 +22,15 @@
       <div class="col-sm-2">
       {% block sidebar %}
       <ul class="sidebar-nav">
-          <li><a href="{% url 'atelier:index' %}">Home</a></li>
-          <li><a href="{% url 'atelier:order_list' %}">All orders</a></li>
-          <li><a href="{% url 'atelier:client_list' %}">All clients</a></li>
+          <li><a href="{% url 'atelier:index' %}">Домівка</a></li>
+          <li><a href="{% url 'atelier:order_list' %}">Замовлення</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Клієнти</a></li>
+          <li><a href="{% url 'atelier:product_list' %}">Вироби</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Надбавки і знижки</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Ускладнюючі елементи</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Тканини</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Групи тканин</a></li>
+          <li><a href="{% url 'atelier:client_list' %}">Групи ускладнюючих елементів</a></li>
       </ul>
      {% endblock %}
       </div>

@@ -14,4 +14,4 @@ class FabricComplexityGroup(models.Model):
         ordering = ['name']
 
     def get_absolute_url(self):
-        return reverse('atelier:fabric_compexity_group_detail', args=[str(self.id)])
+        return reverse('atelier:fabric_complexity_group_detail', args=[str(self.id)])
