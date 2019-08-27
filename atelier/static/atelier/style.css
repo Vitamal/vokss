@@ -1,13 +1,11 @@
-ul, li, a, em {
-    color: darkblue;
-    font-size: large;
+li, a, em {
+    color: black;
 }
 body {
-    background: white url("images/background.odg") no-repeat;
+    background: white url("images/background_new.jpg") ;
 }
 .sidebar-nav {
     margin-top: 20px;
     padding: 0;
     list-style: none;
-    font-size: large;
 }

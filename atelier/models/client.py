@@ -5,7 +5,7 @@ from django.urls import reverse
 class Client(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    tel_number = models.IntegerField(blank=True)
+    tel_number = models.CharField(max_length=30, blank=True)
     place = models.CharField(max_length=30)
 
     def __str__(self):
