@@ -1,0 +1,16 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+
+    <h1>Замовлення: {{ order.pk }}</h1>
+
+    <p><strong>Клієнт: </strong>п. {{ order.client }} </p>
+    <p><strong>Виріб: </strong> {{ order.product }}</p>
+    <p><strong>Тканина: </strong> {{ order.fabric }}</p>
+    <p><strong>Ускладнюючий елемент: </strong> {{ order.complication_elements }}</p>
+    <p><strong>Надбавки / знижки: </strong> {{ order.allowance_discount }}</p>
+    <p><strong>Група ускладнюючого елемента: </strong> {{ order.element_complexity_group }}</p>
+    <p><strong>Дата замовлення: </strong> {{ order.order_date }}</p>
+
+{#    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>#}
+{% endblock %}
