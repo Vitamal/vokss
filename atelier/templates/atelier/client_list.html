@@ -4,6 +4,8 @@
      <h1>Клієнти</h1>
 
     {% if client_list %}
+    <p><a href="{% url 'atelier:client_form' %}">Додати клієнта</a></p>
+    <br>
     <ul>
       {% for client in client_list %}
           <li>

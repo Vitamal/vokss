@@ -8,7 +8,9 @@
     <p><strong>Прізвище: </strong> {{ client.last_name }}</p>
     <p><strong>Телефон: </strong> {{ client.tel_number }}</p>
     <p><strong>Місто/село: </strong> {{ client.place }}</p>
-    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">Edit</a></p>
+    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">Редагувати</a></p>
+    <br>
+    <p><a href="{% url 'atelier:client_delete_form' pk=client.pk %}">Видалити</a></p>
     <br>
     <p><strong>orders: </strong></p>
     <ul>
