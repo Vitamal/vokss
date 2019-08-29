@@ -8,7 +8,8 @@
     <p><strong>Виріб: </strong> {{ order.product }}</p>
     <p><strong>Тканина: </strong> {{ order.fabric }}</p>
     <p><strong>Тканина (група): </strong> {{ order.fabric.group }}</p>
-    <p><strong>Ускладнюючий елемент: </strong> </p>
+    <p><strong>Категорія обробки: </strong> {{ order.processing_category }}</p>
+    <p><strong>Ускладнюючий елемент: </strong></p>
     <ul>
     {% for ce in order.complication_elements.all %}
         <li> <a href="{% url 'atelier:index' %}"> {{ ce }} </a> </li>
@@ -18,12 +19,6 @@
     <ul>
     {% for ad in order.allowance_discount.all %}
         <li> <a href="{% url 'atelier:index' %}"> {{ ad }} </a> </li>
-    {% endfor %}
-    </ul>
-    <p><strong>Група ускладнюючого елемента: </strong></p>
-    <ul>
-    {% for ecg in order.element_complexity_group.all %}
-        <li> <a href="{% url 'atelier:index' %}"> {{ ecg }} </a> </li>
     {% endfor %}
     </ul>
     <p><strong>Дата замовлення: </strong> {{ order.order_date }}</p>

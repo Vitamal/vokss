@@ -13,4 +13,4 @@ class MinimalStyle(models.Model):
         ordering = ['group']
 
     def get_absolute_url(self):
-        return reverse('atelier:fabric_detail', args=[str(self.id)])
+        return reverse('atelier:minimal_style_detail', args=[str(self.id)])

@@ -32,7 +32,8 @@ admin.site.register(Client, ClientAdmin)
 class OrderAdmin(admin.ModelAdmin):
 
     # to display all fields for orders
-    list_display = ('client', 'product', 'fabric', 'display_allowance_discount', 'order_date')
+    list_display = ('client', 'product', 'fabric', 'processing_category', 'display_allowance_discount',
+                    'display_complication_elements', 'order_date')
 
     # add the filters
     list_filter = ('client', 'product', 'fabric', 'order_date')

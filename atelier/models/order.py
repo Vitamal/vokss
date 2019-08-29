@@ -33,6 +33,15 @@ class Order(models.Model):
 
     display_allowance_discount.short_description = 'allowance_discount'
 
+    def display_complication_elements(self):
+        """
+        Creates a string for the complication_elements. This is required to display complication_elements in Admin.
+        """
+        return ', '.join([complication_elements.name for complication_elements in self.complication_elements.all()[:3]])
+
+    display_complication_elements.short_description = 'allowance_discount'
+
+
     def get_absolute_url(self):
         return reverse('atelier:order_detail', args=[str(self.id)])
 

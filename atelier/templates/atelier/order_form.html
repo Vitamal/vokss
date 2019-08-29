@@ -16,11 +16,11 @@
       </div>
     </div>
     {{ form.fabric|as_crispy_field }}
+    {{ form.processing_category|as_crispy_field }}
     {{ form.complication_elements|as_crispy_field }}
     {{ form.allowance_discount|as_crispy_field }}
-    {{ form.element_complexity_group|as_crispy_field }}
     {{ form.order_date|as_crispy_field }}
-    <button type="submit" class="btn btn-success">Save person</button>
+    <button type="submit" class="btn btn-success">Зберегти замовлення</button>
   </form>
 
 {% endblock %}
