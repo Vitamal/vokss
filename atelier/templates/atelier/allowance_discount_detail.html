@@ -1,0 +1,13 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+
+    <h1>Надбавки / скидки:</h1>
+
+    <p><strong>Тип: </strong> {{ allowance_discount.label }} </p>
+    <p><strong>Коефіцієнт: </strong> {{ allowance_discount.coefficient }} </p>
+    <p><strong>Особоивості виготовлення: </strong> {{ allowance_discount.name }}</p>
+    <p><a href="{% url 'atelier:allowance_discount_update_form' pk=client.pk %}">Редагувати</a></p>
+    <br>
+    <p><a href="{% url 'atelier:allowance_discount_delete_form' pk=client.pk %}">Видалити</a></p>
+{% endblock %}

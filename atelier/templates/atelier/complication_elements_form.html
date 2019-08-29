@@ -1,0 +1,23 @@
+{% extends 'atelier/base.html' %}
+
+{{% load crispy_forms_tags %}
+
+**atelier/complication_elements_form.html**
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.name|as_crispy_field }}
+      </div>
+      <div class="col-6">
+        {{ form.base_price|as_crispy_field }}
+      </div>
+    </div>
+    {{ form.complexity|as_crispy_field }}
+    {{ form.group|as_crispy_field }}
+    <button type="submit" class="btn btn-success">Зберегти</button>
+  </form>
+
+{% endblock %}
