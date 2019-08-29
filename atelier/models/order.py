@@ -4,12 +4,18 @@ from django.urls import reverse
 
 
 class Order(models.Model):
+    CATEGORY1 = '1'
+    CATEGORY2 = '2'
+    PROCESSING_CATEGORY = [
+        (CATEGORY1, 'Категорія обробки 1'),
+        (CATEGORY2, 'Категорія обробки 2'),
+    ]
     client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE)
     product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE)
     fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
+    processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,)
     complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True)
     allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True)
-    element_complexity_group = models.ManyToManyField('atelier.ElementComplexityGroup', blank=True)
     order_date = models.DateField(default=datetime.date.today)
 
     class Meta:

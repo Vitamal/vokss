@@ -1,13 +1,11 @@
 from django.contrib import admin
-from .models import Product, Order, Client, AllowanceDiscount, ComplicationElement, ElementComplexityGroup, Fabric, FabricComplexityGroup
-from . import models
+from .models import Product, Order, Client, AllowanceDiscount, ComplicationElement,  Fabric, MinimalStyle
 
 admin.site.register(Fabric)
 admin.site.register(AllowanceDiscount)
 admin.site.register(ComplicationElement)
-admin.site.register(ElementComplexityGroup)
-admin.site.register(FabricComplexityGroup)
 admin.site.register(Product)
+admin.site.register(MinimalStyle)
 
 # Define the admin class
 
@@ -45,6 +43,6 @@ class OrderAdmin(admin.ModelAdmin):
             'fields': ('client', 'product', 'fabric', 'order_date')
         }),
         ('Addition', {
-            'fields': ('complication_elements', 'allowance_discount', 'element_complexity_group')
+            'fields': ('complication_elements', 'allowance_discount')
         }),
     )

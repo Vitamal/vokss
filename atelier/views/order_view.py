@@ -10,6 +10,7 @@ class OrderCreateView(generic.CreateView):
 
 class OrderDetailView(generic.DetailView):
     model = Order
+    fields = '__all__'
 
 
 class OrderListView(generic.ListView):

@@ -7,9 +7,25 @@
     <p><strong>Клієнт: </strong>п. {{ order.client }} </p>
     <p><strong>Виріб: </strong> {{ order.product }}</p>
     <p><strong>Тканина: </strong> {{ order.fabric }}</p>
-    <p><strong>Ускладнюючий елемент: </strong> {{ order.complication_elements }}</p>
-    <p><strong>Надбавки / знижки: </strong> {{ order.allowance_discount }}</p>
-    <p><strong>Група ускладнюючого елемента: </strong> {{ order.element_complexity_group }}</p>
+    <p><strong>Тканина (група): </strong> {{ order.fabric.group }}</p>
+    <p><strong>Ускладнюючий елемент: </strong> </p>
+    <ul>
+    {% for ce in order.complication_elements.all %}
+        <li> <a href="{% url 'atelier:index' %}"> {{ ce }} </a> </li>
+    {% endfor %}
+    </ul>
+    <p><strong>Надбавки / знижки: </strong></p>
+    <ul>
+    {% for ad in order.allowance_discount.all %}
+        <li> <a href="{% url 'atelier:index' %}"> {{ ad }} </a> </li>
+    {% endfor %}
+    </ul>
+    <p><strong>Група ускладнюючого елемента: </strong></p>
+    <ul>
+    {% for ecg in order.element_complexity_group.all %}
+        <li> <a href="{% url 'atelier:index' %}"> {{ ecg }} </a> </li>
+    {% endfor %}
+    </ul>
     <p><strong>Дата замовлення: </strong> {{ order.order_date }}</p>
 
 {#    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>#}

@@ -4,8 +4,8 @@ from django.urls import reverse
 
 class Product(models.Model):
     name = models.CharField(max_length=264)
-    base_price = models.DecimalField(max_digits=5, decimal_places=2)
-    allowed_materials = models.ManyToManyField('atelier.Fabric')
+    minimal_style = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
+    base_price = models.DecimalField(max_digits=5, decimal_places=2)1
 
     def __str__(self):
         return self.name
