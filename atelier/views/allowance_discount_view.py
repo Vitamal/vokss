@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404, render
 from atelier.models import AllowanceDiscount
 from django.views import generic
 from atelier.forms import AllowanceDiscountForm
@@ -21,14 +20,15 @@ class AllowanceDiscountListView(generic.ListView):
 class AllowanceDiscountCreateView(generic.CreateView):
     model = AllowanceDiscount
     fields = '__all__'
-    template_name = 'atelier/allowance_discount_form.html'
+    template_name = 'atelier/create_form.html'
 
 class AllowanceDiscountUpdateView(generic.UpdateView):
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
-    template_name = 'atelier/allowance_discount_update_form.html'
+    template_name = 'atelier/create_form.html'
 
 
 class AllowanceDiscountDeleteView(generic.DeleteView):
     model = AllowanceDiscount
     success_url = reverse_lazy('atelier:allowance_discount_list')
+    template_name = 'atelier/delete_form.html'

@@ -3,10 +3,10 @@ from django.urls import reverse
 
 
 class ComplicationElement(models.Model):
-    name = models.CharField(max_length=264)
-    base_price = models.DecimalField(max_digits=5, decimal_places=2)
-    complexity = models.DecimalField(default=1, max_digits=3,decimal_places=2)
-    group = models.CharField(default='4', max_length=255)
+    name = models.CharField(max_length=264, verbose_name="Опис")
+    base_price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Базова ціна")
+    complexity = models.DecimalField(default=1, max_digits=3,decimal_places=2, verbose_name="Складність")
+    group = models.CharField(default='4', max_length=255, verbose_name="Назва")
 
 
     def __str__(self):

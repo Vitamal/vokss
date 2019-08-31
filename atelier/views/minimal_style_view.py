@@ -20,13 +20,13 @@ class MinimalStyleListView(generic.ListView):
 class MinimalStyleCreateView(generic.CreateView):
     model = MinimalStyle
     fields = '__all__'
-    template_name = 'atelier/minimal_style_form.html'
+    template_name = 'atelier/create_form.html'
 
 
 class MinimalStyleUpdateView(generic.UpdateView):
     model = MinimalStyle
     form_class = MinimalStyleForm
-    template_name = 'atelier/minimal_style_update_form.html'
+    template_name = 'atelier/create_form.html'
 
 
 class MinimalStyleDeleteView(generic.DeleteView):

@@ -4,10 +4,10 @@
     <h1>Мінімальні фасони:</h1>
     <p><a href="{% url 'atelier:minimal_style_form' %}">Додати елемент</a></p>
     <br>
-    {% if client_list %}
+    {% if minimalstyle_list %}
 
     <ul>
-      {% for minimal_style in minimal_style_list %}
+      {% for minimal_style in minimalstyle_list %}
           <li>
               <strong>  <a href="{{ minimal_style.get_absolute_url }}">{{ minimal_style.name }}
                                  {{ minimal_style.group }}</a></strong>

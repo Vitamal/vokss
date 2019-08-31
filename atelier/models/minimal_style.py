@@ -3,8 +3,8 @@ from django.urls import reverse
 
 
 class MinimalStyle(models.Model):
-    name = models.CharField(max_length=264)
-    group = models.CharField(max_length=264)
+    name = models.TextField(max_length=264, verbose_name="Опис")
+    group = models.CharField(max_length=264, verbose_name="Група виробів")
 
     def __str__(self):
         return self.name

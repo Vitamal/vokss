@@ -7,14 +7,14 @@ from django.urls import reverse_lazy
 class ClientCreateView(generic.CreateView):
     model = Client
     fields = ('first_name', 'last_name', 'tel_number', 'place')
-    template_name = 'atelier/product_form.html'
+    template_name = 'atelier/create_form.html'
     initial = {'place': 'Моршин', }
 
 
 class ClientUpdateView(generic.UpdateView):
     model = Client
     form_class = ClientForm
-    template_name = 'atelier/client_update_form.html'
+    template_name = 'atelier/create_form.html'
 
 
 class ClientListView(generic.ListView):
