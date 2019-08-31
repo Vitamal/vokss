@@ -23,5 +23,8 @@
     </ul>
     <p><strong>Дата замовлення: </strong> {{ order.order_date }}</p>
 
-{#    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>#}
+    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>
+    <br>
+    <p><a href="{% url 'atelier:order_delete_form' pk=order.pk %}">Видалити</a></p>
+    <br>
 {% endblock %}

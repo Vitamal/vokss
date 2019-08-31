@@ -8,11 +8,13 @@ from django.urls import reverse_lazy
 class MinimalStyleDetailView(generic.DetailView):
     model = MinimalStyle
     fields = '__all__'
+    template_name = 'atelier/minimal_style_detail.html'
 
 
 class MinimalStyleListView(generic.ListView):
     model = MinimalStyle
     paginate_by = 10  # number of records on the one page
+    template_name = 'atelier/minimal_style_list.html'
 
 
 class MinimalStyleCreateView(generic.CreateView):

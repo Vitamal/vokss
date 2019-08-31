@@ -1,0 +1,14 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+
+    <h1>Ускладнюючі елементи:</h1>
+
+    <p><strong>Назва: </strong> {{ complication_element.name }} </p>
+    <p><strong>Базова ціна: </strong> {{ complication_element.base_price }} </p>
+    <p><strong>Складність виготовлення: </strong> {{ complication_element.complexity }}</p>
+    <p><strong>Група: </strong> {{ complication_element.group }}</p>
+{#    <p><a href="{% url 'atelier:complication_element_form' pk=complication_element.pk %}">Редагувати</a></p>#}
+    <br>
+{#    <p><a href="{% url 'atelier:complication_element_delete_form' pk=complication_element.pk %}">Видалити</a></p>#}
+{% endblock %}

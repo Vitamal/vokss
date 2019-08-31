@@ -9,10 +9,13 @@ from django.urls import reverse_lazy
 class ComplicationElementDetailView(generic.DetailView):
     model = ComplicationElement
     fields = '__all__'
+    template_name = 'atelier/complication_element_detail.html'
+
 
 class ComplicationElementListView(generic.ListView):
     model = ComplicationElement
     paginate_by = 10  # number of records on the one page
+    template_name = 'atelier/complication_element_list.html'
 
 class ComplicationElementCreateView(generic.CreateView):
     model = ComplicationElement

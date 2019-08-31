@@ -9,20 +9,24 @@ from django.urls import reverse_lazy
 class AllowanceDiscountDetailView(generic.DetailView):
     model = AllowanceDiscount
     fields = '__all__'
+    template_name = 'atelier/allowance_discount_detail.html'
+
 
 class AllowanceDiscountListView(generic.ListView):
     model = AllowanceDiscount
     paginate_by = 10  # number of records on the one page
+    template_name = 'atelier/allowance_discount_list.html'
+
 
 class AllowanceDiscountCreateView(generic.CreateView):
     model = AllowanceDiscount
     fields = '__all__'
-    template_name = 'atelier/allowance_aiscount_form.html'
+    template_name = 'atelier/allowance_discount_form.html'
 
 class AllowanceDiscountUpdateView(generic.UpdateView):
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
-    template_name = 'atelier/allowance_aiscount_update_form.html'
+    template_name = 'atelier/allowance_discount_update_form.html'
 
 
 class AllowanceDiscountDeleteView(generic.DeleteView):

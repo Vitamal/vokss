@@ -1,7 +1,10 @@
 {% extends 'atelier/generic_new.html' %}
 
 {% block content %}
-     <h1>Перелік виробів</h1>
+    <h1>Перелік виробів</h1>
+    <p><a href="{% url 'atelier:product_form' %}">Створити виріб</a></p>
+    <br>
+
 
     {% if product_list %}
     <ul>
