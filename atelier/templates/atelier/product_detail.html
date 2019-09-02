@@ -6,7 +6,7 @@
 
     <p><strong>Базова ціна:</strong> {{ product.base_price }} грн.</p>
     <p><strong>Мінімальний фасон:</strong> {{ product.minimal_style.group }}</p>
-{#    <p><a href="{% url 'atelier:product.minimal_style.name' pk=product.pk %}">Опис мінімального фасону</a></p>#}
+    <p><a href="{% url 'atelier:minimal_style_detail' pk=product.minimal_style.pk %}">Опис мінімального фасону</a></p>
 
     <p><a href="{% url 'atelier:product_update_form' pk=product.pk %}">Редагувати</a></p>
     <br>

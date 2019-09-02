@@ -9,6 +9,7 @@ class ProductDetailView(generic.DetailView):
     model = Product
     fields = '__all__'
 
+
 class ProductListView(generic.ListView):
     model = Product
     paginate_by = 10  # number of records on the one page
@@ -27,3 +28,4 @@ class ProductUpdateView(generic.UpdateView):
 class ProductDeleteView(generic.DeleteView):
     model = Product
     success_url = reverse_lazy('atelier:product_list')
+    template_name = 'atelier/delete_form.html'
