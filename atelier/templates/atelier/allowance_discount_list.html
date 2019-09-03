@@ -1,0 +1,21 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+    <h1>Надбавки / знижки</h1>
+    <p><a href="{% url 'atelier:allowance_discount_form' %}">Додати елемент</a></p>
+    <br>
+    {% if allowancediscount_list %}
+
+    <ul>
+      {% for allowance_discount in allowancediscount_list %}
+          <li>
+              <strong>  <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}
+                                 {{ allowance_discount.label }}</a></strong>
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Немає жодного елемента в Ательє.</p>
+    {% endif %}
+{% endblock %}
+

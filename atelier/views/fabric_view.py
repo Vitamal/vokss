@@ -17,12 +17,12 @@ class FabricListView(generic.ListView):
 class FabricCreateView(generic.CreateView):
     model = Fabric
     fields = '__all__'
-    template_name = 'atelier/fabric_form.html'
+    template_name = 'atelier/create_form.html'
 
 class FabricUpdateView(generic.UpdateView):
     model = Fabric
     form_class = FabricForm
-    template_name = 'atelier/fabric_update_form.html'
+    template_name = 'atelier/create_form.html'
 
 
 class FabricDeleteView(generic.DeleteView):

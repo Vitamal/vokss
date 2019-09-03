@@ -10,13 +10,15 @@ class Order(models.Model):
         (CATEGORY1, 'Категорія обробки 1'),
         (CATEGORY2, 'Категорія обробки 2'),
     ]
-    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE)
-    product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE)
-    fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE)
-    processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,)
-    complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True)
-    allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True)
-    order_date = models.DateField(default=datetime.date.today)
+    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE, verbose_name="Клієнт")
+    product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE, verbose_name="Виріб")
+    fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE, verbose_name="Тканина")
+    processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,
+                                           verbose_name="Категорія обробки")
+    complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True,
+                                                   verbose_name="Ускладнюючі елементи")
+    allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True, verbose_name="Надбавки / знижки")
+    order_date = models.DateField(default=datetime.date.today, verbose_name="Дата замовлення")
 
     class Meta:
         ordering = ["order_date"]

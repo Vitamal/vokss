@@ -5,6 +5,10 @@
     <h1>Виріб: {{ product.name }}</h1>
 
     <p><strong>Базова ціна:</strong> {{ product.base_price }} грн.</p>
-    <p><strong>Матеріал</strong> {{ product.allowed_materials }}</p>
+    <p><strong>Мінімальний фасон:</strong> {{ product.minimal_style.group }}</p>
+    <p><a href="{% url 'atelier:minimal_style_detail' pk=product.minimal_style.pk %}">Опис мінімального фасону</a></p>
 
+    <p><a href="{% url 'atelier:product_update_form' pk=product.pk %}">Редагувати</a></p>
+    <br>
+    <p><a href="{% url 'atelier:product_delete_form' pk=product.pk %}">Видалити</a></p>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+
+    <h1>Мінімальні фасони:</h1>
+
+    <p><strong>Назва: </strong> {{ minimalstyle.name }} </p>
+    <p><strong>Група: </strong> {{ minimalstyle.group }}</p>
+    <p><a href="{% url 'atelier:minimal_style_update_form' pk=minimalstyle.pk %}">Редагувати</a></p>
+    <br>
+    <p><a href="{% url 'atelier:minimal_style_delete_form' pk=minimalstyle.pk %}">Видалити</a></p>
+{% endblock %}

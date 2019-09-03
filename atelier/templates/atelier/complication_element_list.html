@@ -1,0 +1,21 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+    <h1>Ускладнюючі елементи</h1>
+    <p><a href="{% url 'atelier:complication_element_form' %}">Додати елемент</a></p>
+    <br>
+    {% if complicationelement_list %}
+
+    <ul>
+      {% for complication_element in complicationelement_list %}
+          <li>
+              <strong>  <a href="{{ complication_element.get_absolute_url }}">{{ complication_element.name }}
+                                 {{ complication_element.group }}</a></strong>
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Немає жодного елемента в Ательє.</p>
+    {% endif %}
+{% endblock %}
+

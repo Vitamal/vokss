@@ -1,0 +1,21 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+    <h1>Мінімальні фасони:</h1>
+    <p><a href="{% url 'atelier:minimal_style_form' %}">Додати елемент</a></p>
+    <br>
+    {% if minimalstyle_list %}
+
+    <ul>
+      {% for minimal_style in minimalstyle_list %}
+          <li>
+              <strong>  <a href="{{ minimal_style.get_absolute_url }}">{{ minimal_style.name }}
+                                 {{ minimal_style.group }}</a></strong>
+          </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>Немає жодного елемента в Ательє.</p>
+    {% endif %}
+{% endblock %}
+

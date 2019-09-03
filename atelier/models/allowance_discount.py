@@ -3,9 +3,9 @@ from django.urls import reverse
 
 
 class AllowanceDiscount(models.Model):
-    name = models.CharField(max_length=255)
-    coefficient = models.DecimalField(max_digits=5, decimal_places=2)
-    label = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name="Назва")
+    coefficient = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Коефіцієнт")
+    label = models.CharField(max_length=255, verbose_name="Група")
 
     def __str__(self):
         return self.name

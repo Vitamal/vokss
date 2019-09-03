@@ -1,0 +1,14 @@
+{% extends "atelier/generic_new.html" %}
+
+{% block content %}
+
+<h1>Видалення елементу</h1>
+
+<p>Ви впевненні що хочете видалити цей елемент?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+    <button type="submit" class="btn btn-success">Видалити</button>
+</form>
+
+{% endblock %}

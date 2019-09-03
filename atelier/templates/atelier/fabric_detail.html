@@ -1,0 +1,13 @@
+{% extends 'atelier/generic_new.html' %}
+
+{% block content %}
+
+    <h1>Ускладнюючі елементи:</h1>
+
+    <p><strong>Назва: </strong> {{ fabric.name }} </p>
+    <p><strong>Складність виготовлення: </strong> {{ fabric.complexity_factor }}</p>
+    <p><strong>Група: </strong> {{ fabric.group }}</p>
+    <p><a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">Редагувати</a></p>
+    <br>
+    <p><a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">Видалити</a></p>
+{% endblock %}
