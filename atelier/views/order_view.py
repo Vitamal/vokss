@@ -1,3 +1,4 @@
+from atelier.app_utils import blabla
 from atelier.forms import OrderForm
 from atelier.models import Order
 from django.views import generic
@@ -15,6 +16,18 @@ class OrderDetailView(generic.DetailView):
     model = Order
     fields = '__all__'
 
+    def _get_order_price(self):
+        order = self.object
+        return blabla()
+
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        print(context_data)
+        context_data['test_context_data'] = self._get_order_price()
+        return context_data
+
+
 
 class OrderListView(generic.ListView):
     model = Order
@@ -30,3 +43,4 @@ class OrderUpdateView(generic.UpdateView):
 class OrderDeleteView(generic.DeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
+
