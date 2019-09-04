@@ -1,4 +1,6 @@
 {% extends 'atelier/generic_new.html' %}
+{% load i18n %}
+
 
 {% block content %}
 
@@ -8,12 +10,12 @@
     <p><strong>Виріб: </strong> {{ order.product }}</p>
     <p><strong>Тканина: </strong> {{ order.fabric }}</p>
     <p><strong>Тканина (група): </strong> {{ order.fabric.group }}</p>
-    <p><strong>Категорія обробки: </strong> {{ order.processing_category }}</p>
+    <p><strong>{% trans 'Transformation category' %}: </strong> {{ order.processing_category }}</p>
     <p><strong>Ускладнюючий елемент: </strong></p>
     <ul>
-    {% for ce in order.complication_elements.all %}
-        <li> <a href="{% url 'atelier:index' %}"> {{ ce }} </a> </li>
-    {% endfor %}
+        {% for ce in order.complication_elements.all %}
+            <li> <a href="{% url 'atelier:index' %}"> {{ ce }} </a> </li>
+        {% endfor %}
     </ul>
     <p><strong>Надбавки / знижки: </strong></p>
     <ul>
@@ -21,8 +23,8 @@
         <li> <a href="{% url 'atelier:index' %}"> {{ ad }} </a> </li>
     {% endfor %}
     </ul>
-    <p><strong>Дата замовлення: </strong> {{ order.order_date }}</p>
-
+    <p><strong>Дата замовлення: </strong> {{ order.order_date|date:"l d F Y"  }}</p>  {# my comment:Formats a date according to the given format.#}
+    <p><strong>Ціна замовлення: </strong> {{ test_context_data }} </p>
     <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>
     <br>
     <p><a href="{% url 'atelier:order_delete_form' pk=order.pk %}">Видалити</a></p>
