@@ -1,4 +1,4 @@
-from atelier.app_utils import blabla
+from atelier.app_utils import order_price_calculation
 from atelier.forms import OrderForm
 from atelier.models import Order
 from django.views import generic
@@ -16,16 +16,19 @@ class OrderDetailView(generic.DetailView):
     model = Order
     fields = '__all__'
 
-    def _get_order_price(self):
-        order = self.object
-        return blabla()
-
-
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        print(context_data)
-        context_data['test_context_data'] = self._get_order_price()
-        return context_data
+    # def get_order_price(self):
+    #     order = self.object
+    #     complication_elements_list = []
+    #     for i in order.complication_elements.all():
+    #         complication_elements_list.append(i.base_price)
+    #     return order_price_calculation(complication_elements_list)
+    #
+    #
+    # def get_context_data(self, **kwargs):
+    #     context_data = super().get_context_data(**kwargs)
+    #     print(context_data)
+    #     context_data['test_context_data'] = self.get_order_price()
+    #     return context_data
 
 
 

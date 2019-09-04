@@ -17,7 +17,7 @@ class Fabric(models.Model):
     ]
     name = models.CharField(max_length=264, verbose_name="Назва")
     group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name="Група")
-    complexity_factor = models.IntegerField( default=1, verbose_name="Фактор складності")
+    complexity_factor = models.DecimalField(default=1, max_digits=5, decimal_places=2, verbose_name="Фактор складності")
 
     def __str__(self):
         return self.name
