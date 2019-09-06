@@ -1,5 +1,6 @@
 {% extends 'atelier/generic_new.html' %}
 {% load i18n %}
+{% load order_price_calc %}
 
 
 {% block content %}
@@ -25,8 +26,11 @@
     </ul>
     <p><strong>Дата замовлення: </strong> {{ order.order_date|date:"l d F Y"  }}</p>  {# my comment:Formats a date according to the given format.#}
 
-    <p><strong>Ціна замовлення1: </strong> {{ order.order_price }} </p>
-    <p><strong>Ціна замовлення2: </strong> {{ test_context_data }} </p>
+    <p><strong>Ціна замовлення : </strong> {{ order.order_price }} ₴ </p>           {#  from model @property #}
+    <p><strong>Ціна замовлення : </strong> {{ order_price_view }} ₴</p>  {#  from view #}
+
+    {% order_price_tag order  as tag_order_price %}
+    <p><strong>Ціна замовлення : </strong> {{ tag_order_price }} ₴</p>    {#  from temlatetag #}
 
     <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>
     <br>

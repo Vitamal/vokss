@@ -4,10 +4,10 @@
     <h1>Надбавки / знижки</h1>
     <p><a href="{% url 'atelier:allowance_discount_form' %}">Додати елемент</a></p>
     <br>
-    {% if allowancediscount_list %}
+    {% if allowance_discount_list %}
 
     <ul>
-      {% for allowance_discount in allowancediscount_list %}
+      {% for allowance_discount in allowance_discount_list %}
           <li>
               <strong>  <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}
                                  {{ allowance_discount.label }}</a></strong>

@@ -1,3 +1,5 @@
+
+
 def order_price_calculation(fabric_complexity_factor, product_base_price, complication_element_base_price,
                             complication_element_complexity, order_processing_category,
                             allowance_discount_coefficients):
@@ -18,4 +20,4 @@ def order_price_calculation(fabric_complexity_factor, product_base_price, compli
 
     order_price = starting_price + order_allowance_discount
 
-    return order_price
+    return "%.2f" % order_price
