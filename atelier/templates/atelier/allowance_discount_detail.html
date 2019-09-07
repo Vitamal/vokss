@@ -1,13 +1,14 @@
 {% extends 'atelier/generic_new.html' %}
+{% load i18n %}
 
 {% block content %}
 
-    <h1>Надбавки / скидки:</h1>
+    <h1>{% trans 'Allowance/Discount' %}:</h1>
 
-    <p><strong>Тип: </strong> {{ allowance_discount.label }} </p>
-    <p><strong>Коефіцієнт: </strong> {{ allowance_discount.coefficient }} </p>
-    <p><strong>Особоивості виготовлення: </strong> {{ allowance_discount.name }}</p>
-    <p><a href="{% url 'atelier:allowance_discount_update_form' pk=allowance_discount.pk %}">Редагувати</a></p>
+    <p><strong>{% trans 'Type' %}: </strong> {{ allowance_discount.label }} </p>
+    <p><strong>{% trans 'Coefficient' %}: </strong> {{ allowance_discount.coefficient }} </p>
+    <p><strong>{% trans 'Name' %}:</strong> {{ allowance_discount.name }}</p>
+    <p><a href="{% url 'atelier:allowance_discount_update_form' pk=allowance_discount.pk %}">{% trans 'Edit' %}</a></p>
     <br>
-    <p><a href="{% url 'atelier:allowance_discount_delete_form' pk=allowance_discount.pk %}">Видалити</a></p>
+    <p><a href="{% url 'atelier:allowance_discount_delete_form' pk=allowance_discount.pk %}">{% trans 'Delete' %}</a></p>
 {% endblock %}

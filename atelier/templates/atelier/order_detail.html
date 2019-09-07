@@ -5,35 +5,37 @@
 
 {% block content %}
 
-    <h1>Замовлення: {{ order.pk }}</h1>
+    <h1>{% trans 'Order' %} : {{ order.pk }}</h1>
 
-    <p><strong>Клієнт: </strong>п. {{ order.client }} </p>
-    <p><strong>Виріб: </strong> {{ order.product }}</p>
-    <p><strong>Тканина: </strong> {{ order.fabric }}</p>
-    <p><strong>Тканина (група): </strong> {{ order.fabric.group }}</p>
-    <p><strong>{% trans 'Transformation category' %}: </strong> {{ order.processing_category }}</p>
-    <p><strong>Ускладнюючий елемент: </strong></p>
+    <p><strong>{% trans 'Client' %} : </strong>п. {{ order.client }} </p>
+    <p><strong>{% trans 'Product' %} : </strong> {{ order.product }}</p>
+    <p><strong>{% trans 'Fabric' %}: </strong> {{ order.fabric }}</p>
+    <p><strong>{% trans 'Group of fabric' %}: </strong> {{ order.fabric.group }}</p>
+    <p><strong>{% trans 'Processing category' %}: </strong> {{ order.processing_category }}</p>
+    <p><strong>{% trans 'Complication Elements' %}: </strong></p>
     <ul>
         {% for complication_element in order.complication_elements.all %}
-            <li> <a href="{% url 'atelier:index' %}"> {{ complication_element }} </a> </li>
+            <li><a href="{% url 'atelier:index' %}"> {{ complication_element }} </a></li>
         {% endfor %}
     </ul>
-    <p><strong>Надбавки / знижки: </strong></p>
+    <p><strong>{% trans 'Allowance/Discount' %}: </strong></p>
     <ul>
-    {% for allowance_discount in order.allowance_discount.all %}
-        <li> <a href="{% url 'atelier:index' %}"> {{ allowance_discount }} </a> </li>
-    {% endfor %}
+        {% for allowance_discount in order.allowance_discount.all %}
+            <li><a href="{% url 'atelier:index' %}"> {{ allowance_discount }} </a></li>
+        {% endfor %}
     </ul>
-    <p><strong>Дата замовлення: </strong> {{ order.order_date|date:"l d F Y"  }}</p>  {# my comment:Formats a date according to the given format.#}
+    <p><strong>{% trans 'Order Date' %}: </strong> {{ order.order_date|date:"l d F Y" }}</p>
+    {# my comment:Formats a date according to the given format.#}
 
-    <p><strong>Ціна замовлення : </strong> {{ order.order_price }} ₴ </p>           {#  from model @property #}
-    <p><strong>Ціна замовлення : </strong> {{ order_price_view }} ₴</p>  {#  from view #}
+    <p><strong>{% trans 'Order Price' %} : </strong> {{ order.order_price }} ₴ </p>
+    {#  from model @property #}
+    <p><strong>{% trans 'Order Price' %} : </strong> {{ order_price_view }} ₴</p>  {#  from view #}
 
-    {% order_price_tag order  as tag_order_price %}
-    <p><strong>Ціна замовлення : </strong> {{ tag_order_price }} ₴</p>    {#  from temlatetag #}
+    {% order_price_tag order as tag_order_price %}
+    <p><strong>{% trans 'Order Price' %} : </strong> {{ tag_order_price }} ₴</p>    {#  from temlatetag #}
 
-    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">Edit</a></p>
+    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">{% trans 'Edit' %}</a></p>
     <br>
-    <p><a href="{% url 'atelier:order_delete_form' pk=order.pk %}">Видалити</a></p>
+    <p><a href="{% url 'atelier:order_delete_form' pk=order.pk %}">{% trans 'Delete' %}</a></p>
     <br>
 {% endblock %}

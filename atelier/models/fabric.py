@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext
 
 
 class Fabric(models.Model):
@@ -15,9 +16,10 @@ class Fabric(models.Model):
         (GROUP3, 'Група ІІІ'),
         (GROUP4, 'Група ІV'),
     ]
-    name = models.CharField(max_length=264, verbose_name="Назва")
-    group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name="Група")
-    complexity_factor = models.DecimalField(default=1, max_digits=5, decimal_places=2, verbose_name="Фактор складності")
+    name = models.CharField(max_length=264, verbose_name=ugettext('Name'))
+    group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name=ugettext('Group'))
+    complexity_factor = models.DecimalField(default=1, max_digits=5, decimal_places=2,
+                                            verbose_name=ugettext('Complexity Factor'))
 
     def __str__(self):
         return self.name

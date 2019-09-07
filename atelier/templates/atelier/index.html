@@ -1,19 +1,17 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
-<h1>Ательє Домівка</h1>
+    <h1>{% trans 'Atelier Home:' %}</h1>
 
-  <h2>Ласкаво просимо до  <em> Ательє </em>!</h2>
-  <h3>Статистика на сьогодні:</h3>
-  <ul>
-    <li><strong>Тканини:</strong> {{ num_fabrics }}</li>
-    <li><strong>Вироби:</strong> {{ num_products }}</li>
-    <li><strong>Клієнти:</strong> {{ num_clients }}</li>
-    <li><strong>Замовлення:</strong> {{ num_orders }}</li>
-    <li><strong>Надбавки / знижки:</strong> {{ num_allowance_discount }}</li>
-    <li><strong>Ускладнюючі елементи:</strong> {{ num_complication_element }}</li>
-    <li><strong>Мінімальні фасони:</strong> {{ num_minimal_style }}</li>
-
-  </ul>
-
+    <h2>{% trans 'Welcome to Atelier!' %}</h2>
+    <h3>{% trans 'Today statistic' %}:</h3>
+    <ul>
+        <li><strong>{% trans 'Fabrics' %}:</strong> {{ num_fabrics }}</li>
+        <li><strong>{% trans 'Products' %}:</strong> {{ num_products }}</li>
+        <li><strong>{% trans 'Clients' %}:</strong> {{ num_clients }}</li>
+        <li><strong>{% trans 'Orders' %}:</strong> {{ num_orders }}</li>
+        <li><strong>{% trans 'Allowance/Discounts' %}:</strong> {{ num_allowance_discount }}</li>
+        <li><strong>{% trans 'Complication Elements' %}:</strong> {{ num_complication_element }}</li>
+        <li><strong>{% trans 'Minimal Styles' %}:</strong> {{ num_minimal_style }}</li>
+    </ul>
 {% endblock %}

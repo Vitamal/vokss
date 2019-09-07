@@ -4,18 +4,17 @@ from atelier.forms import AllowanceDiscountForm
 from django.urls import reverse_lazy
 
 
-
 class AllowanceDiscountDetailView(generic.DetailView):
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
     context_object_name = 'allowance_discount'  # we changed lowercased version of the model class’ name:
-                                                # allowancediscount to allowance_discount.
+    # allowancediscount to allowance_discount.
 
 
 class AllowanceDiscountListView(generic.ListView):
     model = AllowanceDiscount
-    paginate_by = 10                                     # number of records on the one page
+    paginate_by = 10  # number of records on the one page
     template_name = 'atelier/allowance_discount_list.html'
     context_object_name = 'allowance_discount_list'
 
@@ -24,6 +23,7 @@ class AllowanceDiscountCreateView(generic.CreateView):
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/create_form.html'
+
 
 class AllowanceDiscountUpdateView(generic.UpdateView):
     model = AllowanceDiscount

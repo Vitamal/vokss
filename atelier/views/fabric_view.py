@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404, render
 from atelier.models import Fabric
 from django.views import generic
 from atelier.forms import FabricForm
@@ -28,3 +27,5 @@ class FabricUpdateView(generic.UpdateView):
 class FabricDeleteView(generic.DeleteView):
     model = Fabric
     success_url = reverse_lazy('atelier:fabric_list')
+    template_name = 'atelier/delete_form.html'
+

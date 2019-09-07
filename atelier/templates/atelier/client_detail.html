@@ -1,18 +1,18 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
 
     <h1>Клієнт: </h1>
 
-    <p><strong>Імя: </strong> {{ client.first_name }} </p>
-    <p><strong>Прізвище: </strong> {{ client.last_name }}</p>
-    <p><strong>Телефон: </strong> {{ client.tel_number }}</p>
-    <p><strong>Місто/село: </strong> {{ client.place }}</p>
-    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">Редагувати</a></p>
+    <p><strong>{% trans 'First Name' %}: </strong> {{ client.first_name }} </p>
+    <p><strong>{% trans 'Surname' %}: </strong> {{ client.last_name }}</p>
+    <p><strong>{% trans 'Tel. number' %}: </strong> {{ client.tel_number }}</p>
+    <p><strong>{% trans 'Place' %}: </strong> {{ client.place }}</p>
+    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">{% trans 'Edit' %}</a></p>
     <br>
-    <p><a href="{% url 'atelier:client_delete_form' pk=client.pk %}">Видалити</a></p>
+    <p><a href="{% url 'atelier:client_delete_form' pk=client.pk %}">{% trans 'Delete' %}</a></p>
     <br>
-    <p><strong>orders: </strong></p>
+    <p><strong>{% trans 'Orders' %}: </strong></p>
     <ul>
         {% for item in order_list %}
             <li>{{ item.product }}</li>

@@ -1,14 +1,14 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
 
-    <h1>Ускладнюючі елементи:</h1>
+    <h1>{% trans 'Complication Elements' %}</h1>
 
-    <p><strong>Назва: </strong> {{ complicationelement.name }} </p>
-    <p><strong>Базова ціна: </strong> {{ complicationelement.base_price }} </p>
-    <p><strong>Складність виготовлення: </strong> {{ complicationelement.complexity }}</p>
-    <p><strong>Група: </strong> {{ complicationelement.group }}</p>
-{#    <p><a href="{% url 'atelier:complication_element_form' pk=complication_element.pk %}">Редагувати</a></p>#}
+    <p><strong>{% trans 'Name' %}: </strong> {{ complicationelement.name }} </p>
+    <p><strong>{% trans 'Base Price' %}:  </strong> {{ complicationelement.base_price }} </p>
+    <p><strong>{% trans 'Complexity' %}: </strong> {{ complicationelement.complexity }}</p>
+    <p><strong>{% trans 'Group' %}: </strong> {{ complicationelement.group }}</p>
+    <p><a href="{% url 'atelier:complication_element_update_form' pk=complicationelement.pk %}">{% trans 'Edit' %}</a></p>
     <br>
-{#    <p><a href="{% url 'atelier:complication_element_delete_form' pk=complication_element.pk %}">Видалити</a></p>#}
+    <p><a href="{% url 'atelier:complication_element_delete_form' pk=complicationelement.pk %}">{% trans 'Delete' %}</a></p>
 {% endblock %}

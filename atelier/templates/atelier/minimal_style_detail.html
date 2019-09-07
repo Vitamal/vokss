@@ -1,12 +1,12 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
 
-    <h1>Мінімальні фасони:</h1>
+    <h1>{% trans 'Minimal Styles' %}:</h1>
 
-    <p><strong>Назва: </strong> {{ minimalstyle.name }} </p>
-    <p><strong>Група: </strong> {{ minimalstyle.group }}</p>
-    <p><a href="{% url 'atelier:minimal_style_update_form' pk=minimalstyle.pk %}">Редагувати</a></p>
+    <p><strong>{% trans 'Name' %}: </strong> {{ minimalstyle.name }} </p>
+    <p><strong>{% trans 'Group' %}: </strong> {{ minimalstyle.group }}</p>
+    <p><a href="{% url 'atelier:minimal_style_update_form' pk=minimalstyle.pk %}">{% trans 'Edit' %}</a></p>
     <br>
-    <p><a href="{% url 'atelier:minimal_style_delete_form' pk=minimalstyle.pk %}">Видалити</a></p>
+    <p><a href="{% url 'atelier:minimal_style_delete_form' pk=minimalstyle.pk %}">{% trans 'Delete' %}</a></p>
 {% endblock %}

@@ -1,3 +1,5 @@
+from django.utils.translation import ugettext
+
 from atelier.models import Client, Order
 from django.views import generic
 from atelier.forms import ClientForm
@@ -8,7 +10,7 @@ class ClientCreateView(generic.CreateView):
     model = Client
     fields = ('first_name', 'last_name', 'tel_number', 'place')
     template_name = 'atelier/create_form.html'
-    initial = {'place': 'Моршин', }
+    initial = {'place': ugettext('Morshyn'), }
 
 
 class ClientUpdateView(generic.UpdateView):
@@ -36,3 +38,4 @@ class ClientDetailView(generic.DetailView):
 class ClientDeleteView(generic.DeleteView):
     model = Client
     success_url = reverse_lazy('atelier:client_list')
+    template_name = 'atelier/delete_form.html'

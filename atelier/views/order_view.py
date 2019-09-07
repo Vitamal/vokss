@@ -56,4 +56,6 @@ class OrderUpdateView(generic.UpdateView):
 class OrderDeleteView(generic.DeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
+    template_name = 'atelier/delete_form.html'
+
 

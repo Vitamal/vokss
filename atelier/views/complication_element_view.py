@@ -30,3 +30,4 @@ class ComplicationElementUpdateView(generic.UpdateView):
 class ComplicationElementDeleteView(generic.DeleteView):
     model = ComplicationElement
     success_url = reverse_lazy('atelier:complication_element_list')
+    template_name = 'atelier/delete_form.html'

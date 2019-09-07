@@ -1,20 +1,20 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
-    <h1>Замовлення</h1>
-    <p><a href="{% url 'atelier:order_form' %}">Створити замовлення</a></p>
+    <h1>{% trans 'Orders' %}</h1>
+    <p><a href="{% url 'atelier:order_form' %}">{% trans 'Create Order' %}</a></p>
     <br>
 
     {% if order_list %}
-    <ul>
-      {% for order in order_list|dictsort:"order_date" %}   {# my comment: filtered dictionary by date #}
-          <li>
-              <strong>  <a href="{{ order.get_absolute_url }}">{{ order.product }} {{ order.order_date}} {{ order.client }}</a></strong>
-          </li>
-      {% endfor %}
-    </ul>
+        <ul>
+            {% for order in order_list|dictsort:"order_date" %}   {# my comment: filtered dictionary by date #}
+                <li>
+                    <strong> <a
+                            href="{{ order.get_absolute_url }}">{{ order.product }} {{ order.order_date }} {{ order.client }}</a></strong>
+                </li>
+            {% endfor %}
+        </ul>
     {% else %}
-      <p>Немає жодного замовлення в Ательє.</p>
+        <p>{% trans 'There is no one element in Atelier' %}</p>
     {% endif %}
 {% endblock %}
-

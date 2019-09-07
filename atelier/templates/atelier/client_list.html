@@ -1,8 +1,8 @@
 {% extends 'atelier/generic_new.html' %}
-
+{% load i18n %}
 {% block content %}
-    <h1>Клієнти</h1>
-    <p><a href="{% url 'atelier:client_form' %}">Додати клієнта</a></p>
+    <h1>{% trans 'Clients'%}:</h1>
+    <p><a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a></p>
     <br>
     {% if client_list %}
 
@@ -14,7 +14,7 @@
       {% endfor %}
     </ul>
     {% else %}
-      <p>Немає жодного клієнта в Ательє.</p>
+      <p>{% trans 'There is no one element in Atelier' %}</p>
     {% endif %}
 {% endblock %}
 

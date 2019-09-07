@@ -46,6 +46,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -110,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -120,6 +122,14 @@ USE_L10N = False
 USE_TZ = False
 
 DATETIME_FORMAT = 'Y-m-d'
+
+LOCAL_PATH = [
+    os.path.join(BASE_DIR, 'locale')
+]
+LANGUAGES = [
+    ('en', 'English'),
+    ('uk', 'Ukrainian'),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

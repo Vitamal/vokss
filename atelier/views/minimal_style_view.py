@@ -32,3 +32,4 @@ class MinimalStyleUpdateView(generic.UpdateView):
 class MinimalStyleDeleteView(generic.DeleteView):
     model = MinimalStyle
     success_url = reverse_lazy('atelier:minimal_style_list')
+    template_name = 'atelier/delete_form.html'
