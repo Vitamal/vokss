@@ -1,11 +1,11 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
 
 
 class MinimalStyle(models.Model):
-    name = models.TextField(max_length=264, verbose_name=ugettext('Name'))
-    group = models.CharField(max_length=264, verbose_name=ugettext('Product group'))
+    name = models.TextField(max_length=264, verbose_name=_('Name'))
+    group = models.CharField(max_length=264, verbose_name=_('Product group'))
 
     def __str__(self):
         return self.name

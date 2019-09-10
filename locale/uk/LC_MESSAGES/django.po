@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-07 18:30+0300\n"
+"POT-Creation-Date: 2019-09-10 10:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -159,14 +159,14 @@ msgid "There is no one element in Atelier"
 msgstr "Немає жодного елемента в Ательє"
 
 #: atelier/templates/atelier/client_detail.html:15
-#: atelier/templates/atelier/generic_new.html:50
+#: atelier/templates/atelier/generic_new.html:51
 #: atelier/templates/atelier/index.html:12
 #: atelier/templates/atelier/order_list.html:4
 msgid "Orders"
 msgstr "Замовлення"
 
 #: atelier/templates/atelier/client_list.html:4
-#: atelier/templates/atelier/generic_new.html:51
+#: atelier/templates/atelier/generic_new.html:52
 #: atelier/templates/atelier/index.html:11
 msgid "Clients"
 msgstr "Клієнти"
@@ -177,7 +177,7 @@ msgstr "Додати клієнта"
 
 #: atelier/templates/atelier/complication_element_detail.html:5
 #: atelier/templates/atelier/complication_element_list.html:4
-#: atelier/templates/atelier/generic_new.html:55
+#: atelier/templates/atelier/generic_new.html:56
 #: atelier/templates/atelier/index.html:14
 #: atelier/templates/atelier/order_detail.html:15
 msgid "Complication Elements"
@@ -192,7 +192,7 @@ msgid "Are You sure to do this?"
 msgstr "Ви впевнені?"
 
 #: atelier/templates/atelier/fabric_detail.html:4
-#: atelier/templates/atelier/generic_new.html:57
+#: atelier/templates/atelier/generic_new.html:58
 #: atelier/templates/atelier/index.html:9
 msgid "Fabrics"
 msgstr "Тканини"
@@ -201,22 +201,22 @@ msgstr "Тканини"
 msgid "Add the Fabric"
 msgstr "Додати тканину"
 
-#: atelier/templates/atelier/generic_new.html:49
+#: atelier/templates/atelier/generic_new.html:50
 msgid "Home"
 msgstr "Домівка"
 
-#: atelier/templates/atelier/generic_new.html:52
+#: atelier/templates/atelier/generic_new.html:53
 #: atelier/templates/atelier/index.html:10
 #: atelier/templates/atelier/product_list.html:4
 msgid "Products"
 msgstr "Вироби"
 
-#: atelier/templates/atelier/generic_new.html:53
+#: atelier/templates/atelier/generic_new.html:54
 #: atelier/templates/atelier/index.html:13
 msgid "Allowance/Discounts"
 msgstr "Надбавки/знижки"
 
-#: atelier/templates/atelier/generic_new.html:58
+#: atelier/templates/atelier/generic_new.html:59
 #: atelier/templates/atelier/index.html:15
 #: atelier/templates/atelier/minimal_style_detail.html:5
 #: atelier/templates/atelier/minimal_style_list.html:4
@@ -269,7 +269,7 @@ msgstr "Створити виріб"
 msgid "Morshyn"
 msgstr "Моршин"
 
-#: vokss/urls.py:29
+#: vokss/urls.py:31
 msgid "admin/"
 msgstr "адмін/"
 

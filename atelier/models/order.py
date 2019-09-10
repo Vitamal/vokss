@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 from django.urls import reverse
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
 
 from atelier.app_utils import order_price_calculation
 
@@ -10,19 +10,19 @@ class Order(models.Model):
     CATEGORY1 = '1'
     CATEGORY2 = '2'
     PROCESSING_CATEGORY = [
-        (CATEGORY1, ugettext('Processing category 1')),
-        (CATEGORY2, ugettext('Processing category 2')),
+        (CATEGORY1, _('Processing category 1')),
+        (CATEGORY2, _('Processing category 2')),
     ]
-    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE, verbose_name=ugettext('Client'))
-    product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE, verbose_name=ugettext('Product'))
-    fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE, verbose_name=ugettext('Fabric'))
+    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE, verbose_name=_('Client'))
+    product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE, verbose_name=_('Product'))
+    fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE, verbose_name=_('Fabric'))
     processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,
-                                           verbose_name=ugettext('Processing category'))
+                                           verbose_name=_('Processing category'))
     complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True,
-                                                   verbose_name=ugettext('Processing category'))
+                                                   verbose_name=_('Processing category'))
     allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True,
-                                                verbose_name=ugettext('Allowance/Discount'))
-    order_date = models.DateField(default=datetime.date.today, verbose_name=ugettext('Order Date'))
+                                                verbose_name=_('Allowance/Discount'))
+    order_date = models.DateField(default=datetime.date.today, verbose_name=_('Order Date'))
 
     class Meta:
         ordering = ["order_date"]

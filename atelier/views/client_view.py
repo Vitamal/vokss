@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
 
 from atelier.models import Client, Order
 from django.views import generic
@@ -10,7 +10,7 @@ class ClientCreateView(generic.CreateView):
     model = Client
     fields = ('first_name', 'last_name', 'tel_number', 'place')
     template_name = 'atelier/create_form.html'
-    initial = {'place': ugettext('Morshyn'), }
+    initial = {'place': _('Morshyn'), }
 
 
 class ClientUpdateView(generic.UpdateView):

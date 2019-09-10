@@ -20,9 +20,10 @@ from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
 # urlpatterns = [
-    # path('admin/', admin.site.urls),
-    # path('atelier/', include('atelier.urls')),
-    # path('', RedirectView.as_view(url='/atelier/', permanent=True)),
+#     path('admin/', admin.site.urls),
+#     path('atelier/', include('atelier.urls')),
+#     path('', RedirectView.as_view(url='/atelier/', permanent=True)),
+# ]
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),

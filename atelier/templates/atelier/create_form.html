@@ -1,12 +1,14 @@
 {% extends 'atelier/base.html' %}
+{% load i18n %}
+
 
 **atelier/product_form.html**
 
 {% block content %}
     <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value={% trans 'Save' %}/>
     </form>
 
 {% endblock %}

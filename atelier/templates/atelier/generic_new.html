@@ -26,9 +26,11 @@
             {% block sidebar %}
 
                 <ul class="sidebar-nav">
+
+                    {#change the lenguage for site and for admin #}
                     {% get_current_language as LANGUAGE_CODE %}
                     <h4>{{ LANGUAGE_CODE }}</h4>
-                    <h4><a href="{% url 'admin:index' %}">{% url 'admin:index' %}</a> </h4>
+                    <h4><a href="{% url 'admin:index' %}">{% trans 'admin' %}</a></h4>
                     <form action="{% url 'set_language' %}" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ redirect_to }}">

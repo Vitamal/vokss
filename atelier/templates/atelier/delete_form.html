@@ -2,13 +2,13 @@
 {% load i18n %}
 {% block content %}
 
-<h1>{% trans 'Delete the element in Atelier' %}</h1>
+    <h1>{% trans 'Delete the element in Atelier' %}</h1>
 
-<p>{% trans 'Are You sure to do this?' %}</p>
+    <p>{% trans 'Are You sure to do this?' %}</p>
 
-<form action="" method="POST">
-  {% csrf_token %}
-    <button type="submit" class="btn btn-success">{% trans 'Delete' %}</button>
-</form>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">{% trans 'Delete' %}</button>
+    </form>
 
 {% endblock %}

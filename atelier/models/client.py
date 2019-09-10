@@ -1,13 +1,13 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext
+from django.utils.translation import gettext_lazy as _
 
 
 class Client(models.Model):
-    first_name = models.CharField(max_length=30, verbose_name=ugettext('First Name'))
-    last_name = models.CharField(max_length=30, verbose_name=ugettext('Surname'))
-    tel_number = models.CharField(max_length=30, blank=True, verbose_name=ugettext('Tel. number'))
-    place = models.CharField(max_length=30, verbose_name=ugettext('Place'))
+    first_name = models.CharField(max_length=30, verbose_name=_('First Name'))
+    last_name = models.CharField(max_length=30, verbose_name=_('Surname'))
+    tel_number = models.CharField(max_length=30, blank=True, verbose_name=_('Tel. number'))
+    place = models.CharField(max_length=30, verbose_name=_('Place'))
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
