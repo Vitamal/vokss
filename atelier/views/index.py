@@ -6,7 +6,6 @@ def index(request):
     '''
     Home page view function
     '''
-    from django.utils import translation
 
     num_fabrics = Fabric.objects.all().count()
     num_products = Product.objects.all().count()

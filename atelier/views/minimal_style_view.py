@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404, render
 from atelier.models import MinimalStyle
 from django.views import generic
 from atelier.forms import MinimalStyleForm

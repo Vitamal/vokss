@@ -16,10 +16,10 @@ class Fabric(models.Model):
         (GROUP3, 'Група ІІІ'),
         (GROUP4, 'Група ІV'),
     ]
-    name = models.CharField(max_length=264, verbose_name=_('Name'))
-    group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name=_('Group'))
+    name = models.CharField(max_length=264, verbose_name=_('name'))
+    group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name=_('group'))
     complexity_factor = models.DecimalField(default=1, max_digits=5, decimal_places=2,
-                                            verbose_name=_('Complexity Factor'))
+                                            verbose_name=_('complexity factor'))
 
     def __str__(self):
         return self.name

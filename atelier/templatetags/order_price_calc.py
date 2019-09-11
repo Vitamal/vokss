@@ -1,5 +1,4 @@
 from django import template
-from atelier.models import Order
 from atelier.app_utils import order_price_calculation
 
 

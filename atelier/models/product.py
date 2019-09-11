@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=264, verbose_name=_('Name'))
+    name = models.CharField(max_length=264, verbose_name=_('name'))
     minimal_style = models.ForeignKey('atelier.MinimalStyle', on_delete=models.CASCADE,
-                                      verbose_name=_('Minimal Style'))
-    base_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Base Price'))
+                                      verbose_name=_('minimal style'))
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('base price'))
 
     def __str__(self):
         return self.name

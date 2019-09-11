@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Client(models.Model):
-    first_name = models.CharField(max_length=30, verbose_name=_('First Name'))
-    last_name = models.CharField(max_length=30, verbose_name=_('Surname'))
-    tel_number = models.CharField(max_length=30, blank=True, verbose_name=_('Tel. number'))
-    place = models.CharField(max_length=30, verbose_name=_('Place'))
+    first_name = models.CharField(max_length=30, verbose_name=_('first Name'))
+    last_name = models.CharField(max_length=30, verbose_name=_('surname'))
+    tel_number = models.CharField(max_length=30, blank=True, verbose_name=_('tel. number'))
+    place = models.CharField(max_length=30, verbose_name=_('place'))
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
