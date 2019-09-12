@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Client(models.Model):
     first_name = models.CharField(max_length=30, verbose_name=_('first Name'))
-    last_name = models.CharField(max_length=30, verbose_name=_('surname'))
+    last_name = models.CharField(max_length=30, verbose_name=_('second Name'))
     tel_number = models.CharField(max_length=30, blank=True, verbose_name=_('tel. number'))
     place = models.CharField(max_length=30, verbose_name=_('place'))
 
