@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-11 18:52+0000\n"
+"POT-Creation-Date: 2019-09-12 13:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,22 +19,16 @@ msgstr ""
 #: atelier/models/allowance_discount.py:7
 #: atelier/models/complication_element.py:7 atelier/models/fabric.py:19
 #: atelier/models/minimal_style.py:7 atelier/models/product.py:7
-#, fuzzy
-#| msgid "Surname"
 msgid "name"
-msgstr "Прізвище"
+msgstr "назва"
 
 #: atelier/models/allowance_discount.py:8
-#, fuzzy
-#| msgid "Coefficient"
 msgid "coefficient"
-msgstr "Коефіцієнт"
+msgstr "коефіцієнт"
 
 #: atelier/models/allowance_discount.py:9 atelier/models/fabric.py:20
-#, fuzzy
-#| msgid "Group"
 msgid "group"
-msgstr "Група"
+msgstr "група"
 
 #: atelier/models/client.py:7
 #, fuzzy
@@ -44,106 +37,69 @@ msgid "first Name"
 msgstr "Імя"
 
 #: atelier/models/client.py:8
-#, fuzzy
-#| msgid "Surname"
-msgid "surname"
+msgid "second Name"
 msgstr "Прізвище"
 
 #: atelier/models/client.py:9
-#, fuzzy
-#| msgid "Tel. number"
 msgid "tel. number"
 msgstr "Тел. номер"
 
 #: atelier/models/client.py:10
-#, fuzzy
-#| msgid "Place"
 msgid "place"
 msgstr "Місто/село"
 
 #: atelier/models/complication_element.py:8 atelier/models/product.py:10
-#, fuzzy
-#| msgid "Base Price"
 msgid "base price"
 msgstr "Базова ціна"
 
 #: atelier/models/complication_element.py:9
-#, fuzzy
-#| msgid "Complexity"
 msgid "complexity"
 msgstr "Складність"
 
-#: atelier/models/fabric.py:22
+#: atelier/models/complication_element.py:10
 #, fuzzy
-#| msgid "Complexity Factor"
+#| msgid "group"
+msgid "group name"
+msgstr "назва групи"
+
+#: atelier/models/fabric.py:22
 msgid "complexity factor"
 msgstr "Фактор складності"
 
 #: atelier/models/minimal_style.py:8
-#, fuzzy
-#| msgid "Product group"
 msgid "product group"
 msgstr "Група виробів"
 
-#: atelier/models/order.py:13
-msgid "Processing category 1"
-msgstr "Категорія обробки 1"
-
-#: atelier/models/order.py:14
-msgid "Processing category 2"
-msgstr "Категорія обробки 2"
-
 #: atelier/models/order.py:16
-#, fuzzy
-#| msgid "Client"
 msgid "client"
 msgstr "Клієнт"
 
 #: atelier/models/order.py:17
-#, fuzzy
-#| msgid "Product"
 msgid "product"
 msgstr "Виріб"
 
 #: atelier/models/order.py:18
-#, fuzzy
-#| msgid "Fabric"
 msgid "fabric"
 msgstr "Матеріал"
 
-#: atelier/models/order.py:20 atelier/models/order.py:22
-#, fuzzy
-#| msgid "Processing category"
+#: atelier/models/order.py:20
 msgid "processing category"
 msgstr "Категорія обробки"
 
-#: atelier/models/order.py:24
-#, fuzzy
-#| msgid "Allowance/Discount"
-msgid "allowance/Discount"
+#: atelier/models/order.py:22 atelier/models/order.py:47
+#| msgid "complication_element"
+msgid "complication elements"
+msgstr "Ускладнюючі елементи"
+
+#: atelier/models/order.py:24 atelier/models/order.py:39
+msgid "allowance/discount"
 msgstr "Надбавки/знижки"
 
 #: atelier/models/order.py:25
-#, fuzzy
-#| msgid "Order Date"
 msgid "order date"
 msgstr "Дата замовлення"
 
-#: atelier/models/order.py:39
-#, fuzzy
-#| msgid "Allowance/Discount"
-msgid "allowance_discount"
-msgstr "Надбавки/знижки"
-
-#: atelier/models/order.py:47
-#, fuzzy
-#| msgid "Complication elements"
-msgid "complication_element"
-msgstr "Ускладнюючі елементи"
-
 #: atelier/models/product.py:9
-#, fuzzy
-#| msgid "Minimal Style"
 msgid "minimal style"
 msgstr "Мінімальний фасон"
 
@@ -208,9 +164,7 @@ msgstr "Додати елемент"
 msgid "There is no one element in Atelier"
 msgstr "Немає жодного елемента в Ательє"
 
-#: templates/atelier/base.html:18
-#, fuzzy
-#| msgid "Atelier Home:"
+#: templates/atelier/base.html:20
 msgid "Atelier"
 msgstr "Ательє"
 
@@ -219,7 +173,9 @@ msgid "First Name"
 msgstr "Імя"
 
 #: templates/atelier/client_detail.html:8
-msgid "Surname"
+#, fuzzy
+#| msgid "second Name"
+msgid "Second Name"
 msgstr "Прізвище"
 
 #: templates/atelier/client_detail.html:9
@@ -268,7 +224,7 @@ msgstr "Складність"
 msgid "Group"
 msgstr "Група"
 
-#: templates/atelier/create_form.html:11 templates/atelier/order_form.html:23
+#: templates/atelier/create_form.html:10 templates/atelier/order_form.html:23
 msgid "Save"
 msgstr "Зберегти"
 
@@ -291,17 +247,15 @@ msgstr "Фактор складності"
 
 #: templates/atelier/fabric_list.html:4 templates/atelier/order_detail.html:12
 msgid "Fabric"
-msgstr "Матеріал"
+msgstr "Тканина"
 
 #: templates/atelier/fabric_list.html:5
 msgid "Add the Fabric"
 msgstr "Додати тканину"
 
 #: templates/atelier/generic_new.html:33
-#, fuzzy
-#| msgid "admin/"
-msgid "admin"
-msgstr "адмін/"
+msgid "Admin"
+msgstr "Адмін/"
 
 #: templates/atelier/generic_new.html:52
 msgid "Home"
@@ -349,7 +303,7 @@ msgstr "Виріб"
 
 #: templates/atelier/order_detail.html:13
 msgid "Group of fabric"
-msgstr "Група матеріалів"
+msgstr "Група тканин"
 
 #: templates/atelier/order_detail.html:14
 msgid "Processing category"
@@ -381,11 +335,11 @@ msgstr "Опис мінімального фасону"
 msgid "Create Product"
 msgstr "Створити виріб"
 
-#: vokss/settings.py:130
+#: vokss/settings.py:125
 msgid "English"
 msgstr "Англійська"
 
-#: vokss/settings.py:131
+#: vokss/settings.py:126
 msgid "Ukrainian"
 msgstr "Українська"
 
@@ -393,7 +347,3 @@ msgstr "Українська"
 msgid "admin/"
 msgstr "адмін/"
 
-#, fuzzy
-#~| msgid "Name"
-#~ msgid "Name "
-#~ msgstr "Назва"

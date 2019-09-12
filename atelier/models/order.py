@@ -10,8 +10,8 @@ class Order(models.Model):
     CATEGORY1 = '1'
     CATEGORY2 = '2'
     PROCESSING_CATEGORY = [
-        (CATEGORY1, _('Processing category 1')),
-        (CATEGORY2, _('Processing category 2')),
+        (CATEGORY1, 'Processing category 1'),
+        (CATEGORY2, 'Processing category 2'),
     ]
     client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE, verbose_name=_('client'))
     product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE, verbose_name=_('product'))
@@ -19,9 +19,9 @@ class Order(models.Model):
     processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,
                                            verbose_name=_('processing category'))
     complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True,
-                                                   verbose_name=_('processing category'))
+                                                   verbose_name=_('complication elements'))
     allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True,
-                                                verbose_name=_('allowance/Discount'))
+                                                verbose_name=_('allowance/discount'))
     order_date = models.DateField(default=datetime.date.today, verbose_name=_('order date'))
 
     class Meta:
@@ -36,7 +36,7 @@ class Order(models.Model):
         """
         return ', '.join([allowance_discount.name for allowance_discount in self.allowance_discount.all()[:3]])
 
-    display_allowance_discount.short_description = _('allowance_discount')
+    display_allowance_discount.short_description = _('allowance/discount')
 
     def display_complication_elements(self):
         """
@@ -44,7 +44,7 @@ class Order(models.Model):
         """
         return ', '.join([complication_elements.name for complication_elements in self.complication_elements.all()[:3]])
 
-    display_complication_elements.short_description = _('complication_element')
+    display_complication_elements.short_description = _('complication elements')
 
     def get_absolute_url(self):
         return reverse('atelier:order_detail', args=[str(self.id)])

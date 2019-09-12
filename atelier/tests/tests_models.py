@@ -1,41 +1,63 @@
-import datetime
-
 from django.test import TestCase
-from django.utils import timezone
-from django.urls import reverse
-from atelier.models import Order
+
+# Create your tests here.
+
+from atelier.models import Client
 
 
-# class OrderModelTests(TestCase):
-#
-#     def test_was_ordered_recently_with_future_order(self):
-#         """
-#         was_ordered_recently() returns False for order whose order_date
-#         is in the future.
-#         """
-#         time = timezone.now() + datetime.timedelta(days=30)
-#         future_order = Order(order_date=time)
-#         self.assertIs(future_order.was_ordered_recently(), False)
-
-class YourTestClass(TestCase):
+class ClientModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        print("setUpTestData: Run once to set up non-modified data for all class methods.")
-        pass
+        # Set up non-modified objects used by all test methods
+        Client.objects.create(first_name='Big', last_name='Bob', tel_number='067-200-333-44', place='Stryi')
 
-    def setUp(self):
-        print("setUp: Run once for every test method to setup clean data.")
-        pass
+    def test_first_name_label(self):
+        client = Client.objects.get(id=1)
+        field_label = client._meta.get_field('first_name').verbose_name
+        self.assertEquals(field_label, 'first Name')
 
-    def test_false_is_false(self):
-        print("Method: test_false_is_false.")
-        self.assertFalse(False)
+    def test_last_name_label(self):
+        client = Client.objects.get(id=1)
+        field_label = client._meta.get_field('last_name').verbose_name
+        self.assertEquals(field_label, 'second Name')
 
-    def test_false_is_true(self):
-        print("Method: test_false_is_true.")
-        self.assertTrue(False)
+    def test_place_label(self):
+        client = Client.objects.get(id=1)
+        field_label = client._meta.get_field('place').verbose_name
+        self.assertEquals(field_label, 'place')
 
-    def test_one_plus_one_equals_two(self):
-        print("Method: test_one_plus_one_equals_two.")
-        self.assertEqual(1 + 1, 2)
+    def test_tel_number_label(self):
+        client = Client.objects.get(id=1)
+        field_label = client._meta.get_field('tel_number').verbose_name
+        self.assertEquals(field_label, 'tel. number')
+
+    def test_first_name_max_length(self):
+        client = Client.objects.get(id=1)
+        max_length = client._meta.get_field('first_name').max_length
+        self.assertEquals(max_length, 30)
+
+    def test_last_name_max_length(self):
+        client = Client.objects.get(id=1)
+        max_length = client._meta.get_field('last_name').max_length
+        self.assertEquals(max_length, 30)
+
+    def test_tel_number_max_length(self):
+        client = Client.objects.get(id=1)
+        max_length = client._meta.get_field('tel_number').max_length
+        self.assertEquals(max_length, 30)
+
+    def test_place_max_length(self):
+        client = Client.objects.get(id=1)
+        max_length = client._meta.get_field('place').max_length
+        self.assertEquals(max_length, 30)
+
+    def test_object_name_is_first_name_last_name(self):
+        client = Client.objects.get(id=1)
+        expected_object_name = '%s %s' % (client.first_name, client.last_name)
+        self.assertEquals(expected_object_name, str(client))
+
+    def test_get_absolute_url(self):
+        client = Client.objects.get(id=1)
+        # This will also fail if the urlconf is not defined.
+        self.assertEquals(client.get_absolute_url(), '/atelier/client/1/')

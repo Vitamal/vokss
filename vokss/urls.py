@@ -32,5 +32,5 @@ urlpatterns += i18n_patterns(
     path(_('admin/'), admin.site.urls),
     path('atelier/', include('atelier.urls')),
     path('', RedirectView.as_view(url='/atelier/', permanent=True)),
-    # prefix_default_language=False, # With this code active, the program works wrong: don't switch to default language!
+    prefix_default_language=False,  # With this code active, the program works wrong: don't switch to default language!
 )
