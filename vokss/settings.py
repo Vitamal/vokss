@@ -135,4 +135,4 @@ LANGUAGES = [
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-print("base dir path", BASE_DIR)
+# print("base dir path", BASE_DIR)

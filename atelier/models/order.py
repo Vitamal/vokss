@@ -1,7 +1,7 @@
 from django.db import models
 import datetime
 from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from atelier.app_utils import order_price_calculation
 
