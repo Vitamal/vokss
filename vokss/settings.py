@@ -14,6 +14,8 @@ import os
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django_dbdev.backends.postgres import DBSETTINGS
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_dbdev',
     'atelier.apps.AtelierConfig',
     'crispy_forms',
 ]
@@ -74,14 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'vokss.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'vokss',
-        'USER': 'vitalii',
-        'PASSWORD': 'Insight~',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': DBSETTINGS
 }
 
 # Password validation
