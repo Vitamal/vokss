@@ -2,7 +2,9 @@ Django==2.2.3
 django-crispy-forms==1.7.2
 django-dbdev==1.2.3
 future==0.17.1
+model-mommy==1.6.0
 psycopg2==2.8.3
 pytz==2019.1
 sh==1.12.14
+six==1.12.0
 sqlparse==0.3.0

@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+
 # Create your tests here.
 
 from atelier.models import Client
@@ -61,3 +62,5 @@ class ClientModelTest(TestCase):
         client = Client.objects.get(id=1)
         # This will also fail if the urlconf is not defined.
         self.assertEquals(client.get_absolute_url(), '/atelier/client/1/')
+
+
