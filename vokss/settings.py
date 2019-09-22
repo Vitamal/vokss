@@ -15,6 +15,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django_dbdev.backends.postgres import DBSETTINGS
+from ievv_opensource.utils import ievvdevrun
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django_dbdev',
     'atelier.apps.AtelierConfig',
     'crispy_forms',
+    'ievv_opensource.ievvtasks_common',
+    'ievv_opensource.ievvtasks_development',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -126,3 +129,14 @@ LANGUAGES = [
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+IEVVTASKS_DEVRUN_RUNNABLES = {
+    'default': ievvdevrun.config.RunnableThreadList(
+        ievvdevrun.runnables.dbdev_runserver.RunnableThread(),
+        ievvdevrun.runnables.django_runserver.RunnableThread(port=8080)
+    )
+}
+
+THIS_DIR = os.path.dirname(__file__)
+
+IEVVTASKS_DUMPDATA_DIRECTORY = os.path.join(THIS_DIR, 'dumps')
