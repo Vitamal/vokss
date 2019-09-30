@@ -15,8 +15,13 @@ def index(request):
     num_minimal_style = MinimalStyle.objects.all().count()
     num_allowance_discount = AllowanceDiscount.objects.all().count()
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits+1
+
     return render(request, 'atelier/index.html', context={'num_fabrics': num_fabrics, 'num_products': num_products,
                                                           'num_clients': num_clients, 'num_orders': num_orders,
                                                           'num_allowance_discount': num_allowance_discount,
                                                           'num_complication_element': num_complication_element,
-                                                          'num_minimal_style': num_minimal_style})
+                                                          'num_minimal_style': num_minimal_style,
+                                                          'num_visits': num_visits})

@@ -1,9 +1,24 @@
 from django.test import TestCase
+from model_mommy import mommy
+from model_mommy.recipe import Recipe, foreign_key
+
+from atelier.models import Client, AllowanceDiscount
 
 
-# Create your tests here.
+class AllowanceDiscountTestModel(TestCase):
+    """
+    Class to test the model
+    AllowanceDiscount
+    """
 
-from atelier.models import Client
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.allowance_discount = mommy.make(AllowanceDiscount,
+                                             fill_optional=True)  # _fill_optional=True to fill all fields with random data
+        self.assertTrue(isinstance(self.allowance_discount, AllowanceDiscount))
+        self.assertEqual(self.allowance_discount.__unicode__(), self.allowance_discount.title)
 
 
 class ClientModelTest(TestCase):
@@ -61,6 +76,16 @@ class ClientModelTest(TestCase):
     def test_get_absolute_url(self):
         client = Client.objects.get(id=1)
         # This will also fail if the urlconf is not defined.
-        self.assertEquals(client.get_absolute_url(), '/atelier/client/1/')
+        self.assertEquals(client.get_absolute_url(), '/en-us/atelier/client/1/')
 
+class OrderTestModel(TestCase):
+    """
+        Class to test the module
+        Order
+    """
 
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.order = mommy.make('atelier.Order', make_m2m=True)
