@@ -9,7 +9,7 @@ class AllowanceDiscountDetailView(generic.DetailView):
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
     context_object_name = 'allowance_discount'  # we changed lowercased version of the model class’ name:
-    # allowancediscount to allowance_discount.
+                                                # allowancediscount to allowance_discount.
 
 
 class AllowanceDiscountListView(generic.ListView):
