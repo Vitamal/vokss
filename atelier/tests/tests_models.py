@@ -1,7 +1,7 @@
 from django.test import TestCase
 from model_mommy import mommy
 
-from atelier.models import Client, AllowanceDiscount
+from atelier.models import Client, AllowanceDiscount, ComplicationElement
 
 
 class AllowanceDiscountTestModel(TestCase):
@@ -14,11 +14,34 @@ class AllowanceDiscountTestModel(TestCase):
         """
         Set up all the tests
         """
-        self.allowance_discount = mommy.make(AllowanceDiscount,
-                                             fill_optional=True)  # _fill_optional=True to fill all fields with random data
-        self.assertTrue(isinstance(self.allowance_discount, AllowanceDiscount))
-        self.assertEqual(self.allowance_discount.__unicode__(), self.allowance_discount.title)
+        self.allowance_discount = mommy.make(AllowanceDiscount)
 
+    def test_allowence_discount_instance(self):
+        allowance_discount = self.allowance_discount
+        self.assertTrue(isinstance(allowance_discount, AllowanceDiscount))
+        self.assertEqual(allowance_discount.__str__(), allowance_discount.name)
+
+    def test_allowence_discount_fields(self):
+        field_name = self.allowance_discount._meta.get_field('name').verbose_name
+        field_coefficient = self.allowance_discount._meta.get_field('coefficient').verbose_name
+        field_label = self.allowance_discount._meta.get_field('label').verbose_name
+        self.assertEquals(field_name, 'name')
+        self.assertEquals(field_coefficient, 'coefficient')
+        self.assertEquals(field_label, 'group')
+
+
+class ComplicationElementTestModel(TestCase):
+    """
+    Class to test the model
+    ComplicationElement
+    """
+
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.complication_element = mommy.make(ComplicationElement)
+        # self.assertTrue(isinstance(self.complication_element, ComplicationElement))
 
 class ClientModelTest(TestCase):
 
