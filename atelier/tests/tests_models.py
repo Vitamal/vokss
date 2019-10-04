@@ -1,11 +1,13 @@
 from django.test import TestCase
 from model_mommy import mommy
-
-from atelier.models import Client, AllowanceDiscount, ComplicationElement
-
+from atelier.models import Client, AllowanceDiscount, ComplicationElement, Fabric
+from model_mommy.recipe import Recipe
 
 class ClientModelTest(TestCase):
-
+    """
+    Class to test the model
+    Client
+    """
     @classmethod
     def setUpTestData(cls):
         # Set up non-modified objects used by all test methods
@@ -65,7 +67,7 @@ class ClientModelTest(TestCase):
 class AllowanceDiscountTestModel(TestCase):
     """
     Class to test the model
-    AllowanceDiscount
+    AllowanceDiscount by the help of Model Mommy
     """
 
     def setUp(self):
@@ -78,7 +80,7 @@ class AllowanceDiscountTestModel(TestCase):
         self.assertTrue(isinstance(self.allowance_discount, AllowanceDiscount))
         self.assertEqual(self.allowance_discount.__str__(), self.allowance_discount.name)
 
-    def test_fields(self):
+    def test_fields_verbous_name(self):
         field_name = self.allowance_discount._meta.get_field('name').verbose_name
         field_coefficient = self.allowance_discount._meta.get_field('coefficient').verbose_name
         field_label = self.allowance_discount._meta.get_field('label').verbose_name
@@ -100,6 +102,57 @@ class AllowanceDiscountTestModel(TestCase):
         # This will also fail if the urlconf is not defined.
         self.allowance_discount.id = 1
         self.assertEquals(self.allowance_discount.get_absolute_url(), '/en-us/atelier/allowance_discount/1/')
+
+class FabricTestModel(TestCase):
+    """
+    Class to test the model
+    Fabric (using model mommy Recipe)
+    """
+    def setUp(self):
+        """ Load the recipe 'fabric' from 'atelier/mommy_recipes.py' and create the instances"""
+        self.fabric_one = mommy.make_recipe('atelier.fabric')
+        # create recip for fabric_wool instance
+        self.fabric_wool = Recipe(Fabric, name='Wool', group='GR1', complexity_factor=2,)
+
+    def test_instance(self):
+        """True if create instances"""
+        self.assertTrue(isinstance(self.fabric_one, Fabric))
+        #True if create instance (another instance)
+        fabric_wool = self.fabric_wool.make()
+        self.assertIsInstance(fabric_wool, Fabric)
+
+    def test_str_(self):
+        """models _str_ checking"""
+        self.assertEqual(self.fabric_one.__str__(), self.fabric_one.name)
+        # another instance _str_ checking
+        fabric_wool = self.fabric_wool.make()
+        self.assertEqual(fabric_wool.__str__(), fabric_wool.name)
+
+    def test_fields_verbous_name(self):
+        field_name = self.fabric_one._meta.get_field('name').verbose_name
+        field_group = self.fabric_one._meta.get_field('group').verbose_name
+        field_complexity_factor = self.fabric_one._meta.get_field('complexity_factor').verbose_name
+        self.assertEquals(field_name, 'name')
+        self.assertEquals(field_group, 'group')
+        self.assertEquals(field_complexity_factor, 'complexity factor')
+
+
+    def test_field_arguments(self):
+        max_length_name = self.fabric_one._meta.get_field('name').max_length
+        max_length_group = self.fabric_one._meta.get_field('group').max_length
+        max_digits_complexity_factor = self.fabric_one._meta.get_field('complexity_factor').max_digits
+        decimal_places_complexity_factor = self.fabric_one._meta.get_field('complexity_factor').decimal_places
+        default_complexity_factor = self.fabric_one._meta.get_field('complexity_factor').default
+        self.assertEquals(max_length_name, 264)
+        self.assertEquals(max_length_group, 3)
+        self.assertEquals(max_digits_complexity_factor, 5)
+        self.assertEquals(decimal_places_complexity_factor, 2)
+        self.assertEquals(default_complexity_factor, 1)
+
+    def test_get_absolute_url(self):
+        # This will also fail if the urlconf is not defined.
+        self.fabric_one.id = 1
+        self.assertEquals(self.fabric_one.get_absolute_url(), '/en-us/atelier/fabric/1/')
 
 
 class ComplicationElementTestModel(TestCase):

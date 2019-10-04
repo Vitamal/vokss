@@ -10,11 +10,11 @@ class Fabric(models.Model):
     GROUP3 = 'GR3'
     GROUP4 = 'GR4'
     FABRIC_GROUPS = [
-        (GROUP0, 'Група 0'),
-        (GROUP1, 'Група І'),
-        (GROUP2, 'Група ІІ'),
-        (GROUP3, 'Група ІІІ'),
-        (GROUP4, 'Група ІV'),
+        (GROUP0, _('Group 0')),
+        (GROUP1, _('Group I')),
+        (GROUP2, _('Group II')),
+        (GROUP3, _('Group III')),
+        (GROUP4, _('Group IV')),
     ]
     name = models.CharField(max_length=264, verbose_name=_('name'))
     group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name=_('group'))
