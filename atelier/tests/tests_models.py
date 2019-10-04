@@ -4,45 +4,6 @@ from model_mommy import mommy
 from atelier.models import Client, AllowanceDiscount, ComplicationElement
 
 
-class AllowanceDiscountTestModel(TestCase):
-    """
-    Class to test the model
-    AllowanceDiscount
-    """
-
-    def setUp(self):
-        """
-        Set up all the tests
-        """
-        self.allowance_discount = mommy.make(AllowanceDiscount)
-
-    def test_allowence_discount_instance(self):
-        allowance_discount = self.allowance_discount
-        self.assertTrue(isinstance(allowance_discount, AllowanceDiscount))
-        self.assertEqual(allowance_discount.__str__(), allowance_discount.name)
-
-    def test_allowence_discount_fields(self):
-        field_name = self.allowance_discount._meta.get_field('name').verbose_name
-        field_coefficient = self.allowance_discount._meta.get_field('coefficient').verbose_name
-        field_label = self.allowance_discount._meta.get_field('label').verbose_name
-        self.assertEquals(field_name, 'name')
-        self.assertEquals(field_coefficient, 'coefficient')
-        self.assertEquals(field_label, 'group')
-
-
-class ComplicationElementTestModel(TestCase):
-    """
-    Class to test the model
-    ComplicationElement
-    """
-
-    def setUp(self):
-        """
-        Set up all the tests
-        """
-        self.complication_element = mommy.make(ComplicationElement)
-        # self.assertTrue(isinstance(self.complication_element, ComplicationElement))
-
 class ClientModelTest(TestCase):
 
     @classmethod
@@ -99,6 +60,64 @@ class ClientModelTest(TestCase):
         client = Client.objects.get(id=1)
         # This will also fail if the urlconf is not defined.
         self.assertEquals(client.get_absolute_url(), '/en-us/atelier/client/1/')
+
+
+class AllowanceDiscountTestModel(TestCase):
+    """
+    Class to test the model
+    AllowanceDiscount
+    """
+
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.allowance_discount = mommy.make(AllowanceDiscount)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.allowance_discount, AllowanceDiscount))
+        self.assertEqual(self.allowance_discount.__str__(), self.allowance_discount.name)
+
+    def test_fields(self):
+        field_name = self.allowance_discount._meta.get_field('name').verbose_name
+        field_coefficient = self.allowance_discount._meta.get_field('coefficient').verbose_name
+        field_label = self.allowance_discount._meta.get_field('label').verbose_name
+        self.assertEquals(field_name, 'name')
+        self.assertEquals(field_coefficient, 'coefficient')
+        self.assertEquals(field_label, 'group')
+
+    def test_field_arguments(self):
+        max_length_name = self.allowance_discount._meta.get_field('name').max_length
+        max_length_label = self.allowance_discount._meta.get_field('label').max_length
+        max_digits_coefficient = self.allowance_discount._meta.get_field('coefficient').max_digits
+        decimal_places_coefficient = self.allowance_discount._meta.get_field('coefficient').decimal_places
+        self.assertEquals(max_length_name, 255)
+        self.assertEquals(max_length_label, 255)
+        self.assertEquals(max_digits_coefficient, 5)
+        self.assertEquals(decimal_places_coefficient, 2)
+
+    def test_get_absolute_url(self):
+        # This will also fail if the urlconf is not defined.
+        self.allowance_discount.id = 1
+        self.assertEquals(self.allowance_discount.get_absolute_url(), '/en-us/atelier/allowance_discount/1/')
+
+
+class ComplicationElementTestModel(TestCase):
+    """
+    Class to test the model
+    ComplicationElement
+    """
+
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.complication_element = mommy.make(ComplicationElement)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.complication_element, ComplicationElement))
+        self.assertEqual(self.complication_element.__str__(),
+                         '{} {}'.format(self.complication_element.group, self.complication_element.name))
 
 
 class OrderTestModel(TestCase):
