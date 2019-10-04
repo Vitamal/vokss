@@ -77,6 +77,7 @@ class ClientModelTest(TestCase):
         # This will also fail if the urlconf is not defined.
         self.assertEquals(client.get_absolute_url(), '/en-us/atelier/client/1/')
 
+
 class OrderTestModel(TestCase):
     """
         Class to test the module
