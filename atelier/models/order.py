@@ -58,9 +58,7 @@ class Order(models.Model):
 
         for i in self.complication_elements.all():
             complication_elements_base_price_list.append(i.base_price)
-
-        for j in self.complication_elements.all():
-            complication_elements_complexity_list.append(j.complexity)
+            complication_elements_complexity_list.append(i.complexity)
 
         for k in self.allowance_discount.all():
             allowance_discount_coefficient_list.append(k.coefficient)

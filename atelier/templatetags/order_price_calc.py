@@ -1,8 +1,8 @@
 from django import template
 from atelier.app_utils import order_price_calculation
 
-
 register = template.Library()
+
 
 @register.simple_tag
 def order_price_tag(order):
@@ -12,9 +12,7 @@ def order_price_tag(order):
 
     for i in order.complication_elements.all():
         complication_elements_base_price_list.append(i.base_price)
-
-    for j in order.complication_elements.all():
-        complication_elements_complexity_list.append(j.complexity)
+        complication_elements_complexity_list.append(i.complexity)
 
     for k in order.allowance_discount.all():
         allowance_discount_coefficient_list.append(k.coefficient)

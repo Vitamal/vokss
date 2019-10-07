@@ -1,4 +1,7 @@
+"""
+order price calculation
 
+"""
 
 def order_price_calculation(fabric_complexity_factor, product_base_price, complication_element_base_price,
                             complication_element_complexity, order_processing_category,
