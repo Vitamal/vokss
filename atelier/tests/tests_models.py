@@ -301,7 +301,11 @@ class OrderTestModel(TestCase):
         """
         Set up all the tests
         """
-        self.order = mommy.make('atelier.Order', make_m2m=True)
+        complication_element1 = mommy.make(ComplicationElement, base_price=10, complexity=2)
+        complication_element2 = mommy.make(ComplicationElement, base_price=10, complexity=2)
+        self.order = mommy.make('atelier.Order', complication_elements=[complication_element1, complication_element2], product__price=23)
+        Order.objects.all().filter(order_date='2019-10-01')
+
 
     def test_instance(self):
         self.assertTrue(isinstance(self.order, Order))
@@ -310,5 +314,10 @@ class OrderTestModel(TestCase):
         """models _str_ checking"""
         self.assertEqual(self.order.__str__(), ('{} {}' .format(self.order.client, self.order.order_date)))
 
-    def
-
+    def test_order_price_calculation(self):
+        print(self.order.processing_category)
+        print(self.order.complication_elements)
+        print(self.order.allowance_discount)
+        print(self.order.order_date)
+        print(self.order.fabric)
+        print(self.order.order_price)
