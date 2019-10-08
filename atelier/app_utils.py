@@ -1,7 +1,7 @@
 """
 order price calculation:
 
-order_price = starting_price + order_allowance_discount
+order_price = (starting_price * Fabric.complexity_factor) * 1.2 + order_allowance_discount
 
 where:
 starting_price = Product.base_price + (ComplicationElement.base_price * ComplicationElement.complexity)_1 + (ComplicationElement.base_price * ComplicationElement.complexity)_2 + ...
