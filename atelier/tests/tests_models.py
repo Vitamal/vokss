@@ -301,16 +301,23 @@ class OrderTestModel(TestCase):
         """
         Set up all the tests
         """
-        complication_element1 = mommy.make(ComplicationElement, base_price=10, complexity=2)
-        complication_element2 = mommy.make(ComplicationElement, base_price=10, complexity=2)
-        self.order = mommy.make('atelier.Order', complication_elements=[complication_element1, complication_element2]git)
-        Order.objects.all().filter(order_date='2019-10-01')
-
+        complication_element1 = mommy.make(ComplicationElement, base_price=10, complexity=2, name='Element1')
+        complication_element2 = mommy.make(ComplicationElement, base_price=10, complexity=2, name='Element2')
+        self.order = mommy.make('atelier.Order', complication_elements=[complication_element1, complication_element2])
 
     def test_instance(self):
         self.assertTrue(isinstance(self.order, Order))
 
     def test_str_(self):
         """models _str_ checking"""
-        self.assertEqual(self.order.__str__(), ('{} {}' .format(self.order.client, self.order.order_date)))
+        self.assertEqual(self.order.__str__(), ('{} {}'.format(self.order.client, self.order.order_date)))
 
+    def test_get_absolute_url(self):
+        # This will also fail if the urlconf is not defined.
+        id = self.order.id
+        self.assertEquals(self.order.get_absolute_url(), '/en-us/atelier/order/{}/'.format(id))
+
+    def test_order_field(self):
+        ''' I'm not sure if this test is appropriate :) '''
+        ord = Order.objects.filter(complication_elements__name='Element1')
+        self.assertEquals(self.order.complication_elements, ord[0].complication_elements)
