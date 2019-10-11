@@ -1,7 +1,8 @@
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 from model_mommy import mommy
-from atelier.models import  AllowanceDiscount
-from atelier.views import AllowanceDiscountDetailView
+from atelier.models import AllowanceDiscount
+from django.urls import reverse_lazy
+
 
 class PagesTest(TestCase):
 
@@ -37,18 +38,45 @@ class PagesTest(TestCase):
         response = self.client.get('/en/atelier/minimal_style/')
         self.assertEqual(response.status_code, 200)
 
-class GoodTest(TestCase):
+
+class AllowanceDiscountViewTests(TestCase):
     def setUp(self):
-        # Every test needs access to the request factory.
-        self.factory = RequestFactory()
-        self.allowance_discount = mommy.make(AllowanceDiscount)
+        """Create an instances more than 10 for pagination tests"""
+        self.allowance_discount = mommy.make(AllowanceDiscount, _quantity=13)
+
     def test_allowance_discount_detail_view(self):
-        # Create an instance of a GET request.
-        pk = self.allowance_discount.pk
-        request = self.factory.get('/en/atelier/allowance_discount/{}'.format(pk))
-        # Test AllowanceDiscountDetailView() as if it were deployed at /en/atelier/allowance_discount/
-        response = AllowanceDiscountDetailView.as_view()(request)
+        instance_id = self.allowance_discount[0].id
+        response = self.client.get('/en/atelier/allowance_discount/{}/'.format(instance_id))  # get response in way one
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/allowance_discount_detail.html')
+
+    def test_allowance_discount_view_form(self):
+        response = self.client.get(reverse_lazy('atelier:allowance_discount_form'))  # get response in way two
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/create_form.html')
+
+    def test_allowance_discount_edit_view(self):
+        instance_id = self.allowance_discount[0].id
+        response = self.client.get('/en/atelier/allowance_discount/{}/edit/'.format(instance_id))
+        self.assertEqual(response.status_code, 200)
+
+    def test_allowance_discount_delete_view(self):
+        instance_id = self.allowance_discount[0].id
+        response = self.client.get('/en/atelier/allowance_discount/{}/delete/'.format(instance_id))
+        self.assertEqual(response.status_code, 200)
+
+    def test_allowance_discount_list_view(self):
+        response = self.client.get('/en/atelier/allowance_discount/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/allowance_discount_list.html')
+
+    def test_pagination_is_ten(self):
+        resp = self.client.get(reverse_lazy('atelier:allowance_discount_list'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'] == True)
+        self.assertTrue(len(resp.context['object_list']) == 10)
+
 
 
     # def test_language_using_cookie(self):
@@ -64,4 +92,3 @@ class GoodTest(TestCase):
     #     with translation.override('fr'):
     #         response = self.client.get('/')
     #     self.assertEqual(response.content, b"Bienvenue sur mon site.")
-
