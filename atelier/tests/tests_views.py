@@ -1,10 +1,44 @@
+import htmls
 from django.test import TestCase
 from model_mommy import mommy
 from atelier.models import AllowanceDiscount
 from django.urls import reverse_lazy
 
 
+def _indent_string(string):
+    try:
+        return '\n'.join(['   {}'.format(line) for line in string.split('\n')])
+    except:
+        return string
+
+
 class PagesTest(TestCase):
+    def prettyformat_response_content(self, response):
+        warnings = []
+        output = None
+        if hasattr(response, 'render'):
+            try:
+                response.render()
+            except Exception as e:
+                warnings.append('[cradmin TestCaseMixin warning] response.render() failed with: {}'.format(e))
+            else:
+                try:
+                    output = '[cradmin TestCaseMixin info]: Prettyformatted response.content:\n{}'.format(
+                        _indent_string(htmls.S(response.content).prettify())
+                    )
+                except:
+                    pass
+        if output is None:
+            try:
+                content = response.content.decode('utf-8')
+            except UnicodeError:
+                content = response.content
+            if content:
+                output = '[cradmin TestCaseMixin info]: response.content:\n{}'.format(
+                    _indent_string(content))
+            else:
+                output = '[cradmin TestCaseMixin info]: response.content is empty.'
+        return output, warnings
 
     def test_index_page(self):
         response = self.client.get('/uk/atelier/')
@@ -16,6 +50,9 @@ class PagesTest(TestCase):
 
     def test_product_page(self):
         response = self.client.get('/en/atelier/product/')
+        response.selector = htmls.S(response.content)
+        response.selector.list('p')[0].prettyprint()
+        self.assertEquals(response.selector.one('title').alltext_normalized, "Atelier")
         self.assertEqual(response.status_code, 200)
 
     def test_order_page(self):
