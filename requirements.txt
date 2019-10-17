@@ -1,3 +1,4 @@
+htmls
 argh==0.26.2
 arrow==0.15.2
 cssselect==1.1.0

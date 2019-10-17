@@ -1,7 +1,7 @@
 import htmls
 from django.test import TestCase
 from model_mommy import mommy
-from atelier.models import AllowanceDiscount
+from atelier.models import AllowanceDiscount, Client, Order
 from django.urls import reverse_lazy
 
 
@@ -85,7 +85,7 @@ class PagesTest(TestCase):
     def test_index_page_3(self):
         response = self.client.get('/en/atelier/')
         selector = htmls.S(response.content)
-        self.assertEqual(len(selector.list('li')), 15)
+        self.assertEqual(len(selector.list('li')), 15)     # there is simple test for practice to use htmls
 
     def test_index_page_4(self):
         response = self.client.get('/en/atelier/')
@@ -138,6 +138,73 @@ class AllowanceDiscountViewTests(TestCase):
         self.assertTrue('is_paginated' in resp.context)
         self.assertTrue(resp.context['is_paginated'] == True)
         self.assertTrue(len(resp.context['object_list']) == 10)
+
+    # def test_language_using_cookie(self):
+    #     self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'uk'})
+    #     response = self.client.get('/atelier/allowance_discount/')
+    #     self.assertEqual(response.content, b"allowance_discount")
+    #
+    # def test_language_using_header(self):
+    #     response = self.client.get('/', HTTP_ACCEPT_LANGUAGE='fr')
+    #     self.assertEqual(response.content, b"Bienvenue sur mon site.")
+    #
+    # def test_language_using_override(self):
+    #     with translation.override('fr'):
+    #         response = self.client.get('/')
+    #     self.assertEqual(response.content, b"Bienvenue sur mon site.")
+
+
+class ClientViewTests(TestCase):
+    def setUp(self):
+        """
+            Create an instances more than 10 for pagination tests (13 instances)
+        """
+        self.clients = mommy.make(Client, _quantity=13)
+
+    def test_clients_detail_view(self):
+        """
+            In this test we get response in way one
+        """
+        instance_id = self.clients[0].id
+        response = self.client.get('/en/atelier/client/{}/'.format(instance_id))  # get response in way one
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/client_detail.html')
+
+    def test_clients_view_form(self):
+        """
+                In this test we get response in second way
+        """
+        response = self.client.get(reverse_lazy('atelier:client_form'))  # get response in way two
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/create_form.html')
+
+    def test_clients_edit_view(self):
+        instance_id = self.clients[0].id
+        response = self.client.get('/en/atelier/client/{}/edit/'.format(instance_id))
+        self.assertEqual(response.status_code, 200)
+
+    def test_client_delete_view(self):
+        instance_id = self.clients[0].id
+        response = self.client.get('/en/atelier/client/{}/delete/'.format(instance_id))
+        self.assertEqual(response.status_code, 200)
+
+    def test_client_list_view(self):
+        response = self.client.get('/en/atelier/client/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'atelier/client_list.html')
+
+    def test_client_pagination_is_ten(self):
+        resp = self.client.get(reverse_lazy('atelier:client_list'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'] == True)
+        self.assertTrue(len(resp.context['object_list']) == 10)
+
+    def test_get_context_data_client(self):
+        order = mommy.make(Order, client=self.clients)
+        instance_id = self.clients[0].id
+        response = self.client.get('/en/atelier/client/{}/'.format(instance_id))
+        self.assertEqual(response.context['order_list'], self.clients.order)
 
     # def test_language_using_cookie(self):
     #     self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'uk'})
