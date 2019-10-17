@@ -13,6 +13,7 @@ def _indent_string(string):
 
 
 class PagesTest(TestCase):
+
     def prettyformat_response_content(self, response):
         warnings = []
         output = None
@@ -40,7 +41,7 @@ class PagesTest(TestCase):
                 output = '[cradmin TestCaseMixin info]: response.content is empty.'
         return output, warnings
 
-    def test_index_page(self):
+    def test_index_page_1(self):
         response = self.client.get('/uk/atelier/')
         self.assertEqual(response.status_code, 200)
 
@@ -50,9 +51,6 @@ class PagesTest(TestCase):
 
     def test_product_page(self):
         response = self.client.get('/en/atelier/product/')
-        response.selector = htmls.S(response.content)
-        response.selector.list('p')[0].prettyprint()
-        self.assertEquals(response.selector.one('title').alltext_normalized, "Atelier")
         self.assertEqual(response.status_code, 200)
 
     def test_order_page(self):
@@ -75,19 +73,46 @@ class PagesTest(TestCase):
         response = self.client.get('/en/atelier/minimal_style/')
         self.assertEqual(response.status_code, 200)
 
+    def test_index_page_2(self):
+        """
+            tests with using htmls module
+        """
+        response = self.client.get('/en/atelier/')
+        selector = htmls.S(response.content)
+        selector.list('h2')[0].prettyprint()     # print <h2>...</h2> first tag in terminal
+        self.assertEqual(selector.one('h2').text_normalized, 'Welcome to Atelier!')
+
+    def test_index_page_3(self):
+        response = self.client.get('/en/atelier/')
+        selector = htmls.S(response.content)
+        self.assertEqual(len(selector.list('li')), 15)
+
+    def test_index_page_4(self):
+        response = self.client.get('/en/atelier/')
+        selector = htmls.S(response.content)
+        self.assertEqual(selector.one('title').alltext_normalized, "Atelier")
+
 
 class AllowanceDiscountViewTests(TestCase):
     def setUp(self):
-        """Create an instances more than 10 for pagination tests"""
+        """
+            Create an instances more than 10 for pagination tests (13 instances)
+        """
         self.allowance_discount = mommy.make(AllowanceDiscount, _quantity=13)
 
     def test_allowance_discount_detail_view(self):
+        """
+            In this test we get response in way one
+        """
         instance_id = self.allowance_discount[0].id
         response = self.client.get('/en/atelier/allowance_discount/{}/'.format(instance_id))  # get response in way one
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'atelier/allowance_discount_detail.html')
 
     def test_allowance_discount_view_form(self):
+        """
+                In this test we get response in second way
+        """
         response = self.client.get(reverse_lazy('atelier:allowance_discount_form'))  # get response in way two
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'atelier/create_form.html')
@@ -113,8 +138,6 @@ class AllowanceDiscountViewTests(TestCase):
         self.assertTrue('is_paginated' in resp.context)
         self.assertTrue(resp.context['is_paginated'] == True)
         self.assertTrue(len(resp.context['object_list']) == 10)
-
-
 
     # def test_language_using_cookie(self):
     #     self.client.cookies.load({settings.LANGUAGE_COOKIE_NAME: 'uk'})

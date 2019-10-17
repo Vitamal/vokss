@@ -10,8 +10,6 @@ class MinimalStyleQueryset(models.QuerySet):
 
 class MinimalStyle(models.Model):
 
-    object = MinimalStyleQueryset.as_manager()
-
     name = models.TextField(max_length=264, verbose_name=_('name'))
     group = models.CharField(max_length=264, verbose_name=_('product group'))
 
