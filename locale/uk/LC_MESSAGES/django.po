@@ -279,7 +279,7 @@ msgstr "Додати тканину"
 
 #: atelier/templates/atelier/generic_new.html:33
 msgid "Admin"
-msgstr "Адмін/"
+msgstr "Адмін"
 
 #: atelier/templates/atelier/generic_new.html:52
 msgid "Home"
