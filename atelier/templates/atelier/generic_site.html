@@ -1,3 +1,8 @@
+<!--
+There is the html template for future site!
+Not used in project before now!
+-->
+
 {% load static %}
 {% load i18n %}
 <!DOCTYPE html>
@@ -32,28 +37,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Atelier Menu <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'atelier:order_list' %}">{% trans 'Orders' %}</a></li>
-                            <li><a href="{% url 'atelier:client_list' %}">{% trans 'Clients' %}</a></li>
-                            <li><a href="{% url 'atelier:product_list' %}">{% trans 'Products' %}</a></li>
-                            <li>
-                                <a href="{% url 'atelier:allowance_discount_list' %}">{% trans 'Allowance/Discounts' %}</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'atelier:complication_element_list' %}">{% trans 'Complication Elements' %}</a>
-                            </li>
-                            <li><a href="{% url 'atelier:fabric_list' %}">{% trans 'Fabrics' %}</a></li>
-                            <li><a href="{% url 'atelier:minimal_style_list' %}">{% trans 'Minimal Styles' %}</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#statistic">STATISTIC</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
                 <li><a href="#portfolio">PORTFOLIO</a></li>
                 <li><a href="#pricing">PRICING</a></li>
                 <li><a href="#contact">CONTACT</a></li>
@@ -61,12 +46,10 @@
                 {#change the lenguage for site and for admin #}
                 {% get_current_language as LANGUAGE_CODE %}
                 <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
-                <li><a href="#" hreflang="uk" class="language" rel="uk-UA"><img
-                        src="{% static 'atelier/images/uk_UA.png' %}"
-                        alt="Ukrainian"/></a></li>
-                <li><a href="#" hreflang="en" class="language" rel="en-GB"><img
-                        src="{% static 'atelier/images/en_GB.png' %}"
-                        alt="English"/></a></li>
+                <li><a href="#" hreflang = "uk" class="language" rel="uk-UA"><img src="{% static 'atelier/images/uk_UA.png' %}"
+                                                                  alt="Ukrainian"/></a></li>
+                <li><a href="#" hreflang = "en" class="language" rel="en-GB"><img src="{% static 'atelier/images/en_GB.png' %}"
+                                                                  alt="English"/></a></li>
                 <li>{{ LANGUAGE_CODE }}</li>
                 <li>
                     <form action="{% url 'set_language' %}" method="POST">
@@ -86,7 +69,6 @@
                     </form>
                 </li>
             </ul>
-
             <br>
         </div>
     </div>
@@ -95,147 +77,99 @@
 <div class="jumbotron text-center">
     <h1>Atelier</h1>
     <p>The Tailor helper program</p>
+{#    <form>#}
+{#        <div class="input-group">#}
+{#            <input type="email" class="form-control" size="50" placeholder="Email Address" required>#}
+{#            <div class="input-group-btn">#}
+{#                <button type="button" class="btn btn-danger">Subscribe</button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </form>#}
 </div>
 
-<!-- Container (Sidebar Section) -->
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
     <div class="row">
-        <div class="col-sm-2">
-            {% block sidebar %}
-
-                <ul class="sidebar-nav sidebar-fixed-left">
-                    <li><a href="{% url 'atelier:index' %}">{% trans 'Home' %}</a></li>
-                    <li><a href="{% url 'atelier:order_list' %}">{% trans 'Orders' %}</a></li>
-                    <li><a href="{% url 'atelier:client_list' %}">{% trans 'Clients' %}</a></li>
-                    <li><a href="{% url 'atelier:product_list' %}">{% trans 'Products' %}</a></li>
-                    <li><a href="{% url 'atelier:allowance_discount_list' %}">{% trans 'Allowance/Discounts' %}</a>
-                    </li>
-                    <li><a href="{% url 'atelier:complication_element_list' %}">{% trans 'Complication Elements' %}</a>
-                    </li>
-                    <li><a href="{% url 'atelier:fabric_list' %}">{% trans 'Fabrics' %}</a></li>
-                    <li><a href="{% url 'atelier:minimal_style_list' %}">{% trans 'Minimal Styles' %}</a></li>
-
-                </ul>
-            {% endblock %}
+        <div class="col-sm-8">
+            <h2>About Atelier</h2><br>
+            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</h4><br>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                ut aliquip ex ea commodo consequat.</p>
+            <br>
+            <button class="btn btn-default btn-lg">Get in Touch</button>
         </div>
-
-
-<!-- Container (Statistic Section) -->
-<div id="statistic" class="container-fluid">
-    <div class="text-center">
-        <h2>{% trans 'Statistic' %}</h2>
-        <h4>{% trans 'Statistic for today - look at your progress!' %}</h4>
-    </div>
-    <div class="row slideanim">
-        <div class="col-sm-4 col-xs-12">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <h1>Basic</h1>
-                </div>
-                <div class="panel-body">
-                    <p><strong>20</strong> Lorem</p>
-                    <p><strong>15</strong> Ipsum</p>
-                    <p><strong>5</strong> Dolor</p>
-                    <p><strong>2</strong> Sit</p>
-                    <p><strong>Endless</strong> Amet</p>
-                </div>
-                <div class="panel-footer">
-                    <h3>$19</h3>
-                    <h4>per month</h4>
-                    <button class="btn btn-lg">Sign Up</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-12">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <h1>Pro</h1>
-                </div>
-                <div class="panel-body">
-                    <p><strong>50</strong> Lorem</p>
-                    <p><strong>25</strong> Ipsum</p>
-                    <p><strong>10</strong> Dolor</p>
-                    <p><strong>5</strong> Sit</p>
-                    <p><strong>Endless</strong> Amet</p>
-                </div>
-                <div class="panel-footer">
-                    <h3>$29</h3>
-                    <h4>per month</h4>
-                    <button class="btn btn-lg">Sign Up</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 col-xs-12">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <h1>Premium</h1>
-                </div>
-                <div class="panel-body">
-                    <p><strong>100</strong> Lorem</p>
-                    <p><strong>50</strong> Ipsum</p>
-                    <p><strong>25</strong> Dolor</p>
-                    <p><strong>10</strong> Sit</p>
-                    <p><strong>Endless</strong> Amet</p>
-                </div>
-                <div class="panel-footer">
-                    <h3>$49</h3>
-                    <h4>per month</h4>
-                    <button class="btn btn-lg">Sign Up</button>
-                </div>
-            </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-signal logo"></span>
         </div>
     </div>
 </div>
 
+<div class="container-fluid bg-grey">
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-globe logo slideanim"></span>
+        </div>
+        <div class="col-sm-8">
+            <h2>Our Values</h2><br>
+            <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+            <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.</p>
+        </div>
+    </div>
+</div>
 
 <!-- Container (Services Section) -->
 <div id="services" class="container-fluid text-center">
-    <h2>{% trans 'SERVICES' %}</h2>
-    <h4>{% trans 'Select the section' %}</h4>
+    <h2>SERVICES</h2>
+    <h4>What we offer</h4>
     <br>
     <div class="row slideanim">
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-off logo-small"></span>
-            <h3><a href="{% url 'atelier:order_list' %}">{% trans 'Orders' %}</a></h3>
-            <p>{% trans 'Atelier Orders' %}</p>
+            <h4>POWER</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-heart logo-small"></span>
-            <h4><a href="{% url 'atelier:client_list' %}">{% trans 'Clients' %}</a></h4>
-            <p>{% trans 'Atelier Clients' %}</p>
+            <h4>LOVE</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-lock logo-small"></span>
-            <h4><a href="{% url 'atelier:allowance_discount_list' %}">{% trans 'Allowance/Discounts' %}</a></h4>
-            <p>{% trans 'Atelier Allowance/Discounts' %}</p>
+            <h4>JOB DONE</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
     </div>
     <br><br>
     <div class="row slideanim">
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-leaf logo-small"></span>
-            <h4><a href="{% url 'atelier:complication_element_list' %}">{% trans 'Complication Elements' %}</a></h4>
-            <p>{% trans 'Atelier Complication Elements' %}</p>
+            <h4>GREEN</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-certificate logo-small"></span>
-            <h4><a href="{% url 'atelier:product_list' %}">{% trans 'Products' %}</a></h4>
-            <p>{% trans 'Atelier Products' %}</p>
+            <h4>CERTIFIED</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
         <div class="col-sm-4">
             <span class="glyphicon glyphicon-wrench logo-small"></span>
-            <h4 style="color:#303030;"><a href="{% url 'atelier:fabric_list' %}">{% trans 'Fabrics' %}</a></h4>
-            <p>{% trans 'Atelier Fabrics' %}</p>
+            <h4 style="color:#303030;">HARD WORK</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
         </div>
     </div>
-    <br><br>
-    <div class="row slideanim">
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-leaf logo-small"></span>
-            <h4><a href="{% url 'atelier:minimal_style_list' %}">{% trans 'Minimal Styles' %}</a></h4>
-            <p>{% trans 'Atelier Minimal Styles' %}</p>
-        </div>
-    </div>
-
 </div>
 
 <!-- Container (Portfolio Section) -->
@@ -303,6 +237,72 @@
     </div>
 </div>
 
+<!-- Container (Pricing Section) -->
+<div id="pricing" class="container-fluid">
+    <div class="text-center">
+        <h2>Pricing</h2>
+        <h4>Choose a payment plan that works for you</h4>
+    </div>
+    <div class="row slideanim">
+        <div class="col-sm-4 col-xs-12">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Basic</h1>
+                </div>
+                <div class="panel-body">
+                    <p><strong>20</strong> Lorem</p>
+                    <p><strong>15</strong> Ipsum</p>
+                    <p><strong>5</strong> Dolor</p>
+                    <p><strong>2</strong> Sit</p>
+                    <p><strong>Endless</strong> Amet</p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$19</h3>
+                    <h4>per month</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Pro</h1>
+                </div>
+                <div class="panel-body">
+                    <p><strong>50</strong> Lorem</p>
+                    <p><strong>25</strong> Ipsum</p>
+                    <p><strong>10</strong> Dolor</p>
+                    <p><strong>5</strong> Sit</p>
+                    <p><strong>Endless</strong> Amet</p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$29</h3>
+                    <h4>per month</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Premium</h1>
+                </div>
+                <div class="panel-body">
+                    <p><strong>100</strong> Lorem</p>
+                    <p><strong>50</strong> Ipsum</p>
+                    <p><strong>25</strong> Dolor</p>
+                    <p><strong>10</strong> Sit</p>
+                    <p><strong>Endless</strong> Amet</p>
+                </div>
+                <div class="panel-footer">
+                    <h3>$49</h3>
+                    <h4>per month</h4>
+                    <button class="btn btn-lg">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
