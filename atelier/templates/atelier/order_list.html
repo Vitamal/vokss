@@ -1,4 +1,4 @@
-{% extends 'atelier/generic_new.html' %}
+{% extends 'atelier/generic.html' %}
 {% load i18n %}
 {% block content %}
     <h1>{% trans 'Orders' %}</h1>
@@ -7,7 +7,7 @@
 
     {% if order_list %}
         <ul>
-            {% for order in order_list|dictsort:"order_date" %}   {# my comment: filtered dictionary by date #}
+            {% for order in order_list|dictsort:"order_date" %}   {# my comment: filtered dictionary by date
                 <li>
                     <strong> <a
                             href="{{ order.get_absolute_url }}">{{ order.product }} {{ order.order_date }} {{ order.client }}</a></strong>
@@ -18,3 +18,37 @@
         <p>{% trans 'There is no one element in Atelier' %}</p>
     {% endif %}
 {% endblock %}
+
+{#{% block content %}#}
+{#    <div class="slide" id="2">#}
+{#        <div class="content second-content">#}
+{#            <div class="container-fluid">#}
+{#                <div class="col-md-6">#}
+{#                    <div class="left-content">#}
+{#                        <h2>{% trans 'Orders' %}</h2>#}
+{#                        {% if order_list %}#}
+{#                            <ul>#}
+{#                                {% for order in order_list|dictsort:"order_date" %}#}
+                                    {# my comment: filtered dictionary by date #}
+{#                                    <li>#}
+{#                                        <strong> <a#}
+{#                                                href="{{ order.get_absolute_url }}">{{ order.product }} {{ order.order_date }} {{ order.client }}</a></strong>#}
+{#                                    </li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        {% else %}#}
+{#                            <p>{% trans 'There is no one element in Atelier' %}</p>#}
+{#                        {% endif %}#}
+{#                        <div class="main-btn"><a href="{% url 'atelier:order_form' %}">{% trans 'Create Order' %}</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6">#}
+{#                    <div class="right-image">#}
+{#                        <img src="{% static 'atelier/img/about_image.jpg' %}" alt="">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
