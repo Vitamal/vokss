@@ -1,4 +1,4 @@
-{% extends 'atelier/generic_new.html' %}
+{% extends 'atelier/template.html' %}
 {% load i18n %}
 {% block content %}
     <h1>{% trans 'Atelier Home:' %}</h1>
@@ -17,5 +17,5 @@
         <li><strong>{% trans 'Complication Elements' %}:</strong> {{ num_complication_element }}</li>
         <li><strong>{% trans 'Minimal Styles' %}:</strong> {{ num_minimal_style }}</li>
     </ul>
-    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    <p><i class="fas fa-smile"></i></i>   {% trans 'You have visited this page' %} {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 {% endblock %}
