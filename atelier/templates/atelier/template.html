@@ -148,7 +148,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
+
                             {#change the lenguage for site and for admin #}
+
                             {% get_current_language as LANGUAGE_CODE %}
                             <form action="{% url 'set_language' %}" method="POST">
                                 {% csrf_token %}
@@ -159,17 +161,13 @@
                                     {% for language in languages %}
                                         <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
                                                 selected {% endif %}>
-                                            {{ language.name_local }} ({{ language.code }})
+                                            {{ language.name_local }}
                                         </option>
                                     {% endfor %}
                                 </select>
                                 <input type="submit" value="Go">
                             </form>
                         </li>
-                        <li class="nav-item">
-                            <h4>{{ LANGUAGE_CODE }}</h4>
-                        </li>
-
                         <li class="nav-item">
                             <button class="btn btn-sm btn-outline-secondary" type="button">
                                 <a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></button>

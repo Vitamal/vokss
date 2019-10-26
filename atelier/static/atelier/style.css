@@ -31,12 +31,14 @@ a:focus {
 .btn {
     color: #ff34c2;
     background: #010205;
+    border: 1px solid #00ffdf;
 }
-.btn:hover{
+
+.btn:hover {
     background: #000000;
     color: #00ffdf;
     font-weight: bold;
-    }
+}
 
 .navbar {
     padding: 15px 10px;
@@ -63,23 +65,56 @@ a:focus {
 
 /*Styling Select  Menus*/
 select {
-  color: #ff34c2;
-  width: 100%;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #010205;
+    color: #ff34c2;
+    /*width: 100%;*/
+    /*padding: 16px 20px;*/
+    border-radius: 7px;
+    background-color: #010205;
+    border: 1px solid #00ffdf;
+    vertical-align: top;
+    height: 30px;
+    font-size: small;
+
+}
+select:hover {
+    background: #000000;
+    color: #00ffdf;
+    font-weight: bold;
 }
 
-
+input {
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
+    color: #ff34c2;
+    background-color: #010205;
+    font-size: small;
+    border-radius: 7px;
+    border: 1px solid #00ffdf;
+}
+input:hover {
+    background: #000000;
+    color: #00ffdf;
+    font-weight: bold;
+}
+option {
+    color:#ff34c2;
+}
+option:active {
+    background: #000000;
+    color: #00ffdf;
+    font-weight: bold;
+}
 .line {
     width: 100%;
     border-top: 1px dashed #e70067;
     margin: 40px 0 0 10px;
 }
+
 .hr {
     border: 1px dashed #e70067;
 }
+
 i,
 span {
     display: inline-block;
@@ -114,8 +149,7 @@ span {
     text-align: center;
 }
 
-#sidebar.active .sidebar-header h3
- {
+#sidebar.active .sidebar-header h3 {
     display: none;
 }
 
@@ -168,7 +202,7 @@ span {
     border-bottom: 1px solid #010522;
 }
 
-#sidebar ul li a  {
+#sidebar ul li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;

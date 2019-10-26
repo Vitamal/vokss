@@ -376,4 +376,4 @@ msgstr "Українська"
 
 #: vokss/urls.py:27
 msgid "admin/"
-msgstr "адмін/"
+msgstr "адмін"
