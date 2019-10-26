@@ -1,12 +1,13 @@
-{% extends 'atelier/base.html' %}
+{% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 **atelier/product_form.html**
 
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value={% trans 'Save' %}>
+        {% crispy form %}
+    <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
     </form>
 {% endblock %}

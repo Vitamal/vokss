@@ -7,15 +7,47 @@
     <p>Atelier is a simple, responsive program suitable for ateliers, tailors, design studios or small sewing business .
         It uses the best tailor practices, and on top of that, it’s fast, simple, and easy to use. <br><strong>Atelier
             Is More Than A Program for calculations, It’s A Powerful Design Tool</strong></p>
-    <h3>{% trans 'Today statistic' %}:</h3>
-    <ul>
-        <li><strong>{% trans 'Fabrics' %}:</strong> {{ num_fabrics }}</li>
-        <li><strong>{% trans 'Products' %}:</strong> {{ num_products }}</li>
-        <li><strong>{% trans 'Clients' %}:</strong> {{ num_clients }}</li>
-        <li><strong>{% trans 'Orders' %}:</strong> {{ num_orders }}</li>
-        <li><strong>{% trans 'Allowance/Discounts' %}:</strong> {{ num_allowance_discount }}</li>
-        <li><strong>{% trans 'Complication Elements' %}:</strong> {{ num_complication_element }}</li>
-        <li><strong>{% trans 'Minimal Styles' %}:</strong> {{ num_minimal_style }}</li>
-    </ul>
-    <p><i class="fas fa-smile"></i></i>   {% trans 'You have visited this page' %} {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Today statistic' %}:</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Fabrics' %}</td>
+                            <td>{{ num_fabrics }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Products' %}</td>
+                            <td>{{ num_products }}</td>
+                        <tr>
+                            <td>{% trans 'Clients' %}</td>
+                            <td>{{ num_clients }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Orders' %}</td>
+                            <td>{{ num_orders }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Allowance/Discounts' %}</td>
+                            <td>{{ num_allowance_discount }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Complication Elements' %}</td>
+                            <td>{{ num_complication_element }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Minimal Styles' %}</td>
+                            <td>{{ num_minimal_style }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p><i class="fas fa-smile"></i></i>   {% trans 'You have visited this page' %}
+        {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 {% endblock %}
