@@ -1,13 +1,25 @@
 /*
     DEMO STYLE
 */
+
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+{% load static %}
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
 }
+.bg-img {
+    /* The image used */
+    background-image: url("site.jpg");
+    min-height: 100%;
 
+  /* Center and scale the image nicely */
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: auto;
+  /* Needed to position the navbar */
+  position: relative;
+}
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
@@ -42,13 +54,12 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #c4c2ff;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 2px 2px 4px #010205;
-    background-color: #ffdfef !important;
     border-color: #E7E7E7;
+
 }
 
 .nav-link {
