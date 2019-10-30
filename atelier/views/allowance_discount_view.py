@@ -21,7 +21,7 @@ class AllowanceDiscountListView(generic.ListView):
 
 class AllowanceDiscountCreateView(generic.CreateView):
     model = AllowanceDiscount
-    fields = '__all__'
+    form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
 

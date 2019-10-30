@@ -4,9 +4,9 @@
     <h1>{% trans 'Atelier Home:' %}</h1>
 
     <h2>{% trans 'Welcome to Atelier!' %}</h2>
-    <p>Atelier is a simple, responsive program suitable for ateliers, tailors, design studios or small sewing business .
-        It uses the best tailor practices, and on top of that, it’s fast, simple, and easy to use. <br><strong>Atelier
-            Is More Than A Program for calculations, It’s A Powerful Design Tool</strong></p>
+    <p>{% trans 'Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small sewing business . It uses the best tailor practices, and on top of that, it’s fast, simple, and easy to use.' %}
+        <br><strong>{% trans 'Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!' %}</strong>
+    </p>
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
@@ -49,5 +49,5 @@
     </div>
 
     <p><i class="fas fa-smile"></i></i>   {% trans 'You have visited this page' %}
-        {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+        {{ num_visits }} {% if num_visits == 1 %} {%  trans 'time' %}{% else %}{% trans 'times' %} {% endif %}.</p>
 {% endblock %}

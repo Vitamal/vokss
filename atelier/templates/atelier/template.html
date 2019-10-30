@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>{% trans 'Atelier' %}</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -35,7 +35,7 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>VOKSS Atelier</h3>
+            <h3>{% trans 'VOKSS Atelier' %}</h3>
             <strong>VA</strong>
         </div>
 
@@ -100,19 +100,19 @@
                 <li>
                     <a href="#">
                         <i class="fas fa-image"></i>
-                        Portfolio
+                        {% trans 'Portfolio' %}
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <i class="fas fa-question"></i>
-                        FAQ
+                        {% trans 'FAQ' %}
                     </a>
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-copy"></i>
-                        Contacts
+                        {% trans 'Contacts' %}
                     </a>
                 </li>
                 <ul class="collapse list-unstyled CTAs" id="pageSubmenu">
@@ -152,6 +152,7 @@
                             {#change the lenguage for site and for admin #}
 
                             {% get_current_language as LANGUAGE_CODE %}
+
                             <form action="{% url 'set_language' %}" method="POST">
                                 {% csrf_token %}
                                 <input id="input" type="hidden" name="next" value="{{ redirect_to }}">
@@ -199,7 +200,6 @@
                 {% endif %}
             {% endblock %}
         </div>
-v
     </div>
 </div>
 </div>

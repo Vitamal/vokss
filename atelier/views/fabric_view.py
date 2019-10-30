@@ -15,7 +15,7 @@ class FabricListView(generic.ListView):
 
 class FabricCreateView(generic.CreateView):
     model = Fabric
-    fields = '__all__'
+    form_class = FabricForm
     template_name = 'atelier/create_form.html'
 
 class FabricUpdateView(generic.UpdateView):

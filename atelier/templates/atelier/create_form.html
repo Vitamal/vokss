@@ -2,12 +2,16 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-**atelier/product_form.html**
+**atelier/create_form.html**
 
 {% block content %}
-    <form action="" method="post">
+    <form method="post" novalidate>
         {% csrf_token %}
-        {% crispy form %}
-    <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
+        {% for field in form %}
+            <div class="col-6">
+                {{ field|as_crispy_field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
     </form>
 {% endblock %}

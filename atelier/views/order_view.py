@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 class OrderCreateView(generic.CreateView):
     model = Order
-    fields = '__all__'
+    form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
 

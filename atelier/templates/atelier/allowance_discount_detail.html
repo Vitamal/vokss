@@ -2,11 +2,34 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{% trans 'Allowance/Discount' %}:</h1>
-    <p><strong>{% trans 'Type' %}: </strong> {{ allowance_discount.label }} </p>
-    <p><strong>{% trans 'Coefficient' %}: </strong> {{ allowance_discount.coefficient }} </p>
-    <p><strong>{% trans 'Name' %}:</strong> {{ allowance_discount.name }}</p>
-    <p><a href="{% url 'atelier:allowance_discount_update_form' pk=allowance_discount.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:allowance_discount_delete_form' pk=allowance_discount.pk %}">{% trans 'Delete' %}</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Allowance/Discount' %}:</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Type' %}:</td>
+                            <td>{{ allowance_discount.label }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Coefficient' %}:</td>
+                            <td>{{ allowance_discount.coefficient }}</td>
+                        <tr>
+                            <td>{% trans 'Name' %}:</td>
+                            <td>{{ allowance_discount.name }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_update_form' pk=allowance_discount.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_delete_form' pk=allowance_discount.pk %}">{% trans 'Delete' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

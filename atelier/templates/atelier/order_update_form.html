@@ -3,5 +3,6 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  {% crispy form %}
+    {% csrf_token %}
+    {% crispy form %}
 {% endblock %}

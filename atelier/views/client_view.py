@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 class ClientCreateView(generic.CreateView):
     model = Client
-    fields = ('first_name', 'last_name', 'tel_number', 'place')
+    form_class = ClientForm
     template_name = 'atelier/create_form.html'
     initial = {'place': _('Morshyn'), }
 

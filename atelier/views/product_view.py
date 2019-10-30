@@ -16,7 +16,7 @@ class ProductListView(generic.ListView):
 
 class ProductCreateView(generic.CreateView):
     model = Product
-    fields = '__all__'
+    form_class = ProductForm
     template_name = 'atelier/create_form.html'
 
 class ProductUpdateView(generic.UpdateView):

@@ -18,7 +18,7 @@ class ComplicationElementListView(generic.ListView):
 
 class ComplicationElementCreateView(generic.CreateView):
     model = ComplicationElement
-    fields = '__all__'
+    form_class = ComplicationElementForm
     template_name = 'atelier/create_form.html'
 
 class ComplicationElementUpdateView(generic.UpdateView):

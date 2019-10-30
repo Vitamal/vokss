@@ -18,7 +18,7 @@ class MinimalStyleListView(generic.ListView):
 
 class MinimalStyleCreateView(generic.CreateView):
     model = MinimalStyle
-    fields = '__all__'
+    form_class = MinimalStyleForm
     template_name = 'atelier/create_form.html'
 
 

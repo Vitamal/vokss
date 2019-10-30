@@ -1,21 +1,56 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
-{% block content %}
-    <h1>{% trans 'Allowance/Discount' %}:</h1>
-    <p><a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a></p>
-    <br>
-    {% if allowance_discount_list %}
 
-        <ul>
-            {% for allowance_discount in allowance_discount_list %}
-                <li>
-                    <strong> <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}
-                        {{ allowance_discount.label }}</a></strong>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{% trans 'There is no one element in Atelier' %}</p>
-    {% endif %}
+{#{% block content %}#}
+{#    <h1>{% trans 'Allowance/Discount' %}:</h1>#}
+{#    <p><a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a></p>#}
+{#    <br>#}
+{#    {% if allowance_discount_list %}#}
+{##}
+{#        <ul>#}
+{#            {% for allowance_discount in allowance_discount_list %}#}
+{#                <li>#}
+{#                    <strong> <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}#}
+{#                        {{ allowance_discount.label }}</a></strong>#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    {% else %}#}
+{#        <p>{% trans 'There is no one element in Atelier' %}</p>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Allowance/Discount' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a>
+                </button>
+                <br/>
+                <div class="table-responsive">
+                    {% if allowance_discount_list %}
+
+                        <table class="table table-striped">
+                            <tbody>
+                            {% for allowance_discount in allowance_discount_list %}
+
+                                <tr>
+                                    <td>
+                                        <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}
+                                        </a></td>
+                                    <td>{{ allowance_discount.label }} </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

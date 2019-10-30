@@ -5,22 +5,22 @@
 **atelier/order_form.html**
 
 {% block content %}
-  <form method="post" novalidate>
-    {% csrf_token %}
-    <div class="row">
-      <div class="col-6">
-        {{ form.client|as_crispy_field }}
-      </div>
-      <div class="col-6">
-        {{ form.product|as_crispy_field }}
-      </div>
-    </div>
-    {{ form.fabric|as_crispy_field }}
-    {{ form.processing_category|as_crispy_field }}
-    {{ form.complication_elements|as_crispy_field }}
-    {{ form.allowance_discount|as_crispy_field }}
-    {{ form.order_date|as_crispy_field }}
-    <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
-  </form>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{ form.client|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.product|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.fabric|as_crispy_field }}
+        {{ form.processing_category|as_crispy_field }}
+        {{ form.complication_elements|as_crispy_field }}
+        {{ form.allowance_discount|as_crispy_field }}
+        {{ form.order_date|as_crispy_field }}
+        <button type="submit" class="btn btn-success">{% trans 'Save' %}</button>
+    </form>
 
 {% endblock %}

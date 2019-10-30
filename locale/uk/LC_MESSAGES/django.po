@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-04 20:47+0300\n"
+"POT-Creation-Date: 2019-10-30 20:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: atelier/models/allowance_discount.py:7
 #: atelier/models/complication_element.py:7 atelier/models/fabric.py:19
-#: atelier/models/minimal_style.py:7 atelier/models/product.py:7
+#: atelier/models/minimal_style.py:13 atelier/models/product.py:7
 msgid "name"
 msgstr "назва"
 
@@ -31,7 +31,6 @@ msgid "group"
 msgstr "група"
 
 #: atelier/models/client.py:7
-#| msgid "First Name"
 msgid "first Name"
 msgstr "Імя"
 
@@ -56,32 +55,26 @@ msgid "complexity"
 msgstr "Складність"
 
 #: atelier/models/complication_element.py:10
-#| msgid "group"
 msgid "group name"
 msgstr "назва групи"
 
 #: atelier/models/fabric.py:13
-#| msgid "Group"
 msgid "Group 0"
 msgstr "Група 0"
 
 #: atelier/models/fabric.py:14
-#| msgid "Group"
 msgid "Group I"
 msgstr "Група I"
 
 #: atelier/models/fabric.py:15
-#| msgid "Group"
 msgid "Group II"
 msgstr "Група II"
 
 #: atelier/models/fabric.py:16
-#| msgid "Group"
 msgid "Group III"
 msgstr "Група III"
 
 #: atelier/models/fabric.py:17
-#| msgid "Group"
 msgid "Group IV"
 msgstr "Група IV"
 
@@ -89,7 +82,7 @@ msgstr "Група IV"
 msgid "complexity factor"
 msgstr "Фактор складності"
 
-#: atelier/models/minimal_style.py:8
+#: atelier/models/minimal_style.py:14
 msgid "product group"
 msgstr "Група виробів"
 
@@ -178,21 +171,16 @@ msgstr "Додати елемент"
 #: atelier/templates/atelier/complication_element_list.html:18
 #: atelier/templates/atelier/fabric_list.html:18
 #: atelier/templates/atelier/minimal_style_list.html:18
-#: atelier/templates/atelier/order_list.html:18
+#: atelier/templates/atelier/order_list.html:19
 #: atelier/templates/atelier/product_list.html:19
 msgid "There is no one element in Atelier"
 msgstr "Немає жодного елемента в Ательє"
-
-#: atelier/templates/atelier/base.html:20
-msgid "Atelier"
-msgstr "Ательє"
 
 #: atelier/templates/atelier/client_detail.html:7
 msgid "First Name"
 msgstr "Імя"
 
 #: atelier/templates/atelier/client_detail.html:8
-#| msgid "second Name"
 msgid "Second Name"
 msgstr "Прізвище"
 
@@ -205,15 +193,15 @@ msgid "Place"
 msgstr "Місто/село"
 
 #: atelier/templates/atelier/client_detail.html:15
-#: atelier/templates/atelier/generic_new.html:53
-#: atelier/templates/atelier/index.html:12
+#: atelier/templates/atelier/index.html:29
 #: atelier/templates/atelier/order_list.html:4
+#: atelier/templates/atelier/template.html:54
 msgid "Orders"
 msgstr "Замовлення"
 
 #: atelier/templates/atelier/client_list.html:4
-#: atelier/templates/atelier/generic_new.html:54
-#: atelier/templates/atelier/index.html:11
+#: atelier/templates/atelier/index.html:25
+#: atelier/templates/atelier/template.html:66
 msgid "Clients"
 msgstr "Клієнти"
 
@@ -223,9 +211,9 @@ msgstr "Додати клієнта"
 
 #: atelier/templates/atelier/complication_element_detail.html:5
 #: atelier/templates/atelier/complication_element_list.html:4
-#: atelier/templates/atelier/generic_new.html:58
-#: atelier/templates/atelier/index.html:14
+#: atelier/templates/atelier/index.html:37
 #: atelier/templates/atelier/order_detail.html:15
+#: atelier/templates/atelier/template.html:80
 msgid "Complication Elements"
 msgstr "Ускладнюючі елементи"
 
@@ -245,7 +233,7 @@ msgstr "Складність"
 msgid "Group"
 msgstr "Група"
 
-#: atelier/templates/atelier/create_form.html:10
+#: atelier/templates/atelier/create_form.html:15
 #: atelier/templates/atelier/order_form.html:23
 msgid "Save"
 msgstr "Зберегти"
@@ -259,8 +247,8 @@ msgid "Are You sure to do this?"
 msgstr "Ви впевнені?"
 
 #: atelier/templates/atelier/fabric_detail.html:4
-#: atelier/templates/atelier/generic_new.html:60
-#: atelier/templates/atelier/index.html:9
+#: atelier/templates/atelier/index.html:18
+#: atelier/templates/atelier/template.html:87
 msgid "Fabrics"
 msgstr "Тканини"
 
@@ -277,32 +265,6 @@ msgstr "Тканина"
 msgid "Add the Fabric"
 msgstr "Додати тканину"
 
-#: atelier/templates/atelier/generic_new.html:33
-msgid "Admin"
-msgstr "Адмін"
-
-#: atelier/templates/atelier/generic_new.html:52
-msgid "Home"
-msgstr "Домівка"
-
-#: atelier/templates/atelier/generic_new.html:55
-#: atelier/templates/atelier/index.html:10
-#: atelier/templates/atelier/product_list.html:4
-msgid "Products"
-msgstr "Вироби"
-
-#: atelier/templates/atelier/generic_new.html:56
-#: atelier/templates/atelier/index.html:13
-msgid "Allowance/Discounts"
-msgstr "Надбавки/знижки"
-
-#: atelier/templates/atelier/generic_new.html:61
-#: atelier/templates/atelier/index.html:15
-#: atelier/templates/atelier/minimal_style_detail.html:5
-#: atelier/templates/atelier/minimal_style_list.html:4
-msgid "Minimal Styles"
-msgstr "Мінімальні фасони"
-
 #: atelier/templates/atelier/index.html:4
 msgid "Atelier Home:"
 msgstr "Ательє домівка"
@@ -312,8 +274,55 @@ msgid "Welcome to Atelier!"
 msgstr "Ласкаво просимо в Ательє!"
 
 #: atelier/templates/atelier/index.html:7
+msgid ""
+"Atelier is a simple, responsive application suitable for ateliers, tailors, "
+"design studios or small sewing business . It uses the best tailor practices, "
+"and on top of that, it’s fast, simple, and easy to use."
+msgstr ""
+"Ательє - це простий, чуйний додаток, який підходить для ательє, кравців, "
+"дизайнерських студій чи малого швейного бізнесу. Він використовує найкращі "
+"методипошиття одягу, а крім того, він швидкий, простий і легкий у "
+"використанні. "
+
+#: atelier/templates/atelier/index.html:8
+msgid ""
+"Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!"
+msgstr ""
+"Atelier - це більше, ніж програма для розрахунків, це потужний інструмент "
+"дизайну!"
+
+#: atelier/templates/atelier/index.html:13
 msgid "Today statistic"
 msgstr "Статистика на сьогодні"
+
+#: atelier/templates/atelier/index.html:22
+#: atelier/templates/atelier/product_list.html:4
+#: atelier/templates/atelier/template.html:60
+msgid "Products"
+msgstr "Вироби"
+
+#: atelier/templates/atelier/index.html:33
+msgid "Allowance/Discounts"
+msgstr "Надбавки/знижки"
+
+#: atelier/templates/atelier/index.html:41
+#: atelier/templates/atelier/minimal_style_detail.html:5
+#: atelier/templates/atelier/minimal_style_list.html:4
+#: atelier/templates/atelier/template.html:94
+msgid "Minimal Styles"
+msgstr "Мінімальні фасони"
+
+#: atelier/templates/atelier/index.html:51
+msgid "You have visited this page"
+msgstr "Ви відвідували цю сторінку"
+
+#: atelier/templates/atelier/index.html:52
+msgid "time"
+msgstr "раз"
+
+#: atelier/templates/atelier/index.html:52
+msgid "times"
+msgstr "рази(-ів)"
 
 #: atelier/templates/atelier/order_detail.html:8
 msgid "Order"
@@ -362,6 +371,40 @@ msgstr "Опис мінімального фасону"
 msgid "Create Product"
 msgstr "Створити виріб"
 
+#: atelier/templates/atelier/template.html:14
+msgid "Atelier"
+msgstr "Ательє"
+
+#: atelier/templates/atelier/template.html:38
+#, fuzzy
+#| msgid "Atelier"
+msgid "VOKSS Atelier"
+msgstr "Ательє"
+
+#: atelier/templates/atelier/template.html:46
+msgid "Home"
+msgstr "Домівка"
+
+#: atelier/templates/atelier/template.html:73
+msgid "Allowance / Discounts"
+msgstr "Надбавки / знижки"
+
+#: atelier/templates/atelier/template.html:103
+msgid "Portfolio"
+msgstr "Портфоліо"
+
+#: atelier/templates/atelier/template.html:109
+msgid "FAQ"
+msgstr "Часті запитання"
+
+#: atelier/templates/atelier/template.html:115
+msgid "Contacts"
+msgstr "Контакти"
+
+#: atelier/templates/atelier/template.html:174
+msgid "Admin"
+msgstr "Адмін"
+
 #: atelier/views/client_view.py:13
 msgid "Morshyn"
 msgstr "Моршин"
@@ -376,4 +419,4 @@ msgstr "Українська"
 
 #: vokss/urls.py:27
 msgid "admin/"
-msgstr "адмін"
+msgstr "Адмін"
