@@ -1,20 +1,39 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-    <h1>{% trans 'Clients'%}:</h1>
-    <p><a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a></p>
-    <br>
-    {% if client_list %}
-
-    <ul>
-      {% for client in client_list %}
-          <li>
-              <strong>  <a href="{{ client.get_absolute_url }}">{{ client.first_name }} {{ client.last_name }}</a></strong>
-          </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-      <p>{% trans 'There is no one element in Atelier' %}</p>
-    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Clients' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if client_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'First Name' %}</th>
+                                <th>{% trans 'Second Name' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in client_list %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ client.get_absolute_url }}">{{ client.first_name }} </a>
+                                    </td>
+                                    <td>{{ client.last_name }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

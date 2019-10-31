@@ -6,6 +6,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>{% trans 'Allowance/Discount' %}:</h3>
+             <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a>
+                </button>
+                <br/><br/>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
@@ -16,6 +20,7 @@
                         <tr>
                             <td>{% trans 'Coefficient' %}:</td>
                             <td>{{ allowance_discount.coefficient }}</td>
+                        </tr>
                         <tr>
                             <td>{% trans 'Name' %}:</td>
                             <td>{{ allowance_discount.name }}</td>

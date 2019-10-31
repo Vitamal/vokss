@@ -1,25 +1,6 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
 
-{#{% block content %}#}
-{#    <h1>{% trans 'Allowance/Discount' %}:</h1>#}
-{#    <p><a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a></p>#}
-{#    <br>#}
-{#    {% if allowance_discount_list %}#}
-{##}
-{#        <ul>#}
-{#            {% for allowance_discount in allowance_discount_list %}#}
-{#                <li>#}
-{#                    <strong> <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}#}
-{#                        {{ allowance_discount.label }}</a></strong>#}
-{#                </li>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#    {% else %}#}
-{#        <p>{% trans 'There is no one element in Atelier' %}</p>#}
-{#    {% endif %}#}
-{#{% endblock %}#}
-
 {% block content %}
     <div class="container">
         <div class="row">
@@ -29,25 +10,28 @@
                     <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a>
                 </button>
                 <br/>
+                <br/>
                 <div class="table-responsive">
                     {% if allowance_discount_list %}
-
                         <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Name' %}</th>
+                                <th>{% trans 'Group' %}</th>
+                            </tr>
+                            </thead>
                             <tbody>
                             {% for allowance_discount in allowance_discount_list %}
-
                                 <tr>
                                     <td>
                                         <a href="{{ allowance_discount.get_absolute_url }}">{{ allowance_discount.name }}
                                         </a></td>
-                                    <td>{{ allowance_discount.label }} </td>
+                                    <td>{{ allowance_discount.label }}</td>
                                 </tr>
                             {% endfor %}
-
                             </tbody>
                         </table>
                     {% endif %}
-
                 </div>
             </div>
         </div>

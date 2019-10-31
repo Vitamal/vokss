@@ -133,58 +133,57 @@
 
     <!-- Page Content  -->
     <div id="content">
-<div class="bg-img">
-        <nav class="navbar  navbar-expand-lg  bg-transparent sticky-top">
-            <div class="container-fluid">
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>VA</span>
-                </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-align-justify"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
+        <div class="bg-img">
+            <nav class="navbar  navbar-expand-lg  bg-transparent sticky-top">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>VA</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
 
-                            {#change the lenguage for site and for admin #}
+                                {#change the lenguage for site and for admin #}
 
-                            {% get_current_language as LANGUAGE_CODE %}
+                                {% get_current_language as LANGUAGE_CODE %}
 
-                            <form action="{% url 'set_language' %}" method="POST">
-                                {% csrf_token %}
-                                <input id="input" type="hidden" name="next" value="{{ redirect_to }}">
-                                <select name="language" id="">
-                                    {% get_available_languages as LANGUEGES %}
-                                    {% get_language_info_list for LANGUEGES as languages %}
-                                    {% for language in languages %}
-                                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
-                                                selected {% endif %}>
-                                            {{ language.name_local }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                                <input type="submit" value="Go">
-                            </form>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-outline-secondary" type="button">
-                                <a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></button>
-                        </li>
-                    </ul>
+                                <form action="{% url 'set_language' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input id="input" type="hidden" name="next" value="{{ redirect_to }}">
+                                    <select name="language" id="">
+                                        {% get_available_languages as LANGUEGES %}
+                                        {% get_language_info_list for LANGUEGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
+                                                    selected {% endif %}>
+                                                {{ language.name_local }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="submit" value="Go">
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-sm btn-outline-secondary" type="button">
+                                    <a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
-        {# the block of content#}
-
-        <div class="container-fluid">
-            {% block content %}{% endblock %}
-            {% block pagination %}
-                {% if is_paginated %}
-                    <div class="pagination">
+            {# the block of content#}
+            <div class="container-fluid">
+                {% block content %}{% endblock %}
+                {% block pagination %}
+                    {% if is_paginated %}
+                        <div class="pagination">
               <span class="page-links">
                    {% if page_obj.has_previous %}
                        <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
@@ -196,12 +195,12 @@
                       <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
                   {% endif %}
               </span>
-                    </div>
-                {% endif %}
-            {% endblock %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->

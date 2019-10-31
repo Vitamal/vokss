@@ -10,7 +10,7 @@ body {
 }
 .bg-img {
     /* The image used */
-    background-image: url("site.jpg");
+    background-image: url("images/background.jpg");
     min-height: 100%;
 
   /* Center and scale the image nicely */
@@ -215,7 +215,7 @@ span {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     display: block;
 }
 
@@ -223,7 +223,7 @@ span {
 #sidebar ul li a:hover {
     background: #000000;
     color: #00ffdf;
-    font-weight: bold;
+    /*font-weight: bold;*/
     text-decoration: underline;
 }
 
@@ -303,7 +303,24 @@ a.article:hover {
     color: #ff34c2;
     font-weight: bold;
 }
-
+.table thead {
+    font-style: italic;
+    background-color: #01054d;
+}
+.table a:hover {
+    color: #00ffdf;
+    text-decoration: underline;
+}
+.page-links a,
+.page-current {
+    background-color: #010522;
+    color: #ff34c2;
+    font-weight: bold;
+}
+.page-links a:hover {
+    color: #00ffdf;
+    text-decoration: underline;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

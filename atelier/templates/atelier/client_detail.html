@@ -1,21 +1,43 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
 {% block content %}
-
-    <h1>Клієнт: </h1>
-
-    <p><strong>{% trans 'First Name' %}: </strong> {{ client.first_name }} </p>
-    <p><strong>{% trans 'Second Name' %}: </strong> {{ client.last_name }}</p>
-    <p><strong>{% trans 'Tel. number' %}: </strong> {{ client.tel_number }}</p>
-    <p><strong>{% trans 'Place' %}: </strong> {{ client.place }}</p>
-    <p><a href="{% url 'atelier:client_update_form' pk=client.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:client_delete_form' pk=client.pk %}">{% trans 'Delete' %}</a></p>
-    <br>
-    <p><strong>{% trans 'Orders' %}: </strong></p>
-    <ul>
-        {% for item in order_list %}
-            <li>{{ item.product }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Client' %}:</h3>
+             <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the client' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'First Name' %}:</td>
+                            <td>{{ client.first_name }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Second Name' %}:</td>
+                            <td>{{ client.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Tel. number' %}:</td>
+                            <td>{{ client.tel_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Place' %}:</td>
+                            <td>{{ client.place }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:client_update_form' pk=client.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:client_delete_form' pk=client.pk %}">{% trans 'Delete' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
