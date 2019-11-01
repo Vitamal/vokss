@@ -1,21 +1,39 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-    <h1>{% trans 'Fabric' %}</h1>
-    <p><a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the Fabric' %}</a></p>
-    <br>
-    {% if fabric_list %}
-
-        <ul>
-            {% for fabric in fabric_list %}
-                <li>
-                    <strong> <a href="{{ fabric.get_absolute_url }}">{{ fabric.name }}
-                        {{ fabric.group }}</a></strong>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{% trans 'There is no one element in Atelier' %}</p>
-    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Fabric list' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the Fabric' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if fabric_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Fabric' %}</th>
+                                <th>{% trans 'Group of fabric' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for fabric in fabric_list %}
+                                <tr>
+                                    <td style="width:70%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.name }} </a></td>
+                                    <td style="width:30%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.group }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>{% trans 'There is no one element in Atelier' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

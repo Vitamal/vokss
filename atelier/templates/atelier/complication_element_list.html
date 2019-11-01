@@ -1,21 +1,43 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-    <h1>{% trans 'Complication Elements' %}</h1>
-    <p><a href="{% url 'atelier:complication_element_form' %}">{% trans 'Add the element' %}</a></p>
-    <br>
-    {% if complicationelement_list %}
-
-    <ul>
-      {% for complication_element in complicationelement_list %}
-          <li>
-              <strong>  <a href="{{ complication_element.get_absolute_url }}">{{ complication_element.name }}
-                                 {{ complication_element.group }}</a></strong>
-          </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-      <p>{% trans 'There is no one element in Atelier' %}</p>
-    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>{% trans 'Complication Elements' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:complication_element_form' %}">{% trans 'Add the element' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if complicationelement_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Complication Element Name' %}</th>
+                                <th>{% trans 'Complication Element Group' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for complication_element in complicationelement_list %}
+                                <tr>
+                                    <td style="width:70%"><a
+                                            href="{{ complication_element.get_absolute_url }}">{{ complication_element.name }} </a>
+                                    </td>
+                                    <td style="width:30%; text-align:center"><a
+                                            href="{{ complication_element.get_absolute_url }}">{{ complication_element.group }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>{% trans 'There is no one element in Atelier' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

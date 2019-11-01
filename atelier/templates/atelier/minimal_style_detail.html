@@ -1,12 +1,39 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-
-    <h1>{% trans 'Minimal Styles' %}:</h1>
-
-    <p><strong>{% trans 'Name' %}: </strong> {{ minimalstyle.name }} </p>
-    <p><strong>{% trans 'Group' %}: </strong> {{ minimalstyle.group }}</p>
-    <p><a href="{% url 'atelier:minimal_style_update_form' pk=minimalstyle.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:minimal_style_delete_form' pk=minimalstyle.pk %}">{% trans 'Delete' %}</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Minimal Style' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:minimal_style_form' %}">{% trans 'Add the Minimal Styles' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Name' %}:</td>
+                            <td>{{ minimalstyle.name }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Group' %}:</td>
+                            <td>{{ minimalstyle.group }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:minimal_style_update_form' pk=minimalstyle.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:minimal_style_delete_form' pk=minimalstyle.pk %}">{% trans 'Delete' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:minimal_style_list' %}">{% trans 'Back to list' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

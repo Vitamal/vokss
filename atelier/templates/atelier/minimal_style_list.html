@@ -1,20 +1,43 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
-{% block content %}
-    <h1>{% trans 'Minimal Styles' %}</h1>
-    <p><a href="{% url 'atelier:minimal_style_form' %}">{% trans 'Add the element' %}</a></p>
-        <br>
-        {% if minimalstyle_list %}
 
-            <ul>
-                {% for minimal_style in minimalstyle_list %}
-                    <li>
-                        <strong> <a href="{{ minimal_style.get_absolute_url }}">{{ minimal_style.name }}
-                            {{ minimal_style.group }}</a></strong>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>{% trans 'There is no one element in Atelier' %}</p>
-        {% endif %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>{% trans 'Minimal Style list' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:minimal_style_form' %}">{% trans 'Add the Minimal Style' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if minimalstyle_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Minimal Style' %}</th>
+                                <th>{% trans 'Group of Minimal Style' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for minimal_style in minimalstyle_list %}
+                                <tr>
+                                    <td style="width:80%"><a
+                                            href="{{ minimal_style.get_absolute_url }}">{{ minimal_style.name }} </a>
+                                    </td>
+                                    <td style="width:20%; text-align:center"><a
+                                            href="{{ minimal_style.get_absolute_url }}">{{ minimal_style.group }}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>{% trans 'There is no one element in Atelier' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

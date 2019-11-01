@@ -34,6 +34,9 @@
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:allowance_discount_delete_form' pk=allowance_discount.pk %}">{% trans 'Delete' %}</a>
                 </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_list' %}">{% trans 'Back to list' %}</a>
+                </button>
             </div>
         </div>
     </div>

@@ -2,40 +2,89 @@
 {% load i18n %}
 {% load order_price_calc %}
 
-
 {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Order list' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:order_form' %}">{% trans 'Add the Order' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Client' %}:</td>
+                            <td>{{ order.client }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Product' %}:</td>
+                            <td>{{ order.product }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Fabric' %}:</td>
+                            <td>{{ order.fabric }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Group of fabric' %}:</td>
+                            <td>{{ order.fabric.group }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Processing category' %}:</td>
+                            <td>{{ order.processing_category }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Complication Elements' %}:</td>
+                            <td>
+                                <ul>
+                                    {% for complication_element in order.complication_elements.all %}
+                                        <li><a href="{% url 'atelier:index' %}"> {{ complication_element }} </a></li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        <tr>
+                            <td>{% trans 'Allowance/Discount' %}:</td>
+                            <td>
+                                <ul>
+                                    {% for allowance_discount in order.allowance_discount.all %}
+                                        <li><a href="{% url 'atelier:index' %}"> {{ allowance_discount }} </a></li>
+                                    {% endfor %}
+                                </ul>
 
-    <h1>{% trans 'Order' %} : {{ order.pk }}</h1>
-
-    <p><strong>{% trans 'Client' %} : </strong>п. {{ order.client }} </p>
-    <p><strong>{% trans 'Product' %} : </strong> {{ order.product }}</p>
-    <p><strong>{% trans 'Fabric' %}: </strong> {{ order.fabric }}</p>
-    <p><strong>{% trans 'Group of fabric' %}: </strong> {{ order.fabric.group }}</p>
-    <p><strong>{% trans 'Processing category' %}: </strong> {{ order.processing_category }}</p>
-    <p><strong>{% trans 'Complication Elements' %}: </strong></p>
-    <ul>
-        {% for complication_element in order.complication_elements.all %}
-            <li><a href="{% url 'atelier:index' %}"> {{ complication_element }} </a></li>
-        {% endfor %}
-    </ul>
-    <p><strong>{% trans 'Allowance/Discount' %}: </strong></p>
-    <ul>
-        {% for allowance_discount in order.allowance_discount.all %}
-            <li><a href="{% url 'atelier:index' %}"> {{ allowance_discount }} </a></li>
-        {% endfor %}
-    </ul>
-    <p><strong>{% trans 'Order Date' %}: </strong> {{ order.order_date|date:"l d F Y" }}</p>
-    {# my comment:Formats a date according to the given format.#}
-
-    <p><strong>{% trans 'Order Price' %} : </strong> {{ order.order_price }} ₴ </p>
-    {#  from model @property #}
-    <p><strong>{% trans 'Order Price' %} : </strong> {{ order_price_view }} ₴</p>  {#  from view #}
-
-    {% order_price_tag order as tag_order_price %}
-    <p><strong>{% trans 'Order Price' %} : </strong> {{ tag_order_price }} ₴</p>    {#  from temlatetag #}
-
-    <p><a href="{% url 'atelier:order_update_form' pk=order.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:order_delete_form' pk=order.pk %}">{% trans 'Delete' %}</a></p>
-    <br>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Order Date' %}:</td>
+                            <td>{{ order.order_date|date:"l d F Y" }}</td> {# my comment:Formats a date according to the given format. #}
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Order Price' %}:</td>
+                            <td>{{ order.order_price }} ₴ </td>     {#  from model @property #}
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Order Price' %}:</td>
+                            <td>{{ order_price_view }} ₴ </td>      {#  from view #}
+                        </tr>
+                        <tr>
+                            {% order_price_tag order as tag_order_price %}
+                            <td>{% trans 'Order Price' %}:</td>
+                            <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:order_update_form' pk=order.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:order_delete_form' pk=order.pk %}">{% trans 'Delete' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:order_list' %}">{% trans 'Back to list' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

@@ -37,6 +37,9 @@
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:client_delete_form' pk=client.pk %}">{% trans 'Delete' %}</a>
                 </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:client_list' %}">{% trans 'Back to list' %}</a>
+                </button>
             </div>
         </div>
     </div>

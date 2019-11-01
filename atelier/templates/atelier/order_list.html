@@ -1,22 +1,42 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-    <h1>{% trans 'Orders' %}</h1>
-    <p><a href="{% url 'atelier:order_form' %}">{% trans 'Create Order' %}</a></p>
-    <br>
-
-    {% if order_list %}
-        <ul>
-            <!-- my comment: filtered dictionary by date -->
-            {% for order in order_list|dictsort:"order_date" %}
-                <li>
-                    <strong> <a
-                            href="{{ order.get_absolute_url }}">{{ order.product }} {{ order.order_date }} {{ order.client }}</a></strong>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>{% trans 'There is no one element in Atelier' %}</p>
-    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Orders' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:order_form' %}">{% trans 'Create Order' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if order_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Product' %}</th>
+                                <th>{% trans 'Order date' %}</th>
+                                <th>{% trans 'Client' %}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <!-- my comment: filtered dictionary by date -->
+                                {% for order in order_list|dictsort:"order_date" %}
+                                <tr>
+                                    <td><a href="{{ order.get_absolute_url }}">{{ order.product }} </a></td>
+                                    <td><a href="{{ order.get_absolute_url }}">{{ order.order_date }}</a></td>
+                                    <td><a href="{{ order.get_absolute_url }}">{{ order.client }}</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>{% trans 'There is no one element in Atelier' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
-

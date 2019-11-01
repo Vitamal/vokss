@@ -1,14 +1,46 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
 {% block content %}
-
-    <h1>{% trans 'Complication Elements' %}</h1>
-
-    <p><strong>{% trans 'Name' %}: </strong> {{ complicationelement.name }} </p>
-    <p><strong>{% trans 'Base Price' %}:  </strong> {{ complicationelement.base_price }} </p>
-    <p><strong>{% trans 'Complexity' %}: </strong> {{ complicationelement.complexity }}</p>
-    <p><strong>{% trans 'Group' %}: </strong> {{ complicationelement.group }}</p>
-    <p><a href="{% url 'atelier:complication_element_update_form' pk=complicationelement.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:complication_element_delete_form' pk=complicationelement.pk %}">{% trans 'Delete' %}</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Complication Element' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the client' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Name' %}:</td>
+                            <td>{{ complicationelement.name }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Base Price' %}:</td>
+                            <td>{{ complicationelement.base_price }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Complexity' %}:</td>
+                            <td>{{ complicationelement.complexity }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Group' %}:</td>
+                            <td>{{ complicationelement.group }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:complication_element_update_form' pk=complicationelement.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:complication_element_delete_form' pk=complicationelement.pk %}">{% trans 'Delete' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:complication_element_list' %}">{% trans 'Back to list' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

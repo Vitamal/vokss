@@ -1,12 +1,43 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
-{% block content %}
-    <h1>{% trans 'Fabrics' %}</h1>
 
-    <p><strong>{% trans 'Name' %}: </strong> {{ fabric.name }} </p>
-    <p><strong>{% trans 'Complexity Factor' %}: </strong> {{ fabric.complexity_factor }}</p>
-    <p><strong>{% trans 'Group' %}: </strong> {{ fabric.group }}</p>
-    <p><a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a></p>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Complication Element' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the fabric' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Name' %}:</td>
+                            <td>{{ fabric.name }} </td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Complexity Factor' %}:</td>
+                            <td>{{ fabric.complexity_factor }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Group' %}:</td>
+                            <td>{{ fabric.group }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:fabric_list' %}">{% trans 'Back to list' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
