@@ -5,8 +5,8 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <h3>{% trans 'Order list' %}:</h3>
+            <div class="col-sm-12">
+                <h3>{% trans 'Order' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:order_form' %}">{% trans 'Add the Order' %}</a>
                 </button>
@@ -39,7 +39,7 @@
                             <td>
                                 <ul>
                                     {% for complication_element in order.complication_elements.all %}
-                                        <li><a href="{% url 'atelier:index' %}"> {{ complication_element }} </a></li>
+                                        <li> {{ complication_element }}</li>
                                     {% endfor %}
                                 </ul>
                             </td>
@@ -48,7 +48,7 @@
                             <td>
                                 <ul>
                                     {% for allowance_discount in order.allowance_discount.all %}
-                                        <li><a href="{% url 'atelier:index' %}"> {{ allowance_discount }} </a></li>
+                                        <li>{{ allowance_discount }}</li>
                                     {% endfor %}
                                 </ul>
 

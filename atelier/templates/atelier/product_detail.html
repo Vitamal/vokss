@@ -1,16 +1,43 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+
 {% block content %}
-
-    <h1>{% trans 'Product' %}: {{ product.name }}</h1>
-
-    <p><strong>{% trans 'Base Price' %}:</strong> {{ product.base_price }} грн.</p>
-    <p><strong>{% trans 'Minimal Style' %}:</strong> {{ product.minimal_style.group }}</p>
-    <p>
-        <a href="{% url 'atelier:product_detail' pk=product.minimal_style.pk %}">{% trans 'Minimal Style description' %}</a>
-    </p>
-
-    <p><a href="{% url 'atelier:product_update_form' pk=product.pk %}">{% trans 'Edit' %}</a></p>
-    <br>
-    <p><a href="{% url 'atelier:product_delete_form' pk=product.pk %}">{% trans 'Delete' %}</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Product' %}:</h3>
+             <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:product_form' %}">{% trans 'Add the element' %}</a>
+                </button>
+                <br/><br/>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td>{% trans 'Name' %}:</td>
+                            <td>{{ product.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Minimal Style' %}:</td>
+                            <td>{{ product.minimal_style.group }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'Base Price' %}:</td>
+                            <td>{{ product.base_price }} ₴</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:product_update_form' pk=product.pk %}">{% trans 'Edit' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:product_delete_form' pk=product.pk %}">{% trans 'Delete' %}</a>
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:product_list' %}">{% trans 'Back to list' %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

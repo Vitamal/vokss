@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 20:18+0200\n"
+"POT-Creation-Date: 2019-11-01 19:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "група"
 
 #: atelier/models/client.py:7
 msgid "first Name"
-msgstr "Імя"
+msgstr "Ім'я"
 
 #: atelier/models/client.py:8
 msgid "second Name"
@@ -118,120 +118,155 @@ msgstr "Дата замовлення"
 msgid "minimal style"
 msgstr "Мінімальний фасон"
 
-#: atelier/templates/atelier/allowance_discount_detail.html:5
-#: atelier/templates/atelier/allowance_discount_list.html:4
-#: atelier/templates/atelier/order_detail.html:21
+#: atelier/templates/atelier/allowance_discount_detail.html:8
+#: atelier/templates/atelier/order_detail.html:47
 msgid "Allowance/Discount"
 msgstr "Надбавки/знижки"
 
-#: atelier/templates/atelier/allowance_discount_detail.html:6
-msgid "Type"
-msgstr "Тип"
-
-#: atelier/templates/atelier/allowance_discount_detail.html:7
-msgid "Coefficient"
-msgstr "Коефіцієнт"
-
-#: atelier/templates/atelier/allowance_discount_detail.html:8
-#: atelier/templates/atelier/complication_element_detail.html:7
-#: atelier/templates/atelier/fabric_detail.html:6
-#: atelier/templates/atelier/minimal_style_detail.html:7
-msgid "Name"
-msgstr "Назва"
-
-#: atelier/templates/atelier/allowance_discount_detail.html:9
-#: atelier/templates/atelier/client_detail.html:11
-#: atelier/templates/atelier/complication_element_detail.html:11
-#: atelier/templates/atelier/fabric_detail.html:9
-#: atelier/templates/atelier/minimal_style_detail.html:9
-#: atelier/templates/atelier/order_detail.html:37
-#: atelier/templates/atelier/product_detail.html:13
-msgid "Edit"
-msgstr "Редагувати"
-
-#: atelier/templates/atelier/allowance_discount_detail.html:11
-#: atelier/templates/atelier/client_detail.html:13
-#: atelier/templates/atelier/complication_element_detail.html:13
-#: atelier/templates/atelier/delete_form.html:11
-#: atelier/templates/atelier/fabric_detail.html:11
-#: atelier/templates/atelier/minimal_style_detail.html:11
-#: atelier/templates/atelier/order_detail.html:39
-#: atelier/templates/atelier/product_detail.html:15
-msgid "Delete"
-msgstr "Видалити"
-
-#: atelier/templates/atelier/allowance_discount_list.html:5
-#: atelier/templates/atelier/complication_element_list.html:5
-#: atelier/templates/atelier/minimal_style_list.html:5
+#: atelier/templates/atelier/allowance_discount_detail.html:10
+#: atelier/templates/atelier/allowance_discount_list.html:10
+#: atelier/templates/atelier/complication_element_list.html:10
+#: atelier/templates/atelier/product_detail.html:10
 msgid "Add the element"
 msgstr "Додати елемент"
 
-#: atelier/templates/atelier/allowance_discount_list.html:18
-#: atelier/templates/atelier/client_list.html:17
-#: atelier/templates/atelier/complication_element_list.html:18
-#: atelier/templates/atelier/fabric_list.html:18
-#: atelier/templates/atelier/minimal_style_list.html:18
-#: atelier/templates/atelier/order_list.html:19
-#: atelier/templates/atelier/product_list.html:19
-msgid "There is no one element in Atelier"
-msgstr "Немає жодного елемента в Ательє"
+#: atelier/templates/atelier/allowance_discount_detail.html:17
+msgid "Type"
+msgstr "Тип"
+
+#: atelier/templates/atelier/allowance_discount_detail.html:21
+msgid "Coefficient"
+msgstr "Коефіцієнт"
+
+#: atelier/templates/atelier/allowance_discount_detail.html:25
+#: atelier/templates/atelier/allowance_discount_list.html:19
+#: atelier/templates/atelier/complication_element_detail.html:16
+#: atelier/templates/atelier/fabric_detail.html:17
+#: atelier/templates/atelier/minimal_style_detail.html:17
+#: atelier/templates/atelier/product_detail.html:17
+msgid "Name"
+msgstr "Назва"
+
+#: atelier/templates/atelier/allowance_discount_detail.html:32
+#: atelier/templates/atelier/client_detail.html:35
+#: atelier/templates/atelier/complication_element_detail.html:35
+#: atelier/templates/atelier/fabric_detail.html:32
+#: atelier/templates/atelier/minimal_style_detail.html:28
+#: atelier/templates/atelier/order_detail.html:78
+#: atelier/templates/atelier/product_detail.html:32
+msgid "Edit"
+msgstr "Редагувати"
+
+#: atelier/templates/atelier/allowance_discount_detail.html:35
+#: atelier/templates/atelier/client_detail.html:38
+#: atelier/templates/atelier/complication_element_detail.html:38
+#: atelier/templates/atelier/delete_form.html:11
+#: atelier/templates/atelier/fabric_detail.html:35
+#: atelier/templates/atelier/minimal_style_detail.html:31
+#: atelier/templates/atelier/order_detail.html:81
+#: atelier/templates/atelier/product_detail.html:35
+msgid "Delete"
+msgstr "Видалити"
+
+#: atelier/templates/atelier/allowance_discount_detail.html:38
+#: atelier/templates/atelier/client_detail.html:41
+#: atelier/templates/atelier/complication_element_detail.html:41
+#: atelier/templates/atelier/fabric_detail.html:38
+#: atelier/templates/atelier/minimal_style_detail.html:34
+#: atelier/templates/atelier/order_detail.html:84
+#: atelier/templates/atelier/product_detail.html:38
+msgid "Back to list"
+msgstr "Назад до списку"
+
+#: atelier/templates/atelier/allowance_discount_list.html:8
+#| msgid "Allowance/Discounts"
+msgid "Allowance/Discount list"
+msgstr "Перелік надбавок і знижок"
+
+#: atelier/templates/atelier/allowance_discount_list.html:20
+#: atelier/templates/atelier/complication_element_detail.html:28
+#: atelier/templates/atelier/fabric_detail.html:25
+#: atelier/templates/atelier/minimal_style_detail.html:21
+msgid "Group"
+msgstr "Група"
 
 #: atelier/templates/atelier/client_detail.html:7
-msgid "First Name"
-msgstr "Імя"
-
-#: atelier/templates/atelier/client_detail.html:8
-msgid "Second Name"
-msgstr "Прізвище"
+#: atelier/templates/atelier/order_detail.html:18
+#: atelier/templates/atelier/order_list.html:21
+msgid "Client"
+msgstr "Клієнт"
 
 #: atelier/templates/atelier/client_detail.html:9
-msgid "Tel. number"
-msgstr "Тел. номер"
-
-#: atelier/templates/atelier/client_detail.html:10
-msgid "Place"
-msgstr "Місто/село"
-
-#: atelier/templates/atelier/client_detail.html:15
-#: atelier/templates/atelier/index.html:29
-#: atelier/templates/atelier/order_list.html:4
-#: atelier/templates/atelier/template.html:54
-msgid "Orders"
-msgstr "Замовлення"
-
-#: atelier/templates/atelier/client_list.html:4
-#: atelier/templates/atelier/index.html:25
-#: atelier/templates/atelier/template.html:66
-msgid "Clients"
-msgstr "Клієнти"
-
-#: atelier/templates/atelier/client_list.html:5
+#: atelier/templates/atelier/client_list.html:10
+#: atelier/templates/atelier/complication_element_detail.html:9
 msgid "Add the client"
 msgstr "Додати клієнта"
 
-#: atelier/templates/atelier/complication_element_detail.html:5
-#: atelier/templates/atelier/complication_element_list.html:4
-#: atelier/templates/atelier/index.html:37
-#: atelier/templates/atelier/order_detail.html:15
-#: atelier/templates/atelier/template.html:80
-msgid "Complication Elements"
+#: atelier/templates/atelier/client_detail.html:16
+msgid "First Name"
+msgstr "Ім'я"
+
+#: atelier/templates/atelier/client_detail.html:20
+msgid "Second Name"
+msgstr "Прізвище"
+
+#: atelier/templates/atelier/client_detail.html:24
+msgid "Tel. number"
+msgstr "Тел. номер"
+
+#: atelier/templates/atelier/client_detail.html:28
+msgid "Place"
+msgstr "Місто/село"
+
+#: atelier/templates/atelier/client_list.html:8
+#| msgid "Clients"
+msgid "Client list"
+msgstr "Клієнти"
+
+#: atelier/templates/atelier/client_list.html:19
+#| msgid "Client"
+msgid "Client Name"
+msgstr "Клієнт"
+
+#: atelier/templates/atelier/client_list.html:33
+#: atelier/templates/atelier/complication_element_list.html:37
+#: atelier/templates/atelier/fabric_list.html:33
+#: atelier/templates/atelier/minimal_style_list.html:37
+#: atelier/templates/atelier/order_list.html:36
+#: atelier/templates/atelier/product_list.html:52
+msgid "There is no one element in Atelier"
+msgstr "Немає жодного елемента в Ательє"
+
+#: atelier/templates/atelier/complication_element_detail.html:7
+#: atelier/templates/atelier/fabric_detail.html:8
+#| msgid "Complication Elements"
+msgid "Complication Element"
 msgstr "Ускладнюючі елементи"
 
-#: atelier/templates/atelier/complication_element_detail.html:8
-#: atelier/templates/atelier/product_detail.html:7
-#: atelier/templates/atelier/product_list.html:14
+#: atelier/templates/atelier/complication_element_detail.html:20
+#: atelier/templates/atelier/product_detail.html:25
+#: atelier/templates/atelier/product_list.html:39
 msgid "Base Price"
 msgstr "Базова ціна"
 
-#: atelier/templates/atelier/complication_element_detail.html:9
+#: atelier/templates/atelier/complication_element_detail.html:24
 msgid "Complexity"
 msgstr "Складність"
 
-#: atelier/templates/atelier/complication_element_detail.html:10
-#: atelier/templates/atelier/fabric_detail.html:8
-#: atelier/templates/atelier/minimal_style_detail.html:8
-msgid "Group"
-msgstr "Група"
+#: atelier/templates/atelier/complication_element_list.html:8
+#| msgid "Complication Elements"
+msgid "Complication Element list"
+msgstr "Перелік ускладнюючих елементів"
+
+#: atelier/templates/atelier/complication_element_list.html:19
+#| msgid "Complication Elements"
+msgid "Complication Element Name"
+msgstr "Ускладнюючі елементи"
+
+#: atelier/templates/atelier/complication_element_list.html:20
+#| msgid "Complication Elements"
+msgid "Complication Element Group"
+msgstr "Група ускладнюючих елементів"
 
 #: atelier/templates/atelier/create_form.html:15
 #: atelier/templates/atelier/order_form.html:23
@@ -246,24 +281,33 @@ msgstr "Видалити елемент з Ательє"
 msgid "Are You sure to do this?"
 msgstr "Ви впевнені?"
 
-#: atelier/templates/atelier/fabric_detail.html:4
-#: atelier/templates/atelier/index.html:18
-#: atelier/templates/atelier/template.html:87
-msgid "Fabrics"
-msgstr "Тканини"
+#: atelier/templates/atelier/fabric_detail.html:10
+#| msgid "Add the Fabric"
+msgid "Add the fabric"
+msgstr "Додати тканину"
 
-#: atelier/templates/atelier/fabric_detail.html:7
+#: atelier/templates/atelier/fabric_detail.html:21
 msgid "Complexity Factor"
 msgstr "Фактор складності"
 
-#: atelier/templates/atelier/fabric_list.html:4
-#: atelier/templates/atelier/order_detail.html:12
+#: atelier/templates/atelier/fabric_list.html:8
+#| msgid "Fabrics"
+msgid "Fabric list"
+msgstr "Перелік тканин"
+
+#: atelier/templates/atelier/fabric_list.html:10
+msgid "Add the Fabric"
+msgstr "Додати тканину"
+
+#: atelier/templates/atelier/fabric_list.html:19
+#: atelier/templates/atelier/order_detail.html:26
 msgid "Fabric"
 msgstr "Тканина"
 
-#: atelier/templates/atelier/fabric_list.html:5
-msgid "Add the Fabric"
-msgstr "Додати тканину"
+#: atelier/templates/atelier/fabric_list.html:20
+#: atelier/templates/atelier/order_detail.html:30
+msgid "Group of fabric"
+msgstr "Група тканин"
 
 #: atelier/templates/atelier/index.html:4
 msgid "Atelier Home:"
@@ -295,19 +339,37 @@ msgstr ""
 msgid "Today statistic"
 msgstr "Статистика на сьогодні"
 
+#: atelier/templates/atelier/index.html:18
+#: atelier/templates/atelier/template.html:87
+msgid "Fabrics"
+msgstr "Тканини"
+
 #: atelier/templates/atelier/index.html:22
-#: atelier/templates/atelier/product_list.html:4
 #: atelier/templates/atelier/template.html:60
 msgid "Products"
 msgstr "Вироби"
+
+#: atelier/templates/atelier/index.html:25
+#: atelier/templates/atelier/template.html:66
+msgid "Clients"
+msgstr "Клієнти"
+
+#: atelier/templates/atelier/index.html:29
+#: atelier/templates/atelier/template.html:54
+msgid "Orders"
+msgstr "Замовлення"
 
 #: atelier/templates/atelier/index.html:33
 msgid "Allowance/Discounts"
 msgstr "Надбавки/знижки"
 
+#: atelier/templates/atelier/index.html:37
+#: atelier/templates/atelier/order_detail.html:38
+#: atelier/templates/atelier/template.html:80
+msgid "Complication Elements"
+msgstr "Ускладнюючі елементи"
+
 #: atelier/templates/atelier/index.html:41
-#: atelier/templates/atelier/minimal_style_detail.html:5
-#: atelier/templates/atelier/minimal_style_list.html:4
 #: atelier/templates/atelier/template.html:94
 msgid "Minimal Styles"
 msgstr "Мінімальні фасони"
@@ -324,62 +386,91 @@ msgstr "раз"
 msgid "times"
 msgstr "рази(-ів)"
 
-#: atelier/templates/atelier/order_detail.html:8
-msgid "Order"
-msgstr "Замовлення"
-
-#: atelier/templates/atelier/order_detail.html:10
-msgid "Client"
-msgstr "Клієнт"
-
-#: atelier/templates/atelier/order_detail.html:11
-#: atelier/templates/atelier/product_detail.html:5
-msgid "Product"
-msgstr "Виріб"
-
-#: atelier/templates/atelier/order_detail.html:13
-msgid "Group of fabric"
-msgstr "Група тканин"
-
-#: atelier/templates/atelier/order_detail.html:14
-msgid "Processing category"
-msgstr "Категорія обробки"
-
-#: atelier/templates/atelier/order_detail.html:27
-msgid "Order Date"
-msgstr "Дата замовлення"
-
-#: atelier/templates/atelier/order_detail.html:30
-#: atelier/templates/atelier/order_detail.html:32
-#: atelier/templates/atelier/order_detail.html:35
-msgid "Order Price"
-msgstr "Ціна замовлення"
-
-#: atelier/templates/atelier/order_list.html:5
-msgid "Create Order"
-msgstr "Створити замовлення"
-
-#: atelier/templates/atelier/product_detail.html:8
+#: atelier/templates/atelier/minimal_style_detail.html:8
+#: atelier/templates/atelier/minimal_style_list.html:19
+#: atelier/templates/atelier/product_detail.html:21
 msgid "Minimal Style"
 msgstr "Мінімальний фасон"
 
-#: atelier/templates/atelier/product_detail.html:10
-msgid "Minimal Style description"
-msgstr "Опис мінімального фасону"
+#: atelier/templates/atelier/minimal_style_detail.html:10
+#| msgid "Minimal Styles"
+msgid "Add the Minimal Styles"
+msgstr "Мінімальні фасони"
 
-#: atelier/templates/atelier/product_list.html:5
-msgid "Create Product"
-msgstr "Створити виріб"
+#: atelier/templates/atelier/minimal_style_list.html:8
+#| msgid "Minimal Styles"
+msgid "Minimal Style list"
+msgstr "Перелік мінімальних фасонів"
+
+#: atelier/templates/atelier/minimal_style_list.html:10
+#| msgid "Minimal Style"
+msgid "Add the Minimal Style"
+msgstr "Додати мінімальний фасон"
+
+#: atelier/templates/atelier/minimal_style_list.html:20
+#| msgid "Minimal Style"
+msgid "Group of Minimal Style"
+msgstr "Група мінімальних фасонів"
+
+#: atelier/templates/atelier/order_detail.html:9
+#: atelier/templates/atelier/order_list.html:8
+#| msgid "Orders"
+msgid "Order list"
+msgstr "Перелік замовлень"
+
+#: atelier/templates/atelier/order_detail.html:11
+#| msgid "Add the client"
+msgid "Add the Order"
+msgstr "Додати замовлення"
+
+#: atelier/templates/atelier/order_detail.html:22
+#: atelier/templates/atelier/order_list.html:19
+#: atelier/templates/atelier/product_detail.html:8
+#: atelier/templates/atelier/product_list.html:38
+msgid "Product"
+msgstr "Виріб"
+
+#: atelier/templates/atelier/order_detail.html:34
+msgid "Processing category"
+msgstr "Категорія обробки"
+
+#: atelier/templates/atelier/order_detail.html:58
+msgid "Order Date"
+msgstr "Дата замовлення"
+
+#: atelier/templates/atelier/order_detail.html:62
+#: atelier/templates/atelier/order_detail.html:66
+#: atelier/templates/atelier/order_detail.html:71
+msgid "Order Price"
+msgstr "Ціна замовлення"
+
+#: atelier/templates/atelier/order_list.html:10
+msgid "Create Order"
+msgstr "Створити замовлення"
+
+#: atelier/templates/atelier/order_list.html:20
+#| msgid "order date"
+msgid "Order date"
+msgstr "Дата замовлення"
+
+#: atelier/templates/atelier/product_list.html:27
+#| msgid "Products"
+msgid "Product list"
+msgstr "Перелік Виробів"
+
+#: atelier/templates/atelier/product_list.html:29
+#| msgid "Create Product"
+msgid "Add the Product"
+msgstr "Додати виріб"
 
 #: atelier/templates/atelier/template.html:14
 msgid "Atelier"
 msgstr "Ательє"
 
 #: atelier/templates/atelier/template.html:38
-#, fuzzy
 #| msgid "Atelier"
 msgid "VOKSS Atelier"
-msgstr "Ательє"
+msgstr "VOKSS Ательє"
 
 #: atelier/templates/atelier/template.html:46
 msgid "Home"

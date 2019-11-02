@@ -4,8 +4,8 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <h3>{% trans 'Clients' %}:</h3>
+            <div class="col-sm-6">
+                <h3>{% trans 'Client list' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
                 </button>
@@ -16,7 +16,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>{% trans 'Client Name' %}</th>
+                                <th>{% trans 'Client' %}</th>
                                 <th></th>
                             </tr>
                             </thead>
