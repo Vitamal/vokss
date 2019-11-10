@@ -2,8 +2,9 @@ from django.db import models
 import datetime
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-
 from atelier.app_utils import order_price_calculation
+from django.contrib.auth.models import User
+
 
 
 class Order(models.Model):
@@ -23,6 +24,8 @@ class Order(models.Model):
     allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True,
                                                 verbose_name=_('allowance/discount'))
     order_date = models.DateField(default=datetime.date.today, verbose_name=_('order date'))
+    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    deadline = models.DateField(default=datetime.date.today() + datetime.timedelta(weeks=2), null=True, blank=True)
 
     class Meta:
         ordering = ["order_date"]

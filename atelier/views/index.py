@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from atelier.models import Client, Product, Fabric, Order, ComplicationElement, MinimalStyle, AllowanceDiscount
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def index(request):
     '''
     Home page view function

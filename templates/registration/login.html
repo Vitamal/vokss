@@ -1,0 +1,30 @@
+{% extends "atelier/template.html" %}
+{% load i18n %}
+{{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>{% trans "Your username and password didn't match. Please try again." %}</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>{% trans "Your account doesn't have access to this page. To proceed,please login with an account that has access." %}</p>
+        {% else %}
+            <p>{% trans 'Please login to see this page.' %}</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">{% trans 'Login' %}
+        <input type="hidden" name="next" value="{{ next }}"/></button>
+    </form>
+
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <button type="submit" class="btn btn-success"><a href="{% url 'password_reset' %}"></a>{% trans 'Lost password?' %}
+    </button>
+{% endblock %}

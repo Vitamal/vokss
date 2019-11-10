@@ -62,28 +62,28 @@
                 </li>
                 <li>
                     <a href="{% url 'atelier:client_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-address-card"></i>
                         {% trans 'Clients' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:allowance_discount_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-balance-scale-right"></i>
                         {% trans 'Allowance / Discounts' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:complication_element_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-cut"></i>
                         {% trans 'Complication Elements' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:fabric_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fab fa-alipay"></i>
                         {% trans 'Fabrics' %}
                     </a>
                 </li>
@@ -134,7 +134,7 @@
     <!-- Page Content  -->
     <div id="content">
         <div class="bg-img">
-            <nav class="navbar  navbar-expand-lg  bg-transparent sticky-top">
+            <nav class="navbar  navbar-expand-lg  bg-transparent sticky-top ">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
@@ -147,12 +147,37 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                            <li>
+                                {% if user.is_authenticated %}
+                                    <li class="nav-item dropdown">
+                                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
+                                                data-toggle="dropdown">
+                                            {% trans 'User' %}: {{ user.get_username }}
+                                            <span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <button class="btn btn-sm btn-outline-primary" type="button">
+                                                    <a href="{% url 'logout' %}?next={{ request.path }}">{% trans 'Logout' %}</a>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="btn btn-sm btn-outline-primary" type="button">
+                                                    <a href="#?next={{ request.path }}">{% trans 'Change password' %}</a>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <button class="btn btn-sm btn-outline-primary" type="button">
+                                            <a href="{% url 'login' %}?next={{ request.path }}">{% trans 'Login' %}</a>
+                                        </button>
+                                    </li>
+                                {% endif %}
+                            </li>
                             <li class="nav-item">
-
                                 {#change the lenguage for site and for admin #}
-
                                 {% get_current_language as LANGUAGE_CODE %}
-
                                 <form action="{% url 'set_language' %}" method="POST">
                                     {% csrf_token %}
                                     <input id="input" type="hidden" name="next" value="{{ redirect_to }}">
