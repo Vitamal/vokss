@@ -49,6 +49,9 @@ a:focus {
     font-weight: bold;
 }
 
+/* ---------------------------------------------------
+    NAVBAR STYLE
+----------------------------------------------------- */
 .navbar {
     padding: 15px 10px;
     border: none;
@@ -221,7 +224,6 @@ span {
 #sidebar ul li a:hover {
     background: #000000;
     color: #00ffdf;
-    /*font-weight: bold;*/
     text-decoration: underline;
 }
 
@@ -318,6 +320,16 @@ a.article:hover {
 .page-links a:hover {
     color: #00ffdf;
     text-decoration: underline;
+}
+
+/* ---------------------------------------------------
+    Login style
+----------------------------------------------------- */
+
+.card, .card-body {
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid #010522;
+
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

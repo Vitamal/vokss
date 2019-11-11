@@ -50,7 +50,7 @@ class OrderListView(generic.ListView):
 class OrderUpdateView(generic.UpdateView):
     model = Order
     form_class = OrderForm
-    template_name = 'atelier/order_update_form.html'
+    template_name = 'atelier/order_form.html'
 
 
 class OrderDeleteView(generic.DeleteView):

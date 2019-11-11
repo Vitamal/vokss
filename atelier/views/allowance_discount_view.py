@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class AllowanceDiscountDetailView(LoginRequiredMixin, generic.DetailView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
@@ -14,6 +16,8 @@ class AllowanceDiscountDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class AllowanceDiscountListView(LoginRequiredMixin, generic.ListView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     paginate_by = 10  # number of records on the one page
     template_name = 'atelier/allowance_discount_list.html'
@@ -21,18 +25,24 @@ class AllowanceDiscountListView(LoginRequiredMixin, generic.ListView):
 
 
 class AllowanceDiscountCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
 
 class AllowanceDiscountUpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
 
 class AllowanceDiscountDeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     success_url = reverse_lazy('atelier:allowance_discount_list')
     template_name = 'atelier/delete_form.html'
