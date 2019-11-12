@@ -52,6 +52,5 @@ urlpatterns = [
     path('minimal_style/add/', views.MinimalStyleCreateView.as_view(), name='minimal_style_form'),
     path('minimal_style/<int:pk>/edit/', views.MinimalStyleUpdateView.as_view(), name='minimal_style_update_form'),
     path('minimal_style/<int:pk>/delete/', views.MinimalStyleDeleteView.as_view(), name='minimal_style_delete_form'),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
 
 ]

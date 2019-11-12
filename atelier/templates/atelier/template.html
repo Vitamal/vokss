@@ -162,7 +162,7 @@
                                             </li>
                                             <li>
                                                 <button class="btn btn-sm btn-outline-primary" type="button">
-                                                    <a href="#?next={{ request.path }}">{% trans 'Change password' %}</a>
+                                                    <a href="{% url 'password_change' %}?next={{ request.path }}">{% trans 'Change password' %}</a>
                                                 </button>
                                             </li>
                                         </ul>

@@ -1,30 +1,33 @@
 from django.utils.translation import gettext_lazy as _
-
 from atelier.models import Client, Order
 from django.views import generic
 from atelier.forms import ClientForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ClientCreateView(generic.CreateView):
+class ClientCreateView(LoginRequiredMixin, generic.CreateView):
     model = Client
     form_class = ClientForm
     template_name = 'atelier/create_form.html'
     initial = {'place': _('Morshyn'), }
 
 
-class ClientUpdateView(generic.UpdateView):
+class ClientUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Client
     form_class = ClientForm
     template_name = 'atelier/create_form.html'
 
 
-class ClientListView(generic.ListView):
+class ClientListView(LoginRequiredMixin, generic.ListView):
     model = Client
     paginate_by = 10  # number of records on the one page
 
+    def get_queryset(self):
+        return Client.objects.filter(tailor__username=self.request.user)
 
-class ClientDetailView(generic.DetailView):
+
+class ClientDetailView(LoginRequiredMixin, generic.DetailView):
     model = Client
 
     def get_context_data(self, **kwargs):
@@ -35,7 +38,7 @@ class ClientDetailView(generic.DetailView):
         return context
 
 
-class ClientDeleteView(generic.DeleteView):
+class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Client
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'
