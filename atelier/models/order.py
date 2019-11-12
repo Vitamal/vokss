@@ -24,8 +24,8 @@ class Order(models.Model):
     allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True,
                                                 verbose_name=_('allowance/discount'))
     order_date = models.DateField(default=datetime.date.today, verbose_name=_('order date'))
-    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    deadline = models.DateField(default=datetime.date.today() + datetime.timedelta(weeks=2), null=True, blank=True)
+    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('tailor'))
+    deadline = models.DateField(default=datetime.date.today() + datetime.timedelta(weeks=2), null=True, blank=True, verbose_name=_('deadline'))
 
     class Meta:
         ordering = ["order_date"]

@@ -3,16 +3,17 @@ from atelier.forms import OrderForm
 from atelier.models import Order
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
 
-
-class OrderCreateView(generic.CreateView):
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
 
-class OrderDetailView(generic.DetailView):
+class OrderDetailView(LoginRequiredMixin, generic.DetailView):
     model = Order
     fields = '__all__'
 
@@ -37,23 +38,27 @@ class OrderDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        print(context_data)
         context_data['order_price_view'] = self.get_order_price()
         return context_data
 
 
-class OrderListView(generic.ListView):
+class OrderListView(LoginRequiredMixin, generic.ListView):
     model = Order
     paginate_by = 10  # number of records on the one page
+    template_name = 'atelier/order_list.html'
+    context_object_name = 'order_list'
+
+    def get_queryset(self):
+        return Order.objects.filter(tailor__username=self.request.user)
 
 
-class OrderUpdateView(generic.UpdateView):
+class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
 
-class OrderDeleteView(generic.DeleteView):
+class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'

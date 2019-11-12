@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                                 <!-- my comment: filtered dictionary by date -->
-                                {% for order in order_list|dictsort:"order_date" %}
+                                {% for order in order_list|dictsortreversed:"order_date" %}
                                 <tr>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.order_date }}</a></td>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.client }}</a></td>

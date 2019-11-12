@@ -71,6 +71,14 @@
                             <td>{% trans 'Order Price' %}:</td>
                             <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
                         </tr>
+                        <tr>
+                            <td>{% trans 'Tailor' %}:</td>
+                            <td>{{ order.tailor }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans 'deadline' %}:</td>
+                            <td>{{ order.deadline }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
