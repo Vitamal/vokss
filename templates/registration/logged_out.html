@@ -1,7 +1,21 @@
 {% extends "atelier/template.html" %}
+{% load static %}
+{% load i18n %}
 
 {% block content %}
-<p>Logged out!</p>  
-
-<a href="{% url 'login'%}">Click here to login again.</a>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 align="center">You are logged out!</h4>
+                    <br/>
+                    <p align="center">
+                    <button class="btn btn-sm btn-outline-primary" type="button" >
+                        <a href="{% url 'login' %}">{% trans 'Click here to login again.' %}</a>
+                    </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -157,12 +157,12 @@
                                         <ul class="dropdown-menu">
                                             <li>
                                                 <button class="btn btn-sm btn-outline-primary" type="button">
-                                                    <a href="{% url 'logout' %}?next={{ request.path }}">{% trans 'Logout' %}</a>
+                                                    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
                                                 </button>
                                             </li>
                                             <li>
                                                 <button class="btn btn-sm btn-outline-primary" type="button">
-                                                    <a href="{% url 'password_change' %}?next={{ request.path }}">{% trans 'Change password' %}</a>
+                                                    <a href="{% url 'password_change' %}?next={{ request.path }}">{% trans 'Change psw' %}</a>
                                                 </button>
                                             </li>
                                         </ul>
