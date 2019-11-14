@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{% static 'atelier/style.css' %}">
 
     <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/92ff8a2b21.js" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
             integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
             crossorigin="anonymous"></script>
@@ -56,41 +57,41 @@
                 </li>
                 <li>
                     <a href="{% url 'atelier:product_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-tshirt"></i>
                         {% trans 'Products' %}
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'atelier:client_list' %}">
-                        <i class="fas fa-address-card"></i>
+                        <i class="fas fa-user-friends"></i>
                         {% trans 'Clients' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:allowance_discount_list' %}">
-                        <i class="fas fa-balance-scale-right"></i>
+                        <i class="fas fa-plus-circle"></i>
                         {% trans 'Allowance / Discounts' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:complication_element_list' %}">
-                        <i class="fas fa-cut"></i>
+                        <i class="fas fa-puzzle-piece"></i>
                         {% trans 'Complication Elements' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:fabric_list' %}">
-                        <i class="fab fa-alipay"></i>
+                        <i class="fas fa-tags"></i>
                         {% trans 'Fabrics' %}
                     </a>
                 </li>
                 <li>
 
                     <a href="{% url 'atelier:minimal_style_list' %}">
-                        <i class="fas fa-copy"></i>
+                        <i class="fas fa-star-half"></i>
                         {% trans 'Minimal Styles' %}
                     </a>
                 </li>
@@ -99,7 +100,7 @@
             <div class="line">
                 <li>
                     <a href="#">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-id-card"></i>
                         {% trans 'Portfolio' %}
                     </a>
                 </li>
@@ -111,7 +112,7 @@
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-copy"></i>
+                       <i class="fas fa-address-book"></i>
                         {% trans 'Contacts' %}
                     </a>
                 </li>

@@ -48,7 +48,10 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'order_list'
 
     def get_queryset(self):
-        return Order.objects.filter(tailor__username=self.request.user)
+        if self.request.user.is_staff:
+            return Order.objects.all()     # admin user access all orders
+        else:
+            return Order.objects.filter(tailor__username=self.request.user)   # ordinary user access his own orders only
 
 
 class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):

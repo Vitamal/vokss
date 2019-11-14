@@ -19,15 +19,21 @@
                                 <th>{% trans 'Order date' %}</th>
                                 <th>{% trans 'Client' %}</th>
                                 <th>{% trans 'Product' %}</th>
+                                {% if user.is_staff %}
+                                    <th>{% trans 'Tailor' %}</th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
-                                <!-- my comment: filtered dictionary by date -->
-                                {% for order in order_list|dictsortreversed:"order_date" %}
+                            <!-- my comment: filtered dictionary by date -->
+                            {% for order in order_list|dictsortreversed:"order_date" %}
                                 <tr>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.order_date }}</a></td>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.client }}</a></td>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.product }} </a></td>
+                                    {% if user.is_staff %}
+                                        <td>{{ order.tailor }}</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
