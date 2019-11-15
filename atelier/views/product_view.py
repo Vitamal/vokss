@@ -34,6 +34,10 @@ class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = ProductForm
     template_name = 'atelier/create_form.html'
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(tailor=self.request.user)
+        return super().form_valid(form)
 
 
 class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
