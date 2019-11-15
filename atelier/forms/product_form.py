@@ -7,4 +7,8 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = [
+            'name',
+            'minimal_style',
+            'base_price'
+        ]

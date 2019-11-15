@@ -36,7 +36,8 @@ class ProductCreateView(LoginRequiredMixin, generic.CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.update(tailor=self.request.user)
+        atelier_id = self.kwargs.get('atelier_id')
+        self.object.update(atelier_id=atelier_id)
         return super().form_valid(form)
 
 
