@@ -12,11 +12,16 @@ class ClientCreateView(LoginRequiredMixin, generic.CreateView):
     template_name = 'atelier/create_form.html'
     initial = {'place': _('Morshyn'), }
 
-
 class ClientUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Client
     form_class = ClientForm
     template_name = 'atelier/create_form.html'
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Client.objects.all()  # admin user access all orders
+        else:
+            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
 
 
 class ClientListView(LoginRequiredMixin, generic.ListView):
@@ -24,7 +29,10 @@ class ClientListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10  # number of records on the one page
 
     def get_queryset(self):
-        return Client.objects.filter(tailor__username=self.request.user)
+        if self.request.user.is_staff:
+            return Client.objects.all()  # admin user access all orders
+        else:
+            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
 
 
 class ClientDetailView(LoginRequiredMixin, generic.DetailView):
@@ -37,8 +45,20 @@ class ClientDetailView(LoginRequiredMixin, generic.DetailView):
         context['order_list'] = Order.objects.all().filter(client=self.object)
         return context
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Client.objects.all()  # admin user access all orders
+        else:
+            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+
 
 class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Client
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Client.objects.all()  # admin user access all orders
+        else:
+            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only

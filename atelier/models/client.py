@@ -9,7 +9,7 @@ class Client(models.Model):
     last_name = models.CharField(max_length=30, verbose_name=_('second Name'))
     tel_number = models.CharField(max_length=30, blank=True, verbose_name=_('tel. number'))
     place = models.CharField(max_length=30, verbose_name=_('place'))
-    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('tailor'))
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)

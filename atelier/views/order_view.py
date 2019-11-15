@@ -16,6 +16,12 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
     model = Order
     fields = '__all__'
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Order.objects.all()  # admin user access all orders
+        else:
+            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+
     def get_order_price(self):
         order = self.object
         complication_elements_base_price_list = []
@@ -49,9 +55,9 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Order.objects.all()     # admin user access all orders
+            return Order.objects.all()  # admin user access all orders
         else:
-            return Order.objects.filter(tailor__username=self.request.user)   # ordinary user access his own orders only
+            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
 
 
 class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -59,10 +65,20 @@ class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Order.objects.all()  # admin user access all orders
+        else:
+            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+
 
 class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'
 
-
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Order.objects.all()  # admin user access all orders
+        else:
+            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
