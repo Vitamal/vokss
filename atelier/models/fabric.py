@@ -2,8 +2,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from atelier.models import AbstractBaseModel
 
-class Fabric(models.Model):
+
+class Fabric(AbstractBaseModel):
     GROUP0 = 'GR0'
     GROUP1 = 'GR1'
     GROUP2 = 'GR2'

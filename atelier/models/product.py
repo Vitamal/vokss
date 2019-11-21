@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+from atelier.models import AbstractBaseModel
 from atelier.models.atelier import Atelier
 
 
-class Product(models.Model):
+class Product(AbstractBaseModel):
     name = models.CharField(max_length=264, verbose_name=_('name'))
     minimal_style = models.ForeignKey('atelier.MinimalStyle', on_delete=models.CASCADE,
                                       verbose_name=_('minimal style'))

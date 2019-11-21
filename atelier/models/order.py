@@ -5,9 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from atelier.app_utils import order_price_calculation
 from django.contrib.auth.models import User
 
+from atelier.models import AbstractBaseModel
 
 
-class Order(models.Model):
+class Order(AbstractBaseModel):
     CATEGORY1 = '1'
     CATEGORY2 = '2'
     PROCESSING_CATEGORY = [

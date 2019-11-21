@@ -2,13 +2,15 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from atelier.models import AbstractBaseModel
+
 
 class MinimalStyleQueryset(models.QuerySet):
     def filter_by_name(self, name):
         return self.filter(name=name)
 
 
-class MinimalStyle(models.Model):
+class MinimalStyle(AbstractBaseModel):
 
     name = models.TextField(max_length=264, verbose_name=_('name'))
     group = models.CharField(max_length=264, verbose_name=_('product group'))
