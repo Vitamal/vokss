@@ -13,11 +13,19 @@ class AbstractBaseModel(models.Model):
     )
 
     created_by = models.ForeignKey(
-        get_user_model(), null=True, blank=True, related_name='+'
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+'
     )
 
     last_updated_by = models.ForeignKey(
-        get_user_model(), null=True, blank=True, related_name='+'
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+'
     )
 
     class Meta:
