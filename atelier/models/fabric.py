@@ -18,16 +18,35 @@ class Fabric(AbstractBaseModel):
         (GROUP3, _('Group III')),
         (GROUP4, _('Group IV')),
     ]
-    name = models.CharField(max_length=264, verbose_name=_('name'))
-    group = models.CharField(max_length=3,choices=FABRIC_GROUPS, default=GROUP2, verbose_name=_('group'))
-    complexity_factor = models.DecimalField(default=1, max_digits=5, decimal_places=2,
-                                            verbose_name=_('complexity factor'))
+    name = models.CharField(
+        max_length=264,
+        verbose_name=_('name')
+    )
+    group = models.CharField(
+        max_length=3,
+        choices=FABRIC_GROUPS,
+        default=GROUP2,
+        verbose_name=_('group')
+    )
+    complexity_factor = models.DecimalField(
+        default=1,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name=_('complexity factor')
+    )
 
     def __str__(self):
+        """
+                to display an object in the Django admin site
+                and as the value inserted into a template when it displays an object
+                """
         return self.name
 
     class Meta:
         ordering = ['group']
 
     def get_absolute_url(self):
+        """
+        Returns the url to access a particular client instance.
+        """
         return reverse('atelier:fabric_detail', args=[str(self.id)])

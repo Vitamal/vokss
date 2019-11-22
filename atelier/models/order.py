@@ -1,11 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 import datetime
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from atelier.app_utils import order_price_calculation
-from django.contrib.auth.models import User
 
-from atelier.models import AbstractBaseModel
+from atelier.models import AbstractBaseModel, Atelier
 
 
 class Order(AbstractBaseModel):
@@ -15,23 +15,68 @@ class Order(AbstractBaseModel):
         (CATEGORY1, 'Processing category 1'),
         (CATEGORY2, 'Processing category 2'),
     ]
-    client = models.ForeignKey('atelier.Client', on_delete=models.CASCADE, verbose_name=_('client'))
-    product = models.ForeignKey('atelier.Product', on_delete=models.CASCADE, verbose_name=_('product'))
-    fabric = models.ForeignKey('atelier.Fabric', on_delete=models.CASCADE, verbose_name=_('fabric'))
-    processing_category = models.CharField(max_length=1, choices=PROCESSING_CATEGORY, default=CATEGORY2,
-                                           verbose_name=_('processing category'))
-    complication_elements = models.ManyToManyField('atelier.ComplicationElement', blank=True,
-                                                   verbose_name=_('complication elements'))
-    allowance_discount = models.ManyToManyField('atelier.AllowanceDiscount', blank=True,
-                                                verbose_name=_('allowance/discount'))
-    order_date = models.DateField(default=datetime.date.today, verbose_name=_('order date'))
-    tailor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('tailor'))
-    deadline = models.DateField(default=datetime.date.today() + datetime.timedelta(weeks=2), null=True, blank=True, verbose_name=_('deadline'))
+    client = models.ForeignKey(
+        'atelier.Client',
+        on_delete=models.CASCADE,
+        verbose_name=_('client')
+    )
+    product = models.ForeignKey(
+        'atelier.Product',
+        on_delete=models.CASCADE,
+        verbose_name=_('product')
+    )
+    fabric = models.ForeignKey(
+        'atelier.Fabric',
+        on_delete=models.CASCADE,
+        verbose_name=_('fabric')
+    )
+    processing_category = models.CharField(
+        max_length=1,
+        choices=PROCESSING_CATEGORY,
+        default=CATEGORY2,
+        verbose_name=_('processing category')
+    )
+    complication_elements = models.ManyToManyField(
+        'atelier.ComplicationElement',
+        blank=True,
+        verbose_name=_('complication elements')
+    )
+    allowance_discount = models.ManyToManyField(
+        'atelier.AllowanceDiscount',
+        blank=True,
+        verbose_name=_('allowance/discount')
+    )
+    order_date = models.DateField(
+        default=datetime.date.today,
+        verbose_name=_('order date')
+    )
+    tailor = models.ForeignKey(
+        get_user_model(),  # will return the currently active user model
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_('tailor')
+    )
+    deadline = models.DateField(
+        default=datetime.date.today() + datetime.timedelta(weeks=2),
+        null=True, blank=True, verbose_name=_('deadline')
+    )
+
+    atelier = models.ForeignKey(
+        Atelier,
+        on_delete=models.CASCADE,
+        verbose_name=_('atelier')
+    )
 
     class Meta:
         ordering = ["order_date"]
 
     def __str__(self):
+        """
+        to display an object in the Django admin site
+        and as the value inserted into a template when it displays an object
+        """
+
         return '{} {}'.format(self.client, self.order_date)
 
     def display_allowance_discount(self):
@@ -51,6 +96,9 @@ class Order(AbstractBaseModel):
     display_complication_elements.short_description = _('complication elements')
 
     def get_absolute_url(self):
+        """
+        Returns the url to access a particular client instance.
+        """
         return reverse('atelier:order_detail', args=[str(self.id)])
 
     @property
