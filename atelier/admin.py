@@ -18,7 +18,7 @@ class OrderInline(admin.TabularInline):  # addition admin.class to show orders f
 
 
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'tel_number', 'place', 'tailor')
+    list_display = ('first_name', 'last_name', 'tel_number', 'place', 'atelier')
     inlines = [OrderInline]
 
 
@@ -31,15 +31,15 @@ admin.site.register(Client, ClientAdmin)
 class OrderAdmin(admin.ModelAdmin):
     # to display all fields for orders
     list_display = ('client', 'product', 'fabric', 'processing_category', 'tailor', 'display_allowance_discount',
-                    'display_complication_elements', 'order_date')
+                    'display_complication_elements', 'order_date', 'deadline', 'atelier')
 
     # add the filters
-    list_filter = ('client', 'product', 'fabric', 'order_date', 'tailor')
+    list_filter = ('atelier', 'client', 'product', 'fabric', 'order_date', 'tailor')
 
     # division of fields into groups
     fieldsets = (
         (None, {
-            'fields': ('client', 'product', 'fabric', 'order_date', 'tailor', 'deadline')
+            'fields': ('atelier', 'client', 'product', 'fabric', 'order_date', 'tailor', 'deadline')
         }),
         ('Addition', {
             'fields': ('complication_elements', 'allowance_discount')

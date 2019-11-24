@@ -11,14 +11,6 @@ class Atelier(AbstractBaseModel):
         verbose_name=_('name')
     )
 
-    tailor = models.ManyToManyField(
-        get_user_model(),   # will return the currently active user model
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name=_('tailor')
-    )
-
     def __str__(self):
         """
         to display an object in the Django admin site
