@@ -5,11 +5,13 @@ from django.db import models
 class AbstractBaseModel(models.Model):
 
     created_datetime = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
+        null=True,
     )
 
     last_updated_datetime = models.DateTimeField(
-        auto_now=True
+        auto_now=True,
+        null=True,
     )
 
     created_by = models.ForeignKey(

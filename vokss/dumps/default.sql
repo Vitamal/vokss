@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.6 (Ubuntu 11.6-1.pgdg18.04+1)
--- Dumped by pg_dump version 11.6 (Ubuntu 11.6-1.pgdg18.04+1)
+-- Dumped from database version 11.5 (Ubuntu 11.5-3.pgdg18.04+1)
+-- Dumped by pg_dump version 11.5 (Ubuntu 11.5-3.pgdg18.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -975,7 +975,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$150000$zsgmTd2Yt592$JZeR4QQqjqbXRFguPCsjcORzTDQEeWcDoBcq3+z5K0Q=	2019-11-24 16:36:16.568898+02	t	grandma@example.com			grandma@example.com	t	t	2019-09-22 10:08:56.711791+03
+1	pbkdf2_sha256$150000$zsgmTd2Yt592$JZeR4QQqjqbXRFguPCsjcORzTDQEeWcDoBcq3+z5K0Q=	2019-11-25 15:26:47.336061+02	t	grandma@example.com			grandma@example.com	t	t	2019-09-22 10:08:56.711791+03
 \.
 
 
@@ -1059,6 +1059,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 0h06ztvugcsb46kf23uzldl43xyp5xk6	YzAwNWQwNzI4NWYwZDY4MzdmYjdkNjRmNGFjNzE4NTQ4OTI3ODk5OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0ZjA0N2I0ZTQwZmFhY2E3YmVjMzAyODkyYjNiMTYyMDAxOWVmNzgwIn0=	2019-10-06 10:09:04.606474+03
 68qpk0mjmrp2ja9k3ayg6q9wzeml1u24	NWVkOWQxOWM5NmY1ZWU2ODVkM2NkNjE4OWU5M2M0YWE0ZDk3YTE0Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0ZjA0N2I0ZTQwZmFhY2E3YmVjMzAyODkyYjNiMTYyMDAxOWVmNzgwIiwibnVtX3Zpc2l0cyI6MX0=	2019-12-08 16:36:16.607621+02
+mmnf75h8g078mh2h36mkdw9hss9e4v4r	YzAwNWQwNzI4NWYwZDY4MzdmYjdkNjRmNGFjNzE4NTQ4OTI3ODk5OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0ZjA0N2I0ZTQwZmFhY2E3YmVjMzAyODkyYjNiMTYyMDAxOWVmNzgwIn0=	2019-12-09 15:26:47.341685+02
 \.
 
 

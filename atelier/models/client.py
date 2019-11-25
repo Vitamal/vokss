@@ -28,7 +28,8 @@ class Client(AbstractBaseModel):
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.CASCADE,
-        verbose_name=_('atelier')
+        verbose_name=_('atelier'),
+        null=True,
     )
 
     def __str__(self):

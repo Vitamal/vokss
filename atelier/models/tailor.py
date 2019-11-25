@@ -2,14 +2,16 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
 from atelier.models import Atelier
 from atelier.models.abstract_base import AbstractBaseModel
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import User
 
 
 class Tailor(AbstractBaseModel):
     name = models.ForeignKey(
-        get_user_model(),   # will return the currently active user model
+        get_user_model(),  # will return the currently active user model
         on_delete=models.CASCADE,
         verbose_name=_('name')
     )
@@ -21,6 +23,16 @@ class Tailor(AbstractBaseModel):
         blank=True,
         verbose_name=_('atelier')
     )
+
+    # email_confirmed = models.BooleanField(
+    #     default=False
+    # )
+
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Tailor.objects.create(user=instance)
+        instance.tailor.save()
 
     def __str__(self):
         """

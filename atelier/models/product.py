@@ -23,7 +23,8 @@ class Product(AbstractBaseModel):
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.CASCADE,
-        verbose_name=_('Atelier')
+        verbose_name=_('Atelier'),
+        null=True,
     )
 
     def __str__(self):
