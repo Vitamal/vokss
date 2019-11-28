@@ -8,3 +8,4 @@ from .complication_element_view import *
 from .allowance_discount_view import *
 from .atelier_view import *
 from .tailor_view import *
+from .register import *

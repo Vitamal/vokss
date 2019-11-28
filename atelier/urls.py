@@ -62,5 +62,6 @@ urlpatterns = [
     path('tailor/add/', views.TailorCreateView.as_view(), name='tailor_form'),
     path('tailor/<int:pk>/edit/', views.TailorUpdateView.as_view(), name='tailor_update_form'),
     path('tailor/<int:pk>/delete/', views.TailorDeleteView.as_view(), name='tailor_delete_form'),
+    path("register/", views.register, name="register"),
 
 ]

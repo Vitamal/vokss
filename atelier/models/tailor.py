@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -10,10 +9,9 @@ from django.contrib.auth.models import User
 
 
 class Tailor(AbstractBaseModel):
-    name = models.ForeignKey(
-        get_user_model(),  # will return the currently active user model
-        on_delete=models.CASCADE,
-        verbose_name=_('name')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
     )
 
     atelier = models.ForeignKey(
@@ -29,9 +27,12 @@ class Tailor(AbstractBaseModel):
     # )
 
     @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, created, **kwargs):
+    def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Tailor.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
         instance.tailor.save()
 
     def __str__(self):
@@ -39,10 +40,10 @@ class Tailor(AbstractBaseModel):
         to display an object in the Django admin site
         and as the value inserted into a template when it displays an object
         """
-        return self.name
+        return self.user
 
     class Meta:
-        ordering = ['name']
+        ordering = ['user']
 
     def get_absolute_url(self):
         """
