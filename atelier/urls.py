@@ -57,11 +57,11 @@ urlpatterns = [
     path('atelier/add/', views.AtelierCreateView.as_view(), name='atelier_form'),
     path('atelier/<int:pk>/edit/', views.AtelierUpdateView.as_view(), name='atelier_update_form'),
     path('atelier/<int:pk>/delete/', views.AtelierDeleteView.as_view(), name='atelier_delete_form'),
-    path('tailor/', views.TailorListView.as_view(), name='tailor_list'),
-    path('tailor/<int:pk>/', views.TailorDetailView.as_view(), name='tailor_detail'),
-    path('tailor/add/', views.TailorCreateView.as_view(), name='tailor_form'),
-    path('tailor/<int:pk>/edit/', views.TailorUpdateView.as_view(), name='tailor_update_form'),
-    path('tailor/<int:pk>/delete/', views.TailorDeleteView.as_view(), name='tailor_delete_form'),
-    path("register/", views.register, name="register"),
+    path('profile/', views.ProfileListView.as_view(), name='profile_list'),
+    path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile_detail'),
+    path('profile/add/', views.ProfileCreateView.as_view(), name='profile_form'),
+    path('profile/<int:pk>/edit/', views.ProfileUpdateView.as_view(), name='profile_update_form'),
+    path('profile/<int:pk>/delete/', views.ProfileDeleteView.as_view(), name='profile_delete_form'),
+    path("register/", views.signup, name="register"),
 
 ]

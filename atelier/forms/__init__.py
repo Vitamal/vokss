@@ -6,5 +6,8 @@ from .complication_element_form import *
 from .fabric_form import *
 from .minimal_style_form import *
 from .atelier_form import *
-from .tailor_form import *
+from .profile_form import *
+from .seamstress_sign_up_form import *
+from .tailor_sign_up_form import *
+
 
