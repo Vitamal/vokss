@@ -19,6 +19,9 @@ from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
+import atelier
+from atelier.views import tailor, seamstress
+
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
@@ -32,4 +35,7 @@ urlpatterns += i18n_patterns(
 
     #Add Django site authentication urls (for login, logout, password management)
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', atelier.views.SignUpView.as_view(), name='signup'),
+    path('accounts/signup/tailor/', atelier.views.TailorSignUpView.as_view(), name='tailor_signup'),
+    path('accounts/signup/seamstress/', atelier.views.SeamstressSignUpView.as_view(), name='seamstress_signup'),
 )

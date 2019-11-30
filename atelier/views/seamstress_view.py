@@ -2,16 +2,16 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
-from atelier.models import Profile
+from ..forms import SeamstressSignUpForm
+from ..models import Profile
 
-
-class TailorSignUpView(CreateView):
+class SeamstressSignUpView(CreateView):
     model = Profile
-    form_class = TailorSignUpForm
+    form_class = SeamstressSignUpForm
     template_name = 'registration/signup_form.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'tailor'
+        kwargs['user_type'] = 'seamstress'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):

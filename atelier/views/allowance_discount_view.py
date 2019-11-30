@@ -1,20 +1,29 @@
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from ..decorators import seamstress_required
+
 from atelier.models import AllowanceDiscount
 from django.views import generic
 from atelier.forms import AllowanceDiscountForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+
+from django.contrib.auth.decorators import user_passes_test
 
 
-class AllowanceDiscountDetailView(LoginRequiredMixin, generic.DetailView):
+@method_decorator([login_required, seamstress_required], name='dispatch')
+class AllowanceDiscountDetailView(generic.DetailView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
-    context_object_name = 'allowance_discount'  # we changed lowercased version of the model class’ name: allowancediscount to allowance_discount.
+    context_object_name = 'allowance_discount'  # we changed lowercased version of the model class’ name:
+    # allowancediscount to allowance_discount.
 
 
-class AllowanceDiscountListView(LoginRequiredMixin, generic.ListView):
+@method_decorator([login_required, seamstress_required], name='dispatch')
+class AllowanceDiscountListView(generic.ListView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
@@ -23,22 +32,38 @@ class AllowanceDiscountListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'allowance_discount_list'
 
 
-class AllowanceDiscountCreateView(LoginRequiredMixin, generic.CreateView):
+class AllowanceDiscountCreateView(UserPassesTestMixin, generic.CreateView):
+    permission_required = 'is_staff'
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
+    """
+    check permissions in class-based views with the help of UserPassesTestMixin and test_funk
+    """
 
-class AllowanceDiscountUpdateView(LoginRequiredMixin, generic.UpdateView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+class AllowanceDiscountUpdateView(UserPassesTestMixin, generic.UpdateView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
+    """
+    check permissions in class-based views with the help of UserPassesTestMixin and test_funk
+    """
 
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
 class AllowanceDiscountDeleteView(LoginRequiredMixin, generic.DeleteView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
