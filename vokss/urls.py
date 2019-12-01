@@ -34,7 +34,4 @@ urlpatterns += i18n_patterns(
 
     #Add Django site authentication urls (for login, logout, password management, signup)
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', signup_view.SignUpView.as_view(), name='signup'),
-    path('accounts/signup/tailor/', tailor_view.TailorSignUpView.as_view(), name='tailor_signup'),
-    path('accounts/signup/seamstress/', seamstress_view.SeamstressSignUpView.as_view(), name='seamstress_signup'),
 )

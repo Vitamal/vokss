@@ -32,14 +32,29 @@ class Profile(AbstractBaseModel):
         default=False
     )
 
+    """
+    With the @receiver decorator, we can link a signal with a function. 
+    So, every time that a User model instance ends to run its save() method (or when user register ends), 
+    the update_profile_signal will start to work right after user saved.
+    sender - The model class.
+    instance - The actual instance being saved.
+    created - A boolean; True if a new record was created.
+    """
     @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
+    def update_profile_signal(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+
+
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+    #
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
 
     def __str__(self):
         """

@@ -9,7 +9,7 @@ from atelier.models import Profile
 class SeamstressSignUpView(CreateView):
     model = Profile
     form_class = SeamstressSignUpForm
-    template_name = 'registration/signup_form.html'
+    template_name = 'registration/../templates/atelier/signup_form.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'seamstress'
