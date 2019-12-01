@@ -13,7 +13,10 @@ class Profile(AbstractBaseModel):
         User,
         on_delete=models.CASCADE
     )
-
+    username = models.CharField(
+        max_length=264,
+        verbose_name=_('name')
+    )
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.SET_NULL,
@@ -43,7 +46,7 @@ class Profile(AbstractBaseModel):
         to display an object in the Django admin site
         and as the value inserted into a template when it displays an object
         """
-        return self.user
+        return self.user.username
 
     class Meta:
         ordering = ['user']
@@ -52,4 +55,4 @@ class Profile(AbstractBaseModel):
         """
         Returns the url to access a particular client instance.
         """
-        return reverse('atelier:tailor_detail', args=[str(self.id)])
+        return reverse('atelier:profile_detail', args=[str(self.id)])

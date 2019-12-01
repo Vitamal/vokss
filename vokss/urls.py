@@ -19,8 +19,7 @@ from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
-import atelier
-from atelier.views import tailor, seamstress
+from atelier.views import signup_view, seamstress_view, tailor_view
 
 
 urlpatterns = [
@@ -33,9 +32,9 @@ urlpatterns += i18n_patterns(
     # prefix_default_language=False,  # With this code active, the program works wrong: don't switch to default language!
                                       # Look at https://code.djangoproject.com/ticket/29425
 
-    #Add Django site authentication urls (for login, logout, password management)
+    #Add Django site authentication urls (for login, logout, password management, signup)
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', atelier.views.SignUpView.as_view(), name='signup'),
-    path('accounts/signup/tailor/', atelier.views.TailorSignUpView.as_view(), name='tailor_signup'),
-    path('accounts/signup/seamstress/', atelier.views.SeamstressSignUpView.as_view(), name='seamstress_signup'),
+    path('accounts/signup/', signup_view.SignUpView.as_view(), name='signup'),
+    path('accounts/signup/tailor/', tailor_view.TailorSignUpView.as_view(), name='tailor_signup'),
+    path('accounts/signup/seamstress/', seamstress_view.SeamstressSignUpView.as_view(), name='seamstress_signup'),
 )

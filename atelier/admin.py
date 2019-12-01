@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Product, Order, Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Atelier, Tailor
+from .models import Product, Order, Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Atelier, Profile
 
 admin.site.register(Atelier)
-admin.site.register(Tailor)
+admin.site.register(Profile)
 admin.site.register(Fabric)
 admin.site.register(AllowanceDiscount)
 admin.site.register(ComplicationElement)

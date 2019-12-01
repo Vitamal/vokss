@@ -2,8 +2,9 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView
 
-from ..forms import SeamstressSignUpForm
-from ..models import Profile
+from atelier.forms import SeamstressSignUpForm
+from atelier.models import Profile
+
 
 class SeamstressSignUpView(CreateView):
     model = Profile

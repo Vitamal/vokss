@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 
 from atelier.models import Profile
+from atelier.forms import TailorSignUpForm
 
 
 class TailorSignUpView(CreateView):
@@ -17,4 +18,4 @@ class TailorSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('atelier:home')
+        return redirect('atelier:profile_list')

@@ -21,7 +21,7 @@ class ClientUpdateView(LoginRequiredMixin, generic.UpdateView):
         if self.request.user.is_staff:
             return Client.objects.all()  # admin user access all orders
         else:
-            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
 
 
 class ClientListView(LoginRequiredMixin, generic.ListView):
@@ -32,7 +32,7 @@ class ClientListView(LoginRequiredMixin, generic.ListView):
         if self.request.user.is_staff:
             return Client.objects.all()  # admin user access all orders
         else:
-            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
 
 
 class ClientDetailView(LoginRequiredMixin, generic.DetailView):
@@ -49,7 +49,7 @@ class ClientDetailView(LoginRequiredMixin, generic.DetailView):
         if self.request.user.is_staff:
             return Client.objects.all()  # admin user access all orders
         else:
-            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
 
 
 class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -61,4 +61,4 @@ class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
         if self.request.user.is_staff:
             return Client.objects.all()  # admin user access all orders
         else:
-            return Client.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only

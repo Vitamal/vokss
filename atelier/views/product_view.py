@@ -11,10 +11,10 @@ class ProductDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Product.objects.all()  # admin user access all orders
+            return Product.objects.all()  # admin user access all products
         else:
             return Product.objects.filter(
-                tailor__username=self.request.user)  # ordinary user access his own orders only
+                atelier=self.request.user.profile.atelier)  # ordinary user access his atelier products only
 
 
 class ProductListView(LoginRequiredMixin, generic.ListView):
@@ -23,10 +23,10 @@ class ProductListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Product.objects.all()  # admin user access all orders
+            return Product.objects.all()  # admin user access all products
         else:
             return Product.objects.filter(
-                tailor__username=self.request.user)  # ordinary user access his own orders only
+                atelier=self.request.user.profile.atelier)  # ordinary user access his atelier products only
 
 
 class ProductCreateView(LoginRequiredMixin, generic.CreateView):
@@ -34,11 +34,11 @@ class ProductCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = ProductForm
     template_name = 'atelier/create_form.html'
 
-    def form_valid(self, form):
-        self.object = form.save()
-        atelier_id = self.kwargs.get('atelier_id')
-        self.object.update(atelier_id=atelier_id)
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     self.object = form.save()
+    #     atelier_id = self.kwargs.get('atelier_id')
+    #     self.object.update(atelier_id=atelier_id)
+    #     return super().form_valid(form)
 
 
 class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -48,10 +48,10 @@ class ProductUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Product.objects.all()  # admin user access all orders
+            return Product.objects.all()  # admin user access all products
         else:
             return Product.objects.filter(
-                tailor__username=self.request.user)  # ordinary user access his own orders only
+                atelier=self.request.user.profile.atelier)  # ordinary user access his atelier products only
 
 
 class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -61,7 +61,7 @@ class ProductDeleteView(LoginRequiredMixin, generic.DeleteView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Product.objects.all()  # admin user access all orders
+            return Product.objects.all()  # admin user access all products
         else:
             return Product.objects.filter(
-                tailor__username=self.request.user)  # ordinary user access his own orders only
+                atelier=self.request.user.profile.atelier)  # ordinary user access his atelier products only

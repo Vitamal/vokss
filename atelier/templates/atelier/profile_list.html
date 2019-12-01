@@ -1,0 +1,53 @@
+{% extends 'atelier/template.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>{% trans 'Profile list' %}:</h3>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:profile_form' %}">{% trans 'Add the Profile' %}</a>
+                </button>
+                <br/>
+                <br/>
+                <div class="table-responsive">
+                    {% if profile_list %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Username' %}</th>
+                                <th>{% trans 'User' %}</th>
+                                <th>{% trans 'Profile' %}</th>
+                                {% if user.is_staff %}
+                                    <th>{% trans 'Atelier' %}</th>
+                                {% endif %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for profile in profile_list %}
+                                <tr>
+                                    <td style="width:70%"><a href="{{ profile.get_absolute_url }}">{{ profile.username }} </a></td>
+                                    <td style="width:30%">{{ profile.user }}</td>
+                                    {% if profile.is_tailor %}
+                                        <td style="width:30%">{% trans 'tailor' %}</td>
+                                    {% elif profile.is_seamstress %}
+                                        <td style="width:30%">{% trans 'seamstress' %}</td>
+                                    {% else %}
+                                        <td style="width:30%">{% trans 'without profile!' %} </td>
+                                    {% endif %}
+                                    {% if user.is_staff %}
+                                        <td>{{ profile.atelier }}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>{% trans 'There is no one element in Atelier' %}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
