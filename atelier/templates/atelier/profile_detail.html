@@ -29,10 +29,10 @@
                             <td>{% trans 'Profile' %}:</td>
                         {% if profile.is_tailor %}
                                 <td>{% trans 'tailor' %} </td>
-                        {% elif profile.is_seamstress %}
-                                <td>{% trans 'seamstress' %} </td>
+{#                        {% elif profile.is_seamstress %}#}
+{#                                <td>{% trans 'seamstress' %} </td>#}
                         {% else %}
-                                <td>{% trans 'without profile!' %} </td>
+                                <td>{% trans 'simple profile' %} </td>
                         {% endif %}
                         </tr>
                         </tbody>

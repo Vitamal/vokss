@@ -13,10 +13,6 @@ class Profile(AbstractBaseModel):
         User,
         on_delete=models.CASCADE
     )
-    username = models.CharField(
-        max_length=264,
-        verbose_name=_('name')
-    )
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.SET_NULL,
@@ -26,16 +22,17 @@ class Profile(AbstractBaseModel):
     )
 
     is_tailor = models.BooleanField(
-        default=False
-    )
-    is_seamstress = models.BooleanField(
-        default=False
+        default=False,
+        help_text="User can be a tailor to have administrator access within his atelier"
     )
 
     """
     With the @receiver decorator, we can link a signal with a function. 
     So, every time that a User model instance ends to run its save() method (or when user register ends), 
     the update_profile_signal will start to work right after user saved.
+    We will now define signals so our Profile model will be automatically created/updated 
+    when we create/update User instances.
+    
     sender - The model class.
     instance - The actual instance being saved.
     created - A boolean; True if a new record was created.
@@ -45,16 +42,6 @@ class Profile(AbstractBaseModel):
         if created:
             Profile.objects.create(user=instance)
         instance.profile.save()
-
-
-    # @receiver(post_save, sender=User)
-    # def create_user_profile(sender, instance, created, **kwargs):
-    #     if created:
-    #         Profile.objects.create(user=instance)
-    #
-    # @receiver(post_save, sender=User)
-    # def save_user_profile(sender, instance, **kwargs):
-    #     instance.profile.save()
 
     def __str__(self):
         """

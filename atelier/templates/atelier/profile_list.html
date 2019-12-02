@@ -31,10 +31,10 @@
                                     <td style="width:30%">{{ profile.user }}</td>
                                     {% if profile.is_tailor %}
                                         <td style="width:30%">{% trans 'tailor' %}</td>
-                                    {% elif profile.is_seamstress %}
-                                        <td style="width:30%">{% trans 'seamstress' %}</td>
+{#                                    {% elif profile.is_seamstress %}#}
+{#                                        <td style="width:30%">{% trans 'seamstress' %}</td>#}
                                     {% else %}
-                                        <td style="width:30%">{% trans 'without profile!' %} </td>
+                                        <td style="width:30%">{% trans 'simple profile' %} </td>
                                     {% endif %}
                                     {% if user.is_staff %}
                                         <td>{{ profile.atelier }}</td>

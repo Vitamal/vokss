@@ -1,6 +1,5 @@
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from ..decorators import seamstress_required
 
 from atelier.models import AllowanceDiscount
 from django.views import generic
@@ -11,7 +10,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import user_passes_test
 
 
-@method_decorator([login_required, seamstress_required], name='dispatch')
 class AllowanceDiscountDetailView(generic.DetailView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
@@ -22,7 +20,6 @@ class AllowanceDiscountDetailView(generic.DetailView):
     # allowancediscount to allowance_discount.
 
 
-@method_decorator([login_required, seamstress_required], name='dispatch')
 class AllowanceDiscountListView(generic.ListView):
     login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'

@@ -19,8 +19,6 @@ from django.views.generic import RedirectView
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import gettext_lazy as _
 
-from atelier.views import signup_view, seamstress_view, tailor_view
-
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
