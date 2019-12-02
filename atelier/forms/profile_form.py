@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from atelier.models import Profile
+from atelier.models import Profile, Atelier
 
 
 class UserForm(forms.ModelForm):
@@ -25,8 +25,8 @@ class SignUpForm(UserCreationForm):
     '''
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        user = User.objects.filter(is_active=True)
-        self.fields['atelier'].queryset = user.profile.atelier
+        # user = User.objects.filter(is_active=True)
+        self.fields['atelier'].queryset = Atelier.objects.all()
 
     class Meta:
         model = User

@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import redirect, render
@@ -5,8 +6,8 @@ from django.contrib import messages
 
 from atelier.models import Profile
 from django.views import generic
-from atelier.forms import ProfileForm, UserForm
-from django.urls import reverse_lazy
+from atelier.forms import ProfileForm, UserForm, SignUpForm
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -19,6 +20,24 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
     model = Profile
     paginate_by = 10  # number of records on the one page
 
+
+def create_profile(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # load the profile instance created by the signal
+            user.profile.atelier = form.cleaned_data.get('atelier')
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+            return redirect('profile_list')
+    else:
+        form = SignUpForm()
+    return render(request, 'atelier/signup_form.html', {'form': form})
+
+
 @login_required
 @transaction.atomic
 def update_profile(request):
@@ -29,7 +48,7 @@ def update_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('settings:profile')
+            return redirect(reverse('settings:profile'))
         else:
             messages.error(request, _('Please correct the error below.'))
     else:

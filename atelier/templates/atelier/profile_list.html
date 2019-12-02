@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <h3>{% trans 'Profile list' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:profile_form' %}">{% trans 'Add the Profile' %}</a>
@@ -27,12 +27,10 @@
                             <tbody>
                             {% for profile in profile_list %}
                                 <tr>
-                                    <td style="width:70%"><a href="{{ profile.get_absolute_url }}">{{ profile.username }} </a></td>
+                                    <td style="width:70%"><a href="{{ profile.get_absolute_url }}">{{ profile.user.username }} </a></td>
                                     <td style="width:30%">{{ profile.user }}</td>
                                     {% if profile.is_tailor %}
                                         <td style="width:30%">{% trans 'tailor' %}</td>
-{#                                    {% elif profile.is_seamstress %}#}
-{#                                        <td style="width:30%">{% trans 'seamstress' %}</td>#}
                                     {% else %}
                                         <td style="width:30%">{% trans 'simple profile' %} </td>
                                     {% endif %}

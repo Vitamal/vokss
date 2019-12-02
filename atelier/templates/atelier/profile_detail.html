@@ -14,8 +14,8 @@
                     <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <td>{% trans 'Name' %}:</td>
-                            <td>{{ profile.username }}</td>
+                            <td>{% trans 'User' %}:</td>
+                            <td>{{ profile.user }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'User' %}:</td>
@@ -29,8 +29,6 @@
                             <td>{% trans 'Profile' %}:</td>
                         {% if profile.is_tailor %}
                                 <td>{% trans 'tailor' %} </td>
-{#                        {% elif profile.is_seamstress %}#}
-{#                                <td>{% trans 'seamstress' %} </td>#}
                         {% else %}
                                 <td>{% trans 'simple profile' %} </td>
                         {% endif %}
@@ -39,10 +37,10 @@
                     </table>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:profile_update_form' pk=product.pk %}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'atelier:profile_update_form' pk=profile.user.pk %}">{% trans 'Edit' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:profile_delete_form' pk=product.pk %}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'atelier:profile_delete_form' pk=profile.user.pk %}">{% trans 'Delete' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:profile_list' %}">{% trans 'Back to list' %}</a>
