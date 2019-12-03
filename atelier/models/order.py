@@ -52,21 +52,20 @@ class Order(AbstractBaseModel):
     )
     tailor = models.ForeignKey(
         get_user_model(),  # will return the currently active user model
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         verbose_name=_('tailor')
     )
     deadline = models.DateField(
         default=datetime.date.today() + datetime.timedelta(weeks=2),
-        null=True, blank=True, verbose_name=_('deadline')
+        null=True,
+        blank=True,
+        verbose_name=_('deadline')
     )
 
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.CASCADE,
         verbose_name=_('atelier'),
-        null=True,
     )
 
     class Meta:

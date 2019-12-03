@@ -11,19 +11,19 @@ from django.contrib.auth.models import User
 class Profile(AbstractBaseModel):
     user = models.OneToOneField(
         User,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        verbose_name=_('user')
     )
     atelier = models.ForeignKey(
         Atelier,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.CASCADE,
         verbose_name=_('atelier')
     )
 
     is_tailor = models.BooleanField(
         default=False,
-        help_text="User can be a tailor to have administrator access within his atelier"
+        help_text=_("User can be a tailor to have administrator access within his atelier"),
+        verbose_name=_('tailor')
     )
 
     """

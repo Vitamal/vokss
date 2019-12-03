@@ -24,7 +24,6 @@ class Product(AbstractBaseModel):
         Atelier,
         on_delete=models.CASCADE,
         verbose_name=_('Atelier'),
-        null=True,
     )
 
     def __str__(self):

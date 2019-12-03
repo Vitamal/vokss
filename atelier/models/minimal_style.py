@@ -11,8 +11,14 @@ class MinimalStyleQueryset(models.QuerySet):
 
 
 class MinimalStyle(AbstractBaseModel):
-    name = models.TextField(max_length=264, verbose_name=_('name'))
-    group = models.CharField(max_length=264, verbose_name=_('product group'))
+    name = models.TextField(
+        max_length=264,
+        verbose_name=_('name')
+    )
+    group = models.CharField(
+        max_length=264,
+        verbose_name=_('product group')
+    )
 
     def __str__(self):
         """

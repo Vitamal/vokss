@@ -32,18 +32,18 @@ def create_profile(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('profile_list')
+            return redirect(reverse('profile_list'))
     else:
         form = SignUpForm()
     return render(request, 'atelier/signup_form.html', {'form': form})
 
 
 @login_required
-@transaction.atomic
+# @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        user_form = UserForm(request.POST, instance=request.profile.user)
+        profile_form = ProfileForm(request.POST, instance=request.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
