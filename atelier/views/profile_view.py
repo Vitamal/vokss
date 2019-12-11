@@ -1,13 +1,12 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.db import transaction
-from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
+from django.shortcuts import render_to_response
 from django.contrib import messages
+from django.views.generic import FormView
 
 from atelier.models import Profile
 from django.views import generic
-from atelier.forms import ProfileForm, UserForm, SignUpForm
-from django.urls import reverse_lazy, reverse
+from atelier.forms import UserForm
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -21,54 +20,42 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10  # number of records on the one page
 
 
-def create_profile(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.profile.atelier = form.cleaned_data.get('atelier')
-            user.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-            return redirect(reverse('profile_list'))
-    else:
-        form = SignUpForm()
-    return render(request, 'atelier/signup_form.html', {'form': form})
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserForm(data=request.POST)
+#         print(form.__dict__)
+#         if form.is_valid():
+#             user = form.save()
+#             pw = user.password
+#             user.set_password(pw)
+#             user.save()
+#         else:
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = UserForm()
+#     return render_to_response('atelier/profile_form.html', {'form': form})
 
 
-@login_required
-# @transaction.atomic
-def update_profile(request):
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.profile.user)
-        profile_form = ProfileForm(request.POST, instance=request.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, _('Your profile was successfully updated!'))
-            return redirect(reverse('settings:profile'))
-        else:
-            messages.error(request, _('Please correct the error below.'))
-    else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'atelier/profile_form.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
-    })
+class RegisterProfileView(FormView):
+    template_name = 'atelier/profile_form.html'
+    form_class = UserForm
 
-# class ProfileCreateView(LoginRequiredMixin, generic.CreateView):
-#     model = Profile
-#     form_class = ProfileForm
-#     template_name = 'atelier/create_form.html'
-#
-#
-# class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
-#     model = Profile
-#     form_class = ProfileForm
-#     template_name = 'atelier/create_form.html'
+    def get_success_url(self):
+        return '/atelier/'
+
+    def form_valid(self, form):
+        print(form.__dict__)
+        user = User.objects.create(
+            email=form.fields.get('email'),
+            username=form.fields.get('username'),
+        )
+        user.set_password(form.password)
+        Profile.objects.create(
+            user=user,
+            atelier=self.request.user.profile.atelier,
+            is_tailor=form.fields.get('is_tailor'),
+        )
+        return super().form_valid(form)
 
 
 class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):

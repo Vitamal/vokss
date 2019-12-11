@@ -37,11 +37,11 @@ class Profile(AbstractBaseModel):
     instance - The actual instance being saved.
     created - A boolean; True if a new record was created.
     """
-    @receiver(post_save, sender=User)
-    def update_profile_signal(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-        instance.profile.save()
+    # @receiver(post_save, sender=User)
+    # def update_profile_signal(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+    #     instance.profile.save()
 
     def __str__(self):
         """
