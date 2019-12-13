@@ -1,23 +1,24 @@
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-
 from atelier.models import AllowanceDiscount
 from django.views import generic
 from atelier.forms import AllowanceDiscountForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-
 from django.contrib.auth.decorators import user_passes_test
 
 
 class AllowanceDiscountDetailView(generic.DetailView):
+    #If a view is using this mixin,
+    # all requests by non-authenticated users will be redirected to the login page
+    # or shown an HTTP 403 Forbidden error, depending on the raise_exception parameter.
     login_url = '/accounts/login/'
-    redirect_field_name = 'redirect_to'
+
+    redirect_field_name = 'redirect_to' #the path that the user should be redirected to upon successful authentication ???
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
     context_object_name = 'allowance_discount'  # we changed lowercased version of the model class’ name:
-    # allowancediscount to allowance_discount.
+                                                # allowancediscount to allowance_discount.
 
 
 class AllowanceDiscountListView(generic.ListView):

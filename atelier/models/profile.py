@@ -22,6 +22,7 @@ class Profile(AbstractBaseModel):
 
     is_tailor = models.BooleanField(
         default=False,
+        blank=True,
         help_text=_("User can be a tailor to have administrator access within his atelier"),
         verbose_name=_('tailor')
     )
