@@ -60,6 +60,6 @@ urlpatterns = [
     path('profile/', views.ProfileListView.as_view(), name='profile_list'),
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile_detail'),
     path('profile/add/', views.ProfileCreateView.as_view(), name='profile_form'),
-    # path('profile/<int:pk>/edit/', views.RegisterProfileView.as_view(), name='profile_update_form'),
+    path('profile/<int:pk>/edit/', views.ProfileChangeView.as_view(), name='profile_update_form'),
     path('profile/<int:pk>/delete/', views.ProfileDeleteView.as_view(), name='profile_delete_form'),
 ]

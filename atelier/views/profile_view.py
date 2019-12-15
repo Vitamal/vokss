@@ -1,17 +1,11 @@
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django.shortcuts import render_to_response, redirect
-from django.contrib import messages
-from django.views.generic import FormView
-import django.core.validators
+from django.shortcuts import get_object_or_404
+from django.views.generic import FormView, UpdateView
 from atelier.models import Profile
 from django.views import generic
-from atelier.forms import UserForm
+from atelier.forms import ProfileRegisterForm
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.utils.translation import gettext_lazy as _
-from django.views.generic.edit import CreateView
-from django.contrib import messages
 
 
 class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
@@ -39,6 +33,7 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
 #         form = UserForm()
 #     return render_to_response('atelier/profile_form.html', {'form': form})
 
+
 class ProfileCreateView(UserPassesTestMixin, FormView):
 
     def test_func(self):
@@ -46,11 +41,10 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
         return self.request.user.profile.is_tailor
 
     template_name = 'atelier/create_form.html'
-    form_class = UserForm
+    form_class = ProfileRegisterForm
 
     def get_success_url(self):
         return reverse_lazy('atelier:profile_list')
-
 
     def form_valid(self, form):  # The default implementation for form_valid() simply redirects to the success_url.
         print(form.__dict__)
@@ -58,7 +52,7 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
             email=form.cleaned_data['email'],
             username=form.cleaned_data['username'],
         )
-        user.set_password(form.cleaned_data['password'])
+        user.set_password(form.cleaned_data['password2'])
         user.save()
         Profile.objects.create(
             user=user,
@@ -68,6 +62,27 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
             last_updated_by=self.request.user,
         )
         return super().form_valid(form)
+
+
+class ProfileChangeView(UserPassesTestMixin, UpdateView):
+
+    def test_func(self):
+        # tailor only can create new users in the own atelier
+        return self.request.user.profile.is_tailor
+
+    template_name = 'atelier/create_form.html'
+    form_class = ProfileRegisterForm
+
+    def get_object(self, *args, **kwargs):
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+
+        # We can also get user object using self.request.user  but that doesnt work
+        # for other models.
+
+        return user.profile
+
+    def get_success_url(self):
+        return reverse_lazy('atelier:profile_list')
 
 
 class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):
