@@ -1,5 +1,8 @@
+from urllib import request
+
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+from django.core.checks import messages
+from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic import FormView, UpdateView
 from atelier.models import Profile
 from django.views import generic
@@ -18,22 +21,6 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10  # number of records on the one page
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserForm(data=request.POST)
-#         print(form.__dict__)
-#         if form.is_valid():
-#             user = form.save()
-#             pw = user.password
-#             user.set_password(pw)
-#             user.save()
-#         else:
-#             messages.error(request, 'Please correct the error below.')
-#     else:
-#         form = UserForm()
-#     return render_to_response('atelier/profile_form.html', {'form': form})
-
-
 class ProfileCreateView(UserPassesTestMixin, FormView):
 
     def test_func(self):
@@ -47,7 +34,6 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
         return reverse_lazy('atelier:profile_list')
 
     def form_valid(self, form):  # The default implementation for form_valid() simply redirects to the success_url.
-        print(form.__dict__)
         user = User.objects.create(
             email=form.cleaned_data['email'],
             username=form.cleaned_data['username'],
@@ -75,14 +61,32 @@ class ProfileChangeView(UserPassesTestMixin, UpdateView):
 
     def get_object(self, *args, **kwargs):
         user = get_object_or_404(User, pk=self.kwargs['pk'])
+        email = user.email
 
         # We can also get user object using self.request.user  but that doesnt work
         # for other models.
 
-        return user.profile
+        return user
+
+    def form_valid(self, form):  # The default implementation for form_valid() simply redirects to the success_url.
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('atelier:profile_list')
+
+def change_profile(request):
+    if request.method == 'POST':
+        form = ProfileRegisterForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            # pw = user.password
+            # user.set_password(pw)
+            # user.save()
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = ProfileRegisterForm()
+    return render_to_response('atelier/create_form.html', {'form': form})
 
 
 class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):
