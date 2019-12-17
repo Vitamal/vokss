@@ -18,12 +18,16 @@ class ProfileRegisterForm(UserCreationForm):
         return email
 
 
-# class ProfileChangeForm(UserCreationForm):
-#     email = forms.EmailField()
-#     is_tailor = forms.BooleanField(required=False)
-#
-#     def clean_email(self):
-#         email = self.cleaned_data['email']
-#         if User.objects.filter(email=email).exists():
-#             raise ValidationError('Email Already Exists')
-#         return email
+class ProfileChangeForm(UserChangeForm):
+    class Meta:
+        model = Profile
+        fields = ('user', 'is_tailor')
+    # email = forms.EmailField()
+    # is_tailor = forms.BooleanField(required=False)
+    # exclude = ('groups',)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError('Email Already Exists')
+        return email

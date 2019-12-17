@@ -37,10 +37,10 @@
                     </table>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:profile_update_form' pk=profile.user.pk %}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'atelier:profile_update_form' pk=profile.pk %}">{% trans 'Edit' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:profile_delete_form' pk=profile.user.pk %}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'atelier:profile_delete_form' pk=profile.pk %}">{% trans 'Delete' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:profile_list' %}">{% trans 'Back to list' %}</a>
