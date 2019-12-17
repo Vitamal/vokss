@@ -1,13 +1,10 @@
-
 from django.contrib.auth.models import User
-from django.core.checks import messages
-from django.http import QueryDict, request
-from django.shortcuts import get_object_or_404, render_to_response
-from django.views.generic import FormView, UpdateView
+from django.http import HttpResponseRedirect
+from django.views.generic import FormView
 from atelier.models import Profile
 from django.views import generic
 from atelier.forms import ProfileRegisterForm, ProfileChangeForm
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
@@ -33,7 +30,9 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('atelier:profile_list')
 
-    def form_valid(self, form):  # The default implementation for form_valid() simply redirects to the success_url.
+    def form_valid(self, form):
+        # The default implementation for form_valid() simply redirects to the success_url.
+
         user = User.objects.create(
             email=form.cleaned_data['email'],
             username=form.cleaned_data['username'],
@@ -60,43 +59,46 @@ class ProfileChangeView(UserPassesTestMixin, FormView):
     form_class = ProfileChangeForm
 
     def get_success_url(self):
-
         return reverse_lazy('atelier:profile_list')
 
-    # def get_object(self, *args, **kwargs):
-    #     profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
-    #
-    #     # We can also get user object using self.request.user  but that doesnt work
-    #     # for other models.
-    #
-    #     return profile
+    def get_profile_object(self):
+        # print(self.request.GET)
+        profile_id = self.kwargs.get('pk')
+        return Profile.objects.get(id=profile_id)
 
-    def form_valid(self, form):  # The default implementation for form_valid() simply redirects to the success_url.
-        profile = Profile.objects.get(self)
+    def get_initial(self):
+        data = {
+            'email': self.get_profile_object().user.email,
+            'is_tailor': self.get_profile_object().is_tailor
+        }
+        return data
+
+    def form_valid(self, form):
+        # The default implementation for form_valid() simply redirects to the success_url.
+
+        profile = self.get_profile_object()
         profile.is_tailor = form.cleaned_data['is_tailor']
-        form.instance.last_updated_by = self.request.user
         profile.user.email = form.cleaned_data['email']
+        profile.full_clean()
+        profile.save()
+        profile.user.save()
         return super().form_valid(form)
-
-
-# def change_profile(request):
-#     if request.method == 'POST':
-#         form = ProfileRegisterForm(request.POST)
-#         print(request.POST.items())
-#         if form.is_valid():
-#             pass
-#             # form.save()
-#             # pw = user.password
-#             # user.set_password(pw)
-#             # user.save()
-#         else:
-#             messages.error(request, 'Please correct the error below.')
-#     else:
-#         form = ProfileRegisterForm()
-#     return render_to_response('atelier/create_form.html', {'form': form})
 
 
 class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Profile
     success_url = reverse_lazy('atelier:profile_list')
     template_name = 'atelier/delete_form.html'
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
+
+    def get_success_url(self):
+        return reverse_lazy('atelier:profile_list')
