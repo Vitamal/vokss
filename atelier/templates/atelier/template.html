@@ -97,6 +97,14 @@
                         {% trans 'Profiles' %}
                     </a>
                 </li>
+                {% if user.is_superuser %}
+                    <li>
+                        <a href="{% url 'atelier:atelier_list' %}">
+                            <i class="fas fa-star-half"></i>
+                            {% trans 'Ateliers' %}
+                        </a>
+                    </li>
+                {% endif %}
             </div>
             <div class="line">
                 <li>
@@ -113,7 +121,7 @@
                 </li>
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                       <i class="fas fa-address-book"></i>
+                        <i class="fas fa-address-book"></i>
                         {% trans 'Contacts' %}
                     </a>
                 </li>

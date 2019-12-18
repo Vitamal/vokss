@@ -85,17 +85,25 @@ class ProfileChangeView(UserPassesTestMixin, FormView):
         return super().form_valid(form)
 
 
-class ProfileDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ProfileDeleteView(UserPassesTestMixin, generic.DeleteView):
     model = Profile
     success_url = reverse_lazy('atelier:profile_list')
     template_name = 'atelier/delete_form.html'
 
+    def test_func(self):
+        # tailor only can create new users in the own atelier
+        return self.request.user.profile.is_tailor
+
+    def get_user_object(self):
+        profile_id = self.kwargs.get('pk')
+        profile = Profile.objects.get(pk=profile_id)
+        return profile.user
+
     def delete(self, request, *args, **kwargs):
         """
-        Call the delete() method on the fetched object and then redirect to the
-        success URL.
+        Overriding the delete() method to delete User instances; and according Profile will be deleted too.
         """
-        self.object = self.get_object()
+        self.object = self.get_user_object()
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)

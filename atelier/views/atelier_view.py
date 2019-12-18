@@ -1,4 +1,4 @@
-from atelier.models import Atelier
+from atelier.models import Atelier, Profile
 from django.views import generic
 from atelier.forms import AtelierForm
 from django.urls import reverse_lazy
@@ -19,6 +19,16 @@ class AtelierDetailView(UserPassesTestMixin, generic.DetailView):
 class AtelierListView(UserPassesTestMixin, generic.ListView):
     model = Atelier
     paginate_by = 10  # number of records on the one page
+
+    def test_func(self):
+        """
+        check permissions in class-based views with the help of UserPassesTestMixin and test_funk
+        """
+        return self.request.user.is_superuser
+
+    def tailor_list(self):
+        profiles = Profile.objects.filter(is_tailor=True)
+        return Profile.objects.filter(is_tailor=True)
 
 
 class AtelierCreateView(UserPassesTestMixin, generic.CreateView):

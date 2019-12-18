@@ -1,0 +1,48 @@
+{% extends 'atelier/template.html' %}
+{% load i18n %}
+
+{% block content %}
+    {% if user.is_superuser %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>{% trans 'Atelier list' %}:</h3>
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:atelier_form' %}">{% trans 'Add the atelier' %}</a>
+                    </button>
+                    <br/>
+                    <br/>
+                    <div class="table-responsive">
+                        {% if atekier_list %}
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>{% trans 'Ateliers' %}</th>
+                                    <th></th>
+                                    <th>{% trans 'Tailors' %}</th>
+                                    <th></th>
+                                    <th>{% trans 'Simple users' %}</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for atelier in atelier_list %}
+                                    <tr>
+                                        <td><a href="{{ atelier.get_absolute_url }}">{{ atelier.name }} </a></td>
+                                        <td>{{ tailor_list }}</td>
+{#                                        <td>{{ atelier.profile_set.count(is_tailor=False) }}</td>#}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>{% trans 'There is no one element in Atelier' %}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
