@@ -182,5 +182,5 @@ dbdev_tempdata/
 
 # django migrations
 **/migrations/**
-!**/migrations
-!**/migrations/__init__.py
+**/migrations
+**/migrations/__init__.py

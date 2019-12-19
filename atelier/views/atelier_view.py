@@ -27,8 +27,8 @@ class AtelierListView(UserPassesTestMixin, generic.ListView):
         return self.request.user.is_superuser
 
     def tailor_list(self):
-        profiles = Profile.objects.filter(is_tailor=True)
-        return Profile.objects.filter(is_tailor=True)
+        context = Profile.objects.filter(is_tailor=True)
+        return self.render_to_response(context)
 
 
 class AtelierCreateView(UserPassesTestMixin, generic.CreateView):

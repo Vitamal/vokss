@@ -7,7 +7,7 @@
             <div class="col-sm-6">
                 <h3>{% trans 'Ateliers' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the fabric' %}</a>
+                    <a href="{% url 'atelier:atelier_form' %}">{% trans 'Add the atelier' %}</a>
                 </button>
                 <br/><br/>
                 <div class="table-responsive">
@@ -15,27 +15,18 @@
                         <tbody>
                         <tr>
                             <td>{% trans 'Name' %}:</td>
-                            <td>{{ fabric.name }} </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Complexity Factor' %}:</td>
-                            <td>{{ fabric.complexity_factor }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Group' %}:</td>
-                            <td>{{ fabric.group }}</td>
-                        </tr>
+                            <td>{{ atelier.name }} </td>
                         </tbody>
                     </table>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'atelier:atelier_update_form' pk=atelier.pk %}">{% trans 'Edit' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'atelier:atelier_delete_form' pk=atelier.pk %}">{% trans 'Delete' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_list' %}">{% trans 'Back to list' %}</a>
+                    <a href="{% url 'atelier:atelier_list' %}">{% trans 'Back to list' %}</a>
                 </button>
             </div>
         </div>
