@@ -28,12 +28,13 @@
                                 </thead>
                                 <tbody>
                                 {% for atelier in atelier_list %}
-                                    {% for tailor in tailor_list %}
-                                        <tr>
-                                            <td><a href="{{ atelier.get_absolute_url }}">{{ atelier.name }} </a></td>
-                                            <td>{{ tailor.user }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                    <tr>
+                                        <td><a href="{{ atelier.get_absolute_url }}">{{ atelier.name }} </a></td>
+                                        <td></td>
+                                        <td>{{ num_tailors }}</td>
+                                        <td></td>
+                                        <td>{{ num_tailors }}</td>
+                                    </tr>
                                 {% endfor %}
                                 </tbody>
                             </table>
