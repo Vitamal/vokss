@@ -20,7 +20,7 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
         if self.request.user.is_staff:
             return Order.objects.all()  # admin user access all orders
         else:
-            return Order.objects.filter(tailor=self.request.user)  # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)  # ordinary user access his own orders only
 
     def get_order_price(self):
         order = self.object
@@ -56,8 +56,11 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         if self.request.user.is_staff:
             return Order.objects.all()  # admin user access all orders
+        elif self.request.user.profile.is_tailor:
+            # tailor has access to all orders in his own atelier
+            return Order.objects.filter(atelier=self.request.user.profile.atelier)
         else:
-            return Order.objects.filter(tailor=self.request.user)  # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)  # ordinary user access his own orders only
 
 
 class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -69,7 +72,7 @@ class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
         if self.request.user.is_staff:
             return Order.objects.all()  # admin user access all orders
         else:
-            return Order.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)  # ordinary user access his own orders only
 
 
 class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -81,4 +84,4 @@ class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
         if self.request.user.is_staff:
             return Order.objects.all()  # admin user access all orders
         else:
-            return Order.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)  # ordinary user access his own orders only

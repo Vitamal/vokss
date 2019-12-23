@@ -1,10 +1,10 @@
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 import datetime
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from atelier.app_utils import order_price_calculation
-
+from django.contrib.auth import get_user_model
 from atelier.models import AbstractBaseModel, Atelier
 
 
@@ -50,10 +50,11 @@ class Order(AbstractBaseModel):
         default=datetime.date.today,
         verbose_name=_('order date')
     )
-    tailor = models.ForeignKey(
+    performer = models.ForeignKey(
         get_user_model(),  # will return the currently active user model
         on_delete=models.CASCADE,
-        verbose_name=_('tailor')
+        verbose_name=_('performer'),
+        null=True,
     )
     deadline = models.DateField(
         default=datetime.date.today() + datetime.timedelta(weeks=2),
@@ -61,12 +62,17 @@ class Order(AbstractBaseModel):
         blank=True,
         verbose_name=_('deadline')
     )
-
     atelier = models.ForeignKey(
         Atelier,
         on_delete=models.CASCADE,
         verbose_name=_('atelier'),
     )
+    is_closed = models.BooleanField(
+        default=False,
+        blank=True,
+        verbose_name=_('closed')
+    )
+
 
     class Meta:
         ordering = ["order_date"]

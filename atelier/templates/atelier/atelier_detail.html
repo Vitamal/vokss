@@ -5,17 +5,26 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <h3>{% trans 'Ateliers' %}:</h3>
+                <h3>{% trans 'Ateliers' %}: {{ atelier.name }}</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:atelier_form' %}">{% trans 'Add the atelier' %}</a>
                 </button>
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        <tbody>
+                        <thead>
                         <tr>
-                            <td>{% trans 'Name' %}:</td>
-                            <td>{{ atelier.name }} </td>
+                            <th>{% trans 'Profile' %}:</th>
+                            <th>{% trans 'Tailor' %}:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tailor in atelier.profile_set.all %}
+                            <tr>
+                                <td><a href="{{ tailor.get_absolute_url }}">{{ tailor }} </a></td>
+                                <td>{% if tailor.is_tailor %}{% trans 'Yes' %} {% endif %}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

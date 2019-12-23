@@ -30,9 +30,10 @@ class ClientListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Client.objects.all()  # admin user access all orders
+            return Client.objects.all()  # admin user access all clients
         else:
-            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
+            # ordinary user has access to clients of his atelier only
+            return Client.objects.filter(atelier=self.request.user.profile.atelier)
 
 
 class ClientDetailView(LoginRequiredMixin, generic.DetailView):
@@ -49,7 +50,8 @@ class ClientDetailView(LoginRequiredMixin, generic.DetailView):
         if self.request.user.is_staff:
             return Client.objects.all()  # admin user access all orders
         else:
-            return Client.objects.filter(profile__user=self.request.user)  # ordinary user access his own orders only
+            # ordinary user has access to clients of his atelier only
+            return Client.objects.filter(atelier=self.request.user.profile.atelier)
 
 
 class ClientDeleteView(LoginRequiredMixin, generic.DeleteView):
