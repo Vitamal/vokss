@@ -30,6 +30,6 @@ urlpatterns += i18n_patterns(
     # prefix_default_language=False,  # With this code active, the program works wrong: don't switch to default language!
                                       # Look at https://code.djangoproject.com/ticket/29425
 
-    #Add Django site authentication urls (for login, logout, password management)
+    #Add Django site authentication urls (for login, logout, password management, signup)
     path('accounts/', include('django.contrib.auth.urls')),
 )

@@ -5,37 +5,41 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <h3>{% trans 'Fabric' %}:</h3>
+                <h3>{% trans 'Profile' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the fabric' %}</a>
+                    <a href="{% url 'atelier:profile_form' %}">{% trans 'Add the element' %}</a>
                 </button>
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <td>{% trans 'Name' %}:</td>
-                            <td>{{ fabric.name }} </td>
+                            <td>{% trans 'User' %}:</td>
+                            <td>{{ profile.user }}</td>
                         </tr>
                         <tr>
-                            <td>{% trans 'Complexity Factor' %}:</td>
-                            <td>{{ fabric.complexity_factor }}</td>
+                            <td>{% trans 'Atelier' %}:</td>
+                            <td>{{ profile.atelier }} </td>
                         </tr>
                         <tr>
-                            <td>{% trans 'Group' %}:</td>
-                            <td>{{ fabric.group }}</td>
+                            <td>{% trans 'Profile' %}:</td>
+                        {% if profile.is_tailor %}
+                                <td>{% trans 'tailor' %} </td>
+                        {% else %}
+                                <td>{% trans 'simple profile' %} </td>
+                        {% endif %}
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a>
+                    <a href="{% url 'atelier:profile_update_form' pk=profile.pk %}">{% trans 'Edit' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a>
+                    <a href="{% url 'atelier:profile_delete_form' pk=profile.pk %}">{% trans 'Delete' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_list' %}">{% trans 'Back to list' %}</a>
+                    <a href="{% url 'atelier:profile_list' %}">{% trans 'Back to list' %}</a>
                 </button>
             </div>
         </div>

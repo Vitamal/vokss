@@ -1,22 +1,14 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from atelier.models.abstract_base import AbstractBaseModel
 
 
-class AllowanceDiscount(AbstractBaseModel):
+class Atelier(AbstractBaseModel):
     name = models.CharField(
-        max_length=255,
+        max_length=150,
         verbose_name=_('name')
-    )
-    coefficient = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
-        verbose_name=_('coefficient')
-    )
-    label = models.CharField(
-        max_length=255,
-        verbose_name=_('group')
     )
 
     def __str__(self):
@@ -33,4 +25,4 @@ class AllowanceDiscount(AbstractBaseModel):
         """
         Returns the url to access a particular client instance.
         """
-        return reverse('atelier:allowance_discount_detail', args=[str(self.id)])
+        return reverse('atelier:atelier_detail', args=[str(self.id)])

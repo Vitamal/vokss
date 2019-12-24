@@ -6,3 +6,5 @@ from .minimal_style_view import *
 from .fabric_view import *
 from .complication_element_view import *
 from .allowance_discount_view import *
+from .atelier_view import *
+from .profile_view import *

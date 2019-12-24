@@ -1,26 +1,19 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
 {% block content %}
-    <h1>{% trans 'Atelier Home:' %}</h1>
-
-    <h2>{% trans 'Welcome to Atelier!' %}</h2>
+    <h2>{% trans 'Welcome to  Atelier application!' %}</h2>
     <p>{% trans 'Atelier is a simple, responsive application suitable for ateliers, tailors, design studios or small sewing business . It uses the best tailor practices, and on top of that, it’s fast, simple, and easy to use.' %}
         <br><strong>{% trans 'Atelier Is More Than A Program for calculations, It’s A Powerful Design Tool!' %}</strong>
     </p>
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <h3>{% trans 'Today statistic' %}:</h3>
+                <h3>{% trans 'Today statistic for' %} "{{ atelier }}":</h3>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tbody>
-                        <tr>
-                            <td>{% trans 'Fabrics' %}</td>
-                            <td>{{ num_fabrics }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Products' %}</td>
-                            <td>{{ num_products }}</td>
+                        <td>{% trans 'Products' %}</td>
+                        <td>{{ num_products }}</td>
                         <tr>
                             <td>{% trans 'Clients' %}</td>
                             <td>{{ num_clients }}</td>
@@ -29,18 +22,34 @@
                             <td>{% trans 'Orders' %}</td>
                             <td>{{ num_orders }}</td>
                         </tr>
-                        <tr>
-                            <td>{% trans 'Allowance/Discounts' %}</td>
-                            <td>{{ num_allowance_discount }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Complication Elements' %}</td>
-                            <td>{{ num_complication_element }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Minimal Styles' %}</td>
-                            <td>{{ num_minimal_style }}</td>
-                        </tr>
+                        {% if user.is_superuser %}
+                            <tr>
+                                <td>{% trans 'Ateliers' %}</td>
+                                <td>{{ num_ateliers }}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans 'Profiles' %}</td>
+                                <td>{{ num_profiles }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>{% trans 'Fabrics' %}</td>
+                                <td>{{ num_fabrics }}</td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>{% trans 'Allowance/Discounts' %}</td>
+                                <td>{{ num_allowance_discount }}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans 'Complication Elements' %}</td>
+                                <td>{{ num_complication_element }}</td>
+                            </tr>
+                            <tr>
+                                <td>{% trans 'Minimal Styles' %}</td>
+                                <td>{{ num_minimal_style }}</td>
+                            </tr>
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -49,5 +58,5 @@
     </div>
 
     <p><i class="fas fa-smile"></i></i>   {% trans 'You have visited this page' %}
-        {{ num_visits }} {% if num_visits == 1 %} {%  trans 'time' %}{% else %}{% trans 'times' %} {% endif %}.</p>
+        {{ num_visits }} {% if num_visits == 1 %} {% trans 'time' %}{% else %}{% trans 'times' %} {% endif %}.</p>
 {% endblock %}

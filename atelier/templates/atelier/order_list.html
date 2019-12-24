@@ -20,7 +20,7 @@
                                 <th>{% trans 'Client' %}</th>
                                 <th>{% trans 'Product' %}</th>
                                 {% if user.is_staff %}
-                                    <th>{% trans 'Tailor' %}</th>
+                                    <th>{% trans 'Performer' %}</th>
                                 {% endif %}
                             </tr>
                             </thead>
@@ -32,7 +32,7 @@
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.client }}</a></td>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.product }} </a></td>
                                     {% if user.is_staff %}
-                                        <td>{{ order.tailor }}</td>
+                                        <td>{{ order.performer }}</td>
                                     {% endif %}
                                 </tr>
                             {% endfor %}

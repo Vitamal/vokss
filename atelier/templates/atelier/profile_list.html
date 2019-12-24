@@ -5,31 +5,37 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>{% trans 'Client list' %}:</h3>
+                <h3>{% trans 'Profile list' %}:</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
+                    <a href="{% url 'atelier:profile_form' %}">{% trans 'Add the Profile' %}</a>
                 </button>
                 <br/>
                 <br/>
                 <div class="table-responsive">
-                    {% if client_list %}
+                    {% if profile_list %}
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>{% trans 'Client' %}</th>
-                                <th></th>
+                                <th>{% trans 'Username' %}</th>
+                                <th>{% trans 'User' %}</th>
+                                <th>{% trans 'Profile' %}</th>
                                 {% if user.is_staff %}
-                                    <th>{% trans 'Tailor' %}</th>
+                                    <th>{% trans 'Atelier' %}</th>
                                 {% endif %}
                             </tr>
                             </thead>
                             <tbody>
-                            {% for client in client_list %}
+                            {% for profile in profile_list %}
                                 <tr>
-                                    <td><a href="{{ client.get_absolute_url }}">{{ client.first_name }} </a></td>
-                                    <td><a href="{{ client.get_absolute_url }}">{{ client.last_name }}</a></td>
+                                    <td style="width:70%"><a href="{{ profile.get_absolute_url }}">{{ profile.user.username }} </a></td>
+                                    <td style="width:30%">{{ profile.user }}</td>
+                                    {% if profile.is_tailor %}
+                                        <td style="width:30%">{% trans 'tailor' %}</td>
+                                    {% else %}
+                                        <td style="width:30%">{% trans 'simple profile' %} </td>
+                                    {% endif %}
                                     {% if user.is_staff %}
-                                        <td>{{ client.atelier }}</td>
+                                        <td>{{ profile.atelier }}</td>
                                     {% endif %}
                                 </tr>
                             {% endfor %}

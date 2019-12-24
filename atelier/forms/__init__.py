@@ -5,4 +5,5 @@ from .allowance_discount_form import *
 from .complication_element_form import *
 from .fabric_form import *
 from .minimal_style_form import *
-
+from .atelier_form import *
+from .profile_form import *

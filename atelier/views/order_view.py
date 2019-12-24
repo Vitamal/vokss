@@ -18,9 +18,14 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Order.objects.all()  # admin user access all orders
+            # admin user access all orders
+            return Order.objects.all()
+        elif self.request.user.profile.is_tailor:
+            # tailor has access to all orders in his own atelier
+            return Order.objects.filter(atelier=self.request.user.profile.atelier)
         else:
-            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)
 
     def get_order_price(self):
         order = self.object
@@ -55,9 +60,14 @@ class OrderListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Order.objects.all()  # admin user access all orders
+            # admin user access all orders
+            return Order.objects.all()
+        elif self.request.user.profile.is_tailor:
+            # tailor has access to all orders in his own atelier
+            return Order.objects.filter(atelier=self.request.user.profile.atelier)
         else:
-            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)
 
 
 class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -67,9 +77,14 @@ class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Order.objects.all()  # admin user access all orders
+            # admin user access all orders
+            return Order.objects.all()
+        elif self.request.user.profile.is_tailor:
+            # tailor has access to all orders in his own atelier
+            return Order.objects.filter(atelier=self.request.user.profile.atelier)
         else:
-            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)
 
 
 class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -79,6 +94,11 @@ class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Order.objects.all()  # admin user access all orders
+            # admin user access all orders
+            return Order.objects.all()
+        elif self.request.user.profile.is_tailor:
+            # tailor has access to all orders in his own atelier
+            return Order.objects.filter(atelier=self.request.user.profile.atelier)
         else:
-            return Order.objects.filter(tailor__username=self.request.user)  # ordinary user access his own orders only
+            # ordinary user access his own orders only
+            return Order.objects.filter(performer=self.request.user)

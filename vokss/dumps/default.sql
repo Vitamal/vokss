@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.4
--- Dumped by pg_dump version 11.4
+-- Dumped from database version 11.5 (Ubuntu 11.5-3.pgdg18.04+1)
+-- Dumped by pg_dump version 11.5 (Ubuntu 11.5-3.pgdg18.04+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,7 +28,11 @@ CREATE TABLE public.atelier_allowancediscount (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     coefficient numeric(5,2) NOT NULL,
-    label character varying(255) NOT NULL
+    label character varying(255) NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone
 );
 
 
@@ -57,6 +61,44 @@ ALTER SEQUENCE public.atelier_allowancediscount_id_seq OWNED BY public.atelier_a
 
 
 --
+-- Name: atelier_atelier; Type: TABLE; Schema: public; Owner: dbdev
+--
+
+CREATE TABLE public.atelier_atelier (
+    id integer NOT NULL,
+    created_datetime timestamp with time zone,
+    last_updated_datetime timestamp with time zone,
+    name character varying(150) NOT NULL,
+    created_by_id integer,
+    last_updated_by_id integer
+);
+
+
+ALTER TABLE public.atelier_atelier OWNER TO dbdev;
+
+--
+-- Name: atelier_atelier_id_seq; Type: SEQUENCE; Schema: public; Owner: dbdev
+--
+
+CREATE SEQUENCE public.atelier_atelier_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atelier_atelier_id_seq OWNER TO dbdev;
+
+--
+-- Name: atelier_atelier_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbdev
+--
+
+ALTER SEQUENCE public.atelier_atelier_id_seq OWNED BY public.atelier_atelier.id;
+
+
+--
 -- Name: atelier_client; Type: TABLE; Schema: public; Owner: dbdev
 --
 
@@ -65,7 +107,12 @@ CREATE TABLE public.atelier_client (
     first_name character varying(30) NOT NULL,
     last_name character varying(30) NOT NULL,
     tel_number character varying(30) NOT NULL,
-    place character varying(30) NOT NULL
+    place character varying(30) NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone,
+    atelier_id integer
 );
 
 
@@ -102,7 +149,11 @@ CREATE TABLE public.atelier_complicationelement (
     name character varying(264) NOT NULL,
     base_price numeric(5,2) NOT NULL,
     complexity numeric(3,2) NOT NULL,
-    "group" character varying(255) NOT NULL
+    "group" character varying(255) NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone
 );
 
 
@@ -138,7 +189,11 @@ CREATE TABLE public.atelier_fabric (
     id integer NOT NULL,
     name character varying(264) NOT NULL,
     "group" character varying(3) NOT NULL,
-    complexity_factor numeric(5,2) NOT NULL
+    complexity_factor numeric(5,2) NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone
 );
 
 
@@ -173,7 +228,11 @@ ALTER SEQUENCE public.atelier_fabric_id_seq OWNED BY public.atelier_fabric.id;
 CREATE TABLE public.atelier_minimalstyle (
     id integer NOT NULL,
     name text NOT NULL,
-    "group" character varying(264) NOT NULL
+    "group" character varying(264) NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone
 );
 
 
@@ -211,7 +270,14 @@ CREATE TABLE public.atelier_order (
     order_date date NOT NULL,
     client_id integer NOT NULL,
     fabric_id integer NOT NULL,
-    product_id integer NOT NULL
+    product_id integer NOT NULL,
+    deadline date,
+    tailor_id integer,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone,
+    atelier_id integer
 );
 
 
@@ -317,7 +383,12 @@ CREATE TABLE public.atelier_product (
     id integer NOT NULL,
     name character varying(264) NOT NULL,
     base_price numeric(10,2) NOT NULL,
-    minimal_style_id integer NOT NULL
+    minimal_style_id integer NOT NULL,
+    created_by_id integer,
+    created_datetime timestamp with time zone,
+    last_updated_by_id integer,
+    last_updated_datetime timestamp with time zone,
+    atelier_id integer
 );
 
 
@@ -343,6 +414,45 @@ ALTER TABLE public.atelier_product_id_seq OWNER TO dbdev;
 --
 
 ALTER SEQUENCE public.atelier_product_id_seq OWNED BY public.atelier_product.id;
+
+
+--
+-- Name: atelier_tailor; Type: TABLE; Schema: public; Owner: dbdev
+--
+
+CREATE TABLE public.atelier_tailor (
+    id integer NOT NULL,
+    created_datetime timestamp with time zone,
+    last_updated_datetime timestamp with time zone,
+    atelier_id integer,
+    created_by_id integer,
+    last_updated_by_id integer,
+    name_id integer NOT NULL
+);
+
+
+ALTER TABLE public.atelier_tailor OWNER TO dbdev;
+
+--
+-- Name: atelier_tailor_id_seq; Type: SEQUENCE; Schema: public; Owner: dbdev
+--
+
+CREATE SEQUENCE public.atelier_tailor_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atelier_tailor_id_seq OWNER TO dbdev;
+
+--
+-- Name: atelier_tailor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbdev
+--
+
+ALTER SEQUENCE public.atelier_tailor_id_seq OWNED BY public.atelier_tailor.id;
 
 
 --
@@ -696,6 +806,13 @@ ALTER TABLE ONLY public.atelier_allowancediscount ALTER COLUMN id SET DEFAULT ne
 
 
 --
+-- Name: atelier_atelier id; Type: DEFAULT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_atelier ALTER COLUMN id SET DEFAULT nextval('public.atelier_atelier_id_seq'::regclass);
+
+
+--
 -- Name: atelier_client id; Type: DEFAULT; Schema: public; Owner: dbdev
 --
 
@@ -749,6 +866,13 @@ ALTER TABLE ONLY public.atelier_order_complication_elements ALTER COLUMN id SET 
 --
 
 ALTER TABLE ONLY public.atelier_product ALTER COLUMN id SET DEFAULT nextval('public.atelier_product_id_seq'::regclass);
+
+
+--
+-- Name: atelier_tailor id; Type: DEFAULT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor ALTER COLUMN id SET DEFAULT nextval('public.atelier_tailor_id_seq'::regclass);
 
 
 --
@@ -818,7 +942,17 @@ ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('p
 -- Data for Name: atelier_allowancediscount; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_allowancediscount (id, name, coefficient, label) FROM stdin;
+COPY public.atelier_allowancediscount (id, name, coefficient, label, created_by_id, created_datetime, last_updated_by_id, last_updated_datetime) FROM stdin;
+1	blouse	1.00	1	1	2019-11-25 18:42:16.370095+02	1	2019-11-25 18:42:16.370165+02
+\.
+
+
+--
+-- Data for Name: atelier_atelier; Type: TABLE DATA; Schema: public; Owner: dbdev
+--
+
+COPY public.atelier_atelier (id, created_datetime, last_updated_datetime, name, created_by_id, last_updated_by_id) FROM stdin;
+1	2019-11-25 19:09:15.406065+02	2019-11-25 19:09:21.769415+02	New Atelier	1	1
 \.
 
 
@@ -826,7 +960,7 @@ COPY public.atelier_allowancediscount (id, name, coefficient, label) FROM stdin;
 -- Data for Name: atelier_client; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_client (id, first_name, last_name, tel_number, place) FROM stdin;
+COPY public.atelier_client (id, first_name, last_name, tel_number, place, created_by_id, created_datetime, last_updated_by_id, last_updated_datetime, atelier_id) FROM stdin;
 \.
 
 
@@ -834,7 +968,7 @@ COPY public.atelier_client (id, first_name, last_name, tel_number, place) FROM s
 -- Data for Name: atelier_complicationelement; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_complicationelement (id, name, base_price, complexity, "group") FROM stdin;
+COPY public.atelier_complicationelement (id, name, base_price, complexity, "group", created_by_id, created_datetime, last_updated_by_id, last_updated_datetime) FROM stdin;
 \.
 
 
@@ -842,7 +976,7 @@ COPY public.atelier_complicationelement (id, name, base_price, complexity, "grou
 -- Data for Name: atelier_fabric; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_fabric (id, name, "group", complexity_factor) FROM stdin;
+COPY public.atelier_fabric (id, name, "group", complexity_factor, created_by_id, created_datetime, last_updated_by_id, last_updated_datetime) FROM stdin;
 \.
 
 
@@ -850,7 +984,8 @@ COPY public.atelier_fabric (id, name, "group", complexity_factor) FROM stdin;
 -- Data for Name: atelier_minimalstyle; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_minimalstyle (id, name, "group") FROM stdin;
+COPY public.atelier_minimalstyle (id, name, "group", created_by_id, created_datetime, last_updated_by_id, last_updated_datetime) FROM stdin;
+1	test	test pg	1	2019-11-25 18:43:08.053887+02	1	2019-11-25 18:43:08.053941+02
 \.
 
 
@@ -858,7 +993,7 @@ COPY public.atelier_minimalstyle (id, name, "group") FROM stdin;
 -- Data for Name: atelier_order; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_order (id, processing_category, order_date, client_id, fabric_id, product_id) FROM stdin;
+COPY public.atelier_order (id, processing_category, order_date, client_id, fabric_id, product_id, deadline, tailor_id, created_by_id, created_datetime, last_updated_by_id, last_updated_datetime, atelier_id) FROM stdin;
 \.
 
 
@@ -882,7 +1017,20 @@ COPY public.atelier_order_complication_elements (id, order_id, complicationeleme
 -- Data for Name: atelier_product; Type: TABLE DATA; Schema: public; Owner: dbdev
 --
 
-COPY public.atelier_product (id, name, base_price, minimal_style_id) FROM stdin;
+COPY public.atelier_product (id, name, base_price, minimal_style_id, created_by_id, created_datetime, last_updated_by_id, last_updated_datetime, atelier_id) FROM stdin;
+1	blouse	1000.00	1	\N	2019-11-25 18:43:26.986051+02	\N	2019-11-25 18:43:26.98608+02	\N
+2	blouse	1000.00	1	\N	2019-11-25 18:51:01.361025+02	\N	2019-11-25 18:51:01.361091+02	\N
+3	blouse	1000.00	1	\N	2019-11-25 18:51:07.173441+02	\N	2019-11-25 18:51:07.173487+02	\N
+4	blouse	999.98	1	\N	2019-11-25 19:04:06.358502+02	\N	2019-11-25 19:04:06.358556+02	\N
+5	blouse	800.00	1	\N	2019-11-25 19:15:12.416652+02	\N	2019-11-25 19:15:12.416733+02	\N
+\.
+
+
+--
+-- Data for Name: atelier_tailor; Type: TABLE DATA; Schema: public; Owner: dbdev
+--
+
+COPY public.atelier_tailor (id, created_datetime, last_updated_datetime, atelier_id, created_by_id, last_updated_by_id, name_id) FROM stdin;
 \.
 
 
@@ -959,6 +1107,14 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 50	Can change order	13	change_order
 51	Can delete order	13	delete_order
 52	Can view order	13	view_order
+53	Can add atelier	14	add_atelier
+54	Can change atelier	14	change_atelier
+55	Can delete atelier	14	delete_atelier
+56	Can view atelier	14	view_atelier
+57	Can add tailor	15	add_tailor
+58	Can change tailor	15	change_tailor
+59	Can delete tailor	15	delete_tailor
+60	Can view tailor	15	view_tailor
 \.
 
 
@@ -967,7 +1123,8 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$150000$zsgmTd2Yt592$JZeR4QQqjqbXRFguPCsjcORzTDQEeWcDoBcq3+z5K0Q=	2019-09-22 10:09:04.604566+03	t	grandma@example.com			grandma@example.com	t	t	2019-09-22 10:08:56.711791+03
+2	pbkdf2_sha256$150000$5iYAfaqWv33X$YpXt7gsbodjgdQCPdd0vF8bwIBu+INxtCnscqF/hul0=	\N	f	tailor_1	Dick	Zepter	vitamal@ukr.net	f	t	2019-11-25 19:12:08+02
+1	pbkdf2_sha256$150000$zsgmTd2Yt592$JZeR4QQqjqbXRFguPCsjcORzTDQEeWcDoBcq3+z5K0Q=	2019-11-26 12:07:47.70027+02	t	grandma@example.com			grandma@example.com	t	t	2019-09-22 10:08:56.711791+03
 \.
 
 
@@ -992,6 +1149,10 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2019-11-25 19:09:15.409441+02	1	New Atelier	1	[{"added": {}}]	14	1
+2	2019-11-25 19:09:21.770668+02	1	New Atelier	2	[]	14	1
+3	2019-11-25 19:12:08.769319+02	2	tailor_1	1	[{"added": {}}]	4	1
+4	2019-11-25 19:14:07.188317+02	2	tailor_1	2	[{"changed": {"fields": ["first_name", "last_name", "email"]}}]	4	1
 \.
 
 
@@ -1013,6 +1174,8 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 11	atelier	minimalstyle
 12	atelier	product
 13	atelier	order
+14	atelier	atelier
+15	atelier	tailor
 \.
 
 
@@ -1039,6 +1202,11 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 16	auth	0010_alter_group_name_max_length	2019-09-22 10:06:49.359367+03
 17	auth	0011_update_proxy_permissions	2019-09-22 10:06:49.373296+03
 18	sessions	0001_initial	2019-09-22 10:06:49.379771+03
+19	atelier	0002_auto_20191111_0737	2019-11-25 18:41:26.797554+02
+20	atelier	0003_auto_20191111_0926	2019-11-25 18:41:26.851927+02
+21	atelier	0004_auto_20191125_1641	2019-11-25 18:41:27.471802+02
+22	atelier	0005_tailor_email_confirmed	2019-11-25 20:33:14.897336+02
+23	atelier	0002_remove_tailor_email_confirmed	2019-11-25 20:59:27.02751+02
 \.
 
 
@@ -1048,6 +1216,12 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 0h06ztvugcsb46kf23uzldl43xyp5xk6	YzAwNWQwNzI4NWYwZDY4MzdmYjdkNjRmNGFjNzE4NTQ4OTI3ODk5OTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0ZjA0N2I0ZTQwZmFhY2E3YmVjMzAyODkyYjNiMTYyMDAxOWVmNzgwIn0=	2019-10-06 10:09:04.606474+03
+68qpk0mjmrp2ja9k3ayg6q9wzeml1u24	NWVkOWQxOWM5NmY1ZWU2ODVkM2NkNjE4OWU5M2M0YWE0ZDk3YTE0Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0ZjA0N2I0ZTQwZmFhY2E3YmVjMzAyODkyYjNiMTYyMDAxOWVmNzgwIiwibnVtX3Zpc2l0cyI6MX0=	2019-12-08 16:36:16.607621+02
+92q3sqg30quwctyyxzi25y6jbcb5gl5k	MzVmMGM5YTAwOGFjNWZmY2MwM2Y4MDJhY2RiNTdhNTc0M2NiZWEyNDp7fQ==	2019-12-09 20:33:31.936307+02
+krgtijmwgv2eytvyaxxbxjr4yfwo1x4p	MzVmMGM5YTAwOGFjNWZmY2MwM2Y4MDJhY2RiNTdhNTc0M2NiZWEyNDp7fQ==	2019-12-09 20:51:00.429525+02
+8pgvvwd50ciet9w490iunvcp0iw4h3xg	MzVmMGM5YTAwOGFjNWZmY2MwM2Y4MDJhY2RiNTdhNTc0M2NiZWEyNDp7fQ==	2019-12-09 20:52:25.301102+02
+e6u5dygo5zkw2p8k2pg2ozywv498bnwr	MzVmMGM5YTAwOGFjNWZmY2MwM2Y4MDJhY2RiNTdhNTc0M2NiZWEyNDp7fQ==	2019-12-10 12:06:35.524991+02
+edyah90nj49l8vzn5pithlyz6spgibx3	NDUxZDhkZmQ4ZGRiZDMzNGE4ZGE2OWE4MWU2ZDU4ZDgzNWI5NDI1Zjp7Il9sYW5ndWFnZSI6InVrIn0=	2019-12-11 16:00:53.481339+02
 \.
 
 
@@ -1055,7 +1229,14 @@ COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
 -- Name: atelier_allowancediscount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.atelier_allowancediscount_id_seq', 1, false);
+SELECT pg_catalog.setval('public.atelier_allowancediscount_id_seq', 1, true);
+
+
+--
+-- Name: atelier_atelier_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
+--
+
+SELECT pg_catalog.setval('public.atelier_atelier_id_seq', 1, true);
 
 
 --
@@ -1083,7 +1264,7 @@ SELECT pg_catalog.setval('public.atelier_fabric_id_seq', 1, false);
 -- Name: atelier_minimalstyle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.atelier_minimalstyle_id_seq', 1, false);
+SELECT pg_catalog.setval('public.atelier_minimalstyle_id_seq', 1, true);
 
 
 --
@@ -1111,7 +1292,14 @@ SELECT pg_catalog.setval('public.atelier_order_id_seq', 1, false);
 -- Name: atelier_product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.atelier_product_id_seq', 1, false);
+SELECT pg_catalog.setval('public.atelier_product_id_seq', 5, true);
+
+
+--
+-- Name: atelier_tailor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
+--
+
+SELECT pg_catalog.setval('public.atelier_tailor_id_seq', 2, true);
 
 
 --
@@ -1132,7 +1320,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 52, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 60, true);
 
 
 --
@@ -1146,7 +1334,7 @@ SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
 
 
 --
@@ -1160,21 +1348,21 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 4, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 15, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbdev
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 18, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 23, true);
 
 
 --
@@ -1183,6 +1371,14 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 18, true);
 
 ALTER TABLE ONLY public.atelier_allowancediscount
     ADD CONSTRAINT atelier_allowancediscount_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: atelier_atelier atelier_atelier_pkey; Type: CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_atelier
+    ADD CONSTRAINT atelier_atelier_pkey PRIMARY KEY (id);
 
 
 --
@@ -1263,6 +1459,14 @@ ALTER TABLE ONLY public.atelier_order
 
 ALTER TABLE ONLY public.atelier_product
     ADD CONSTRAINT atelier_product_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: atelier_tailor atelier_tailor_pkey; Type: CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor
+    ADD CONSTRAINT atelier_tailor_pkey PRIMARY KEY (id);
 
 
 --
@@ -1402,6 +1606,97 @@ ALTER TABLE ONLY public.django_session
 
 
 --
+-- Name: atelier_allowancediscount_created_by_id_d2220fd6; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_allowancediscount_created_by_id_d2220fd6 ON public.atelier_allowancediscount USING btree (created_by_id);
+
+
+--
+-- Name: atelier_allowancediscount_last_updated_by_id_47954b44; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_allowancediscount_last_updated_by_id_47954b44 ON public.atelier_allowancediscount USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_atelier_created_by_id_82de01cd; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_atelier_created_by_id_82de01cd ON public.atelier_atelier USING btree (created_by_id);
+
+
+--
+-- Name: atelier_atelier_last_updated_by_id_4d758ab7; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_atelier_last_updated_by_id_4d758ab7 ON public.atelier_atelier USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_client_atelier_id_e394475b; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_client_atelier_id_e394475b ON public.atelier_client USING btree (atelier_id);
+
+
+--
+-- Name: atelier_client_created_by_id_28c796c7; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_client_created_by_id_28c796c7 ON public.atelier_client USING btree (created_by_id);
+
+
+--
+-- Name: atelier_client_last_updated_by_id_876ac7ba; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_client_last_updated_by_id_876ac7ba ON public.atelier_client USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_complicationelement_created_by_id_75008570; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_complicationelement_created_by_id_75008570 ON public.atelier_complicationelement USING btree (created_by_id);
+
+
+--
+-- Name: atelier_complicationelement_last_updated_by_id_160ff1ed; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_complicationelement_last_updated_by_id_160ff1ed ON public.atelier_complicationelement USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_fabric_created_by_id_0f69c22f; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_fabric_created_by_id_0f69c22f ON public.atelier_fabric USING btree (created_by_id);
+
+
+--
+-- Name: atelier_fabric_last_updated_by_id_5144c27f; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_fabric_last_updated_by_id_5144c27f ON public.atelier_fabric USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_minimalstyle_created_by_id_e83e24d3; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_minimalstyle_created_by_id_e83e24d3 ON public.atelier_minimalstyle USING btree (created_by_id);
+
+
+--
+-- Name: atelier_minimalstyle_last_updated_by_id_34dd85b5; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_minimalstyle_last_updated_by_id_34dd85b5 ON public.atelier_minimalstyle USING btree (last_updated_by_id);
+
+
+--
 -- Name: atelier_order_allowance_discount_allowancediscount_id_6483c11d; Type: INDEX; Schema: public; Owner: dbdev
 --
 
@@ -1413,6 +1708,13 @@ CREATE INDEX atelier_order_allowance_discount_allowancediscount_id_6483c11d ON p
 --
 
 CREATE INDEX atelier_order_allowance_discount_order_id_2896ddfb ON public.atelier_order_allowance_discount USING btree (order_id);
+
+
+--
+-- Name: atelier_order_atelier_id_55a0542d; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_order_atelier_id_55a0542d ON public.atelier_order USING btree (atelier_id);
 
 
 --
@@ -1437,10 +1739,24 @@ CREATE INDEX atelier_order_complication_elements_order_id_12d03d55 ON public.ate
 
 
 --
+-- Name: atelier_order_created_by_id_a4e6c8e1; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_order_created_by_id_a4e6c8e1 ON public.atelier_order USING btree (created_by_id);
+
+
+--
 -- Name: atelier_order_fabric_id_5a54eefd; Type: INDEX; Schema: public; Owner: dbdev
 --
 
 CREATE INDEX atelier_order_fabric_id_5a54eefd ON public.atelier_order USING btree (fabric_id);
+
+
+--
+-- Name: atelier_order_last_updated_by_id_aeaad62d; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_order_last_updated_by_id_aeaad62d ON public.atelier_order USING btree (last_updated_by_id);
 
 
 --
@@ -1451,10 +1767,66 @@ CREATE INDEX atelier_order_product_id_73f0bb1c ON public.atelier_order USING btr
 
 
 --
+-- Name: atelier_order_tailor_id_c9c984b1; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_order_tailor_id_c9c984b1 ON public.atelier_order USING btree (tailor_id);
+
+
+--
+-- Name: atelier_product_atelier_id_ea0d13e6; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_product_atelier_id_ea0d13e6 ON public.atelier_product USING btree (atelier_id);
+
+
+--
+-- Name: atelier_product_created_by_id_7765ca1f; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_product_created_by_id_7765ca1f ON public.atelier_product USING btree (created_by_id);
+
+
+--
+-- Name: atelier_product_last_updated_by_id_3f95827b; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_product_last_updated_by_id_3f95827b ON public.atelier_product USING btree (last_updated_by_id);
+
+
+--
 -- Name: atelier_product_minimal_style_id_d81fef44; Type: INDEX; Schema: public; Owner: dbdev
 --
 
 CREATE INDEX atelier_product_minimal_style_id_d81fef44 ON public.atelier_product USING btree (minimal_style_id);
+
+
+--
+-- Name: atelier_tailor_atelier_id_18f4edab; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_tailor_atelier_id_18f4edab ON public.atelier_tailor USING btree (atelier_id);
+
+
+--
+-- Name: atelier_tailor_created_by_id_67ba4985; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_tailor_created_by_id_67ba4985 ON public.atelier_tailor USING btree (created_by_id);
+
+
+--
+-- Name: atelier_tailor_last_updated_by_id_be67aee1; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_tailor_last_updated_by_id_be67aee1 ON public.atelier_tailor USING btree (last_updated_by_id);
+
+
+--
+-- Name: atelier_tailor_name_id_75dc0e6f; Type: INDEX; Schema: public; Owner: dbdev
+--
+
+CREATE INDEX atelier_tailor_name_id_75dc0e6f ON public.atelier_tailor USING btree (name_id);
 
 
 --
@@ -1549,6 +1921,110 @@ CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session U
 
 
 --
+-- Name: atelier_allowancediscount atelier_allowancedis_created_by_id_d2220fd6_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_allowancediscount
+    ADD CONSTRAINT atelier_allowancedis_created_by_id_d2220fd6_fk_auth_user FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_allowancediscount atelier_allowancedis_last_updated_by_id_47954b44_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_allowancediscount
+    ADD CONSTRAINT atelier_allowancedis_last_updated_by_id_47954b44_fk_auth_user FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_atelier atelier_atelier_created_by_id_82de01cd_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_atelier
+    ADD CONSTRAINT atelier_atelier_created_by_id_82de01cd_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_atelier atelier_atelier_last_updated_by_id_4d758ab7_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_atelier
+    ADD CONSTRAINT atelier_atelier_last_updated_by_id_4d758ab7_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_client atelier_client_atelier_id_e394475b_fk_atelier_atelier_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_client
+    ADD CONSTRAINT atelier_client_atelier_id_e394475b_fk_atelier_atelier_id FOREIGN KEY (atelier_id) REFERENCES public.atelier_atelier(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_client atelier_client_created_by_id_28c796c7_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_client
+    ADD CONSTRAINT atelier_client_created_by_id_28c796c7_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_client atelier_client_last_updated_by_id_876ac7ba_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_client
+    ADD CONSTRAINT atelier_client_last_updated_by_id_876ac7ba_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_complicationelement atelier_complication_created_by_id_75008570_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_complicationelement
+    ADD CONSTRAINT atelier_complication_created_by_id_75008570_fk_auth_user FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_complicationelement atelier_complication_last_updated_by_id_160ff1ed_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_complicationelement
+    ADD CONSTRAINT atelier_complication_last_updated_by_id_160ff1ed_fk_auth_user FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_fabric atelier_fabric_created_by_id_0f69c22f_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_fabric
+    ADD CONSTRAINT atelier_fabric_created_by_id_0f69c22f_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_fabric atelier_fabric_last_updated_by_id_5144c27f_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_fabric
+    ADD CONSTRAINT atelier_fabric_last_updated_by_id_5144c27f_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_minimalstyle atelier_minimalstyle_created_by_id_e83e24d3_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_minimalstyle
+    ADD CONSTRAINT atelier_minimalstyle_created_by_id_e83e24d3_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_minimalstyle atelier_minimalstyle_last_updated_by_id_34dd85b5_fk_auth_user; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_minimalstyle
+    ADD CONSTRAINT atelier_minimalstyle_last_updated_by_id_34dd85b5_fk_auth_user FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: atelier_order_allowance_discount atelier_order_allowa_allowancediscount_id_6483c11d_fk_atelier_a; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
 --
 
@@ -1562,6 +2038,14 @@ ALTER TABLE ONLY public.atelier_order_allowance_discount
 
 ALTER TABLE ONLY public.atelier_order_allowance_discount
     ADD CONSTRAINT atelier_order_allowa_order_id_2896ddfb_fk_atelier_o FOREIGN KEY (order_id) REFERENCES public.atelier_order(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_order atelier_order_atelier_id_55a0542d_fk_atelier_atelier_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_order
+    ADD CONSTRAINT atelier_order_atelier_id_55a0542d_fk_atelier_atelier_id FOREIGN KEY (atelier_id) REFERENCES public.atelier_atelier(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -1589,11 +2073,27 @@ ALTER TABLE ONLY public.atelier_order_complication_elements
 
 
 --
+-- Name: atelier_order atelier_order_created_by_id_a4e6c8e1_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_order
+    ADD CONSTRAINT atelier_order_created_by_id_a4e6c8e1_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: atelier_order atelier_order_fabric_id_5a54eefd_fk_atelier_fabric_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
 --
 
 ALTER TABLE ONLY public.atelier_order
     ADD CONSTRAINT atelier_order_fabric_id_5a54eefd_fk_atelier_fabric_id FOREIGN KEY (fabric_id) REFERENCES public.atelier_fabric(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_order atelier_order_last_updated_by_id_aeaad62d_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_order
+    ADD CONSTRAINT atelier_order_last_updated_by_id_aeaad62d_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
@@ -1605,11 +2105,75 @@ ALTER TABLE ONLY public.atelier_order
 
 
 --
+-- Name: atelier_order atelier_order_tailor_id_c9c984b1_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_order
+    ADD CONSTRAINT atelier_order_tailor_id_c9c984b1_fk_auth_user_id FOREIGN KEY (tailor_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_product atelier_product_atelier_id_ea0d13e6_fk_atelier_atelier_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_product
+    ADD CONSTRAINT atelier_product_atelier_id_ea0d13e6_fk_atelier_atelier_id FOREIGN KEY (atelier_id) REFERENCES public.atelier_atelier(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_product atelier_product_created_by_id_7765ca1f_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_product
+    ADD CONSTRAINT atelier_product_created_by_id_7765ca1f_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_product atelier_product_last_updated_by_id_3f95827b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_product
+    ADD CONSTRAINT atelier_product_last_updated_by_id_3f95827b_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: atelier_product atelier_product_minimal_style_id_d81fef44_fk_atelier_m; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
 --
 
 ALTER TABLE ONLY public.atelier_product
     ADD CONSTRAINT atelier_product_minimal_style_id_d81fef44_fk_atelier_m FOREIGN KEY (minimal_style_id) REFERENCES public.atelier_minimalstyle(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_tailor atelier_tailor_atelier_id_18f4edab_fk_atelier_atelier_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor
+    ADD CONSTRAINT atelier_tailor_atelier_id_18f4edab_fk_atelier_atelier_id FOREIGN KEY (atelier_id) REFERENCES public.atelier_atelier(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_tailor atelier_tailor_created_by_id_67ba4985_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor
+    ADD CONSTRAINT atelier_tailor_created_by_id_67ba4985_fk_auth_user_id FOREIGN KEY (created_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_tailor atelier_tailor_last_updated_by_id_be67aee1_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor
+    ADD CONSTRAINT atelier_tailor_last_updated_by_id_be67aee1_fk_auth_user_id FOREIGN KEY (last_updated_by_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: atelier_tailor atelier_tailor_name_id_75dc0e6f_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dbdev
+--
+
+ALTER TABLE ONLY public.atelier_tailor
+    ADD CONSTRAINT atelier_tailor_name_id_75dc0e6f_fk_auth_user_id FOREIGN KEY (name_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

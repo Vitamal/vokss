@@ -1,4 +1,4 @@
-<!-- Template file for Atelier application-->
+<!-- Base template file for Atelier user registration -->
 
 {% load static %}
 {% load i18n %}
@@ -34,112 +34,103 @@
 
 <div class="wrapper">
     <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>{% trans 'VOKSS Atelier' %}</h3>
-            <strong>VA</strong>
-        </div>
-
-        <ul class="list-unstyled components">
-            <li>
-                <a href="{% url 'atelier:index' %}">
-                    <i class="fas fa-home"></i>
-                    {% trans 'Home' %}
-                </a>
-            </li>
-            <div class="line">
-                </li>
-                <li>
-                    <a href="{% url 'atelier:order_list' %}">
-                        <i class="fas fa-briefcase"></i>
-                        {% trans 'Orders' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:product_list' %}">
-                        <i class="fas fa-tshirt"></i>
-                        {% trans 'Products' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:client_list' %}">
-                        <i class="fas fa-user-friends"></i>
-                        {% trans 'Clients' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:allowance_discount_list' %}">
-                        <i class="fas fa-plus-circle"></i>
-                        {% trans 'Allowance / Discounts' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:complication_element_list' %}">
-                        <i class="fas fa-puzzle-piece"></i>
-                        {% trans 'Complication Elements' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:fabric_list' %}">
-                        <i class="fas fa-tags"></i>
-                        {% trans 'Fabrics' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:minimal_style_list' %}">
-                        <i class="fas fa-star-half"></i>
-                        {% trans 'Minimal Styles' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'atelier:profile_list' %}">
-                        <i class="fas fa-star-half"></i>
-                        {% trans 'Profiles' %}
-                    </a>
-                </li>
-                {% if user.is_superuser %}
-                    <li>
-                        <a href="{% url 'atelier:atelier_list' %}">
-                            <i class="fas fa-star-half"></i>
-                            {% trans 'Ateliers' %}
-                        </a>
-                    </li>
-                {% endif %}
-            </div>
-            <div class="line">
-                <li>
-                    <a href="#">
-                        <i class="fas fa-id-card"></i>
-                        {% trans 'Portfolio' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-question"></i>
-                        {% trans 'FAQ' %}
-                    </a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-address-book"></i>
-                        {% trans 'Contacts' %}
-                    </a>
-                </li>
-                <ul class="collapse list-unstyled CTAs" id="pageSubmenu">
-                    <li>
-                        <a href="https://twitter.com/?lang=en">Twitter</a>
-                    </li>
-                    <li>
-                        <a href="https://www.facebook.com/">Facebook</a>
-                    </li>
-                    <li>
-                        <a href="#">e-mail:</a>
-                    </li>
-                </ul>
-            </div>
-
-        </ul>
-    </nav>
+{#    <nav id="sidebar">#}
+{#        <div class="sidebar-header">#}
+{#            <h3>{% trans 'VOKSS Atelier' %}</h3>#}
+{#            <strong>VA</strong>#}
+{#        </div>#}
+{##}
+{#        <ul class="list-unstyled components">#}
+{#            <li>#}
+{#                <a href="{% url 'atelier:index' %}">#}
+{#                    <i class="fas fa-home"></i>#}
+{#                    {% trans 'Home' %}#}
+{#                </a>#}
+{#            </li>#}
+{#            <div class="line">#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{% url 'atelier:order_list' %}">#}
+{#                        <i class="fas fa-briefcase"></i>#}
+{#                        {% trans 'Orders' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{% url 'atelier:product_list' %}">#}
+{#                        <i class="fas fa-tshirt"></i>#}
+{#                        {% trans 'Products' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{% url 'atelier:client_list' %}">#}
+{#                        <i class="fas fa-user-friends"></i>#}
+{#                        {% trans 'Clients' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{##}
+{#                    <a href="{% url 'atelier:allowance_discount_list' %}">#}
+{#                        <i class="fas fa-plus-circle"></i>#}
+{#                        {% trans 'Allowance / Discounts' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{##}
+{#                    <a href="{% url 'atelier:complication_element_list' %}">#}
+{#                        <i class="fas fa-puzzle-piece"></i>#}
+{#                        {% trans 'Complication Elements' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{##}
+{#                    <a href="{% url 'atelier:fabric_list' %}">#}
+{#                        <i class="fas fa-tags"></i>#}
+{#                        {% trans 'Fabrics' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{##}
+{#                    <a href="{% url 'atelier:minimal_style_list' %}">#}
+{#                        <i class="fas fa-star-half"></i>#}
+{#                        {% trans 'Minimal Styles' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#            </div>#}
+{##}
+{#            <div class="line">#}
+{#                <li>#}
+{#                    <a href="#">#}
+{#                        <i class="fas fa-id-card"></i>#}
+{#                        {% trans 'Portfolio' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="#">#}
+{#                        <i class="fas fa-question"></i>#}
+{#                        {% trans 'FAQ' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">#}
+{#                       <i class="fas fa-address-book"></i>#}
+{#                        {% trans 'Contacts' %}#}
+{#                    </a>#}
+{#                </li>#}
+{#                <ul class="collapse list-unstyled CTAs" id="pageSubmenu">#}
+{#                    <li>#}
+{#                        <a href="https://twitter.com/?lang=en">Twitter</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="https://www.facebook.com/">Facebook</a>#}
+{#                    </li>#}
+{#                    <li>#}
+{#                        <a href="#">e-mail:</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+{##}
+{#        </ul>#}
+{#    </nav>#}
 
     <!-- Page Content  -->
     <div id="content">

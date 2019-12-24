@@ -52,5 +52,14 @@ urlpatterns = [
     path('minimal_style/add/', views.MinimalStyleCreateView.as_view(), name='minimal_style_form'),
     path('minimal_style/<int:pk>/edit/', views.MinimalStyleUpdateView.as_view(), name='minimal_style_update_form'),
     path('minimal_style/<int:pk>/delete/', views.MinimalStyleDeleteView.as_view(), name='minimal_style_delete_form'),
-
+    path('atelier/', views.AtelierListView.as_view(), name='atelier_list'),
+    path('atelier/<int:pk>/', views.AtelierDetailView.as_view(), name='atelier_detail'),
+    path('atelier/add/', views.AtelierCreateView.as_view(), name='atelier_form'),
+    path('atelier/<int:pk>/edit/', views.AtelierUpdateView.as_view(), name='atelier_update_form'),
+    path('atelier/<int:pk>/delete/', views.AtelierDeleteView.as_view(), name='atelier_delete_form'),
+    path('profile/', views.ProfileListView.as_view(), name='profile_list'),
+    path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile_detail'),
+    path('profile/add/', views.ProfileCreateView.as_view(), name='profile_form'),
+    path('profile/<int:pk>/edit/', views.ProfileChangeView.as_view(), name='profile_update_form'),
+    path('profile/<int:pk>/delete/', views.ProfileDeleteView.as_view(), name='profile_delete_form'),
 ]
