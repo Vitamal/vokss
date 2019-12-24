@@ -8,3 +8,4 @@ from .complication_element_view import *
 from .allowance_discount_view import *
 from .atelier_view import *
 from .profile_view import *
+from .base_view import *

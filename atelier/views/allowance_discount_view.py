@@ -6,14 +6,10 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import user_passes_test
 
+from atelier.views.base_view import *
 
-class AllowanceDiscountDetailView(generic.DetailView):
-    #If a view is using this mixin,
-    # all requests by non-authenticated users will be redirected to the login page
-    # or shown an HTTP 403 Forbidden error, depending on the raise_exception parameter.
-    login_url = '/accounts/login/'
 
-    redirect_field_name = 'redirect_to' #the path that the user should be redirected to upon successful authentication ???
+class AllowanceDiscountDetailView(BaseDetailView):
     model = AllowanceDiscount
     fields = '__all__'
     template_name = 'atelier/allowance_discount_detail.html'
@@ -21,9 +17,7 @@ class AllowanceDiscountDetailView(generic.DetailView):
                                                 # allowancediscount to allowance_discount.
 
 
-class AllowanceDiscountListView(generic.ListView):
-    login_url = '/accounts/login/'
-    redirect_field_name = 'redirect_to'
+class AllowanceDiscountListView(BaseListView):
     model = AllowanceDiscount
     paginate_by = 10  # number of records on the one page
     template_name = 'atelier/allowance_discount_list.html'
@@ -32,8 +26,6 @@ class AllowanceDiscountListView(generic.ListView):
 
 class AllowanceDiscountCreateView(UserPassesTestMixin, generic.CreateView):
     permission_required = 'is_staff'
-    login_url = '/accounts/login/'
-    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
@@ -47,8 +39,6 @@ class AllowanceDiscountCreateView(UserPassesTestMixin, generic.CreateView):
 
 
 class AllowanceDiscountUpdateView(UserPassesTestMixin, generic.UpdateView):
-    login_url = '/accounts/login/'
-    redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
@@ -63,7 +53,6 @@ class AllowanceDiscountUpdateView(UserPassesTestMixin, generic.UpdateView):
 
 @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
 class AllowanceDiscountDeleteView(LoginRequiredMixin, generic.DeleteView):
-    login_url = '/accounts/login/'
     redirect_field_name = 'redirect_to'
     model = AllowanceDiscount
     success_url = reverse_lazy('atelier:allowance_discount_list')

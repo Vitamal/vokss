@@ -19,9 +19,11 @@ class ProfileListView(LoginRequiredMixin, generic.ListView):
 
 
 class ProfileCreateView(UserPassesTestMixin, FormView):
+    # def get_context_data(self):
+    #     self.context['page_name'] = 'Profile'
 
     def test_func(self):
-        # tailor only can create new users in the own atelier
+        # tailor only can create new profile (user) in the own atelier
         return self.request.user.profile.is_tailor
 
     template_name = 'atelier/create_form.html'
@@ -32,7 +34,6 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
 
     def form_valid(self, form):
         # The default implementation for form_valid() simply redirects to the success_url.
-
         user = User.objects.create(
             email=form.cleaned_data['email'],
             username=form.cleaned_data['username'],
@@ -52,7 +53,7 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
 class ProfileChangeView(UserPassesTestMixin, FormView):
 
     def test_func(self):
-        # tailor only can create new users in the own atelier
+        # tailor only can change profile (user) in the own atelier
         return self.request.user.profile.is_tailor
 
     template_name = 'atelier/create_form.html'
@@ -75,10 +76,10 @@ class ProfileChangeView(UserPassesTestMixin, FormView):
 
     def form_valid(self, form):
         # The default implementation for form_valid() simply redirects to the success_url.
-
         profile = self.get_profile_object()
         profile.is_tailor = form.cleaned_data['is_tailor']
         profile.user.email = form.cleaned_data['email']
+        profile.last_updated_by = self.request.user
         profile.full_clean()
         profile.save()
         profile.user.save()
@@ -91,7 +92,7 @@ class ProfileDeleteView(UserPassesTestMixin, generic.DeleteView):
     template_name = 'atelier/delete_form.html'
 
     def test_func(self):
-        # tailor only can create new users in the own atelier
+        # tailor only can delete profile (user) in the own atelier
         return self.request.user.profile.is_tailor
 
     def get_user_object(self):
@@ -101,7 +102,7 @@ class ProfileDeleteView(UserPassesTestMixin, generic.DeleteView):
 
     def delete(self, request, *args, **kwargs):
         """
-        Overriding the delete() method to delete User instances; and according Profile will be deleted too.
+        Overriding the delete() method to delete User instances, and according Profile will be deleted too.
         """
         self.object = self.get_user_object()
         success_url = self.get_success_url()
