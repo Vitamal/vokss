@@ -1,33 +1,33 @@
 from atelier.models import ComplicationElement
-from django.views import generic
 from atelier.forms import ComplicationElementForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from atelier.views.base_view import BaseDetailView, BaseListView, BaseCreateView, BaseUpdateView, BaseDeleteView
 
 
-class ComplicationElementDetailView(LoginRequiredMixin, generic.DetailView):
+class ComplicationElementDetailView(BaseDetailView):
     model = ComplicationElement
     fields = '__all__'
     template_name = 'atelier/complication_element_detail.html'
 
 
-class ComplicationElementListView(LoginRequiredMixin, generic.ListView):
+class ComplicationElementListView(BaseListView):
     model = ComplicationElement
-    paginate_by = 10  # number of records on the one page
     template_name = 'atelier/complication_element_list.html'
 
-class ComplicationElementCreateView(LoginRequiredMixin, generic.CreateView):
+
+class ComplicationElementCreateView(BaseCreateView):
     model = ComplicationElement
     form_class = ComplicationElementForm
     template_name = 'atelier/create_form.html'
 
-class ComplicationElementUpdateView(LoginRequiredMixin, generic.UpdateView):
+
+class ComplicationElementUpdateView(BaseUpdateView):
     model = ComplicationElement
     form_class = ComplicationElementForm
     template_name = 'atelier/create_form.html'
 
 
-class ComplicationElementDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ComplicationElementDeleteView(BaseDeleteView):
     model = ComplicationElement
     success_url = reverse_lazy('atelier:complication_element_list')
     template_name = 'atelier/delete_form.html'

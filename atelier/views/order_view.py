@@ -3,29 +3,31 @@ from atelier.forms import OrderForm
 from atelier.models import Order
 from django.views import generic
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from atelier.views import BaseListView, TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView
 
 
-class OrderCreateView(LoginRequiredMixin, generic.CreateView):
+class OrderCreateView(TailorPermissionPreMixin, generic.CreateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
+    def form_valid(self, form):
+        # assign base attributes to order instance
+        atelier = self.request.user.profile.atelier
+        created_by = self.request.user
+        last_updated_by = self.request.user
+        order = form.save()
+        order.atelier = atelier
+        order.created_by = created_by
+        order.last_updated_by = last_updated_by
+        order.save()
+        return super().form_valid(form)
 
-class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+
+class OrderDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
     model = Order
     fields = '__all__'
-
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            # admin user access all orders
-            return Order.objects.all()
-        elif self.request.user.profile.is_tailor:
-            # tailor has access to all orders in his own atelier
-            return Order.objects.filter(atelier=self.request.user.profile.atelier)
-        else:
-            # ordinary user access his own orders only
-            return Order.objects.filter(performer=self.request.user)
 
     def get_order_price(self):
         order = self.object
@@ -52,53 +54,27 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
         return context_data
 
 
-class OrderListView(LoginRequiredMixin, generic.ListView):
-    model = Order
-    paginate_by = 10  # number of records on the one page
-    template_name = 'atelier/order_list.html'
-    context_object_name = 'order_list'
-
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            # admin user access all orders
-            return Order.objects.all()
-        elif self.request.user.profile.is_tailor:
-            # tailor has access to all orders in his own atelier
-            return Order.objects.filter(atelier=self.request.user.profile.atelier)
-        else:
-            # ordinary user access his own orders only
-            return Order.objects.filter(performer=self.request.user)
-
-
-class OrderUpdateView(LoginRequiredMixin, generic.UpdateView):
+class OrderUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.UpdateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            # admin user access all orders
-            return Order.objects.all()
-        elif self.request.user.profile.is_tailor:
-            # tailor has access to all orders in his own atelier
-            return Order.objects.filter(atelier=self.request.user.profile.atelier)
-        else:
-            # ordinary user access his own orders only
-            return Order.objects.filter(performer=self.request.user)
+    def form_valid(self, form):
+        # assign last_updated_by attribute to order instance
+        last_updated_by = self.request.user
+        order = form.save()
+        order.last_updated_by = last_updated_by
+        order.save()
+        return super().form_valid(form)
 
 
-class OrderDeleteView(LoginRequiredMixin, generic.DeleteView):
+class OrderListView(AtelierFilterObjectsPreMixin, BaseListView):
+    model = Order
+    template_name = 'atelier/order_list.html'
+    context_object_name = 'order_list'
+
+
+class OrderDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.DeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'
-
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            # admin user access all orders
-            return Order.objects.all()
-        elif self.request.user.profile.is_tailor:
-            # tailor has access to all orders in his own atelier
-            return Order.objects.filter(atelier=self.request.user.profile.atelier)
-        else:
-            # ordinary user access his own orders only
-            return Order.objects.filter(performer=self.request.user)

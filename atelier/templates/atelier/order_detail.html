@@ -62,15 +62,15 @@
                             <td>{% trans 'Order Price' %}:</td>
                             <td>{{ order.order_price }} ₴ </td>     {#  from model @property #}
                         </tr>
-                        <tr>
-                            <td>{% trans 'Order Price' %}:</td>
-                            <td>{{ order_price_view }} ₴ </td>      {#  from view #}
-                        </tr>
-                        <tr>
-                            {% order_price_tag order as tag_order_price %}
-                            <td>{% trans 'Order Price' %}:</td>
-                            <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
-                        </tr>
+{#                        <tr>#}
+{#                            <td>{% trans 'Order Price' %}:</td>#}
+{#                            <td>{{ order_price_view }} ₴ </td>      {#  from view #}
+{#                        </tr>#}
+{#                        <tr>#}
+{#                            {% order_price_tag order as tag_order_price %}#}
+{#                            <td>{% trans 'Order Price' %}:</td>#}
+{#                            <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
+{#                        </tr>#}
                         <tr>
                             <td>{% trans 'Performer' %}:</td>
                             <td>{{ order.performer }}</td>
@@ -81,7 +81,7 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Closed' %}:</td>
-                            <td>{{ order.is_closed }}</td>
+                            <td>{{ order.is_closed|yesno:"Yes,No" }}</td>
                         </tr>
                         </tbody>
                     </table>

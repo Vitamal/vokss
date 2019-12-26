@@ -1,15 +1,27 @@
 import htmls
+from django.contrib.auth.models import User
 from django.test import TestCase
 from model_mommy import mommy
-from atelier.models import AllowanceDiscount, Client, Order
-from django.urls import reverse_lazy
-
+from atelier.models import AllowanceDiscount, Order, Profile
+from django.urls import reverse_lazy, reverse
+from django.test.client import Client
 
 def _indent_string(string):
     try:
         return '\n'.join(['   {}'.format(line) for line in string.split('\n')])
     except:
         return string
+
+
+class LoginTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+
+    def testLogin(self):
+        self.client.login(username='john', password='johnpassword')
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
 
 
 class PagesTest(TestCase):
@@ -41,8 +53,15 @@ class PagesTest(TestCase):
                 output = '[cradmin TestCaseMixin info]: response.content is empty.'
         return output, warnings
 
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+        atelier = mommy.make('Atelier')
+        profile = mommy.make('Profile', user=self.user, atelier=atelier)
+        self.client.login(username='john', password='johnpassword')
+
     def test_index_page_1(self):
-        response = self.client.get('/uk/atelier/')
+        response = self.client.get('/en/atelier/')
         self.assertEqual(response.status_code, 200)
 
     def test_client_page(self):
@@ -73,19 +92,27 @@ class PagesTest(TestCase):
         response = self.client.get('/en/atelier/minimal_style/')
         self.assertEqual(response.status_code, 200)
 
+    def test_profile_page(self):
+        response = self.client.get('/en/atelier/profile/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_atelier_page(self):
+        response = self.client.get('/en/atelier/atelier/')
+        self.assertEqual(response.status_code, 200)
+
     def test_index_page_2(self):
         """
             tests with using htmls module
         """
         response = self.client.get('/en/atelier/')
         selector = htmls.S(response.content)
-        selector.list('h2')[0].prettyprint()     # print <h2>...</h2> first tag in terminal
-        self.assertEqual(selector.one('h2').text_normalized, 'Welcome to Atelier!')
+        selector.list('h2')[0].prettyprint()  # print <h2>...</h2> first tag in terminal
+        self.assertEqual(selector.one('h2').text_normalized, 'Welcome to Atelier application!')
 
     def test_index_page_3(self):
         response = self.client.get('/en/atelier/')
         selector = htmls.S(response.content)
-        self.assertEqual(len(selector.list('li')), 15)     # there is simple test for practice to use htmls
+        self.assertEqual(len(selector.list('li')), 21)  # there is simple test for practice to use htmls
 
     def test_index_page_4(self):
         response = self.client.get('/en/atelier/')

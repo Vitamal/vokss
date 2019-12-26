@@ -8,7 +8,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['client', 'product', 'fabric', 'processing_category', 'complication_elements', 'allowance_discount',
-                  'performer', 'order_date', 'deadline', 'is_closed',]
+                  'performer', 'order_date', 'deadline', 'is_closed']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

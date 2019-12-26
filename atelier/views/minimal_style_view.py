@@ -1,34 +1,32 @@
 from atelier.models import MinimalStyle
-from django.views import generic
 from atelier.forms import MinimalStyleForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from atelier.views.base_view import BaseDetailView, BaseListView, BaseCreateView, BaseUpdateView, BaseDeleteView
 
-class MinimalStyleDetailView(LoginRequiredMixin, generic.DetailView):
+class MinimalStyleDetailView(BaseDetailView):
     model = MinimalStyle
     fields = '__all__'
     template_name = 'atelier/minimal_style_detail.html'
 
 
-class MinimalStyleListView(LoginRequiredMixin, generic.ListView):
+class MinimalStyleListView(BaseListView):
     model = MinimalStyle
-    paginate_by = 10  # number of records on the one page
     template_name = 'atelier/minimal_style_list.html'
 
 
-class MinimalStyleCreateView(LoginRequiredMixin, generic.CreateView):
+class MinimalStyleCreateView(BaseCreateView):
     model = MinimalStyle
     form_class = MinimalStyleForm
     template_name = 'atelier/create_form.html'
 
 
-class MinimalStyleUpdateView(LoginRequiredMixin, generic.UpdateView):
+class MinimalStyleUpdateView(BaseUpdateView):
     model = MinimalStyle
     form_class = MinimalStyleForm
     template_name = 'atelier/create_form.html'
 
 
-class MinimalStyleDeleteView(LoginRequiredMixin, generic.DeleteView):
+class MinimalStyleDeleteView(BaseDeleteView):
     model = MinimalStyle
     success_url = reverse_lazy('atelier:minimal_style_list')
     template_name = 'atelier/delete_form.html'

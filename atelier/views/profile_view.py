@@ -5,27 +5,19 @@ from atelier.models import Profile
 from django.views import generic
 from atelier.forms import ProfileRegisterForm, ProfileChangeForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, BaseDetailView
 
 
-class ProfileDetailView(LoginRequiredMixin, generic.DetailView):
+class ProfileDetailView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView):
     model = Profile
     fields = '__all__'
 
 
-class ProfileListView(LoginRequiredMixin, generic.ListView):
+class ProfileListView(AtelierFilterObjectsPreMixin, TailorPermissionPreMixin, BaseListView):
     model = Profile
-    paginate_by = 10  # number of records on the one page
 
 
-class ProfileCreateView(UserPassesTestMixin, FormView):
-    # def get_context_data(self):
-    #     self.context['page_name'] = 'Profile'
-
-    def test_func(self):
-        # tailor only can create new profile (user) in the own atelier
-        return self.request.user.profile.is_tailor
-
+class ProfileCreateView(TailorPermissionPreMixin, FormView):
     template_name = 'atelier/create_form.html'
     form_class = ProfileRegisterForm
 
@@ -50,12 +42,7 @@ class ProfileCreateView(UserPassesTestMixin, FormView):
         return super().form_valid(form)
 
 
-class ProfileChangeView(UserPassesTestMixin, FormView):
-
-    def test_func(self):
-        # tailor only can change profile (user) in the own atelier
-        return self.request.user.profile.is_tailor
-
+class ProfileChangeView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, FormView):
     template_name = 'atelier/create_form.html'
     form_class = ProfileChangeForm
 
@@ -86,14 +73,11 @@ class ProfileChangeView(UserPassesTestMixin, FormView):
         return super().form_valid(form)
 
 
-class ProfileDeleteView(UserPassesTestMixin, generic.DeleteView):
+class ProfileDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.DeleteView):
     model = Profile
     success_url = reverse_lazy('atelier:profile_list')
     template_name = 'atelier/delete_form.html'
 
-    def test_func(self):
-        # tailor only can delete profile (user) in the own atelier
-        return self.request.user.profile.is_tailor
 
     def get_user_object(self):
         profile_id = self.kwargs.get('pk')
@@ -102,7 +86,7 @@ class ProfileDeleteView(UserPassesTestMixin, generic.DeleteView):
 
     def delete(self, request, *args, **kwargs):
         """
-        Overriding the delete() method to delete User instances, and according Profile will be deleted too.
+        Overriding the delete() method to delete User instances, and according Profile instance will be deleted too.
         """
         self.object = self.get_user_object()
         success_url = self.get_success_url()

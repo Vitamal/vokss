@@ -1,31 +1,31 @@
 from atelier.models import Fabric
-from django.views import generic
 from atelier.forms import FabricForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from atelier.views.base_view import BaseDetailView, BaseListView, BaseCreateView, BaseUpdateView, BaseDeleteView
 
 
-class FabricDetailView(LoginRequiredMixin, generic.DetailView):
+class FabricDetailView(BaseDetailView):
     model = Fabric
     fields = '__all__'
 
-class FabricListView(LoginRequiredMixin, generic.ListView):
-    model = Fabric
-    paginate_by = 10  # number of records on the one page
 
-class FabricCreateView(LoginRequiredMixin, generic.CreateView):
+class FabricListView(BaseListView):
     model = Fabric
-    form_class = FabricForm
-    template_name = 'atelier/create_form.html'
 
-class FabricUpdateView(LoginRequiredMixin, generic.UpdateView):
+
+class FabricCreateView(BaseCreateView):
     model = Fabric
     form_class = FabricForm
     template_name = 'atelier/create_form.html'
 
 
-class FabricDeleteView(LoginRequiredMixin, generic.DeleteView):
+class FabricUpdateView(BaseUpdateView):
+    model = Fabric
+    form_class = FabricForm
+    template_name = 'atelier/create_form.html'
+
+
+class FabricDeleteView(BaseDeleteView):
     model = Fabric
     success_url = reverse_lazy('atelier:fabric_list')
     template_name = 'atelier/delete_form.html'
-

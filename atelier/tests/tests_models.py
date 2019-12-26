@@ -1,6 +1,6 @@
 from django.test import TestCase
 from model_mommy import mommy
-from atelier.models import Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Product, Order
+from atelier.models import Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Product, Order, Atelier, Profile
 
 
 class ClientModelTest(TestCase):
@@ -13,8 +13,9 @@ class ClientModelTest(TestCase):
         """
         Set up all the tests
         """
-        self.client = mommy.make(Client)
-        Client.objects.create(first_name='Big', last_name='Bob', tel_number='067-200-333-44', place='Stryi')
+        self.atelier = mommy.make(Atelier)
+        self.client = mommy.make(Client, atelier=self.atelier)
+        Client.objects.create(first_name='Big', last_name='Bob', tel_number='067-200-333-44', place='Stryi', atelier=self.atelier)
 
     def test_first_name_label(self):
         field_label = self.client._meta.get_field('first_name').verbose_name
@@ -27,6 +28,10 @@ class ClientModelTest(TestCase):
     def test_place_label(self):
         field_label = self.client._meta.get_field('place').verbose_name
         self.assertEquals(field_label, 'place')
+
+    def test_atelier_label(self):
+        field_label = self.client._meta.get_field('atelier').verbose_name
+        self.assertEquals(field_label, 'atelier')
 
     def test_tel_number_label(self):
         field_label = self.client._meta.get_field('tel_number').verbose_name
@@ -55,7 +60,7 @@ class ClientModelTest(TestCase):
     def test_get_absolute_url(self):
         # This will also fail if the urlconf is not defined.
         id = self.client.id
-        self.assertEquals(self.client.get_absolute_url(), '/en-us/atelier/client/{}/'.format(id))
+        self.assertEquals(self.client.get_absolute_url(), '/en/atelier/client/{}/'.format(id))
 
 
 class AllowanceDiscountTestModel(TestCase):
@@ -96,7 +101,7 @@ class AllowanceDiscountTestModel(TestCase):
         # This will also fail if the urlconf is not defined.
         id = self.allowance_discount.id
         self.assertEquals(self.allowance_discount.get_absolute_url(),
-                          '/en-us/atelier/allowance_discount/{}/'.format(id))
+                          '/en/atelier/allowance_discount/{}/'.format(id))
 
 
 class FabricTestModel(TestCase):
@@ -146,7 +151,7 @@ class FabricTestModel(TestCase):
     def test_get_absolute_url(self):
         # This will also fail if the urlconf is not defined.
         id = self.fabric_one.id
-        self.assertEquals(self.fabric_one.get_absolute_url(), '/en-us/atelier/fabric/{}/'.format(id))
+        self.assertEquals(self.fabric_one.get_absolute_url(), '/en/atelier/fabric/{}/'.format(id))
 
 
 class ComplicationElementTestModel(TestCase):
@@ -202,7 +207,7 @@ class ComplicationElementTestModel(TestCase):
         # This will also fail if the urlconf is not defined.
         id = self.complication_element.id
         self.assertEquals(self.complication_element.get_absolute_url(),
-                          '/en-us/atelier/complication_element/{}/'.format(id))
+                          '/en/atelier/complication_element/{}/'.format(id))
 
 
 class MinimalStyleTestModel(TestCase):
@@ -240,7 +245,7 @@ class MinimalStyleTestModel(TestCase):
     def test_get_absolute_url(self):
         # This will also fail if the urlconf is not defined.
         id = self.minimal_style.id
-        self.assertEquals(self.minimal_style.get_absolute_url(), '/en-us/atelier/minimal_style/{}/'.format(id))
+        self.assertEquals(self.minimal_style.get_absolute_url(), '/en/atelier/minimal_style/{}/'.format(id))
 
 
 class ProductTestModel(TestCase):
@@ -273,6 +278,7 @@ class ProductTestModel(TestCase):
         field_name = self.product._meta.get_field('name').verbose_name
         field_minimal_style = self.product._meta.get_field('minimal_style').verbose_name
         field_base_price = self.product._meta.get_field('base_price').verbose_name
+        field_atelier = self.product._meta.get_field('atelier').verbose_name
         self.assertEquals(field_name, 'name')
         self.assertEquals(field_minimal_style, 'minimal style')
         self.assertEquals(field_base_price, 'base price')
@@ -288,7 +294,7 @@ class ProductTestModel(TestCase):
     def test_get_absolute_url(self):
         # This will also fail if the urlconf is not defined.
         id = self.product.id
-        self.assertEquals(self.product.get_absolute_url(), '/en-us/atelier/product/{}/'.format(id))
+        self.assertEquals(self.product.get_absolute_url(), '/en/atelier/product/{}/'.format(id))
 
 
 class OrderTestModel(TestCase):
@@ -315,9 +321,11 @@ class OrderTestModel(TestCase):
     def test_get_absolute_url(self):
         # This will also fail if the urlconf is not defined.
         id = self.order.id
-        self.assertEquals(self.order.get_absolute_url(), '/en-us/atelier/order/{}/'.format(id))
+        self.assertEquals(self.order.get_absolute_url(), '/en/atelier/order/{}/'.format(id))
 
     def test_order_field(self):
         ''' I'm not sure if this test is appropriate :) '''
-        ord = Order.objects.filter(complication_elements__name='Element1')
-        self.assertEquals(self.order.complication_elements, ord[0].complication_elements)
+        ord1 = Order.objects.filter(complication_elements__name='Element1')
+        ord2 = Order.objects.filter(complication_elements__name='Element2')
+        self.assertEquals(self.order.complication_elements, ord1[0].complication_elements)
+        self.assertEquals(self.order.complication_elements, ord2[0].complication_elements)

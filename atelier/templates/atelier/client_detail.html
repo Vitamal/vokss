@@ -3,34 +3,59 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <h3>{% trans 'Client' %}:</h3>
-             <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the client' %}</a>
+                <button class="btn btn-sm btn-outline-secondary" type="button">
+                    <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
                 </button>
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{% trans 'First Name' %}:</th>
+                            <th>{% trans 'Second Name' %}:</th>
+                            <th>{% trans 'Tel. number' %}:</th>
+                            <th>{% trans 'Place' %}:</th>
+                        </tr>
+                        </thead>
                         <tbody>
                         <tr>
-                            <td>{% trans 'First Name' %}:</td>
                             <td>{{ client.first_name }} </td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Second Name' %}:</td>
                             <td>{{ client.last_name }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Tel. number' %}:</td>
                             <td>{{ client.tel_number }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans 'Place' %}:</td>
-                            <td>{{ order_list }}</td>
+                            <td>{{ client.place }}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+                <br/><br/>
+                {% if order_list %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{% trans 'Orders' %}:</th>
+                                <th>{% trans 'Order status' %}:</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in order_list %}
+                                <tr>
+                                    <td><a href="{{ order.get_absolute_url }}">{{ order.product }}</a></td>
+                                    {% if order.is_closed %}
+                                        <td>{% trans 'closed' %}</td>
+                                    {% else %}
+                                        <td>{% trans 'open' %}</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+                <br/><br/>
+
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:client_update_form' pk=client.pk %}">{% trans 'Edit' %}</a>
                 </button>
