@@ -5,4 +5,4 @@ from atelier.models import Atelier
 class AtelierForm(forms.ModelForm):
     class Meta:
         model = Atelier
-        fields = '__all__'
+        fields = ['name']

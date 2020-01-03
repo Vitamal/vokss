@@ -5,7 +5,8 @@ from atelier.models import Profile
 from django.views import generic
 from atelier.forms import ProfileRegisterForm, ProfileChangeForm
 from django.urls import reverse_lazy
-from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, BaseDetailView
+from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, \
+    BaseDetailView, BaseDeleteView
 
 
 class ProfileDetailView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView):
@@ -73,7 +74,7 @@ class ProfileChangeView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, 
         return super().form_valid(form)
 
 
-class ProfileDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.DeleteView):
+class ProfileDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDeleteView):
     model = Profile
     success_url = reverse_lazy('atelier:profile_list')
     template_name = 'atelier/delete_form.html'

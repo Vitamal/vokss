@@ -4,10 +4,11 @@ from atelier.models import Order
 from django.views import generic
 from django.urls import reverse_lazy
 
-from atelier.views import BaseListView, TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView
+from atelier.views import BaseListView, TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView, \
+    BaseCreateView, BaseUpdateView, BaseDeleteView
 
 
-class OrderCreateView(TailorPermissionPreMixin, generic.CreateView):
+class OrderCreateView(TailorPermissionPreMixin, BaseCreateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
@@ -54,7 +55,7 @@ class OrderDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
         return context_data
 
 
-class OrderUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.UpdateView):
+class OrderUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseUpdateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
@@ -74,7 +75,7 @@ class OrderListView(AtelierFilterObjectsPreMixin, BaseListView):
     context_object_name = 'order_list'
 
 
-class OrderDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.DeleteView):
+class OrderDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDeleteView):
     model = Order
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'

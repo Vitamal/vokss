@@ -1,23 +1,23 @@
 from django.utils.translation import gettext_lazy as _
 from atelier.models import Client, Order
-from django.views import generic
 from atelier.forms import ClientForm
 from django.urls import reverse_lazy
-from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, BaseDetailView
+from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, \
+    BaseDetailView, BaseUpdateView, BaseCreateView, BaseDeleteView
 
 
 class ClientListView(AtelierFilterObjectsPreMixin, BaseListView):
     model = Client
 
 
-class ClientCreateView(TailorPermissionPreMixin, generic.CreateView):
+class ClientCreateView(TailorPermissionPreMixin, BaseCreateView):
     model = Client
     form_class = ClientForm
     template_name = 'atelier/create_form.html'
     initial = {'place': _('Morshyn'), }
 
 
-class ClientUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.UpdateView):
+class ClientUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseUpdateView):
     model = Client
     form_class = ClientForm
     template_name = 'atelier/create_form.html'
@@ -34,7 +34,7 @@ class ClientDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
         return context
 
 
-class ClientDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, generic.DeleteView):
+class ClientDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDeleteView):
     model = Client
     success_url = reverse_lazy('atelier:client_list')
     template_name = 'atelier/delete_form.html'

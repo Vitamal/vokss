@@ -19,7 +19,7 @@ class OrderInline(admin.TabularInline):  # addition admin.class to show orders f
 
 
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'tel_number', 'place', 'atelier')
+    list_display = ('first_name', 'last_name', 'tel_number', 'place', 'atelier', 'created_datetime', 'last_updated_datetime', 'created_by', 'last_updated_by')
     inlines = [OrderInline]
 
 

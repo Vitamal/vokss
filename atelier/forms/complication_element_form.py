@@ -5,4 +5,4 @@ from atelier.models import ComplicationElement
 class ComplicationElementForm(forms.ModelForm):
     class Meta:
         model = ComplicationElement
-        fields = '__all__'
+        fields = ['name', 'base_price', 'complexity', 'group']

@@ -5,6 +5,6 @@ from atelier.models import Fabric
 class FabricForm(forms.ModelForm):
     class Meta:
         model = Fabric
-        fields = '__all__'
+        fields = ['name', 'group', 'complexity_factor']
 
 

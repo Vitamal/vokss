@@ -18,6 +18,7 @@ class AtelierFilterObjectsPreMixin:
     """
     to show objects in established atelier only (for superuser all objects are showed)
     """
+
     def get_queryset(self):
         if self.request.user.is_staff:
             return self.model.objects.all()  # admin user access all objects
@@ -32,7 +33,7 @@ class TailorPermissionPreMixin:
     """
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.profile.is_tailor and not self.request.user.is_superuser:
+        if self.request.user.is_anonymous or not self.request.user.profile.is_tailor and not self.request.user.is_superuser:
             raise Http404()
         return super().dispatch(request, *args, **kwargs)
 
@@ -45,7 +46,34 @@ class BaseListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 10  # number of records on the one page
 
 
-class BaseCreateView(SuperuserPermissionPreMixin, generic.CreateView):
+class BaseCreateView(LoginRequiredMixin, generic.CreateView):
+    def form_valid(self, form):
+        # assign created_by and last_updated_by attributes to instances
+        atelier = self.request.user.profile.atelier
+        atelier_object = form.save()
+        created_by = self.request.user
+        atelier_object.created_by = created_by
+        atelier_object.last_updated_by = created_by
+        atelier_object.atelier = atelier
+        atelier_object.save()
+        return super().form_valid(form)
+
+
+class BaseUpdateView(LoginRequiredMixin, generic.UpdateView):
+    def form_valid(self, form):
+        # assign last_updated_by attribute to instance
+        last_updated_by = self.request.user
+        atelier_object = form.save()
+        atelier_object.last_updated_by = last_updated_by
+        atelier_object.save()
+        return super().form_valid(form)
+
+
+class BaseDeleteView(LoginRequiredMixin, generic.DeleteView):
+    pass
+
+
+class SuperuserCreateView(SuperuserPermissionPreMixin, BaseCreateView):
 
     def form_valid(self, form):
         # assign base attributes to instances
@@ -60,15 +88,8 @@ class BaseCreateView(SuperuserPermissionPreMixin, generic.CreateView):
         return super().form_valid(form)
 
 
-class BaseUpdateView(SuperuserPermissionPreMixin, generic.UpdateView):
-    def form_valid(self, form):
-        # assign last_updated_by attribute to instance
-        last_updated_by = self.request.user
-        order = form.save()
-        order.last_updated_by = last_updated_by
-        order.save()
-        return super().form_valid(form)
+class SuperuserUpdateView(SuperuserPermissionPreMixin, BaseUpdateView):
+    pass
 
-
-class BaseDeleteView(SuperuserPermissionPreMixin, generic.DeleteView):
+class SuperuserDeleteView(SuperuserPermissionPreMixin, BaseDeleteView):
     pass

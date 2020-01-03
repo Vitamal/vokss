@@ -1,11 +1,12 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load atelier_tags %} {# give class name for testing (test_css_class) #}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <h3>{% trans 'Ateliers' %}: {{ atelier.name }}</h3>
+                <h3 class="{% test_css_class 'name' %}">{% trans 'Ateliers' %}: {{ atelier.name }}</h3>
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:atelier_form' %}">{% trans 'Add the atelier' %}</a>
                 </button>

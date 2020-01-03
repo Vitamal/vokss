@@ -1,5 +1,7 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load atelier_tags %}  {# give class name for testing (test_css_class) #}
+
 {% block content %}
     <div class="container">
         <div class="row">
@@ -21,10 +23,10 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>{{ client.first_name }} </td>
-                            <td>{{ client.last_name }}</td>
-                            <td>{{ client.tel_number }}</td>
-                            <td>{{ client.place }}</td>
+                            <td class="{% test_css_class 'first' %}">{{ client.first_name }} </td>
+                            <td class="{% test_css_class 'last' %}">{{ client.last_name }}</td>
+                            <td class="{% test_css_class 'tel' %}">{{ client.tel_number }}</td>
+                            <td class="{% test_css_class 'pl' %}">{{ client.place }}</td>
                         </tr>
                         </tbody>
                     </table>

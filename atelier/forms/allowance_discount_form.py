@@ -5,5 +5,5 @@ from atelier.models import AllowanceDiscount
 class AllowanceDiscountForm(forms.ModelForm):
     class Meta:
         model = AllowanceDiscount
-        fields = '__all__'
+        fields = ['name', 'coefficient', 'label']
 

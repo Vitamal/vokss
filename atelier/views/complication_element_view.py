@@ -1,7 +1,8 @@
 from atelier.models import ComplicationElement
 from atelier.forms import ComplicationElementForm
 from django.urls import reverse_lazy
-from atelier.views.base_view import BaseDetailView, BaseListView, BaseCreateView, BaseUpdateView, BaseDeleteView
+from atelier.views.base_view import BaseDetailView, BaseListView, SuperuserCreateView, SuperuserUpdateView, \
+         SuperuserDeleteView
 
 
 class ComplicationElementDetailView(BaseDetailView):
@@ -15,19 +16,19 @@ class ComplicationElementListView(BaseListView):
     template_name = 'atelier/complication_element_list.html'
 
 
-class ComplicationElementCreateView(BaseCreateView):
+class ComplicationElementCreateView(SuperuserCreateView):
     model = ComplicationElement
     form_class = ComplicationElementForm
     template_name = 'atelier/create_form.html'
 
 
-class ComplicationElementUpdateView(BaseUpdateView):
+class ComplicationElementUpdateView(SuperuserUpdateView):
     model = ComplicationElement
     form_class = ComplicationElementForm
     template_name = 'atelier/create_form.html'
 
 
-class ComplicationElementDeleteView(BaseDeleteView):
+class ComplicationElementDeleteView(SuperuserDeleteView):
     model = ComplicationElement
     success_url = reverse_lazy('atelier:complication_element_list')
     template_name = 'atelier/delete_form.html'

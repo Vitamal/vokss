@@ -1,5 +1,6 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load atelier_tags %}   {# give class name for testing (test_css_class) #}
 
 {% block content %}
     <div class="container">
@@ -15,20 +16,20 @@
                         <tbody>
                         <tr>
                             <td>{% trans 'Type' %}:</td>
-                            <td>{{ allowance_discount.label }} </td>
+                            <td class="{% test_css_class 'type' %}">{{ allowance_discount.label }} </td>
                         </tr>
                         <tr>
                             <td>{% trans 'Coefficient' %}:</td>
-                            <td>{{ allowance_discount.coefficient }}</td>
+                            <td class="{% test_css_class 'coefficient' %}">{{ allowance_discount.coefficient }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Name' %}:</td>
-                            <td>{{ allowance_discount.name }}</td>
+                            <td class="{% test_css_class 'name' %}">{{ allowance_discount.name }}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
+                <button class="btn btn-sm btn-outline-secondary " type="button">
                     <a href="{% url 'atelier:allowance_discount_update_form' pk=allowance_discount.pk %}">{% trans 'Edit' %}</a>
                 </button>
                 <button class="btn btn-sm btn-outline-secondary" type="button">

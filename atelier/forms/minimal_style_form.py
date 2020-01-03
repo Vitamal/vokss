@@ -5,5 +5,5 @@ from atelier.models import MinimalStyle
 class MinimalStyleForm(forms.ModelForm):
     class Meta:
         model = MinimalStyle
-        fields = '__all__'
+        fields = ['name', 'group']
 
