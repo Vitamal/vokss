@@ -1,6 +1,7 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
 {% load atelier_tags %}
+{% load atelier_tags %}  {# give class name for testing (test_css_class) #}
 
 {% block content %}
     <div class="container">
@@ -16,30 +17,30 @@
                         <tbody>
                         <tr>
                             <td>{% trans 'Client' %}:</td>
-                            <td>{{ order.client }} </td>
+                            <td class="{% test_css_class 'client' %}">{{ order.client }} </td>
                         </tr>
                         <tr>
                             <td>{% trans 'Product' %}:</td>
-                            <td>{{ order.product }}</td>
+                            <td class="{% test_css_class 'product' %}">{{ order.product }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Fabric' %}:</td>
-                            <td>{{ order.fabric }}</td>
+                            <td class="{% test_css_class 'fabric' %}">{{ order.fabric }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Group of fabric' %}:</td>
-                            <td>{{ order.fabric.group }}</td>
+                            <td class="{% test_css_class 'fabric_group' %}">{{ order.fabric.group }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Processing category' %}:</td>
-                            <td>{{ order.processing_category }}</td>
+                            <td class="{% test_css_class 'category' %}">{{ order.processing_category }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Complication Elements' %}:</td>
                             <td>
                                 <ul>
                                     {% for complication_element in order.complication_elements.all %}
-                                        <li> {{ complication_element }}</li>
+                                        <li class="{% test_css_class 'elements' %}"> {{ complication_element }}</li>
                                     {% endfor %}
                                 </ul>
                             </td>
@@ -48,7 +49,7 @@
                             <td>
                                 <ul>
                                     {% for allowance_discount in order.allowance_discount.all %}
-                                        <li>{{ allowance_discount }}</li>
+                                        <li class="{% test_css_class 'discount' %}">{{ allowance_discount }}</li>
                                     {% endfor %}
                                 </ul>
 
@@ -56,7 +57,7 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Order Date' %}:</td>
-                            <td>{{ order.order_date|date:"l d F Y" }}</td> {# my comment:Formats a date according to the given format. #}
+                            <td class="{% test_css_class 'date' %}">{{ order.order_date|date:"l d F Y" }}</td> {# Formats a date according to the given format. #}
                         </tr>
                         <tr>
                             <td>{% trans 'Order Price' %}:</td>
@@ -73,15 +74,15 @@
 {#                        </tr>#}
                         <tr>
                             <td>{% trans 'Performer' %}:</td>
-                            <td>{{ order.performer }}</td>
+                            <td class="{% test_css_class 'performer' %}">{{ order.performer }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'deadline' %}:</td>
-                            <td>{{ order.deadline }}</td>
+                            <td class="{% test_css_class 'deadline' %}">{{ order.deadline }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Closed' %}:</td>
-                            <td>{{ order.is_closed|yesno:"Yes,No" }}</td>
+                            <td class="{% test_css_class 'closed' %}">{{ order.is_closed|yesno:"Yes,No" }}</td>
                         </tr>
                         </tbody>
                     </table>

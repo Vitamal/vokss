@@ -1,7 +1,6 @@
 from atelier.app_utils import order_price_calculation
 from atelier.forms import OrderForm
 from atelier.models import Order
-from django.views import generic
 from django.urls import reverse_lazy
 
 from atelier.views import BaseListView, TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView, \
@@ -12,18 +11,6 @@ class OrderCreateView(TailorPermissionPreMixin, BaseCreateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
-
-    def form_valid(self, form):
-        # assign base attributes to order instance
-        atelier = self.request.user.profile.atelier
-        created_by = self.request.user
-        last_updated_by = self.request.user
-        order = form.save()
-        order.atelier = atelier
-        order.created_by = created_by
-        order.last_updated_by = last_updated_by
-        order.save()
-        return super().form_valid(form)
 
 
 class OrderDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
@@ -60,14 +47,6 @@ class OrderUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, Ba
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
 
-    def form_valid(self, form):
-        # assign last_updated_by attribute to order instance
-        last_updated_by = self.request.user
-        order = form.save()
-        order.last_updated_by = last_updated_by
-        order.save()
-        return super().form_valid(form)
-
 
 class OrderListView(AtelierFilterObjectsPreMixin, BaseListView):
     model = Order
@@ -77,5 +56,5 @@ class OrderListView(AtelierFilterObjectsPreMixin, BaseListView):
 
 class OrderDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDeleteView):
     model = Order
-    success_url = reverse_lazy('atelier:client_list')
+    success_url = reverse_lazy('atelier:order_list')
     template_name = 'atelier/delete_form.html'

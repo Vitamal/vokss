@@ -32,10 +32,19 @@ class TailorPermissionPreMixin:
     check permissions for tailor or superuser
     """
 
+    # def dispatch(self, request, *args, **kwargs):
+    #     if self.request.user.is_anonymous or not self.request.user.profile.is_tailor and not self.request.user.is_superuser:
+    #         raise Http404()
+    #     return super().dispatch(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_anonymous or not self.request.user.profile.is_tailor and not self.request.user.is_superuser:
+        if self.request.user.is_anonymous:
             raise Http404()
-        return super().dispatch(request, *args, **kwargs)
+        elif self.request.user.is_superuser or self.request.user.profile.is_tailor:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404()
+
 
 
 class BaseDetailView(LoginRequiredMixin, generic.DetailView):

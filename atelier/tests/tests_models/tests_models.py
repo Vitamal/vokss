@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from model_mommy import mommy
-from atelier.models import Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Product, Order, Atelier, Profile
+from atelier.models import Client, AllowanceDiscount, ComplicationElement, Fabric, MinimalStyle, Product, Order, \
+    Atelier, Profile
 
 
 class ClientModelTest(TestCase):
@@ -15,7 +17,6 @@ class ClientModelTest(TestCase):
         """
         self.atelier = mommy.make(Atelier)
         self.client = mommy.make(Client, atelier=self.atelier)
-        Client.objects.create(first_name='Big', last_name='Bob', tel_number='067-200-333-44', place='Stryi', atelier=self.atelier)
 
     def test_first_name_label(self):
         field_label = self.client._meta.get_field('first_name').verbose_name
@@ -258,8 +259,9 @@ class ProductTestModel(TestCase):
         """
         Set up all the tests
         """
-        self.minimal_style = mommy.make(MinimalStyle)
-        self.product = mommy.make(Product, minimal_style=self.minimal_style)
+        self.minimal_style = mommy.make('atelier.MinimalStyle')
+        self.atelier = mommy.make(('atelier.Atelier'))
+        self.product = mommy.make(Product, minimal_style=self.minimal_style, atelier=self.atelier)
 
     def test_instance(self):
         self.assertTrue(isinstance(self.product, Product))
@@ -269,12 +271,13 @@ class ProductTestModel(TestCase):
         if Product model foreign key related with MinimalStyle model   :return:true
         """
         self.assertEquals(self.product.minimal_style, self.minimal_style)
+        self.assertEquals(self.product.atelier, self.atelier)
 
     def test_str_(self):
         """models _str_ checking"""
         self.assertEqual(self.product.__str__(), self.product.name)
 
-    def test_fields_verbouse_name(self):
+    def test_fields_verbose_name(self):
         field_name = self.product._meta.get_field('name').verbose_name
         field_minimal_style = self.product._meta.get_field('minimal_style').verbose_name
         field_base_price = self.product._meta.get_field('base_price').verbose_name
@@ -282,6 +285,7 @@ class ProductTestModel(TestCase):
         self.assertEquals(field_name, 'name')
         self.assertEquals(field_minimal_style, 'minimal style')
         self.assertEquals(field_base_price, 'base price')
+        self.assertEquals(field_atelier, 'Atelier')
 
     def test_field_arguments(self):
         max_length_name = self.product._meta.get_field('name').max_length
@@ -299,7 +303,7 @@ class ProductTestModel(TestCase):
 
 class OrderTestModel(TestCase):
     """
-        Class to test the module
+        Class to test the model
         Order
     """
 
@@ -307,9 +311,18 @@ class OrderTestModel(TestCase):
         """
         Set up all the tests
         """
-        complication_element1 = mommy.make(ComplicationElement, base_price=10, complexity=2, name='Element1')
-        complication_element2 = mommy.make(ComplicationElement, base_price=10, complexity=2, name='Element2')
-        self.order = mommy.make('atelier.Order', complication_elements=[complication_element1, complication_element2])
+        complication_element1 = mommy.make('atelier.ComplicationElement', base_price=10, complexity=2, name='Element1')
+        complication_element2 = mommy.make('atelier.ComplicationElement', base_price=5, complexity=1, name='Element2')
+        client = mommy.make('atelier.Client')
+        product = mommy.make('atelier.Product', base_price=100)
+        fabric = mommy.make('atelier.Fabric', complexity_factor=2)
+        allowance_discount_1 = mommy.make('atelier.AllowanceDiscount', coefficient=1)
+        allowance_discount_2 = mommy.make('atelier.AllowanceDiscount', coefficient=2)
+        atelier = mommy.make('atelier.Atelier')
+        user = mommy.make('User')
+        self.order = mommy.make('atelier.Order', complication_elements=[complication_element1, complication_element2],
+                                atelier=atelier, client=client, product=product, fabric=fabric,
+                                allowance_discount=[allowance_discount_1, allowance_discount_2], performer=user)
 
     def test_instance(self):
         self.assertTrue(isinstance(self.order, Order))
@@ -323,9 +336,100 @@ class OrderTestModel(TestCase):
         id = self.order.id
         self.assertEquals(self.order.get_absolute_url(), '/en/atelier/order/{}/'.format(id))
 
-    def test_order_field(self):
-        ''' I'm not sure if this test is appropriate :) '''
-        ord1 = Order.objects.filter(complication_elements__name='Element1')
-        ord2 = Order.objects.filter(complication_elements__name='Element2')
-        self.assertEquals(self.order.complication_elements, ord1[0].complication_elements)
-        self.assertEquals(self.order.complication_elements, ord2[0].complication_elements)
+    def test_fields_verbose_name(self):
+        field_processing_category = self.order._meta.get_field('processing_category').verbose_name
+        field_order_date = self.order._meta.get_field('order_date').verbose_name
+        field_deadline = self.order._meta.get_field('deadline').verbose_name
+        field_is_closed = self.order._meta.get_field('is_closed').verbose_name
+        field_client = self.order._meta.get_field('client').verbose_name
+        field_product = self.order._meta.get_field('product').verbose_name
+        field_fabric = self.order._meta.get_field('fabric').verbose_name
+        field_allowance_discount = self.order._meta.get_field('allowance_discount').verbose_name
+        field_performer = self.order._meta.get_field('performer').verbose_name
+        field_atelier = self.order._meta.get_field('atelier').verbose_name
+        field_complication_elements = self.order._meta.get_field('complication_elements').verbose_name
+        self.assertEquals(field_processing_category, 'processing category')
+        self.assertEquals(field_order_date, 'order date')
+        self.assertEquals(field_deadline, 'deadline')
+        self.assertEquals(field_is_closed, 'closed')
+        self.assertEquals(field_client, 'client')
+        self.assertEquals(field_product, 'product')
+        self.assertEquals(field_complication_elements, 'complication elements')
+        self.assertEquals(field_fabric, 'fabric')
+        self.assertEquals(field_allowance_discount, 'allowance/discount')
+        self.assertEquals(field_performer, 'performer')
+        self.assertEquals(field_atelier, 'atelier')
+
+    def test_order_price(self):
+        self.order.processing_category = 3
+        self.assertEqual(self.order.order_price, '1000.00')
+
+
+class AtelierTestModel(TestCase):
+    """
+        Class to test the model
+        Atelier
+    """
+
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        self.atelier = mommy.make('atelier.Atelier')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.atelier, Atelier))
+
+    def test_str_(self):
+        """models _str_ checking"""
+        self.assertEqual(self.atelier.__str__(), self.atelier.name)
+
+    def test_get_absolute_url(self):
+        # This will also fail if the urlconf is not defined.
+        id = self.atelier.id
+        self.assertEquals(self.atelier.get_absolute_url(), '/en/atelier/atelier/{}/'.format(id))
+
+    def test_fields_verbose_name(self):
+        field_name = self.atelier._meta.get_field('name').verbose_name
+        self.assertEquals(field_name, 'name')
+
+    def test_field_arguments(self):
+        max_length_name = self.atelier._meta.get_field('name').max_length
+        self.assertEquals(max_length_name, 150)
+
+class ProfileTestModel(TestCase):
+    """
+        Class to test the model
+        Profile
+    """
+
+    def setUp(self):
+        """
+        Set up all the tests
+        """
+        user = mommy.make('User')
+        self.profile = mommy.make('atelier.Profile', user=user)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.profile, Profile))
+
+    def test_str_(self):
+        """models _str_ checking"""
+        self.assertEqual(self.profile.__str__(), self.profile.user.username)
+
+    def test_get_absolute_url(self):
+        # This will also fail if the urlconf is not defined.
+        id = self.profile.id
+        self.assertEquals(self.profile.get_absolute_url(), '/en/atelier/profile/{}/'.format(id))
+
+    def test_fields_verbose_name(self):
+        field_user = self.profile._meta.get_field('user').verbose_name
+        field_atelier = self.profile._meta.get_field('atelier').verbose_name
+        field_is_tailor = self.profile._meta.get_field('is_tailor').verbose_name
+        self.assertEquals(field_user, 'user')
+        self.assertEquals(field_atelier, 'atelier')
+        self.assertEquals(field_is_tailor, 'tailor')
+
+    def test_field_arguments(self):
+        help_text_is_tailor = self.profile._meta.get_field('is_tailor').help_text
+        self.assertEquals(help_text_is_tailor, 'User can be a tailor to have administrator access within his atelier')

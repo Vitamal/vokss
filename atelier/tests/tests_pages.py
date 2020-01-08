@@ -8,11 +8,11 @@ from django.urls import reverse
 from atelier.tests.tests_views.setup_premixin import SetUpPreMixin
 
 
-def _indent_string(string):
-    try:
-        return '\n'.join(['   {}'.format(line) for line in string.split('\n')])
-    except:
-        return string
+# def _indent_string(string):
+#     try:
+#         return '\n'.join(['   {}'.format(line) for line in string.split('\n')])
+#     except:
+#         return string
 
 
 class LoginTestCase(SetUpPreMixin):
@@ -25,32 +25,32 @@ class LoginTestCase(SetUpPreMixin):
 
 class PagesTest(SetUpPreMixin):
 
-    def prettyformat_response_content(self, response):
-        warnings = []
-        output = None
-        if hasattr(response, 'render'):
-            try:
-                response.render()
-            except Exception as e:
-                warnings.append('[cradmin TestCaseMixin warning] response.render() failed with: {}'.format(e))
-            else:
-                try:
-                    output = '[cradmin TestCaseMixin info]: Prettyformatted response.content:\n{}'.format(
-                        _indent_string(htmls.S(response.content).prettify())
-                    )
-                except:
-                    pass
-        if output is None:
-            try:
-                content = response.content.decode('utf-8')
-            except UnicodeError:
-                content = response.content
-            if content:
-                output = '[cradmin TestCaseMixin info]: response.content:\n{}'.format(
-                    _indent_string(content))
-            else:
-                output = '[cradmin TestCaseMixin info]: response.content is empty.'
-        return output, warnings
+    # def prettyformat_response_content(self, response):
+    #     warnings = []
+    #     output = None
+    #     if hasattr(response, 'render'):
+    #         try:
+    #             response.render()
+    #         except Exception as e:
+    #             warnings.append('[cradmin TestCaseMixin warning] response.render() failed with: {}'.format(e))
+    #         else:
+    #             try:
+    #                 output = '[cradmin TestCaseMixin info]: Prettyformatted response.content:\n{}'.format(
+    #                     _indent_string(htmls.S(response.content).prettify())
+    #                 )
+    #             except:
+    #                 pass
+    #     if output is None:
+    #         try:
+    #             content = response.content.decode('utf-8')
+    #         except UnicodeError:
+    #             content = response.content
+    #         if content:
+    #             output = '[cradmin TestCaseMixin info]: response.content:\n{}'.format(
+    #                 _indent_string(content))
+    #         else:
+    #             output = '[cradmin TestCaseMixin info]: response.content is empty.'
+    #     return output, warnings
 
     def test_index_page_not_logged_in(self):
         response = self.client.get('/en/atelier/')

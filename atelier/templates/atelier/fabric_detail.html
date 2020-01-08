@@ -1,5 +1,6 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load atelier_tags %}  {# give class name for testing (test_css_class) #}
 
 {% block content %}
     <div class="container">
@@ -15,15 +16,15 @@
                         <tbody>
                         <tr>
                             <td>{% trans 'Name' %}:</td>
-                            <td>{{ fabric.name }} </td>
+                            <td class="{% test_css_class 'name' %}">{{ fabric.name }} </td>
                         </tr>
                         <tr>
                             <td>{% trans 'Complexity Factor' %}:</td>
-                            <td>{{ fabric.complexity_factor }}</td>
+                            <td class="{% test_css_class 'factor' %}">{{ fabric.complexity_factor }}</td>
                         </tr>
                         <tr>
                             <td>{% trans 'Group' %}:</td>
-                            <td>{{ fabric.group }}</td>
+                            <td class="{% test_css_class 'group' %}">{{ fabric.group }}</td>
                         </tr>
                         </tbody>
                     </table>

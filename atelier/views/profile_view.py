@@ -6,7 +6,7 @@ from django.views import generic
 from atelier.forms import ProfileRegisterForm, ProfileChangeForm
 from django.urls import reverse_lazy
 from atelier.views.base_view import AtelierFilterObjectsPreMixin, BaseListView, TailorPermissionPreMixin, \
-    BaseDetailView, BaseDeleteView
+    BaseDetailView, BaseDeleteView, BaseUpdateView
 
 
 class ProfileDetailView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView):
@@ -43,7 +43,8 @@ class ProfileCreateView(TailorPermissionPreMixin, FormView):
         return super().form_valid(form)
 
 
-class ProfileChangeView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, FormView):
+class ProfileChangeView(AtelierFilterObjectsPreMixin, TailorPermissionPreMixin, BaseUpdateView):
+    model = Profile
     template_name = 'atelier/create_form.html'
     form_class = ProfileChangeForm
 
@@ -51,7 +52,6 @@ class ProfileChangeView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, 
         return reverse_lazy('atelier:profile_list')
 
     def get_profile_object(self):
-        # print(self.request.GET)
         profile_id = self.kwargs.get('pk')
         return Profile.objects.get(id=profile_id)
 

@@ -1,5 +1,7 @@
 {% extends 'atelier/template.html' %}
 {% load i18n %}
+{% load atelier_tags %}  {# give class name for testing (test_css_class) #}
+
 
 {% block content %}
     <div class="container">
@@ -15,11 +17,11 @@
                         <tbody>
                         <tr>
                             <td>{% trans 'Name' %}:</td>
-                            <td>{{ minimalstyle.name }} </td>
+                            <td class="{% test_css_class 'name' %}">{{ minimalstyle.name }} </td>
                         </tr>
                         <tr>
                             <td>{% trans 'Group' %}:</td>
-                            <td>{{ minimalstyle.group }}</td>
+                            <td class="{% test_css_class 'group' %}">{{ minimalstyle.group }}</td>
                         </tr>
                         </tbody>
                     </table>

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -16,6 +16,20 @@ class ProfileRegisterForm(UserCreationForm):
         return email
 
 
-class ProfileChangeForm(forms.Form):
+
+class ProfileChangeForm(UserChangeForm):
     email = forms.EmailField()
     is_tailor = forms.BooleanField(required=False)
+
+    # rewrite this for add the link in help_text
+    password = ReadOnlyPasswordHashField(
+        label=_("Password"),
+        help_text=_(
+            "!Raw passwords are not stored, so there is no way to see this "
+            "user's password, but you can change the password using "
+            "<a href=/accounts/password_change/?next=/en/atelier/profile/{}/edit/>this form</a>."
+        ),
+    )
+
+    class Meta(ProfileRegisterForm.Meta):
+        fields = ('email', 'is_tailor')
