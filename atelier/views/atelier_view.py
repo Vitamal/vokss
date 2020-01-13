@@ -1,8 +1,8 @@
-from atelier.models import Atelier
+from atelier.models import Atelier, Profile
 from atelier.forms import AtelierForm
 from django.urls import reverse_lazy
 from atelier.views.base_view import BaseDetailView, BaseListView, SuperuserCreateView, SuperuserUpdateView, \
-        SuperuserPermissionPreMixin, SuperuserDeleteView
+    SuperuserPermissionPreMixin, SuperuserDeleteView
 
 
 class AtelierDetailView(SuperuserPermissionPreMixin, BaseDetailView):
@@ -12,6 +12,15 @@ class AtelierDetailView(SuperuserPermissionPreMixin, BaseDetailView):
 
 class AtelierListView(SuperuserPermissionPreMixin, BaseListView):
     model = Atelier
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        num_tailors = Profile.objects.filter(is_tailor=True)
+        num_simple_users = Profile.objects.filter(is_tailor=False).count()
+        context = {
+            'num_tailors': num_tailors,
+            'num_simple_users': num_simple_users,
+        }
+        return super().get_context_data(**context)
 
 
 class AtelierCreateView(SuperuserCreateView):
