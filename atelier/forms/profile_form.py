@@ -16,7 +16,6 @@ class ProfileRegisterForm(UserCreationForm):
         return email
 
 
-
 class ProfileChangeForm(UserChangeForm):
     email = forms.EmailField()
     is_tailor = forms.BooleanField(required=False)
