@@ -16,9 +16,10 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>{% trans 'Order date' %}</th>
-                                <th>{% trans 'Client' %}</th>
                                 <th>{% trans 'Product' %}</th>
+                                <th>{% trans 'Client' %}</th>
+                                <th>{% trans 'Order date' %}</th>
+                                <th>{% trans 'Closed' %}</th>
                                 {% if user.is_staff %}
                                     <th>{% trans 'Performer' %}</th>
                                 {% endif %}
@@ -28,9 +29,10 @@
                             <!-- my comment: filtered dictionary by date -->
                             {% for order in order_list|dictsortreversed:"order_date" %}
                                 <tr>
-                                    <td><a href="{{ order.get_absolute_url }}">{{ order.order_date }}</a></td>
-                                    <td><a href="{{ order.get_absolute_url }}">{{ order.client }}</a></td>
                                     <td><a href="{{ order.get_absolute_url }}">{{ order.product }} </a></td>
+                                    <td><a href="{{ order.client.get_absolute_url }}">{{ order.client }}</a></td>
+                                    <td>{{ order.order_date }}</td>
+                                    <td>{% if order.is_closed %}{% trans 'Yes' %} {% else %} {% trans 'No' %} {% endif %}</td>
                                     {% if user.is_staff %}
                                         <td>{{ order.performer }}</td>
                                     {% endif %}

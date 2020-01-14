@@ -46,7 +46,6 @@ class TailorPermissionPreMixin:
             raise Http404()
 
 
-
 class BaseDetailView(LoginRequiredMixin, generic.DetailView):
     pass
 
@@ -57,9 +56,9 @@ class BaseListView(LoginRequiredMixin, generic.ListView):
 
 class BaseCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
-        # assign created_by and last_updated_by attributes to instances
+        # assign atelier, created_by and last_updated_by attributes to instances
+        atelier_object = form.save(commit=False)  ## Create, but don't save the new instance.
         atelier = self.request.user.profile.atelier
-        atelier_object = form.save()
         created_by = self.request.user
         atelier_object.created_by = created_by
         atelier_object.last_updated_by = created_by
@@ -79,26 +78,4 @@ class BaseUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class BaseDeleteView(LoginRequiredMixin, generic.DeleteView):
-    pass
-
-
-class SuperuserCreateView(SuperuserPermissionPreMixin, BaseCreateView):
-
-    def form_valid(self, form):
-        # assign base attributes to instances
-        atelier = self.request.user.profile.atelier
-        created_by = self.request.user
-        last_updated_by = self.request.user
-        atelier_object = form.save()
-        atelier_object.atelier = atelier
-        atelier_object.created_by = created_by
-        atelier_object.last_updated_by = last_updated_by
-        atelier_object.save()
-        return super().form_valid(form)
-
-
-class SuperuserUpdateView(SuperuserPermissionPreMixin, BaseUpdateView):
-    pass
-
-class SuperuserDeleteView(SuperuserPermissionPreMixin, BaseDeleteView):
     pass

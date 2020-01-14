@@ -1,6 +1,6 @@
 from atelier.app_utils import order_price_calculation
 from atelier.forms import OrderForm
-from atelier.models import Order
+from atelier.models import Order, Client, Product, Profile
 from django.urls import reverse_lazy
 
 from atelier.views import BaseListView, TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, BaseDetailView, \
@@ -11,6 +11,13 @@ class OrderCreateView(TailorPermissionPreMixin, BaseCreateView):
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderCreateView, self).get_context_data(**kwargs)
+        context['form'].fields['client'].queryset = Client.objects.filter(atelier=self.request.user.profile.atelier)
+        context['form'].fields['product'].queryset = Product.objects.filter(atelier=self.request.user.profile.atelier)
+        context['form'].fields['performer'].queryset = Profile.objects.filter(atelier=self.request.user.profile.atelier)
+        return context
 
 
 class OrderDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
@@ -46,6 +53,13 @@ class OrderUpdateView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, Ba
     model = Order
     form_class = OrderForm
     template_name = 'atelier/order_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderUpdateView, self).get_context_data(**kwargs)
+        context['form'].fields['client'].queryset = Client.objects.filter(atelier=self.request.user.profile.atelier)
+        context['form'].fields['product'].queryset = Product.objects.filter(atelier=self.request.user.profile.atelier)
+        context['form'].fields['performer'].queryset = Profile.objects.filter(atelier=self.request.user.profile.atelier)
+        return context
 
 
 class OrderListView(AtelierFilterObjectsPreMixin, BaseListView):
