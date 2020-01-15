@@ -99,6 +99,20 @@ class OrderCreateViewTests(SetUpPreMixin):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'atelier/order_form.html')
 
+    def test_order_create_view_fields_filtering(self):
+        # the tailor can choose instanses of his own atelier only (for ForeignKey fields)
+        mommy.make('atelier.Client', _quantity=3)
+        mommy.make('atelier.Product', _quantity=3)
+        mommy.make('atelier.Profile', _quantity=3)
+        mommy.make('atelier.Client', atelier=self.atelier, _quantity=2)
+        mommy.make('atelier.Product', atelier=self.atelier, _quantity=4)
+        mommy.make('atelier.Profile', atelier=self.atelier, _quantity=6)
+        self.client.login(username='tailor', password='tailorpassword')
+        response = self.client.post(reverse_lazy('atelier:order_form'))
+        self.assertEqual(response.context_data['form'].fields['client'].queryset.count(), 2)
+        self.assertEqual(response.context_data['form'].fields['product'].queryset.count(), 4)
+        self.assertEqual(response.context_data['form'].fields['performer'].queryset.count(), 6)
+
 
 class OrderEditViewTests(SetUpPreMixin):
 

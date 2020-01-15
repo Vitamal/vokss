@@ -1,8 +1,8 @@
 from atelier.models import AllowanceDiscount
 from atelier.forms import AllowanceDiscountForm
 from django.urls import reverse_lazy
-from atelier.views.base_view import BaseDetailView, BaseListView, SuperuserCreateView, SuperuserUpdateView, \
-    SuperuserDeleteView
+from atelier.views.base_view import BaseDetailView, BaseListView, \
+    SuperuserPermissionPreMixin, BaseCreateView, BaseUpdateView, BaseDeleteView
 
 
 class AllowanceDiscountDetailView(BaseDetailView):
@@ -20,19 +20,19 @@ class AllowanceDiscountListView(BaseListView):
     context_object_name = 'allowance_discount_list'
 
 
-class AllowanceDiscountCreateView(SuperuserCreateView):
+class AllowanceDiscountCreateView(SuperuserPermissionPreMixin, BaseCreateView):
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
 
-class AllowanceDiscountUpdateView(SuperuserUpdateView):
+class AllowanceDiscountUpdateView(SuperuserPermissionPreMixin, BaseUpdateView):
     model = AllowanceDiscount
     form_class = AllowanceDiscountForm
     template_name = 'atelier/create_form.html'
 
 
-class AllowanceDiscountDeleteView(SuperuserDeleteView):
+class AllowanceDiscountDeleteView(SuperuserPermissionPreMixin, BaseDeleteView):
     model = AllowanceDiscount
     success_url = reverse_lazy('atelier:allowance_discount_list')
     template_name = 'atelier/delete_form.html'
