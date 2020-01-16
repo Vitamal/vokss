@@ -1,4 +1,5 @@
 import htmls
+from django.contrib.auth.models import User
 from model_mommy import mommy
 from atelier.models import Order
 from django.urls import reverse_lazy
@@ -101,17 +102,19 @@ class OrderCreateViewTests(SetUpPreMixin):
 
     def test_order_create_view_fields_filtering(self):
         # the tailor can choose instanses of his own atelier only (for ForeignKey fields)
-        mommy.make('atelier.Client', _quantity=3)
-        mommy.make('atelier.Product', _quantity=3)
-        mommy.make('atelier.Profile', _quantity=3)
-        mommy.make('atelier.Client', atelier=self.atelier, _quantity=2)
-        mommy.make('atelier.Product', atelier=self.atelier, _quantity=4)
-        mommy.make('atelier.Profile', atelier=self.atelier, _quantity=6)
-        self.client.login(username='tailor', password='tailorpassword')
+        mommy.make('atelier.Client', _quantity=13)
+        mommy.make('atelier.Product', _quantity=13)
+        mommy.make('atelier.Profile', _quantity=13)
+        user = User.objects.create_user('user1', 'lennon@thebeatles.com', 'userpassword1')
+        profile = mommy.make('atelier.Profile', user=user, is_tailor=True)
+        mommy.make('atelier.Client', atelier=profile.atelier, _quantity=2)
+        mommy.make('atelier.Product', atelier=profile.atelier, _quantity=4)
+        mommy.make('atelier.Profile', atelier=profile.atelier, _quantity=6)
+        self.client.login(username='user1', password='userpassword1')
         response = self.client.post(reverse_lazy('atelier:order_form'))
         self.assertEqual(response.context_data['form'].fields['client'].queryset.count(), 2)
         self.assertEqual(response.context_data['form'].fields['product'].queryset.count(), 4)
-        self.assertEqual(response.context_data['form'].fields['performer'].queryset.count(), 6)
+        self.assertEqual(response.context_data['form'].fields['performer'].queryset.count(), 7)  # +1  user yourself
 
 
 class OrderEditViewTests(SetUpPreMixin):
@@ -177,6 +180,23 @@ class OrderEditViewTests(SetUpPreMixin):
         self.assertEqual(order.deadline, now + datetime.timedelta(weeks=2))
         self.assertEqual(order.is_closed, False)
         self.assertEqual(Order.objects.get(id=order.id).last_updated_by, self.tailor)
+
+    def test_order_edit_view_fields_filtering(self):
+        # the tailor can choose instanses of his own atelier only (for ForeignKey fields)
+        mommy.make('atelier.Client', _quantity=3)
+        mommy.make('atelier.Product', _quantity=3)
+        mommy.make('atelier.Profile', _quantity=3)
+        user1 = User.objects.create_user('user1', 'lennon@thebeatles.com', 'userpassword1')
+        profile1 = mommy.make('atelier.Profile', user=user1, is_tailor=True)
+        order = mommy.make('atelier.Order', atelier=profile1.atelier)
+        mommy.make('atelier.Client', atelier=profile1.atelier, _quantity=2)
+        mommy.make('atelier.Product', atelier=profile1.atelier, _quantity=4)
+        mommy.make('atelier.Profile', atelier=profile1.atelier, _quantity=6)
+        self.client.login(username='user1', password='userpassword1')
+        response = self.client.post(reverse_lazy('atelier:order_update_form', kwargs={'pk': order.pk}))
+        self.assertEqual(response.context_data['form'].fields['client'].queryset.count(), 2)
+        self.assertEqual(response.context_data['form'].fields['product'].queryset.count(), 4)
+        self.assertEqual(response.context_data['form'].fields['performer'].queryset.count(), 7)  # +1  user yourself
 
 
 class OrderDeleteViewTests(SetUpPreMixin):
