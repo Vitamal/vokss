@@ -16,10 +16,28 @@
                 {{ form.product|as_crispy_field }}
             </div>
         </div>
-        {{ form.fabric|as_crispy_field }}
-        {{ form.processing_category|as_crispy_field }}
-        {{ form.complication_elements|as_crispy_field }}
-        {{ form.allowance_discount|as_crispy_field }}
+        <div class="row">
+            <div class="col-6">
+                {{ form.fabric|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.processing_category|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p>{% trans 'Complication Element' %}:</p>
+                <div class="checkbox_multiple">
+                    {{ form.complication_elements }}
+                </div>
+            </div>
+            <div class="col-6">
+                <p>{% trans 'Allowance/Discount' %}:</p>
+                <div class="checkbox_multiple">
+                    {{ form.allowance_discount }}
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-4">
                 {{ form.order_date|as_crispy_field }}

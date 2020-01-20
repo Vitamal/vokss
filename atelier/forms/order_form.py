@@ -1,17 +1,17 @@
 from django import forms
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from atelier.models import Order
+from django.forms import CheckboxSelectMultiple
+
+from atelier.models import Order, ComplicationElement
 
 
 class OrderForm(forms.ModelForm):
+    complication_elements = forms.CheckboxSelectMultiple()
+
     class Meta:
         model = Order
         fields = ['client', 'product', 'fabric', 'processing_category', 'complication_elements', 'allowance_discount',
                   'performer', 'order_date', 'deadline', 'is_closed']
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Save order'))
+        widgets = {
+            'complication_elements': CheckboxSelectMultiple(),
+            'allowance_discount': CheckboxSelectMultiple()
+        }

@@ -1,3 +1,4 @@
+# Argh is a small library that provides several layers of abstraction on top of argparse.
 argh==0.26.2
 arrow==0.15.2
 cssselect==1.1.0
