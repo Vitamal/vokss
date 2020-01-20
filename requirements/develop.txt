@@ -1,0 +1,20 @@
+#
+#
+# Dependencies for development.
+#
+#
+-r common.txt
+
+
+# Easier to work with databases during development
+django-dbdev==1.2.3
+sh==1.12.14
+
+# For testing HTML output in tests
+htmls==1.0.0
+lxml==4.4.1
+webencodings==0.5.1
+
+# For database fixture generation
+model-mommy==1.6.0
+

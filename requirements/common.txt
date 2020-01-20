@@ -1,0 +1,48 @@
+Django==2.2.8
+django-crispy-forms==1.7.2
+sqlparse==0.3.0
+pytz==2019.1
+
+# add ievv_opensorce dependences and basic initial configuration
+argh==0.26.2
+pathtools==0.1.2
+psutil==5.6.3
+PyYAML==5.1.2
+python-dateutil==2.8.0
+termcolor==1.1.0
+watchdog==0.9.0
+
+
+# https://pypi.python.org/pypi/psycopg2
+psycopg2==2.8.3
+
+
+# https://pypi.python.org/pypi/arrow
+arrow==0.15.2
+
+# https://pypi.python.org/pypi/ievv_opensource
+ievv-opensource==6.0.0
+
+
+# Easier to work with databases during development
+django-dbdev==1.2.3
+sh==1.12.14
+
+# For testing HTML output in tests
+htmls==1.0.0
+lxml==4.4.1
+webencodings==0.5.1
+
+
+# For database fixture generation
+model-mommy==1.6.0
+
+
+# For the KSS styleguide
+html5lib==1.0.1
+
+
+future==0.17.1
+cssselect==1.1.0
+six==1.12.0
+
