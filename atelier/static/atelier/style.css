@@ -102,7 +102,7 @@ select:hover {
 }
 
 input {
-    width: 30px;
+    width: 100px;
     height: 30px;
     vertical-align: top;
     color: #ff34c2;
@@ -124,6 +124,18 @@ option:active {
     color: #00ffdf;
     font-weight: bold;
 }
+input[value="Go"] {
+    width: 60px;
+    height: 30px;
+    /*vertical-align: top;*/
+    color: #010205;
+    font-size: small;
+    border-radius: 3px;
+    border: 3px solid #01054d;
+    background: url(images/en_GB.png) no-repeat 0 6px; /* Add the Lang country flag */
+    padding-left: 12px; /*text move to right */
+   }
+
 .line {
     width: 100%;
     border-top: 1px dashed #e70067;
@@ -332,9 +344,11 @@ a.article:hover {
     text-decoration: underline;
 }
 
-/* Order form */
+/*------- Order form----------- */
 /* CheckboxSelectMultiple for complication_elements & allowance_discount */
-
+div .row .multiple {
+    max-height: 50%;
+}
 .checkbox_multiple {
     border-radius: 5px;
     font-size: 1em;

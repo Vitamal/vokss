@@ -2,13 +2,13 @@ import os
 from urllib.parse import urlparse
 from vokss.default.settings import *  # noqa
 
-ROOT_URLCONF = 'buyclip.project.production.production_urls'
+# ROOT_URLCONF = 'buyclip.project.production.production_urls'
 
 DEBUG = False
 LANGUAGE_CODE = 'uk'
-INSTALLED_APPS += [
-    'gunicorn',
-]
+# INSTALLED_APPS += [
+#     'gunicorn',
+# ]
 
 ###########################
 # Database
