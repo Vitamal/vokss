@@ -4,20 +4,20 @@ from ievv_opensource.utils import ievvbuildstatic
 
 from .develop_and_test_settings_common import *
 
-INSTALLED_APPS += [
-    'ievv_opensource.ievv_developemail',
-]
+# INSTALLED_APPS += [
+#     'ievv_opensource.ievv_developemail',
+# ]
 
 IEVVTASKS_DEVRUN_RUNNABLES = {
     'default': ievvdevrun.config.RunnableThreadList(
         ievvdevrun.runnables.dbdev_runserver.RunnableThread(),
         # ievvdevrun.runnables.redis_server.RunnableThread(port='36401'),
-        ievvdevrun.runnables.django_runserver.RunnableThread(port=8007),
+        ievvdevrun.runnables.django_runserver.RunnableThread(port=8080),
     ),
     'design': ievvdevrun.config.RunnableThreadList(
         ievvdevrun.runnables.dbdev_runserver.RunnableThread(),
         # ievvdevrun.runnables.redis_server.RunnableThread(port='36401'),
-        ievvdevrun.runnables.django_runserver.RunnableThread(port=8007),
+        ievvdevrun.runnables.django_runserver.RunnableThread(port=8080),
         ievvdevrun.runnables.ievv_buildstatic.RunnableThread()
     ),
 }
