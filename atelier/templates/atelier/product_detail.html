@@ -7,9 +7,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>{% trans 'Product' %}:</h3>
-             <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:product_form' %}">{% trans 'Add the element' %}</a>
-                </button>
+                {% if user.profile.is_tailor %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:product_form' %}">{% trans 'Add the Product' %}</a>
+                    </button>
+                {% endif %}
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table">
@@ -29,12 +31,14 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:product_update_form' pk=product.pk %}">{% trans 'Edit' %}</a>
-                </button>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:product_delete_form' pk=product.pk %}">{% trans 'Delete' %}</a>
-                </button>
+                {% if user.profile.is_tailor %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:product_update_form' pk=product.pk %}">{% trans 'Edit' %}</a>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:product_delete_form' pk=product.pk %}">{% trans 'Delete' %}</a>
+                    </button>
+                {% endif %}
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:product_list' %}">{% trans 'Back to list' %}</a>
                 </button>

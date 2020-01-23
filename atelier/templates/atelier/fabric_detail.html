@@ -7,9 +7,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>{% trans 'Fabric' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the fabric' %}</a>
-                </button>
+                {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the fabric' %}</a>
+                    </button>
+                {% endif %}
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table">
@@ -29,12 +31,14 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a>
-                </button>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a>
-                </button>
+                {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:fabric_update_form' pk=fabric.pk %}">{% trans 'Edit' %}</a>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:fabric_delete_form' pk=fabric.pk %}">{% trans 'Delete' %}</a>
+                    </button>
+                {% endif %}
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:fabric_list' %}">{% trans 'Back to list' %}</a>
                 </button>

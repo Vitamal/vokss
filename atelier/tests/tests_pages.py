@@ -194,7 +194,7 @@ class PagesTest(SetUpPreMixin):
         selector = htmls.S(response.content)
         el = selector.one('.fa-home')
         print(el.alltext_normalized)
-        self.assertEqual(len(selector.list('li')), 21)  # there is simple test for practice to use htmls
+        self.assertEqual(len(selector.list('li')), 20)  # there is simple test for practice to use htmls
 
     def test_index_page_4(self):
         self.client.login(username='user', password='userpassword')

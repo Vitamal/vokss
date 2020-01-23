@@ -6,9 +6,11 @@
         <div class="row">
             <div class="col-sm-6">
                 <h3>{% trans 'Fabric list' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the Fabric' %}</a>
-                </button>
+                {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:fabric_form' %}">{% trans 'Add the Fabric' %}</a>
+                    </button>
+                {% endif %}
                 <br/>
                 <br/>
                 <div class="table-responsive">
@@ -23,8 +25,10 @@
                             <tbody>
                             {% for fabric in fabric_list %}
                                 <tr>
-                                    <td style="width:70%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.name }} </a></td>
-                                    <td style="width:30%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.group }}</a></td>
+                                    <td style="width:70%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.name }} </a>
+                                    </td>
+                                    <td style="width:30%"><a href="{{ fabric.get_absolute_url }}">{{ fabric.group }}</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>

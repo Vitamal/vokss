@@ -6,9 +6,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3>{% trans 'Minimal Style list' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:minimal_style_form' %}">{% trans 'Add the Minimal Style' %}</a>
-                </button>
+                {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:minimal_style_form' %}">{% trans 'Add the Minimal Style' %}</a>
+                    </button>
+                {% endif %}
                 <br/>
                 <br/>
                 <div class="table-responsive">

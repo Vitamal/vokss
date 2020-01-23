@@ -40,12 +40,15 @@ a:focus {
     color: #ff34c2;
     background: #010205;
     border: 1px solid #00ffdf;
+    border-radius: 7px;
 }
 
 .btn:hover {
     background: #000000;
     color: #00ffdf;
-    font-weight: bold;
+    /*font-weight: bold;*/
+    border: 2px solid #00ffdf;
+    border-radius: 7px;
 }
 
 /* ---------------------------------------------------
@@ -54,7 +57,7 @@ a:focus {
 .navbar {
     padding: 15px 10px;
     border: none;
-    border-radius: 0;
+    border-radius: 7px;
     margin-bottom: 40px;
     box-shadow: 2px 2px 4px #010205;
     border-color: #E7E7E7;
@@ -74,7 +77,7 @@ a:focus {
 }
 .dropdown-item{
     color: #ff34c2;
-    border-radius: 5px;
+    border-radius: 7px;
     background-color: #010205;
     border: 1px solid #00ffdf;
 }
@@ -87,7 +90,7 @@ select {
     color: #ff34c2;
     /*width: 100%;*/
     /*padding: 16px 20px;*/
-    border-radius: 5px;
+    border-radius: 7px;
     background-color: #010205;
     border: 1px solid #00ffdf;
     vertical-align: top;
@@ -102,7 +105,7 @@ select:hover {
 }
 
 input {
-    width: 100px;
+    width: 80px;
     height: 30px;
     vertical-align: top;
     color: #ff34c2;
@@ -124,18 +127,30 @@ option:active {
     color: #00ffdf;
     font-weight: bold;
 }
+
+/*----- languige switcher with flag picture  -----------*/
+
 input[value="Go"] {
     width: 60px;
     height: 30px;
-    /*vertical-align: top;*/
     color: #010205;
     font-size: small;
-    border-radius: 3px;
+    border-radius: 7px;
     border: 3px solid #01054d;
-    background: url(images/en_GB.png) no-repeat 0 6px; /* Add the Lang country flag */
-    padding-left: 12px; /*text move to right */
+    padding-left: 12px;  /*text move to right */
    }
+input[value="Go"]:lang(en) {
+    background: url(images/en_GB.png) no-repeat 0 6px;   /* Add the Lang country flag */
+}
+input[value="Go"]:lang(uk) {
+    background: url(images/uk_UA.png) no-repeat 0 6px;   /* Add the Lang country flag */
+}
+input[value="Go"]:hover {
+    font-weight: bold;
+    border-radius: 7px;
+    border: 4px solid #01054d;
 
+   }
 .line {
     width: 100%;
     border-top: 1px dashed #e70067;
@@ -282,7 +297,7 @@ ul.CTAs a {
     text-align: center;
     font-size: 0.9em !important;
     display: block;
-    border-radius: 5px;
+    border-radius: 7px;
     margin-bottom: 5px;
 }
 
@@ -321,43 +336,60 @@ a.article:hover {
     background-color: #010522;
     color: #ff34c2;
     font-weight: bold;
+    border-radius: 7px;
+
 }
 .table thead {
     font-style: italic;
     background-color: #01054d;
+    border-radius: 7px;
 }
 .table a:hover {
     color: #00ffdf;
     text-decoration: underline;
 }
 .table tbody tr:hover {
-    background-color: #00065f; /* highlight tables rows when hover*/
+    background-color: #0006a4; /* highlight tables rows when hover*/
+    border-radius: 7px;
 }
+
+/* pagetination buttons*/
+
 .page-links a,
 .page-current {
     background-color: #010522;
+    font: caption;
     color: #ff34c2;
     font-weight: bold;
+    font-size: small;
+    background: #010205;
+    border: 1px solid #00ffdf;
+    border-radius: 7px;
+    padding: 10px;
 }
 .page-links a:hover {
     color: #00ffdf;
     text-decoration: underline;
+    background: #000000;
+    font-weight: bold;
 }
 
 /*------- Order form----------- */
 /* CheckboxSelectMultiple for complication_elements & allowance_discount */
-div .row .multiple {
-    max-height: 50%;
+div.row.multiple {
+    box-sizing: border-box; !important;
+    height: 200pt; !important;
+    overflow: auto; !important;
 }
 .checkbox_multiple {
-    border-radius: 5px;
+    border-radius: 7px;
     font-size: 1em;
     background-color: rgba(255, 204, 209, 0.36);
     color: #000000;
     width:100%;
     height:50%;
     border:solid 1px rgba(53, 53, 53, 0.89);
-    overflow:auto;
+    overflow: auto;
 }
 .checkbox_multiple input {
     width: 20px;
@@ -367,6 +399,11 @@ div .row .multiple {
     list-style-type: none;
 }
 
+/* edit position for text in checkbox button in forms*/
+.form-check-input{
+    position: relative;
+    margin-top: 0;
+}
 /* ---------------------------------------------------
     Login style
 ----------------------------------------------------- */

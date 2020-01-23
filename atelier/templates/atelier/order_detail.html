@@ -82,7 +82,7 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Closed' %}:</td>
-                            <td class="{% test_css_class 'closed' %}">{{ order.is_closed|yesno:"Yes,No" }}</td>
+                            <td class="{% test_css_class 'closed' %}">{{ order.is_closed|yesno:_("Yes,No") }}</td>
                         </tr>
                         </tbody>
                     </table>

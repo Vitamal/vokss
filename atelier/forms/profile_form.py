@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class ProfileRegisterForm(UserCreationForm):
     email = forms.EmailField()
-    is_tailor = forms.BooleanField(required=False)
+    is_tailor = forms.BooleanField(label=_('Is Tailor'), required=False)
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -18,7 +18,7 @@ class ProfileRegisterForm(UserCreationForm):
 
 class ProfileChangeForm(UserChangeForm):
     email = forms.EmailField()
-    is_tailor = forms.BooleanField(required=False)
+    is_tailor = forms.BooleanField(label=_('Is Tailor'), required=False)
 
     # rewrite this for add the link in help_text
     password = ReadOnlyPasswordHashField(

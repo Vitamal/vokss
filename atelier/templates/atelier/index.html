@@ -24,14 +24,16 @@
                             <td><a href="{% url 'atelier:order_list' %}">{% trans 'Orders' %}</a></td>
                             <td>{{ num_orders }}</td>
                         </tr>
+                        {% if user.profile.is_tailor %}
+                            <tr>
+                                <td><a href="{% url 'atelier:profile_list' %}">{% trans 'Profiles' %}</a></td>
+                                <td>{{ num_profiles_in_atelier }}</td>
+                            </tr>
+                        {% endif %}
                         {% if user.is_superuser %}
                             <tr>
                                 <td><a href="{% url 'atelier:atelier_list' %}">{% trans 'Ateliers' %}</a></td>
                                 <td>{{ num_ateliers }}</td>
-                            </tr>
-                            <tr>
-                                <td><a href="{% url 'atelier:profile_list' %}">{% trans 'Profiles' %}</a></td>
-                                <td>{{ num_profiles }}</td>
                             </tr>
                             <tr>
                                 <td><a href="{% url 'atelier:fabric_list' %}">{% trans 'Fabrics' %}</a></td>

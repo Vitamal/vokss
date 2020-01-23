@@ -28,7 +28,6 @@ def index(request):
         num_minimal_style = MinimalStyle.objects.all().count()
         num_allowance_discount = AllowanceDiscount.objects.all().count()
 
-
         return render(request, 'atelier/index.html', context={
             'num_ateliers': num_ateliers,
             'num_profiles': num_profiles,
@@ -49,6 +48,7 @@ def index(request):
         num_products = Product.objects.filter(atelier=atelier).count()
         num_clients = Client.objects.filter(atelier=atelier).count()
         num_orders = Order.objects.filter(atelier=atelier).count()
+        num_profiles_in_atelier = Profile.objects.filter(atelier=atelier).count()
 
         return render(request, 'atelier/index.html', context={
             'atelier': atelier,
@@ -56,4 +56,5 @@ def index(request):
             'num_clients': num_clients,
             'num_orders': num_orders,
             'num_visits': num_visits,
+            'num_profiles_in_atelier': num_profiles_in_atelier,
         })

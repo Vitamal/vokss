@@ -16,12 +16,12 @@ manage.py`` without anything extra during development.
 DJANGOENV = os.environ.get('DJANGOENV', 'develop')
 
 
-def _load_develop_environment_from_file():
-    if os.path.exists('develop-environment.json'):
-        environment_dict = json.loads(open('develop-environment.json', 'r').read())
-        for key, value in environment_dict.items():
-            if key.upper() == key:
-                os.environ[key] = value
+# def _load_develop_environment_from_file():
+#     if os.path.exists('develop-environment.json'):
+#         environment_dict = json.loads(open('develop-environment.json', 'r').read())
+#         for key, value in environment_dict.items():
+#             if key.upper() == key:
+#                 os.environ[key] = value
 
 if DJANGOENV == 'develop':  # Used for local development
     # _load_develop_environment_from_file()

@@ -17,7 +17,8 @@ from django.utils.translation import gettext_lazy as _
 from django_dbdev.backends.postgres import DBSETTINGS
 from ievv_opensource.utils import ievvdevrun
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print ("base dir path", BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'vokss.default.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../../vokss/templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../vokss/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +129,7 @@ USE_TZ = True
 DATETIME_FORMAT = 'Y-m-d'
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, '../../locale')
+    os.path.join(BASE_DIR, '../vokss/locale')
 ]
 LANGUAGES = [
     ('en', _('English')),

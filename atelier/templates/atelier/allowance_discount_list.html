@@ -4,11 +4,13 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <h3>{% trans 'Allowance/Discount list' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a>
-                </button>
+                {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:allowance_discount_form' %}">{% trans 'Add the element' %}</a>
+                    </button>
+                {% endif %}
                 <br/>
                 <br/>
                 <div class="table-responsive">

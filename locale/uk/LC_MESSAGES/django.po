@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-22 21:05+0200\n"
+"POT-Creation-Date: 2020-01-23 16:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: atelier/forms/profile_form.py:10
+msgid "Is Tailor"
+msgstr "Є Кравцем"
 
 #: atelier/forms/profile_form.py:15
 msgid "Email Already Exists"
@@ -29,9 +33,10 @@ msgid ""
 "!Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=/accounts/"
 "password_change/?next=/en/atelier/profile/{}/edit/>this form</a>."
-msgstr "!Пароль не сбережено, отже неможливо побачити пароль цього "
-"користувача, але ви можете змінити пароль використовуючи <a href=/accounts/"
-"password_change/?next=/en/atelier/profile/{}/edit/>this form</a>."
+msgstr ""
+"!Пароль не сбережено, отже неможливо побачити пароль цього користувача, але "
+"ви можете змінити пароль використовуючи <a href=/accounts/password_change/?"
+"next=/en/atelier/profile/{}/edit/>this form</a>."
 
 #: atelier/models/allowance_discount.py:10 atelier/models/atelier.py:11
 #: atelier/models/complication_element.py:11 atelier/models/fabric.py:23
@@ -65,7 +70,6 @@ msgstr "Місто/село"
 
 #: atelier/models/client.py:31 atelier/models/order.py:68
 #: atelier/models/profile.py:20
-#: msgid "Atelier"
 msgid "atelier"
 msgstr "Ательє"
 
@@ -184,7 +188,6 @@ msgstr "Надбавки/знижки"
 #: atelier/templates/atelier/allowance_discount_list.html:10
 #: atelier/templates/atelier/complication_element_list.html:10
 #: atelier/templates/atelier/product_detail.html:11
-#: atelier/templates/atelier/profile_detail.html:11
 msgid "Add the element"
 msgstr "Додати елемент"
 
@@ -198,7 +201,6 @@ msgstr "Коефіцієнт"
 
 #: atelier/templates/atelier/allowance_discount_detail.html:26
 #: atelier/templates/atelier/allowance_discount_list.html:19
-#: atelier/templates/atelier/client_list.html:19
 #: atelier/templates/atelier/complication_element_detail.html:18
 #: atelier/templates/atelier/fabric_detail.html:18
 #: atelier/templates/atelier/minimal_style_detail.html:19
@@ -258,15 +260,13 @@ msgstr "Група"
 #: atelier/templates/atelier/atelier_list.html:21
 #: atelier/templates/atelier/index.html:29
 #: atelier/templates/atelier/template.html:104
-#: msgid "Atelier"
 msgid "Ateliers"
 msgstr "Ательє"
 
 #: atelier/templates/atelier/atelier_detail.html:11
 #: atelier/templates/atelier/atelier_list.html:12
-#: msgid "Add the client"
 msgid "Add the atelier"
-msgstr "Додати клієнта"
+msgstr "Додати ательє"
 
 #: atelier/templates/atelier/atelier_detail.html:18
 #: atelier/templates/atelier/profile_detail.html:9
@@ -276,7 +276,6 @@ msgid "Profile"
 msgstr "Профіль"
 
 #: atelier/templates/atelier/atelier_detail.html:19
-#: atelier/templates/atelier/product_list.html:22
 msgid "Tailor"
 msgstr "Кравець"
 
@@ -286,9 +285,8 @@ msgid "Yes"
 msgstr "Так"
 
 #: atelier/templates/atelier/atelier_list.html:10
-#: msgid "Atelier"
 msgid "Atelier list"
-msgstr "перелік ательє"
+msgstr "Перелік ательє"
 
 #: atelier/templates/atelier/atelier_list.html:23
 msgid "Tailors"
@@ -304,7 +302,7 @@ msgstr "Швеї"
 #: atelier/templates/atelier/fabric_list.html:33
 #: atelier/templates/atelier/minimal_style_list.html:37
 #: atelier/templates/atelier/order_list.html:44
-#: atelier/templates/atelier/product_list.html:39
+#: atelier/templates/atelier/product_list.html:33
 #: atelier/templates/atelier/profile_list.html:45
 msgid "There is no one element in Atelier"
 msgstr "Немає жодного елемента в Ательє"
@@ -321,10 +319,12 @@ msgid "Add the client"
 msgstr "Додати клієнта"
 
 #: atelier/templates/atelier/client_detail.html:18
+#: atelier/templates/atelier/client_list.html:19
 msgid "First Name"
 msgstr "Ім'я"
 
 #: atelier/templates/atelier/client_detail.html:19
+#: atelier/templates/atelier/client_list.html:20
 msgid "Second Name"
 msgstr "Прізвище"
 
@@ -343,7 +343,6 @@ msgid "Orders"
 msgstr "Замовлення"
 
 #: atelier/templates/atelier/client_detail.html:41
-#: msgid "Order list"
 msgid "Order status"
 msgstr "Перелік замовлень"
 
@@ -357,18 +356,12 @@ msgstr "відкрито"
 msgid "Clients"
 msgstr "Клієнти"
 
-#: atelier/templates/atelier/client_list.html:20
-#: msgid "name"
-msgid "Surname"
-msgstr "Прізвище"
-
 #: atelier/templates/atelier/complication_element_detail.html:9
 #: atelier/templates/atelier/order_form.html:29
 msgid "Complication Element"
 msgstr "Ускладнюючі елементи"
 
 #: atelier/templates/atelier/complication_element_detail.html:11
-#: msgid "complication elements"
 msgid "Add the complication element"
 msgstr "Ускладнюючі елементи"
 
@@ -395,7 +388,7 @@ msgid "Complication Element Group"
 msgstr "Група ускладнюючих елементів"
 
 #: atelier/templates/atelier/create_form.html:15
-#: atelier/templates/atelier/order_form.html:53
+#: atelier/templates/atelier/order_form.html:55
 msgid "Save"
 msgstr "Зберегти"
 
@@ -435,7 +428,6 @@ msgid "Group of fabric"
 msgstr "Група тканин"
 
 #: atelier/templates/atelier/index.html:4
-#: msgid "Welcome to Atelier!"
 msgid "Welcome to  Atelier application!"
 msgstr "Ласкаво просимо в Ательє!"
 
@@ -445,7 +437,7 @@ msgid ""
 "design studios or small sewing business . It uses the best tailor practices, "
 "and on top of that, it’s fast, simple, and easy to use."
 msgstr ""
-"Ательє - це простий, чуйний додаток, який підходить для ательє, кравців, "
+"Ательє - це простий, чудовий додаток, який підходить для ательє, кравців, "
 "дизайнерських студій чи малого швейного бізнесу. Він використовує найкращі "
 "методипошиття одягу, а крім того, він швидкий, простий і легкий у "
 "використанні. "
@@ -458,7 +450,6 @@ msgstr ""
 "дизайну!"
 
 #: atelier/templates/atelier/index.html:11
-#: msgid "Today statistic"
 msgid "Today statistic for"
 msgstr "Статистика на сьогодні"
 
@@ -511,16 +502,13 @@ msgid "Minimal Style"
 msgstr "Мінімальний фасон"
 
 #: atelier/templates/atelier/minimal_style_detail.html:12
-msgid "Add the Minimal Styles"
-msgstr "Мінімальні фасони"
+#: atelier/templates/atelier/minimal_style_list.html:10
+msgid "Add the Minimal Style"
+msgstr "Додати мінімальний фасон"
 
 #: atelier/templates/atelier/minimal_style_list.html:8
 msgid "Minimal Style list"
 msgstr "Перелік мінімальних фасонів"
-
-#: atelier/templates/atelier/minimal_style_list.html:10
-msgid "Add the Minimal Style"
-msgstr "Додати мінімальний фасон"
 
 #: atelier/templates/atelier/minimal_style_list.html:20
 msgid "Group of Minimal Style"
@@ -528,7 +516,6 @@ msgstr "Група мінімальних фасонів"
 
 #: atelier/templates/atelier/order_detail.html:10
 #: atelier/templates/atelier/order_form.html:8
-#: msgid "Orders"
 msgid "Order"
 msgstr "Замовлення"
 
@@ -565,6 +552,10 @@ msgstr "Виконавець"
 msgid "Closed"
 msgstr "Закрито"
 
+#: atelier/templates/atelier/order_detail.html:85
+msgid "Yes,No"
+msgstr "Так,Ні"
+
 #: atelier/templates/atelier/order_list.html:8
 msgid "Order list"
 msgstr "Перелік замовлень"
@@ -589,6 +580,11 @@ msgstr "Перелік Виробів"
 msgid "Add the Product"
 msgstr "Додати виріб"
 
+#: atelier/templates/atelier/profile_detail.html:11
+#: atelier/templates/atelier/profile_list.html:10
+msgid "Add the Profile"
+msgstr "Додати Профіль"
+
 #: atelier/templates/atelier/profile_detail.html:18
 #: atelier/templates/atelier/profile_list.html:20
 #: atelier/templates/atelier/template.html:167
@@ -602,11 +598,7 @@ msgstr "швея"
 
 #: atelier/templates/atelier/profile_list.html:8
 msgid "Profile list"
-msgstr "Перелік Виробів"
-
-#: atelier/templates/atelier/profile_list.html:10
-msgid "Add the Profile"
-msgstr "Додати виріб"
+msgstr "Перелік Профілів"
 
 #: atelier/templates/atelier/profile_list.html:19
 msgid "Username"
@@ -648,7 +640,7 @@ msgstr "Зміна пароля"
 #: templates/registration/login.html:29
 #: templates/registration/password_change_form.html:30
 msgid "Login"
-msgstr ""
+msgstr "Логін"
 
 #: atelier/templates/atelier/template.html:211
 msgid "Admin"
@@ -665,23 +657,25 @@ msgstr "Натисніть сюди щоб залогуватись знову"
 #: templates/registration/login.html:12
 #: templates/registration/password_change_form.html:13
 msgid "Your username and password didn't match. Please try again."
-msgstr "Ваше ім'я користувача і пароль не співпадають. Буд ласка спробуйте ще раз."
+msgstr ""
+"Ваше ім'я користувача і пароль не співпадають. Буд ласка спробуйте ще раз."
 
 #: templates/registration/login.html:18
 #: templates/registration/password_change_form.html:19
 msgid ""
 "Your account doesn't have access to this page. To proceed,please login with "
 "an account that has access."
-msgstr "Ваш профіль не має доступу на цю сторінку. Щоб продовжити залогуйтесь "
-"з профілем що має права доступу."
+msgstr ""
+"Ваш профіль не має доступу на цю сторінку. Щоб продовжити залогуйтесь з "
+"профілем що має права доступу."
 
 #: templates/registration/login.html:21
 #: templates/registration/password_change_form.html:22
 msgid "Please login to see this page."
 msgstr "Будь ласка залогуйтесь щоб побачити цю сторінку"
 
-#: templates/registration/password_change_form.html:33
 #: templates/registration/login.html:34
+#: templates/registration/password_change_form.html:33
 msgid "Lost password?"
 msgstr "Забули пароль?"
 
@@ -694,18 +688,19 @@ msgstr "Змінити пароль"
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "Збій скидання пароля, можливо логін ще використовується."
-"Будь ласка спробуйте знову."
+msgstr ""
+"Збій скидання пароля, можливо логін ще використовується.Будь ласка спробуйте "
+"знову."
 
 #: templates/registration/password_reset_form.html:15
 msgid "Submit"
 msgstr "Підтвердити"
 
-#: vokss/default/settings.py:134
+#: vokss/default/settings.py:135
 msgid "English"
 msgstr "Англійська"
 
-#: vokss/default/settings.py:135
+#: vokss/default/settings.py:136
 msgid "Ukrainian"
 msgstr "Українська"
 
