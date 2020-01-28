@@ -24,20 +24,6 @@ arrow==0.15.2
 ievv-opensource==6.0.0
 
 
-# Easier to work with databases during development
-django-dbdev==1.2.3
-sh==1.12.14
-
-# For testing HTML output in tests
-htmls==1.0.0
-lxml==4.4.1
-webencodings==0.5.1
-
-
-# For database fixture generation
-model-mommy==1.6.0
-
-
 # For the KSS styleguide
 html5lib==1.0.1
 
@@ -46,3 +32,9 @@ future==0.17.1
 cssselect==1.1.0
 six==1.12.0
 
+#
+# For deploy, but should also be available for local testing
+#
+
+dj-database-url==0.5.0
+dj-static==0.0.6

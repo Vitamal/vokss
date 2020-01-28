@@ -2,13 +2,13 @@ import os
 from urllib.parse import urlparse
 from vokss.default.settings import *  # noqa
 
-# ROOT_URLCONF = 'buyclip.project.production.production_urls'
+ROOT_URLCONF = 'vokss.vokss.production.production_urls'
 
 DEBUG = False
 LANGUAGE_CODE = 'uk'
-# INSTALLED_APPS += [
-#     'gunicorn',
-# ]
+INSTALLED_APPS += [
+    'gunicorn',
+]
 
 ###########################
 # Database
@@ -28,40 +28,40 @@ TEMPLATES[0]['OPTIONS']['debug'] = False
 ########################################
 # Cache
 ########################################
-redis_url = urlparse(os.environ.get('REDIS_URL'))
+# redis_url = urlparse(os.environ.get('REDIS_URL'))
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': f'{redis_url.hostname}:{redis_url.port}',
-        'OPTIONS': {
-            'PASSWORD': redis_url.password,
-            'DB': 0,
-        }
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'redis_cache.RedisCache',
+#         'LOCATION': f'{redis_url.hostname}:{redis_url.port}',
+#         'OPTIONS': {
+#             'PASSWORD': redis_url.password,
+#             'DB': 0,
+#         }
+#     }
+# }
 
 #: Name of the django-rq queue used for async email-sending. This queue must be configured in settings.RQ_QUEUES.
-IEVV_RQ_EMAIL_BACKEND_QUEUENAME = 'default'
+# IEVV_RQ_EMAIL_BACKEND_QUEUENAME = 'default'
 
-RQ_QUEUES = {
-    'default': {
-        'ASYNC': True,
-        'HOST': redis_url.hostname,
-        'PASSWORD': redis_url.password,
-        'PORT': redis_url.port,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 60 * 60 * 2  # 2 hours
-    },
-    'long_running_tasks': {
-        'ASYNC': True,
-        'HOST': redis_url.hostname,
-        'PASSWORD': redis_url.password,
-        'PORT': redis_url.port,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 60 * 60 * 20  # 20 hours
-    }
-}
+# RQ_QUEUES = {
+#     'default': {
+#         'ASYNC': True,
+#         'HOST': redis_url.hostname,
+#         'PASSWORD': redis_url.password,
+#         'PORT': redis_url.port,
+#         'DB': 0,
+#         'DEFAULT_TIMEOUT': 60 * 60 * 2  # 2 hours
+#     },
+#     'long_running_tasks': {
+#         'ASYNC': True,
+#         'HOST': redis_url.hostname,
+#         'PASSWORD': redis_url.password,
+#         'PORT': redis_url.port,
+#         'DB': 0,
+#         'DEFAULT_TIMEOUT': 60 * 60 * 20  # 20 hours
+#     }
+# }
 
 ########################################
 # Cache
@@ -93,7 +93,7 @@ ALLOWED_HOSTS = ['*']
 #         os.path.dirname(
 #             os.path.dirname(
 #                 os.path.dirname(os.path.abspath(__file__))))))
-STATIC_ROOT = 'buyclip/staticfiles'
+STATIC_ROOT = 'atelier/staticfiles'
 STATIC_URL = '/static/'
 
 #################################

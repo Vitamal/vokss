@@ -1,0 +1,1 @@
+web: gunicorn vokss.vokss.wsgi --log-file -
