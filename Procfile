@@ -1,1 +1,1 @@
-web: gunicorn vokss.vokss.wsgi --log-file -
+web: gunicorn vokss.wsgi --log-file -

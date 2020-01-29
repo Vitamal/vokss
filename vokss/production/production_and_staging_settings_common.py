@@ -2,7 +2,7 @@ import os
 from urllib.parse import urlparse
 from vokss.default.settings import *  # noqa
 
-ROOT_URLCONF = 'vokss.vokss.production.production_urls'
+ROOT_URLCONF = 'vokss.production.production_urls'
 
 DEBUG = False
 LANGUAGE_CODE = 'uk'
