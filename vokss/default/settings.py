@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'atelier.apps.AtelierConfig',
+    'atelier',
     'crispy_forms',
     'ievv_opensource.ievvtasks_common',
 ]
