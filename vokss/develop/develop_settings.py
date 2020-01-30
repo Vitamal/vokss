@@ -22,20 +22,20 @@ IEVVTASKS_DEVRUN_RUNNABLES = {
     ),
 }
 
-# IEVVTASKS_HEROKUDEPLOY = {
-#     'production': {
-#         'release_type': 'production',
-#         'heroku_appname': 'buyclip-prod',
-#         'require_git_branch': 'production',
-#         'pre_gitpush_heroku_commands': [
-#         ],
-#         'post_gitpush_heroku_commands': [
-#             ['maintenance:on'],
-#             ['run', 'python manage.py migrate'],
-#             ['maintenance:off'],
-#         ],
-#     },
-# }
+IEVVTASKS_HEROKUDEPLOY = {
+    'production': {
+        'release_type': 'production',
+        'heroku_appname': 'buyclip-prod',
+        'require_git_branch': 'production',
+        'pre_gitpush_heroku_commands': [
+        ],
+        'post_gitpush_heroku_commands': [
+            ['maintenance:on'],
+            ['run', 'python manage.py migrate'],
+            ['maintenance:off'],
+        ],
+    },
+}
 
 # IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS = [
 #     {
@@ -57,5 +57,5 @@ IEVVTASKS_DEVRUN_RUNNABLES = {
 #     '127.0.0.1',
 # ]
 
-EMAIL_BACKEND = 'ievv_opensource.ievv_developemail.email_backend.DevelopEmailBackend'
+# EMAIL_BACKEND = 'ievv_opensource.ievv_developemail.email_backend.DevelopEmailBackend'
 
