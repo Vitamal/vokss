@@ -180,8 +180,3 @@ GitHub.sublime-settings
 
 #added by the advise from Yurii
 dbdev_tempdata/
-
-# django migrations
-**/migrations/**
-**/migrations
-**/migrations/__init__.py
