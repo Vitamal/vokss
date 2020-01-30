@@ -25,60 +25,6 @@ DATABASES['default'] = dj_database_url.config()
 ###########################
 TEMPLATES[0]['OPTIONS']['debug'] = False
 
-########################################
-# Cache
-########################################
-# redis_url = urlparse(os.environ.get('REDIS_URL'))
-
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'redis_cache.RedisCache',
-#         'LOCATION': f'{redis_url.hostname}:{redis_url.port}',
-#         'OPTIONS': {
-#             'PASSWORD': redis_url.password,
-#             'DB': 0,
-#         }
-#     }
-# }
-
-#: Name of the django-rq queue used for async email-sending. This queue must be configured in settings.RQ_QUEUES.
-# IEVV_RQ_EMAIL_BACKEND_QUEUENAME = 'default'
-
-# RQ_QUEUES = {
-#     'default': {
-#         'ASYNC': True,
-#         'HOST': redis_url.hostname,
-#         'PASSWORD': redis_url.password,
-#         'PORT': redis_url.port,
-#         'DB': 0,
-#         'DEFAULT_TIMEOUT': 60 * 60 * 2  # 2 hours
-#     },
-#     'long_running_tasks': {
-#         'ASYNC': True,
-#         'HOST': redis_url.hostname,
-#         'PASSWORD': redis_url.password,
-#         'PORT': redis_url.port,
-#         'DB': 0,
-#         'DEFAULT_TIMEOUT': 60 * 60 * 20  # 20 hours
-#     }
-# }
-
-########################################
-# Cache
-########################################
-# redis_url = urlparse(os.environ.get('REDISCLOUD_URL'))
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'redis_cache.RedisCache',
-#         'LOCATION': '{hostname}:{port}'.format(
-#             hostname=redis_url.hostname, port=redis_url.port),
-#         'OPTIONS': {
-#             'PASSWORD': redis_url.password,
-#             'DB': 0,
-#         }
-#     }
-# }
-
 #################################
 # Heroku settings
 #################################
@@ -96,22 +42,12 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = 'atelier/staticfiles'
 STATIC_URL = '/static/'
 
-#################################
-# AWS settings
-#################################
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# AWS_QUERYSTRING_AUTH = False
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_S3_SECURE_URLS = False
-# AWS_ACCESS_KEY_ID = os.environ['DJANGO_AWS_ACCESS_KEY_ID']
-# AWS_SECRET_ACCESS_KEY = os.environ['DJANGO_AWS_SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = os.environ['DJANGO_AWS_STORAGE_BUCKET_NAME']
-# MEDIA_URL = '//{bucket}.s3.amazonaws.com/'.format(bucket=AWS_STORAGE_BUCKET_NAME)
 
 # Where to put user uploaded files relative to the root of the bucket?
 MEDIA_ROOT = 'django_media_root'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 ############################
 # Logging
@@ -165,3 +101,16 @@ LOGGING = {
 # from ievv_opensource 4.2+ (requires ievv_opensource.ievvtasks_common in
 # INSTALLED_APPS).
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+
+# for emailing site error to my email address this account email is used
+ADMINS = [
+    ('vitamal', 'vitamal@ukr.net'),
+]
+
+# settings for SendGrid email box using
+SENDGRID_API_KEY = os.getenv('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')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

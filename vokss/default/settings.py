@@ -128,7 +128,7 @@ USE_TZ = True
 DATETIME_FORMAT = 'Y-m-d'
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, '../vokss/locale')
+    os.path.join(BASE_DIR, 'locale')
 ]
 LANGUAGES = [
     ('en', _('English')),
