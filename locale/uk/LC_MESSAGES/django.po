@@ -363,7 +363,7 @@ msgstr "Ускладнюючі елементи"
 
 #: atelier/templates/atelier/complication_element_detail.html:11
 msgid "Add the complication element"
-msgstr "Ускладнюючі елементи"
+msgstr "Додати ускладнюючий елемент"
 
 #: atelier/templates/atelier/complication_element_detail.html:22
 #: atelier/templates/atelier/product_detail.html:26

@@ -22,6 +22,14 @@ class ProfileCreateView(TailorPermissionPreMixin, FormView):
     template_name = 'atelier/create_form.html'
     form_class = ProfileRegisterForm
 
+    def get_initial(self):
+        """
+        Returns the initial data to use for atelier form field.
+        """
+        initial = super().get_initial()
+        initial['atelier'] = self.request.user.profile.atelier
+        return initial
+
     def get_success_url(self):
         return reverse_lazy('atelier:profile_list')
 
@@ -78,7 +86,6 @@ class ProfileDeleteView(TailorPermissionPreMixin, AtelierFilterObjectsPreMixin, 
     model = Profile
     success_url = reverse_lazy('atelier:profile_list')
     template_name = 'atelier/delete_form.html'
-
 
     def get_user_object(self):
         profile_id = self.kwargs.get('pk')

@@ -6,7 +6,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <h3>{% trans 'Atelier list' %}:</h3>
                     <button class="btn btn-sm btn-outline-secondary" type="button">
                         <a href="{% url 'atelier:atelier_form' %}">{% trans 'Add the atelier' %}</a>
@@ -20,10 +20,6 @@
                                 <tr>
                                     <th>{% trans 'Ateliers' %}</th>
                                     <th></th>
-                                    <th>{% trans 'Tailors' %}</th>
-                                    <th></th>
-                                    <th>{% trans 'Simple users' %}</th>
-
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,9 +27,6 @@
                                     <tr>
                                         <td><a href="{{ atelier.get_absolute_url }}">{{ atelier.name }} </a></td>
                                         <td></td>
-                                            <td>{{ num_tailors }}</td>
-                                            <td></td>
-                                            <td>{{ num_simple_users }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

@@ -13,14 +13,15 @@ class AtelierDetailView(SuperuserPermissionPreMixin, BaseDetailView):
 class AtelierListView(SuperuserPermissionPreMixin, BaseListView):
     model = Atelier
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        num_tailors = Profile.objects.filter(is_tailor=True).count()
-        num_simple_users = Profile.objects.filter(is_tailor=False).count()
-        context = {
-            'num_tailors': num_tailors,
-            'num_simple_users': num_simple_users,
-        }
-        return super().get_context_data(**context)
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     num_tailors = Profile.objects.filter(is_tailor=True).count()
+    #     num_simple_users = Profile.objects.filter(is_tailor=False).count()
+    #     context = {
+    #         'num_tailors': num_tailors,
+    #         'num_simple_users': num_simple_users,
+    #     }
+    #     return super().get_context_data(**context)
 
 
 class AtelierCreateView(SuperuserPermissionPreMixin, BaseCreateView):

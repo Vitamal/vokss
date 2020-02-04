@@ -4,10 +4,17 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+from atelier.models import Atelier
+
 
 class ProfileRegisterForm(UserCreationForm):
     email = forms.EmailField()
     is_tailor = forms.BooleanField(label=_('Is Tailor'), required=False)
+
+    def get_atelier(self):
+        return self.request.user.profil.atelier
+
+    atelier = forms.ModelChoiceField(queryset=Atelier.objects.filter(name=get_atelier()), disabled=True)
 
     def clean_email(self):
         email = self.cleaned_data['email']

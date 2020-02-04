@@ -25,6 +25,9 @@ class OrderDetailView(AtelierFilterObjectsPreMixin, BaseDetailView):
     fields = '__all__'
 
     def get_order_price(self):
+        '''
+        there is three calculation methods
+        '''
         order = self.object
         complication_elements_base_price_list = []
         complication_elements_complexity_list = []
