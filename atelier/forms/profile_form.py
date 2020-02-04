@@ -11,11 +11,6 @@ class ProfileRegisterForm(UserCreationForm):
     email = forms.EmailField()
     is_tailor = forms.BooleanField(label=_('Is Tailor'), required=False)
 
-    def get_atelier(self):
-        return self.request.user.profil.atelier
-
-    atelier = forms.ModelChoiceField(queryset=Atelier.objects.filter(name=get_atelier()), disabled=True)
-
     def clean_email(self):
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
