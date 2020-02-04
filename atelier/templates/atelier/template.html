@@ -93,12 +93,14 @@
                         {% trans 'Minimal Styles' %}
                     </a>
                 </li>
-                <li>
-                    <a href="{% url 'atelier:profile_list' %}">
-                        <i class="fas fa-child"></i>
-                        {% trans 'Profiles' %}
-                    </a>
-                </li>
+                {% if user.profile.is_tailor %}
+                    <li>
+                        <a href="{% url 'atelier:profile_list' %}">
+                            <i class="fas fa-child"></i>
+                            {% trans 'Profiles' %}
+                        </a>
+                    </li>
+                {% endif %}
                 {% if user.is_superuser %}
                     <li>
                         <a href="{% url 'atelier:atelier_list' %}">
@@ -250,6 +252,36 @@
                 {% endblock %}
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="page-footer font-small unique-color-dark pt-4">
+
+            <!-- Footer Elements -->
+            <div class="container">
+
+                <!-- Call to action -->
+                <ul class="list-inline text-center py-2">
+                    <li class="list-inline-item">
+                        <p>Register for free</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!" class="btn btn-footer">Sign up!</a>
+                    </li>
+                </ul>
+                <!-- Call to action -->
+            </div>
+            <!-- Footer Elements -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 VOKSS by VITAMAL. All rights reserved.
+                <a href="https://vokss.herokuapp.com"> VOKSS.com</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+        {# <footer>#}
+        {#        <p>© 2020 VOKSS by VITAMAL. All rights reserved.</p>#}
+        {# </footer>#}
     </div>
 </div>
 

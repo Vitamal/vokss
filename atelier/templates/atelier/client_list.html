@@ -6,9 +6,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3>{% trans 'Clients' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
-                </button>
+                {% if user.profile.is_tailor %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:client_form' %}">{% trans 'Add the client' %}</a>
+                    </button>
+                {% endif %}
                 <br/>
                 <br/>
                 <div class="table-responsive">

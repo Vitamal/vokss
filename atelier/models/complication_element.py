@@ -16,7 +16,8 @@ class ComplicationElement(AbstractBaseModel):
         verbose_name=_('base price')
     )
     complexity = models.DecimalField(
-        default=1, max_digits=3,
+        default=1,
+        max_digits=3,
         decimal_places=2,
         verbose_name=_('complexity')
     )

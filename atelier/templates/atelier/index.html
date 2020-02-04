@@ -27,7 +27,7 @@
                         {% if user.profile.is_tailor %}
                             <tr>
                                 <td><a href="{% url 'atelier:profile_list' %}">{% trans 'Profiles' %}</a></td>
-                                <td>{{ num_profiles_in_atelier }}</td>
+                                <td>{{ num_profiles }}</td>
                             </tr>
                         {% endif %}
                         {% if user.is_superuser %}

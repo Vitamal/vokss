@@ -8,9 +8,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <h3>{% trans 'Order' %}:</h3>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:order_form' %}">{% trans 'Add the Order' %}</a>
-                </button>
+                {% if user.profile.is_tailor %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:order_form' %}">{% trans 'Create Order' %}</a>
+                    </button>
+                {% endif %}
                 <br/><br/>
                 <div class="table-responsive">
                     <table class="table">
@@ -57,21 +59,23 @@
                         </tr>
                         <tr>
                             <td>{% trans 'Order Date' %}:</td>
-                            <td class="{% test_css_class 'date' %}">{{ order.order_date|date:"l d F Y" }}</td> {# Formats a date according to the given format. #}
+                            <td class="{% test_css_class 'date' %}">{{ order.order_date|date:"l d F Y" }}</td>
+                            {# Formats a date according to the given format. #}
                         </tr>
                         <tr>
                             <td>{% trans 'Order Price' %}:</td>
-                            <td>{{ order.order_price }} ₴ </td>     {#  from model @property #}
+                            <td>{{ order.order_price }} ₴</td>
+                            {#  from model @property #}
                         </tr>
-{#                        <tr>#}
-{#                            <td>{% trans 'Order Price' %}:</td>#}
-{#                            <td>{{ order_price_view }} ₴ </td>      {#  from view #}
-{#                        </tr>#}
-{#                        <tr>#}
-{#                            {% order_price_tag order as tag_order_price %}#}
-{#                            <td>{% trans 'Order Price' %}:</td>#}
-{#                            <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
-{#                        </tr>#}
+                        {#                        <tr>#}
+                        {#                            <td>{% trans 'Order Price' %}:</td>#}
+                        {#                            <td>{{ order_price_view }} ₴ </td>      {#  from view #}
+                        {#                        </tr>#}
+                        {#                        <tr>#}
+                        {#                            {% order_price_tag order as tag_order_price %}#}
+                        {#                            <td>{% trans 'Order Price' %}:</td>#}
+                        {#                            <td>{{ tag_order_price }} ₴ </td>     {#  from model temlatetag #}
+                        {#                        </tr>#}
                         <tr>
                             <td>{% trans 'Performer' %}:</td>
                             <td class="{% test_css_class 'performer' %}">{{ order.performer }}</td>
@@ -87,12 +91,14 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:order_update_form' pk=order.pk %}">{% trans 'Edit' %}</a>
-                </button>
-                <button class="btn btn-sm btn-outline-secondary" type="button">
-                    <a href="{% url 'atelier:order_delete_form' pk=order.pk %}">{% trans 'Delete' %}</a>
-                </button>
+                {% if user.profile.is_tailor %}
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:order_update_form' pk=order.pk %}">{% trans 'Edit' %}</a>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" type="button">
+                        <a href="{% url 'atelier:order_delete_form' pk=order.pk %}">{% trans 'Delete' %}</a>
+                    </button>
+                {% endif %}
                 <button class="btn btn-sm btn-outline-secondary" type="button">
                     <a href="{% url 'atelier:order_list' %}">{% trans 'Back to list' %}</a>
                 </button>
