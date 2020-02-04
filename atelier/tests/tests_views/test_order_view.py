@@ -48,7 +48,7 @@ class OrderDetailViewTests(SetUpPreMixin):
         instance = mommy.make('atelier.Order', **kwargs)
         response = self.client.get('/en/atelier/order/{}/'.format(instance.id))
         self.assertEqual(response.status_code, 200)
-        formated_deadline = (datetime.datetime.now() + datetime.timedelta(weeks=2)).strftime('%b. %d, %Y')
+        formated_deadline = (datetime.datetime.now() + datetime.timedelta(weeks=2)).strftime('%b. %-d, %Y')
         formated_date = datetime.datetime.now().strftime('%A %d %B %Y')
         selector = htmls.S(response.content)
         s_client = selector.one('.client').alltext_normalized
