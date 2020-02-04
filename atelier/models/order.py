@@ -9,6 +9,11 @@ from atelier.models import AbstractBaseModel, Atelier
 
 
 class Order(AbstractBaseModel):
+
+    # function to set Django model date field 'deadline' of default value to future date
+    def return_date_time():
+        return datetime.date.today() + datetime.timedelta(weeks=2)
+
     CATEGORY1 = '1'
     CATEGORY2 = '2'
     PROCESSING_CATEGORY = [
@@ -57,7 +62,7 @@ class Order(AbstractBaseModel):
         null=True,
     )
     deadline = models.DateField(
-        default=datetime.date.today() + datetime.timedelta(weeks=2),
+        default=return_date_time(),  ### migration doesn't call it, so it will be evaluated by djanog when creating an instance
         null=True,
         blank=True,
         verbose_name=_('deadline')

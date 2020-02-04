@@ -484,3 +484,31 @@ div.row.multiple {
         display: none;
     }
 }
+
+/* ---------------------------------------------------
+    FOTTERS
+----------------------------------------------------- */
+
+footer {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    background-color: #45a1ff;
+    color: #fff;
+}
+footer .list-inline-item .btn  {
+    padding: 2px 22px;
+    font-size: 10px;
+    color: #ff34c2;
+    background: #010205;
+    border: 1px solid #00ffdf;
+    border-radius: 3px;
+}
+
+.btn-footer:hover {
+    background: #000000;
+    color: #00ffdf;
+    /*font-weight: bold;*/
+    border: 2px solid #00ffdf;
+}

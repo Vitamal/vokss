@@ -42,7 +42,6 @@ ALLOWED_HOSTS = ['*']
 STATIC_ROOT = 'atelier/staticfiles'
 STATIC_URL = '/static/'
 
-
 # Where to put user uploaded files relative to the root of the bucket?
 MEDIA_ROOT = 'django_media_root'
 
@@ -54,11 +53,15 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ############################
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '[%(levelname)s %(asctime)s %(name)s %(pathname)s:%(lineno)s] %(message)s'
-        }
+            'format': '{levelname} {asctime} {name} {pathname:}{lineno} {message}'
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
     },
     'filters': {
         'require_debug_false': {
@@ -70,6 +73,11 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose',
             'class': 'logging.StreamHandler'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false']
         }
     },
     'loggers': {
@@ -77,6 +85,11 @@ LOGGING = {
             'handlers': ['stderr'],
             'level': 'INFO',
             'propagate': False
+        },
+        'myproject.custom': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
         },
         'boto': {
             'handlers': ['stderr'],
